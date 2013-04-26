@@ -1,0 +1,259 @@
+#!/usr/bin/perl -w
+
+#
+# Script should fuse peak and signal stanza for ChIP-chip or ChIP-Seq experiments using table
+# of matching stanza headers. Will append additional options (and remove duplicates from conf. file
+# if they exist) will sort ds/ts entries by ds and report errors, if any
+#
+
+use strict;
+use IO::File;
+
+#PARAMETERS:
+my @peak_collect = ("min_score","max_score","data source","track source");
+my %append_conf  = (max_peak      => 0.2,
+		    min_peak      => 0,
+		    start_color   => "lightblue",
+		    end_color     => "blue",
+		    pos_color     => "blue",
+		    neg_color     => "blue",
+		    bgcolor       => "orange",
+		    alpha         => 80,
+		    fgcolor       => "black",
+		    group_label   => 0,
+		    box_subparts  => 1,
+		   "balloon hover"=> ['sub {my $f = shift;',
+                    		      'my $id = $f->name;',
+                    		      '$id =~ s/^\d+_//;',
+                                      'my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.2;start_c=blue;end_c=lightblue";',
+                    		      'my $score = sprintf "%e",$f->score if $f->score;',
+		                      'my $rs    = sprintf "%e",$f->each_tag_value("rank_score");',
+                  		      'my $meani = sprintf "%.3f",$f->each_tag_value("mean_intensity");',
+		                      'my $m_fpr = sprintf "%e",$f->each_tag_value("marginal_fpr");',
+                  		      'my $msens = sprintf "%e",$f->each_tag_value("marginal_sensitivity");',
+		                      'my $out = "<img width=120 height=23 src=\"".$img_url."\"/><br/>".$id;',
+                  		      '$out.=" <br>Score: ".$f->score if $score;',
+		                      '$out.=" <br>Rank score: ".$rs if $rs;',
+                  		      '$out.=" <br>Mean intensity: ".$meani if $meani;',
+		                      '$out.=" <br>Mean fpr: ".$m_fpr if $m_fpr;',
+                  		      '$out.=" <br>Marginal sensitivity: ".$msens if $msens;',
+		                      'return $out;']
+                    );
+
+my %semzoom     = (zoom => 70001,
+                   strings => ["only_show    = signal"]
+                   );
+my $valid_table = "../waterston_sub2_sig_peak";
+
+my($file,$table) = @ARGV;
+my(%signal,%peaks,$current,%valid);
+
+# Read info from table and initialize hash object
+my $th = new IO::File("<$table") or die "Couldn't read from info table [$table]\n";
+while (<$th>) {
+ chomp;
+ s/[\[,\]]//g;
+ my @temp = split("\t");
+ $signal{$temp[0]} = {peaks=>$temp[1]};
+ $peaks{$temp[1]}  = 1;
+}
+$th->close;
+
+if (-e $valid_table) {
+ print STDERR "loading validation data\n";
+ $th->open("<$valid_table") or die "Couldn't read from validation table\n";
+ while (<$th>) {
+  chomp;
+  my @temp = split("\t");
+  $valid{$temp[0]}->{$temp[1]} = 1;
+  $valid{$temp[0]}->{$temp[2]} = 1;
+ }
+ $th->close;
+}
+
+# 1. Go through peak stanzas (second column in table)
+# and pick options like balloon hover, min/max score and ts/ds info (check vs what is in feature and report problems)
+my %peak_options;
+map{print STDERR $_."\n"} (keys %peak_options);
+
+my $fh  = new IO::File("<$file") or die "Couldn't read from file [$file]\n";
+my $in  = 0;
+my $pad = 0;
+my $fused = 0;
+my $key;
+
+while (<$fh>) {
+ chomp;
+ if (/^\[(.+)\]$/ && $peaks{$1}) {
+  if ($current){exit;}else{$current = $1;}#print STDERR "Peak key $current is getting processed...\n";}
+  map {$peak_options{$current}{$_} = []} @peak_collect;
+ }elsif (/^\[(.+)\]$/ && !$peaks{$1} || /^$/ || /^\s*$/) {
+  $current = undef;
+  next;
+ }
+
+ if (/^\#/ || !$current) {next;}
+ 
+ if((/^(\S+\s\S+)/ || /^(\S+)/) && $peak_options{$current}{$1}) {
+   $in = 1;
+   $key = $1;
+   s/.*\= //;
+   push(@{$peak_options{$current}{$key}},$_);
+   #print STDERR "Pushed data into option $key for $current\n";
+  }elsif(/^\s+\w/ && $in){
+   push(@{$peak_options{$current}{$key}},$_);
+   #print STDERR "Pushed data into option $key for $current\n";
+  }else{
+   $in = 0;
+  }
+}
+
+# 2. Read from conf file and append info from peak hash
+# fuse ts/ds info using code from existing scripts
+seek $fh, 0, SEEK_SET or die "Cannot seek on file $file: $!";
+
+my(@data,@tata);
+
+while(<$fh>) {
+ chomp;
+ s/WIG\:/VISTA\:/; 
+ s/ wiggle_density//;
+ s/wiggle_xyplot/vista_plot/;
+ if (/^\[(.+)\]$/ && $signal{$1}) {
+  
+  $current = $1;
+  $fused   = 0;
+  @data = ();
+  @tata = ();
+  #print STDERR "Found Signal Track $current\n";
+  if (%semzoom) {
+   print "\n\n[$current\:$semzoom{zoom}\]\n";
+   map{print $_."\n"} @{$semzoom{strings}};
+  }
+  print "\n\n$_\n";
+  next;
+ }elsif (/^\[(.+)\]$/ && !$signal{$1} || /^$/ || /^\s*$/) {
+  $current = undef;
+  @data = ();
+  @tata = ();
+  next;
+ }
+
+ if (/^\#/ || !$current) {next;}
+ 
+ if((/^((\S+\s\S+)\s+)\=/ || /^((\S+)\s+)\=/)) {
+   #print STDERR "Found option [$2]\n" if ($2 eq "feature");
+   $key = $2;
+   $pad = length($1);
+   #print STDERR "Padding set to $pad as it is the length of [$1]\n";
+   if ($append_conf{$key}) {
+    next;
+   }
+
+  if(/^database/) {
+   #print STDERR "Appending extra fields\n";
+   print $_."\n";
+    foreach my $option (keys %append_conf) {
+     my $length = length($option);
+     print $option;
+     map{print " "} (1..$pad-$length);
+     if (ref $append_conf{$option}){
+      print "= $append_conf{$option}->[0]\n";
+      my $spacer;
+      map{$spacer.=" "} (1..$pad);
+      map{print $spacer."$append_conf{$option}->[$_]\n";} (1..@{$append_conf{$option}}-1);
+     }else{
+      print "= $append_conf{$option}\n";
+     }
+    }
+    next;
+   }elsif($key =~/source/ && $peak_options{$signal{$current}->{peaks}}{$key}) {
+   next if $fused;
+   my $ids = /.*= / ? $' : $_;
+   if ($key =~ /^track/){@tata = split / /,$ids;}else{@data = split / /,$ids;}
+   # NEED TO FUSE DATA FROM PEAKS WITH DATA FROM SIGNAL
+   #s/.*\= //;
+   #print STDERR "Fusing ts/ds at this point\n";
+   #if (@data && @tata) {print STDERR "DATA: @data\nTATA: @tata\n";}
+   $fused = (@data && @tata) ? &fuse($current) : 0;
+   next;
+   }elsif($peak_options{$signal{$current}->{peaks}}{$key}){
+    if ($key =~/_score/){
+     print $_."\n";
+    }
+    $key =~s/_score/_peak/;
+    if($peak_options{$signal{$current}->{peaks}}{$key}){
+     print $key;
+     my $length = length($key);
+     map{print " "} (1..$pad-$length);
+     print "= $peak_options{$signal{$current}->{peaks}}{$key}\n";
+     next;
+    }else{next;}
+   }
+   print $_."\n";
+  }elsif($current){
+   print $_."\n";
+  }
+}
+
+$fh->close;
+
+
+#Fuse @data and @tata arrays with similar fields from peaks, checking for inconsistancies
+
+sub fuse {
+ 
+ my $track = shift;
+ my %sorted;
+ if(scalar(@data) != scalar(@tata)) {
+  print STDERR "Arrays with data and track ids for SIGNAL have different length, ERROR!\n";
+  print STDERR "DATA: @data\nTATA: @tata\n";
+ }
+
+ map{$sorted{$_} = []} @data;
+
+ map{push(@{$sorted{$data[$_]}},$tata[$_])} (0..@data-1);
+ 
+ my(@ddata,@ttata);
+ if ($peak_options{$signal{$current}->{peaks}}{"data source"} && $peak_options{$signal{$current}->{peaks}}{"track source"}) {
+  @ddata = split / /,$peak_options{$signal{$current}->{peaks}}->{"data source"}[0];
+  @ttata = split / /,$peak_options{$signal{$current}->{peaks}}->{"track source"}[0];
+   if(scalar(@ddata) != scalar(@ttata)) {
+    print STDERR "Arrays with data and track ids for PEAKS have different length, ERROR!\n";
+    print STDERR "DDATA: @ddata\nTTATA: @ttata\n";
+   }
+  map{print STDERR "PEAKs in [@ttata] have a mismatched data source [$_]!!!\n" if !$sorted{$_}} @ddata;
+  map{push(@{$sorted{$ddata[$_]}},$ttata[$_])} (0..@ddata-1);
+
+  #Print fused:
+  my($ds,$ts);
+  foreach my $ds_id (sort {$a<=>$b} keys %sorted) {
+   map {$ds.=" $ds_id"} (@{$sorted{$ds_id}});
+   map {$ts.=" $_"} (@{$sorted{$ds_id}});
+   my %validate_ts = map{$_=>1} @{$sorted{$ds_id}};
+   if (scalar(keys %validate_ts) != scalar @{$sorted{$ds_id}}){
+    print STDERR "We have erroneous peak track id for submission $ds_id !!\n";
+    if (%valid) {
+     if (scalar(keys %validate_ts) != scalar(keys %{$valid{$ds_id}})){
+       print STDERR "We have different number of tracks in config file for submission [$ds_id] than in validation table\n";
+     }
+     map{if(!$valid{$ds_id}->{$_}){print STDERR "Track [$_] for submission [$ds_id] is not in validation table!"}} (keys %validate_ts);
+    }
+   }
+  }
+  
+  print "data source";
+  map{print " "} (1..$pad-11);
+  print "=$ds\n";
+
+  print "track source";
+  map{print " "} (1..$pad-12);  
+  print "=$ts\n"; 
+
+ }else{
+  print STDERR "Fusion is impossible, not enough data from peak part for $track\n";
+  return 0;
+ }
+
+}
+

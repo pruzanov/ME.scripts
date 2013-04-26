@@ -1,0 +1,148 @@
+#!/usr/bin/perl -w
+
+#
+# Script for fixing gff files so they can be shown using heat_map glyph
+#
+
+=head1 TITLE
+
+ gff_fixer.batch - Fixes multiple gff files with features having method binding_site or protein_binding_site
+ so they can be shown using heat_map glyph as subtracks of a single track in GBrowse
+
+ needs three arguments - name of a directory with links to submission dirs (IN), names to be used
+ for scaffold features (tab-delimited table with lines like 'submisiion_id [TAB] Name') 
+ and  method (optional)  - field 3 in gff file (by default, method from input gff file used)
+
+ + one more optional argument for output directory (created if the dir does not exist) 
+
+
+=head1 SINOPSIS
+    
+ gff_fixer.batch will add special scaffold features to input gff(s) and optionally change the method to accomodate for 
+ 40-char limit used in mysql table for storage of method:source combination as tag field (typelist table)
+     
+ usage: gff_fixer.batch [directory with input files] [name table] [method] [output directory]
+
+=cut
+         
+use strict;
+use IO::File;
+my $USAGE = "gff_fixer [dir_to_fix] [name_table] [method - optional] [outdir_to_use - optional]\n";
+
+my ($dir,$tags,$method,$outdir) = @ARGV;
+my(%tags,$s_tag); # For storing submission names and dir id
+
+if (!$dir || !$tags ){die $USAGE;}
+$method ||= "method_stub";
+$outdir ||= ".";
+
+#if (length(join(":",($method,$name))) > 35){die "The choice of name may present a problem, please choose a shorter name\n";}
+
+
+print STDERR "Do you want\n1. worm\n2. fly ?\n";
+my $table;
+while (my $answer = <STDIN>){
+ $table = $answer == 1 ? "scaffolds_worm.txt" : "scaffolds_fly.txt";
+ if ( !-e $table ){die "Table for this organism not found!\n";}
+ last;
+}
+#die $USAGE if (!$file || !$name);
+
+my %data; # Hope we won't run out of memory (use with small files, ok?)
+my %scaffs;
+
+# 1. Read from names table
+my $fh = new IO::File("<$tags") or die "Couldn't read from [$tags]\n";
+while (<$fh>) {
+ chomp;
+ if (/(.+)\t(.+)/) {$tags{$1} = $2;}
+}
+$fh->close;
+
+
+opendir(DIR,$dir) or die "Can't read from [$dir]\n";
+my @dirs = grep {/^\d+$/}  readdir(DIR);
+close DIR;
+
+
+
+# defmethod is to store method from the file (in case we don't have method supplied as an argument)
+my $defmethod;
+my $fo = new IO::File();
+DIR:
+foreach my $d (@dirs) {
+ next if ! -d $d;
+ 
+ opendir(DIR,$d) or die "Can't read from [$d]\n";
+ my @files = grep {/^\d+.*\.gff$/} grep {!/wiggle/} readdir(DIR);
+ close DIR;
+ 
+ FILE:
+ foreach my $file (@files) {
+  $fh->open("<$d/$file") or die "Couldn't read from [$d/$file]\n";
+  %data = ();
+  while (<$fh>) {
+   chomp;
+   next if /^#/ || /^$/;
+   my @temp = split("\t");
+   $defmethod = $temp[2] if !$defmethod;
+   if ($method && $method ne "method_stub") {s/$temp[2]/$method/;} else {$method = $temp[2];}
+   s/\./255/ if /\.\t[\.\+\-]\t\./; #fill in score if it's missing
+   $data{$temp[0]}->{$temp[3]} = $_;
+  }
+  $fh->close;
+
+  if (!&reset_stag($d,$file)) {
+   print STDERR "There is no name for this submission ($d), skipping...\n";
+   last FILE;
+  }
+
+  
+
+  $fo->open(">$outdir/$file") or die "Couldn't write to [$outdir/$file]\n";
+  print STDERR "Writing to $outdir/$file\n";
+  print $fo "##gff-version 3\n";
+  foreach my $chr (keys %data) {
+   $scaffs{$chr} =~ s/method_stub/$defmethod/;
+   print $fo $scaffs{$chr}."\n";
+   foreach my $coord (sort {$a<=>$b} keys %{$data{$chr}}) {
+    print $fo $data{$chr}->{$coord}.";Parent=$tags{$s_tag}_$chr\n";
+   }
+  }
+  $fo->close;
+ #last FILE; #we need to fix only one, right?
+ }
+}
+
+# Sub for generating scaffold features
+sub reset_stag {
+ my $sub  = shift @_;
+ my $file = shift @_;
+ my $f_tag = $file=~/\.gff/ ? $` : $file;
+ $s_tag = $sub;
+
+ while ($f_tag =~ /\//){ $f_tag = $';}
+ return undef if !$tags{$s_tag};
+
+ while (length(join(":",($method,$tags{$s_tag}))) > 35){
+  print STDERR "The choice of name [$tags{$s_tag}] may present a problem, please choose a shorter name\n";
+  my $altname = <STDIN>;
+  chomp($altname);
+  $tags{$s_tag} = $altname =~/^$/ ? $tags{$s_tag} : $altname;
+ }
+ $f_tag.="_$tags{$s_tag}";
+
+ my $ft = new IO::File("<$table") or die "Couldn't read from [$table]\n";
+ while (<$ft>) {
+  chomp;
+  s/name/$tags{$s_tag}/g;
+  s/id/$f_tag/;
+  s/method/$method/;
+  s/ID=id/ID=$tags{$s_tag}/;
+  my $id;
+  /\t/ ? $id = $` : next;
+  $scaffs{$id} = $_;
+ }
+ $ft->close;
+ return 1;
+}

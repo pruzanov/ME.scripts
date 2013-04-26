@@ -1,0 +1,114 @@
+#!/usr/bin/perl -w
+
+
+#  Retrofitting
+## This script will parse a config file and produce a table (tab-delimited) sub_id signal_track_id peak_track_id(if available)
+#  suitable for preparing a data hash for wiggle tracks that also have peak calls. The hash may be used to trace which tracks are related
+
+use strict;
+use Data::Dumper;
+my $file = shift @ARGV;
+
+open(FILE,"<$file") or die "Couldn't open the file [$file]\n";
+my(%linked,@signal,@peaks,@data,@tata,$current_f);
+
+
+while (<FILE>) {
+ chomp;
+ if (/^feature/ && /=\s+(\S+)\:/) {
+  $current_f = $1;
+  #print STDERR "Current is $current_f\n";
+ }elsif (/^data source\s*= /) {
+  @data = split / /,$';
+  #print STDERR "Data is @data\n";
+ }elsif(/^track source\s*= /) {
+  @tata = split / /,$';
+  #print "Tata is @tata\n";
+ }
+ #next;
+
+ #Collect matches (track=>sub) from link field
+ if (/\D*(\d+)\D*=>\D*(\d+)\D/) {
+  $linked{$1} = $2;
+ }
+
+
+ if(@data && @tata && /^$/) {
+
+  die "Arrays are not of equal length\n" if @data != @tata;
+
+  # Sort by ds
+  &sort_ds();
+
+  #print STDERR "$current_f:\n@data\n@tata\n\n";
+  my $flag = "signal";
+  if ($current_f !~/WIG/ && $current_f !~/Signal/) {
+   $flag = "peak";
+   #print STDERR "$current_f determined to be Peak Signal feature\n";
+  } 
+  if ($flag eq "signal") {
+      push @signal,{ds=>[@data],ts=>[@tata]};
+      &validate_match(\@data,\@tata);
+      #%linked = ();
+  }else {
+      push @peaks,{ds=>[@data],ts=>[@tata]};
+      #%linked = ();
+  }
+ @data = ();
+ @tata = ();
+ }
+}
+
+close FILE;
+
+# Print out the table
+TRACK:
+foreach my $track (@signal) {
+ PEAK:
+ foreach my $peak (@peaks) {
+  if (@{$track->{ds}} == @{$peak->{ds}}) {
+   map {if($track->{ds}->[$_] != $peak->{ds}->[$_]){
+      print STDERR "Arrays @{$track->{ds}} and @{$peak->{ds}} are equal length, but elements don't match\n" if($track->{ds}->[0] == $peak->{ds}->[0]);
+      next PEAK;}} (0..@{$peak->{ds}}-1);
+
+   #Matching data sources, merge this guys!
+   map {print "$track->{ds}->[$_]\t$track->{ts}->[$_]\t$peak->{ts}->[$_]\n"} (0..@{$peak->{ds}}-1);
+   next TRACK;
+  }
+ }
+ #No peaks, print out signal ds only
+ map {print "$track->{ds}->[$_]\t$track->{ts}->[$_]\n"} (0..@{$track->{ds}}-1);
+}
+
+
+sub sort_ds {
+ my %hash;
+ map {$hash{$data[$_]}++} (0..@data-1);
+ my (@sorted_d,@sorted_t);
+ foreach my $srt (sort {$a<=>$b} keys %hash) {
+  map {if ($data[$_] == $srt){push(@sorted_d,$data[$_]);push(@sorted_t,$tata[$_]);}} (0..@data-1);
+ }
+ @data = @sorted_d;
+ @tata = @sorted_t;
+}
+
+sub validate_match {
+ my ($dss,$tss) = @_;
+
+ for (my $i = 0; $i < @{$dss}; $i++ ){
+  if (!$linked{$tss->[$i]}){
+   print STDERR "There is no entry for Track $tss->[$i] in validation hash [".(keys %linked)."]\n";
+   #print STDERR "We only have \t",
+   #             keys %linked,
+   #             "\t",
+   #             values %linked;
+  } elsif ($linked{$tss->[$i]} && $linked{$tss->[$i]} != $dss->[$i]) {
+    print STDERR "There is a mismatch between sub id and track id for these arrays:\n",
+                 "data = @{$dss}\ntracks = @{$tss}\n",
+                 "Linked_ds: ";
+    map{print STDERR " $_"} (keys %linked);
+    print STDERR "\nLinked_ts: ";
+    map{print STDERR " $_"} (values %linked);
+  }
+ }
+}

@@ -1,0 +1,154 @@
+#!/usr/bin/perl -w
+
+use strict;
+#
+# A quick script for wig preparation for converting to bigwig format
+#
+
+# Get directories
+my @args = @ARGV;
+my @dirs;
+my $argstring;
+
+if (@args) {
+ foreach (@args) {
+  next if (!/^\d+/);
+  if (/(\d+)\-(\d+)/) {
+   map {push @dirs,$_} ($1..$2);
+  } else {push @dirs,$_;}
+ }
+}else{
+ opendir(DIR,".") or die "Cannot read from current directory";
+ @dirs = grep {/^\d+/} readdir(DIR);
+ closedir DIR;
+} 
+
+# compose mean wigfile
+DIRECTORY:
+foreach my $dir (@dirs) {
+ $argstring = "";
+
+ opendir(DIR,$dir) or die "Cannot read from dir [$dir]\n";
+ my @files = grep {/\.mean.wig$/ || /\.gr$/} readdir(DIR);
+ rewinddir(DIR);
+ my @ffiles = grep {/\.bw$/} readdir(DIR);
+ closedir DIR;
+
+# if (@ffiles > 0 && @files == @ffiles) {
+#   print STDERR "BigWig file(s) exists already, skipping...\n";
+#   next DIRECTORY;
+# }
+
+ #if (@files < 2 && @ffiles == 0) {
+ # print STDERR "Skipping $dir, too few files\n";
+ # next;
+ #}
+
+ my $file_name;
+
+ # BELOW code should go to a separate script for cleaning wigfiles
+
+ #if (@files > 1) {
+ # for (my $i = 0; $i<@files; $i++) {
+ #  print STDERR "Cleaning $files[$i]...\n";
+ #  `perl -ne '{s/^chr//;if(!/^\#/ && !/^track/){print;}}' $dir/$files[$i] > temp$i`; 
+ #  $argstring .= " temp$i";
+ # }
+
+ # `./average_zscore_from_wig_variable.pl Temp_descriptioN $argstring`;
+ # `mv *mean.wig $dir/`;
+ 
+ # opendir(DIR,$dir) or die "Cannot read from dir [$dir]\n";
+ 
+ # @files = grep {/mean.wig/} readdir(DIR);
+ # closedir DIR;
+ # $file_name = $files[0]; #assume its the first file that we need
+ # `rm $argstring`;
+ # }else{$file_name = $files[0];}
+ FILE:
+ foreach my $file (@files) {
+  print STDERR "Checking $file...";
+  $file_name = $file;
+  my $ext = $file_name =~ /\.wig$/ ? ".wig" : ".gr";
+  $file_name =~ s/\.wig$//;
+  $file_name =~ s/\.gr$//;
+
+  if (-e "$dir/$file_name.bw"){next FILE};
+
+  #&clean_file("$dir/$file");
+  &wig_clip($dir,$file);
+
+  if (-e "$dir/$file_name.clip"){$ext = ".clip"};
+  #print STDERR "Extension is $ext\n";
+  # Convert to bigWig
+  print STDERR "Converting [$file_name$ext] to BigWig...\n"; 
+  `wigToBigWig.pl $dir/$file_name$ext chrom.sizes $dir/$file_name.bw`;
+  #if (! -e "$dir/$file_name.bw") {
+  # &clean_file("$dir/$file_name$ext",1);
+  # print STDERR "Trying again\n removing span parameter\n Converting to BigWig...\n";
+  #`wigToBigWig.pl $dir/$file_name$ext chrom.sizes $dir/$file_name.bw`;
+  #}
+  if (-e "$dir/$file_name.clip"){`rm $dir/$file_name.clip`;}
+ }
+}
+
+sub wig_clip {
+ my($dir,$file) = @_;
+ # Sort the file
+ print STDERR "Cleaning $dir/$file\n";
+ #my(@keys) = `awk '{print \$1}' $dir/$file | sort -u`;
+ #foreach my $k (@keys) {
+ # chomp($k);
+ # print STDERR "Parsing $k...\n";
+ # next if($k =~/^\#/ || $k=~/^tag/);
+ # `awk '{if(\$1==\"$k\"){print \$0}}' $dir/$file | sort -n -k 2 >> tempsorted_$$`;
+ #}
+
+ #return unless( -e "tempsorted_$$");
+ # Remove overlap in data
+ my $sorted = $file;
+ $sorted =~s/wig$/clip/;
+ $sorted =~s/gr$/clip/;
+ print STDERR "Writing to $dir/$sorted\n";
+
+ my($current,$previous,$span,@vals);
+ open(FILE,"<$dir/$file") or die "Couldn't open file [tempsorted_$$]";
+ open(OUT,">$dir/$sorted") or die "Couldn't write to [$dir/$sorted]";
+ while (<FILE>) {
+  next if (/^track/ || /^$/ || /^#/);
+  if (/chrom=(\S+).*span=(\d+)/) {$current = $1;$span = $2;print OUT $_;next;}
+  if (!$span) {close FILE;close OUT;`rm tempsorted_$$`;return;}
+  chomp;
+  my @temp = split("\t");
+  if (!$previous) {
+    $previous = $temp[0];
+    print OUT $_."\n";next;
+  }
+  if ($temp[0] > $previous && $temp[0] - $previous < $span) {
+    push(@vals,$temp[1]);
+    next;;
+  } elsif (@vals > 0) {
+    map{$temp[1]+=$_} @vals;
+    $temp[1] = sprintf "%.2f",$temp[1]/(@vals+1);
+    @vals = ();
+  }
+  
+  print OUT join("\t",($temp[0],$temp[1]));
+  print OUT "\n";
+
+  $previous = $temp[0];
+  #`awk 'BEGIN{stop=0;OFS=\"\t\"} {if(\$2 < stop){\$2 = stop+1;}if(\$3 > stop){print \$1,\$2,\$3,\$4;}stop=\$3;}' tempsorted_$$  > $dir/$sorted`;
+  #`rm tempsorted_$$`;
+ }
+ close FILE;
+ close OUT;
+ #`rm tempsorted_$$`;
+}
+
+sub clean_file {
+ my $file = shift @_;
+ my $span = shift @_;
+ print STDERR "Cleaning $file...\n";
+ $span ? `sed 's/^chr//' $file | sed 's/=chr/=/' | sed 's/ span=.*//' | grep -v '^track' | grep -v '\#' > tempsorted_$$` : `sed 's/^chr//' $file | sed 's/=chr/=/' | grep -v '^track' | grep -v '\#' > tempsorted_$$`;
+ `mv tempsorted_$$ $file`;
+}

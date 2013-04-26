@@ -1,0 +1,155 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+#USAGE:
+#./searching	 					- will search for submissions that are in submission document
+#./searching clear				        - will erase whatever is in you're submission document
+#./searching update 					- will download the newest nih spreadsheet and search for each submission
+#Run these with "update clear" or after "update clear"
+#./searching #### ####-####				- will search for specific submissions, only works for released submissions
+#./searching #### ####-#### | grep replaced             - to find submissions that are replaced, replacing submissions will also be checked
+#Run these with "update" or after "update"
+#./searching | grep 'exists and should not' 		- to find submissions that are replaced and should be deleted
+#./searching | grep 'does not exist and should exist' 	- to find submissions that are new
+#./searching | grep 'Submission' 			- to find status of new submissions
+#Variables that change
+my $dir = "/home/jrajasegaram/Desktop/modencode-gbrowse_conf/";
+my $file = "/home/jrajasegaram/Documents/ids_file.map";
+my $metadata= "/home/jrajasegaram/Documents/metadatasubs.txt";
+my $nihremotedir = "/modencode/raw/tools/reporter/output";
+my $ssh_key = "/home/jrajasegaram/.ssh/id_rsa";
+my $pipe_host= "modencode-www1.oicr.on.ca";
+my $nihdir = "/home/jrajasegaram/Downloads";
+use constant DEBUG=>1;
+
+my $latest_nih;
+my $nihspreadsheet;
+my @subs;
+my @args = @ARGV;
+my @found;
+my $emptycount;
+my @superceded;
+my %exist;
+
+if (DEBUG){
+ print "USAGE:
+./searching                                            - will search for submissions that are in submission document
+./searching clear                                      - will erase whatever is in you're submission document
+./searching update                                     - will download the newest nih spreadsheet and search for each submission
+Run these with \"update clear\" or after \"update clear\"
+./searching #### ####-####                             - will search for specific submissions, only works for released submissions
+./searching #### ####-#### | grep replaced             - to find submissions that are replaced, replacing submissions will also be checked
+Run these with \"update\" or after \"update\"
+./searching | grep 'exists and should not'             - to find submissions that are replaced and should be deleted
+./searching | grep 'does not exist and should exist'   - to find submissions that are new
+./searching | grep 'Submission'                        - to find status of new submissions\n";
+sleep 3;
+}
+foreach (@args) {
+ if (/clear/){
+ `rm $file`;
+ `touch $file`;
+ }
+ elsif (/update/){
+ $latest_nih = `ssh -i $ssh_key $pipe_host ls -t $nihremotedir/output_nih_* | head -1`;
+ chomp($latest_nih);
+ `scp -i $ssh_key $pipe_host\:$latest_nih $nihdir`;
+ $nihspreadsheet = `ls -t $nihdir/output_nih_* | head -1`; 
+ chomp($nihspreadsheet);
+ `awk -F'\t' '{print \$17,\$18}' $nihspreadsheet | perl -ne '{chomp;print "\$_\n" if /released/ || /replaced/;}'| cut -d ' ' --fields=2,3,4,5 > $file`;
+ }
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @subs,$_} ($1..$2);
+  foreach my $number ($1..$2){
+  $exist{$number}= "exist";
+  }
+ }
+ else {
+  push @subs,$_;
+  $exist{$_}="exist";
+ }
+}
+$nihspreadsheet = `ls -t $nihdir/output_nih_* | head -1`;
+chomp($nihspreadsheet);
+if (-e $file){
+open(FILE,$file);
+while (<FILE>){
+ chomp;
+ next if (!/^\d+/);
+ if(/\d+\s\D+\s\D+\d+/){
+  @superceded = split(" ",$_);
+  $exist{$superceded[0]}= "not exist";
+  push @subs,$superceded[0];
+  $exist{$superceded[-1]}= "exist";
+  push @subs,$superceded[-1];
+ }
+ else{
+  $exist{$_}= "exist";
+  push @subs,$_;
+ }
+}
+close(FILE);
+}
+if(-e $metadata){
+open(META,$metadata);
+while(<META>){
+ chomp;
+ $exist{$_}= "not exist";
+}
+$exist{0}= "not exist";
+close(META);
+}
+foreach my $subs(@subs){
+ $emptycount = 0;
+ @found = `grep -r ' $subs' $dir | grep 'data source'`;
+ 
+ foreach my $found(@found){
+  if ($found !~/.conf:/){
+    $found = "";
+    $emptycount++;
+  }
+  elsif ($found =~ /#data source/){
+   $found = "";
+   $emptycount++;
+  }
+  
+  elsif ($found =~ /\s+$subs\s+/){
+   my @shorten=split("/",$found);
+   $found= $shorten[-1];
+    
+  }
+  else{
+    $found = "";
+    $emptycount++;
+  }
+ }
+ if($exist{$subs} =~ m/^exist$/ &&`grep -r '\t$subs [d|s]' $nihspreadsheet`=~m/$subs.*[d|s]\s*by\s*(\d+)/ ){
+#   my @nih= split('\t',`grep -r '\t$subs [d|s]' $nihspreadsheet`);
+   
+   chomp($1);
+   print "$subs is replaced by $1\n";
+   push @subs, $1;
+   $exist{$1}='exist';
+   next;
+  }
+ elsif (scalar(@found)==$emptycount){
+  print"$subs does not exist and should $exist{$subs}\n";
+ }
+ elsif($emptycount != 0 && $exist{$subs} =~ "not exist"){
+  print "$subs exists and should not exist\n";
+  print "@found" if DEBUG;
+ }
+ else{
+  print "@found" if DEBUG;
+  print "$subs exists and should $exist{$subs}\n";
+ }
+ if (scalar(@found) == $emptycount && $exist{$subs} =~ m/^exist$/){
+    my @nih= split('\t',`grep -r '\t$subs\t' $nihspreadsheet`);
+    print "Submission $subs is $nih[16]\n"
+
+    
+    
+ }
+}

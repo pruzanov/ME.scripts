@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>modENCODE Data clinic</title>
+<link href="css/bluedream.css" type="text/css" rel="stylesheet">
+<link href="css/status.css" type="text/css" rel="stylesheet">
+<link href="css/tabbed.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>Data clinic</h1>
+<div align="center"><a href = "clinic_help.html" >Help</a></div>
+<br/>
+<div id="tabs10">
+  <ul>
+    <li><a href="#celniker" class="tab_inactive" title="Celniker"><span>Celniker</span></a></li>
+    <li><a href="#henikoff" class="tab_inactive" title="Henikoff"><span>Henikoff</span></a></li>
+    <li><a href="#karpen" class="tab_inactive" title="Karpen"><span>Karpen</span></a></li>
+    <li><a href="#lai" class="tab_inactive" title="Lai"><span>Lai</span></a></li>
+    <li><a href="#macalpine" class="tab_inactive" title="MacAlpine"><span>MacAlpine</span></a></li>
+    <li><a href="#oliver" class="tab_inactive" title="Oliver"><span>Oliver</span></a></li>
+    <li><a href="#piano" class="tab_inactive" title="Piano"><span>Piano</span></a></li>
+    <li><a href="#snyder" class="tab_inactive" title="Snyder"><span>Snyder</span></a></li>
+    <li><a href="#waterston" class="tab_inactive" title="Waterston"><span>Waterston</span></a></li>
+    <li><a href="#white" class="tab_inactive" title="White"><span>White</span></a></li>
+  </ul>
+</div>
+<div id="celniker" class="inactive">
+<br />
+<table width=90% border=1>
+<tr>
+ <th scope="col">Submission id</th>
+ <th scope="col">Submission Name</th>
+ <th scope="col">Status/Links</th>
+ <th scope="col">Info</th>
+</tr>
+<tr>
+ <td width=100>2769</td>
+ <td>S2_RNA_Expression_Tiling_Array</td>
+ <td>
+  <div id="TracksMenu"
+   style="position:absolute; top:170px;
+          width:150px; height:60px; z-index:2;
+          background-color:#F9C36E;
+          visibility:hidden">
+  <br/>
+  <a href="http://submit.modencode.org/submit/public/download/2769?root=tracks">&nbsp;Check the link</a><br/>
+  <a href="#">&nbsp;mark as OK</a><br/>
+  <a href="#">&nbsp;mark as PROBLEM</a>
+  </div>
+  <a href="#" onClick="toggleMenu('TracksMenu');">
+    <img src="icons/f_icon.jpg" width="20" height="20" border=0 alt="Tracks" />
+  </a>
+  <a href="http://submit.modencode.org/submit/public/citation/2769">
+    <img src="icons/c_icon.jpg" width="20" height="20" border=0 alt="Citation" />
+  </a>
+  <a href="http://modencode.oicr.on.ca/fgb2/gbrowse/fly/?start=123000;stop=180000;ref=2L;l=White_CS_SG_NAJIRE">
+    <img src="icons/g_icon.jpg" width="20" height="20" alt="GBrowse" />
+  </a>
+  <a href="http://intermine.modencode.org/query/portal.do?externalid=modENCODE_2769&class=Submission">
+    <img src="icons/m_icon.jpg" width="20" height="20" alt="modMINE" />
+  <a href="#">
+    <img src="icons/pc_NA_icon.jpg" width="20" height="20" alt="Machine check" />
+  </a>
+ </td>
+ <td>
+  <a href="report.html">Report</a>
+ </td>
+</tr>
+</table>
+</div>
+<div id="henikoff" class="inactive">Something for Henikoff</div>
+<div id="karpen" class="inactive">Nothing here yet</div>
+<div id="lai" class="inactive"></div>
+<div id="macalpine" class="inactive"></div>
+<div id="oliver" class="inactive"></div>
+<div id="piano" class="inactive"></div>
+<div id="snyder" class="inactive"></div>
+<div id="waterston" class="inactive"></div>
+<div id="white" class="inactive"></div>
+<br /><br />
+<script src="js/activatables.js" type="text/javascript"></script>
+<script src="js/toggle.js" type="text/javascript"></script>
+<script type="text/javascript">activatables('page', ['celniker', 'henikoff', 'karpen']);</script>
+</body>
+</html>

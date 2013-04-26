@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<project name="FlexPopup" default="compile" basedir="/opt/eclipse/plugins/org.apache.ant_1.7.1.v20100518-1145">
+	<taskdef resource = "flexTasks.tasks" classpath="${basedir}/flexTask/lib/flexTasks.jar"/>
+	<property name="FLEX_HOME" value="/opt/flex"/>
+	<property name="APP_ROOT" value="/home/pruzanov/workspace/FlexPopup"/>
+	<property name="DEPLOY_DIR" value="/home/pruzanov/workspace/FlexPopup/bin-release"/>
+    <target name="compile">
+       <mxmlc file="${APP_ROOT}/src/flexpopup.mxml" output="${DEPLOY_DIR}/flexpopup.swf">
+        <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+       	<source-path path-element="${FLEX_HOME}/frameworks"/>     	
+       </mxmlc>
+    </target>
+	<target name="wrapper">
+	        <html-wrapper 
+	            title="Testing Java Script controlling popups in Flex"
+	            file="FlexPopupControl.html"
+	            bgcolor="white"
+	        	height = "100%"
+		        width = "100%"
+	            application="FlexPopup"
+	            swf="${DEPLOY_DIR}/flexpopup"
+	            version-major="1"
+	            version-minor="0"
+	            version-revision="0"
+	            history="true"
+	            output="${APP_ROOT}/html"/>
+	</target>
+</project>

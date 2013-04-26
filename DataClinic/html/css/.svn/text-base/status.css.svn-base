@@ -1,0 +1,32 @@
+/* 
+        Status styles for Data clinic
+	Written by Peter Ruzanov  pruzanov@oicr.on.ca
+*/
+
+
+ a.ok { 
+ width:20px;
+ display:block;
+ background-color:green;
+ }
+
+ a.bad {
+ width:20px;
+ display:block;
+ background-color:red;
+ }
+
+ a.na {
+ width:20px;
+ display:block;
+ background-color:gray;
+ }
+
+ .hidden {
+ display:none;
+ }
+
+ .unhidden {
+ display:block;
+ }
+

@@ -1,0 +1,176 @@
+#!/usr/bin/perl -w
+
+#
+# Process list of submissions and get the stanza code for them 
+#
+
+use strict;
+use IO::File;
+use Digest::MD5 qw(md5 md5_hex md5_base64);
+my @subs;
+my @args = @ARGV;
+my $USAGE = "merge_cites [list_of_subs]\n";
+my $cachedir = "cache";
+
+use constant DEBUG => 0;
+use constant CACHE => 1; # Set this to zero to meake the script interactive
+
+foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @subs,$_} ($1..$2);
+ } else {push @subs,$_;}
+}
+
+# Read from internet (download stanza from http://submit.modencode.org/submit/public/get_gbrowse_stanzas/SUB_ID)
+# Essentially, we need only to merge citations
+my %list;
+
+&get_list(\@subs);						# Get the list from the web or use an old copy
+
+if (!%list || scalar(keys %list) == 0) { print STDERR "We don't have any data to work with, exiting...\n";
+                                         exit; }
+
+# Ok, we do have some data, let's start stanza extraction
+my $fh = new IO::File();
+
+
+# Process just first stanza citation, assume that all stanzas are the same in one filea
+my @coretext = ();	# For the common text
+my %pars;		# For different parameters
+my $got_core = 0;
+my $in;
+
+foreach my $file (keys %list) {
+ my @current = (); # For storing each parameter's lines
+
+ $fh->open("$cachedir/$file.stanza") or die "Can't read from stanza code for [$file]\n";
+ 
+ LINE:
+ while (<$fh>) {
+  chomp;
+  next if (/^$/ || /^\s+$/);
+  
+  if (/citation\s+\=/) {
+    print STDERR "Found citation\n" if DEBUG;
+    $in = 1;
+    $got_core = @coretext > 1 ? 1 : 0;
+    push(@coretext,$_) if !$got_core;
+    next LINE;
+  }
+  next if !$in;
+
+  if (/\<li\>/ || @current) {
+   push(@current,$_);
+  }
+
+  if (/\<\/li\>/ && @current) {my $next_par = &process_par(\@current);
+                               push(@coretext,$next_par) if !$got_core;
+                               @current = ();
+		               next LINE;
+  }
+  if (@current) {next LINE;}  
+   
+
+  if (/Release Date/) { #we're done
+    push(@coretext,$_." Submission $file"); # Register all Release dates
+    last LINE;
+  }
+  push(@coretext,$_);
+ }
+ $fh->close;
+}
+
+
+#map{print STDERR $_."\n"} (@coretext) if DEBUG;
+#exit if DEBUG;
+my %seen;
+my $first_track = 1; #Flags first occurance of 'Release' line - we may have multiple Release dates, so we need to print extra text only once
+
+# Final Step: Printing out citation text
+foreach my $line (@coretext) {
+ if ($line=~ /\<b\>(.+?)\<\/b\>/ && $pars{$1}) {
+   my $par = $1;
+   print STDERR "Found parameter $par\n" if DEBUG;
+   $seen{$par}++;
+   my $strings = join(",\n  ",keys %{$pars{$par}});
+   $strings =~ s/(\S)\s*\,/$1\,/g;
+   print ' <li>'."\n",
+         ' <b>'.$par.'</b>'."\n",
+         "  ".$strings."\n",
+         ' </li>'."\n";
+   next;
+ }
+
+ if ( $line =~ /Release / && $first_track ){
+			     $first_track = 0;
+  			     foreach my $pr (keys %pars) {
+                             next if $seen{$pr};
+                             my $strings = join(",\n  ",keys %{$pars{$pr}});
+   			     $strings =~ s/(\S)\s*\,/$1\,/g;
+                             print ' <ol>'."\n".' <li>'."\n",
+                             ' <b>'.$pr.'</b>'."\n",
+                             "  ".$strings."\n",
+                             ' </li>'."\n".' </ol>'."\n".' </br></br>'."\n";
+                            }
+                            print $line."\n";}
+ last if (!$first_track && $line!~/Release /);
+ print $line."\n";
+}
+
+
+
+
+# Process Each parameter here
+sub process_par {
+ my @lines = @{shift @_};
+ my $string;
+ my $par = "ERROR";
+ map{$string.=$_} (@lines); # construct solid string
+ print STDERR $string."\n" if DEBUG; 
+ if ($string=~m!\<li\>\s*\<b\>(.+?)\</b\>(.*)\s*\</li\>!){
+ #if ($string=~m/^(.+)/){
+   $par  = $1;
+   print STDERR "Has Parameter $par\n" if DEBUG;
+   my $data = $2;
+   my @data = split(", ",$data);
+   
+   my @fdata; # Remove all besides hrefs
+   map{push(@fdata,$_) if $_=~/href/} @data;
+   map{$_=~s/^\s*(.*)\s*$/$1/ and $pars{$par}->{$_}++} @fdata;
+ } else {print STDERR "the string $string is malformed, cannot extract data\n";
+         }
+ print STDERR scalar(keys %{$pars{$par}})." entries for $par\n" if DEBUG;
+ return " \<b\>$par\<\/b\>";
+}
+
+
+# Get the stanza code files list from the web or use an old copy
+sub get_list {
+ my @subs_ = @{shift @_};
+ # Make sure we have the cache dir in place
+ if (! -e $cachedir || ! -d $cachedir) {print STDERR "Going to create the cache directory\n"; 
+                                        my $dir_ok = system("mkdir $cachedir"); }
+
+ my $over_all = 0;
+
+ foreach my $sub (@subs_) {
+  if ( -e "$cachedir\/$sub\.stanza" && !$over_all ) {
+   print STDERR "Overwrite cached files?\n",
+                "1. NO (default)\n",
+                "2. YES\n";
+   my $answer = CACHE ? 1 : <STDIN>;
+   $over_all = $answer == 2 ? 1 : 0;
+   if ($answer == 1 ) {$list{$sub}->{file} = 1; 
+		       next;}
+  }
+
+ my $success = system("lwp-request -a -t 30 http://submit.modencode.org/submit/public/get_gbrowse_stanzas/$sub > temp_stanza$$");
+ if ($success) {print STDERR "Failed to get a stanza code for $sub\n";
+                 next;}
+ `mv temp_stanza$$ $cachedir/$sub.stanza`; 
+ $list{$sub}->{file} = 1;
+ #last;
+ } 
+}
+

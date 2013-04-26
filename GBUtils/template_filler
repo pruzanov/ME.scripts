@@ -1,0 +1,204 @@
+#!/usr/bin/perl
+
+use IO::File;
+use strict;
+
+#
+# Simple script for filling the stanza using templates
+# Supply a file (tab-delimited) with the following columns:
+#    FIELD_name FIELD_key FIELD_ds FIELD_ts FIELD_cat FIELD_sel
+#
+# This script for filling template for bam tracks ONLY
+# Possible development into more generic script in a future
+
+# Template file should be changed in order to work with some custom tracks
+my $USAGE = "template_filler [template_file] [fields_file]\n";
+
+my($template,$file) = @ARGV;
+my @data;
+
+die $USAGE unless(-f $template && -f $file);
+my $fh = new IO::File("<$file") or die "Cannot read from file [$file]\n";
+while (<$fh>) {
+ chomp;
+ my @temp = split("\t");
+ $temp[0] =~ s!.*/(.+)\.bam!$1!;
+ push @data,{FIELD_name => $temp[0],
+             FIELD_key  => $temp[1],
+             #FIELD_ds   => $temp[2]=~/ / ? [split(" ",$temp[2])] : $temp[2],
+             #FIELD_ts   => $temp[3]=~/ / ? [split(" ",$temp[3])] : $temp[3],
+	     FIELD_ds   => [split(" ",$temp[2])],
+             FIELD_ts   => [split(" ",$temp[3])],
+             FIELD_cat  => $temp[4],
+	     #FIELD_sel  => $temp[5]=~/ / ? [split(" ",$temp[5])] : $temp[5]}
+             FIELD_sel  => [split(" ",$temp[5])]};
+}
+
+
+$fh->close;
+$fh->open("<$template") or die "Cannot read from template [$template]\n";
+my @template;
+map {push @template,$_} (<$fh>);
+$fh->close;
+
+for (my $i = 0; $i < @data; $i++) {
+#my $multi = ref($data[$i]->{FIELD_ts}) ? 1 : 0;
+
+print "\n";
+
+ foreach my $te (@template) {
+  my $t = $te;
+  my(@subs,$head,$type,$tail);
+
+   if ($t =~/^feature/ && $t =~/^(feature\s*=\s*)(\S+:)(FIELD_\S+)/) {
+     $head = $1;
+     $type  = $2;
+     my $f = $3;
+     @subs = map{$type.&cook_string($f,$i,$_)} (0..@{$data[$i]->{FIELD_ts}}-1);
+     print "$head$subs[0]\n";
+    }elsif($t =~/^select/ && $t =~/^(select\s*=\s*)(\S+)/){
+     $head = $1;
+     $type = $2;
+     my $sep = '#';
+     my %names = (names=>$data[$i]->{FIELD_sel},
+                  subs =>$data[$i]->{FIELD_ds});
+     if (@{$names{names}} != @{$names{subs}}){ die "Missing data for $data[$i]->{FIELD_key}";}
+     @subs = map{join($sep,($names{names}->[$_],$names{subs}->[$_]))} (0..@{$names{subs}}-1);
+     print "$head $type $subs[0]\n";
+    }elsif($t =~/^link/){
+     $t =~ s/FIELD_ds/$data[$i]->{FIELD_ds}->[0]/ if $t =~ /FIELD_ds/;
+     print $t;
+     next;
+    }elsif($t=~/=>/ && $t=~/(.*\()/ && $t=~/subs/){
+     $head = $1;
+     $tail = ');';
+     my $sep  = '=>';
+     my %tracks = (ts=>$data[$i]->{FIELD_ts},
+                   ds=>$data[$i]->{FIELD_ds});
+     @subs = map{join($sep,($tracks{ts}->[$_],$tracks{ds}->[$_]))} (0..@{$tracks{ds}}-1);
+     print "$head$subs[0]\,\n"
+    }else{
+     $t =~ s/($1)/@{$data[$i]->{$1}}/ while $t =~ /(FIELD_(ds|ts))/gc;
+     $t =~ s/($1)/$data[$i]->{$1}/ while $t =~ /(FIELD_(name|key|cat))/gc;
+     print $t;
+     next;
+    }
+  my $spaces = "";
+  my $add_sp = $tail ? 0 : 2;
+  $type =~ /\:/ ? map{$spaces.=" "} (1..length($head)) : map{$spaces.=" "} (1..length($head)+length($type)+$add_sp);
+  if ($tail) {
+   map{print $spaces.$subs[$_]."\,\n"} (1..@subs-2);
+   print $spaces.$subs[@subs-1].$tail."\n";
+  }else{
+   map{print $spaces.$subs[$_]."\n"} (1..@subs-1);
+  }
+  next;
+
+
+ }
+  
+ if ( @{$data[$i]->{FIELD_ds}} == 1) {
+  my $c_id = $data[$i]->{FIELD_ds}->[0]; #=~/^(\d+)/ ? $1 : $data[$i]->{FIELD_ds};
+  my $cite_file = $c_id.".stanza";
+
+  if ( -f "cache\/$cite_file" ) {
+   $fh->open("<cache\/$cite_file") or die "Couldn't read from File [cache\/$cite_file]\n";
+  }else{
+   print STDERR "Getting citation for $data[$i]->{FIELD_ds}->[0]\n";
+   `./merge_cites $data[$i]->{FIELD_ds}->[0]`;
+   $fh->open("<cache\/$cite_file") or die "Couldn't read from File [cache\/$cite_file]\n";
+  }
+ }else{
+   print STDERR "Getting citation for @{$data[$i]->{FIELD_ds}}\n";
+   `./merge_cites @{$data[$i]->{FIELD_ds}} > temp$$`;
+   $fh->open("<temp$$") or die "Couldn't read from File [temp$$]\n";
+ }
+   my @cite = @{&clean_cite($fh)};
+   map {print $_} (@cite);
+   $fh->close;
+}
+
+#=====================Changes placeholders into real data
+sub cook_string ($$){
+ my($string,$i,$j) = @_;
+ my $work = $string;
+ $work =~ s/($1)/$data[$i]->{$1}[$j]/ while $work =~ /(FIELD_(name|key|ds|ts|cat|sel))/gc;
+ return $work;
+}
+
+
+#=====================Removes spaces, other junk
+sub clean_cite ($) {
+ my(@results,$in);
+ my $f = shift;
+ 
+ while (<$f>) {
+  if (/^citation/ || $in) {
+   last if (/^\w/ && !/^citation/);
+   $in = 1;
+   if (/^\s*$/ || /^\#/ || /^$/){next;};
+   push @results,$_;
+  } 
+ }
+ return \@results;
+}
+
+=head2 SYNOPSIS
+
+Simple script for filling the stanza using templates
+Supply a file (tab-delimited) with the following columns:
+FIELD_name FIELD_key FIELD_ds FIELD_ts FIELD_cat FIELD_sel
+
+(FIELD_sel is optional, it is only used for tracks with subtracks)
+
+=head2 USAGE
+
+template_filler [template_file] [fileds_file]
+
+template should look like a regular stanza snippet except it would
+use FIELD_* placeholders where required:
+
+[SomePrefix_FIELD_name]
+feature         = VISTA:FIELD_ts
+glyph           = vista_plot
+glyph select    = vista_plot
+label           = sub { my $name = shift->name;
+                        $name =~ s/Dm_//;
+                        return sprintf "%-25s",$name; }
+smoothing       = mean
+smoothing_window = 10
+category        = Chromatin Structure: Nucleosome Structure
+bump density    = 250
+data source     = FIELD_ds
+track source    = FIELD_ts
+autoscale       = local
+variance_band   = 1
+max_peak        = 3
+min_peak        = -3
+start_color     = lightblue
+end_color       = blue
+pos_color       = blue
+neg_color       = blue
+stranded        = 0
+bgcolor         = blue
+alpha           = 80
+fgcolor         = black
+connector       = solid
+database        = my_db
+only_show       = signal
+height          = 30
+label density   = 100
+label_position  = left
+box_subparts    = 1
+bicolor_pivot   = min
+key             = FIELD_key
+select          = name FIELD_sel#FIELD_ds
+link             = sub {my $src = shift->source;
+                        my %subs= (FIELD_ts=>FIELD_ds);
+                        return "http://intermine.modencode.org/query/portal.do?externalid=$subs{$src}&class=Submission";}
+citation        =
+
+The citation part will be filled using cached files or information from DCC server (the url is currently hard-coded)
+
+
+=cut

@@ -1,0 +1,44 @@
+#!/usr/bin/perl -w
+
+# Delete unwanted gff files using sub to gff table
+
+
+my @args = @ARGV;
+my $idfile = "snyder_sub2_sig_peak";
+my(@dirs,@del);
+
+
+foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @dirs,$_} ($1..$2);
+ } else {push @dirs,$_;}
+}
+
+
+open(IDFILE,"<$idfile") or die "Couldn't open file [$idfile] for reading";
+while(<IDFILE>) {
+ chomp;
+ my @temp = split("\t");
+ if ($temp[2]){$gffs{$temp[0]} = $temp[2];}
+}
+close IDFILE;
+
+
+foreach my $d (@dirs) {
+ next if !$gffs{$d};
+
+ opendir(DIR,$d) or die "Cannot read from dir [$d]";
+ my @files = grep {!/wiggle/} grep {/\.gff/} readdir DIR;
+ closedir DIR;
+
+ if (@files && @files >1) {
+  map{if(/^(\d+)\./ && $gffs{$d} != $1){push @del,join("/",($d,$_))}} @files;
+ } elsif (@files == 1 && $files[0]=~/^(\d+)\./ && $1 != $gffs{$d}) {
+   print "$1 not $gffs{$d}\n";
+   print STDERR "$d/$files[0] is not the right one, however it's the only one gff file in $d\n";
+ }
+}
+
+print STDERR join("\n",@del);
+map {`rm $_`} @del;

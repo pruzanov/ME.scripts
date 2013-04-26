@@ -1,0 +1,87 @@
+#!/usr/bin/perl -w
+
+#
+# Script for fixing gff files so they can be shown using heat_map glyph
+# needs two arguments - name of gff file and id + name for parent feature (chromosome-length)
+#
+
+=head1 TITLE
+
+ gff_fixer - Fixes gff files with features having method binding_site or protein_binding_site
+ so they can be shown using heat_map glyph as subtracks of a single track in GBrowse
+
+ needs three arguments - file name method and name to use 
+ (by default, method from input gff file used)
+
+
+
+=head1 SINOPSIS
+    
+ gff_fixer will add special scaffold features to the lines in input gff and optionally change the method to accomodate for 
+ 40-char limit used in mysql table for storage of method:source combination as tag field (typelist table)
+     
+ usage: gff_fixer [input file] [method] [name of a scaffold feature to use]
+
+=cut
+
+ 
+use strict;
+use IO::File;
+my $USAGE = "gff_fixer [file_to_fix] [method] [Name_to_use]\n";
+
+my ($file,$method,$name) = @ARGV;
+
+if (!$file || !$method || !$name){die $USAGE;}
+
+if (length(join(":",($method,$name))) > 35){die "The choice of name may present a problem, please choose a shorter name\n";}
+
+print STDERR "Do you want\n1. worm\n2. fly ?\n";
+my $table;
+while (my $answer = <STDIN>){
+ $table = $answer == 1 ? "scaffolds_worm.txt" : "scaffolds_fly.txt";
+ if ( !-e $table ){die "Table for this organism not found!\n";}
+ last;
+}
+die $USAGE if (!$file || !$name);
+
+my %data; # Hope we won't run out of memory (use with small files, ok?)
+my %scaffs;
+
+# Construct primary tag:
+my $p_tag = $` if $file=~/\.gff/;
+while ($p_tag =~ /\//){ $p_tag = $';}
+$p_tag.="_details_$name";
+
+my $fh = new IO::File("<$table") or die "Couldn't read from [$table]\n";
+while (<$fh>) {
+ chomp;
+ s/name/$name/g;
+ s/id/$p_tag/;
+ s/method/$method/;
+ s/ID=id/ID=$name/;
+ my $id;
+ /\t/ ? $id = $` : next;
+ s/_details//;
+ $scaffs{$id} = $_;
+}
+$fh->close;
+
+$fh->open("<$file") or die "Couldn't read from [$file]\n";
+while (<$fh>) {
+ chomp;
+ next if /^#/ || /^$/;
+ #s/ID=.+?\;//;
+ my @temp = split("\t");
+ #s/Name/Name=$name\;Note/;
+ s/\./255/ if /\.\t[\.\+\-]\t\./; #fill in score if it's missing
+ $data{$temp[0]}->{$temp[3]} = $_;
+}
+$fh->close;
+
+print "#gff-version 3\n";
+foreach my $chr (keys %data) {
+ print $scaffs{$chr}."\n";
+ foreach my $coord (sort {$a<=>$b} keys %{$data{$chr}}) {
+  print $data{$chr}->{$coord}.";Parent=$name"."_$chr\n";
+ }
+}

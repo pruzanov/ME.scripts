@@ -1,0 +1,2052 @@
+# SNYDER TRACKS
+
+# combinded tracks:
+
+[Snyder_ANTIGFP_WIG_COMB:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_ANTIGFP_WIG_COMB]
+feature      = WIG:4095
+	       WIG:4171
+	       WIG:4180
+	       WIG:4186
+	       WIG:4213
+	       WIG:4257
+	       WIG:4266
+	       WIG:4270
+	       WIG:4284
+	       WIG:4297
+	       WIG:4319
+	       WIG:4324
+	       WIG:4353
+	       WIG:4366
+	       WIG:4377
+	       WIG:4388
+	       WIG:5388
+	       WIG:5406
+	       WIG:5415
+	       WIG:5425
+	       WIG:5426
+	       WIG:5427
+	       WIG:5446
+	       WIG:5452
+	       WIG:5454
+	       WIG:5465
+	       WIG:5469
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+graph_type   = histogram
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: ChIP Seq
+pos_color    = blue
+neg_color    = orange
+data source  = 2416 734 2434 2418 589 2430 2429 2417 593 591 2431 2432 2433 2451 2450 2453 2601 2598 2614 2613 2612 2622 2620 2621 2623 2617 2610
+track source = 4095 4171 4180 4186 4213 4257 4266 4270 4284 4297 4319 4324 4353 4366 4377 4388 5388 5406 5415 5425 5426 5427 5446 5452 5454 5465 5469 
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+                    $name =~ s/_GFP//;
+		    $name =~ s/_/ /g;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+label density= 100
+smoothing_window = 16
+select       = name
+               DPY27_emb_GFP #2416
+	       CEH14_L2_GFP #734
+	       ALR1_L2_GFP #2434
+	       HLH8_L3_GFP #2418
+	       AMA1_L4YA_GFP #589
+	       UNC130_L1_GFP #2430
+	       LIN11_L2_GFP #2429
+	       EOR1_L3_GFP #2417
+	       MAB5_L3_GFP #593
+	       DAF16_L4YA_GFP #591
+	       HLH1_emb_GFP #2431
+	       LIN39_L3_GFP #2432
+	       NHR6_L2_GFP #2433
+	       GEI11_L4_GFP #2451
+	       PES1_L4_GFP #2450
+	       EGL5_L3_GFP #2453
+	       MDL1_GFP_L1 #2601
+	       MEP1_GFP_emb #2600
+	       ELT3_GFP_L1 #2614
+	       LIN13_GFP_emb #2613
+	       BLMP1_GFP_L1 #2612
+	       SKN1_GFP_L1 #2622
+	       CEH30_GFP_lemb #2620
+	       EGL27_GFP_L1 #2621
+	       PQM1_GFP_L3 #2623
+	       NHR105_GFP_L3 #2617
+	       LIN15B_GFP_L3 #2610
+key          = Combined (GFP ChIP)
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs = (4095=>2416,
+                     		 4171=>734,
+                     		 4180=>2434,
+                     		 4186=>2418,
+                     		 4213=>589,
+                     		 4257=>2430,
+                     		 4266=>2429,
+                     		 4270=>2417,
+                     		 4284=>593,
+                     		 4297=>591,
+                     		 4319=>2431,
+                     		 4324=>2432,
+                     		 4353=>2433,
+                     		 4366=>2451,
+                     		 4377=>2450,
+                     		 4388=>2453,
+				 5388=>2601,
+				 5406=>2598,
+				 5415=>2614,
+				 5425=>2613,
+				 5426=>2612,
+				 5427=>2622,
+				 5446=>2620,
+				 5452=>2621,
+				 5454=>2623,
+				 5465=>2617,
+				 5469=>2610);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25653">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ </ol>
+ <br />
+ <ol>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389646">GSM389646</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435303">GSM435303</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435317">GSM435317</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435291">GSM435291</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435319">GSM435319</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388729">GSM388729</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435300">GSM435300</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391228">GSM391228</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389311">GSM389311</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391227">GSM391227</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389649">GSM389649</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388728">GSM388728</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435316">GSM435316</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435292">GSM435292</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388727">GSM388727</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435301">GSM435301</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435293">GSM435293</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391226">GSM391226</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389308">GSM389308</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391229">GSM391229</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388726">GSM388726</a>
+ </li>
+ </ol>
+ </br></br>
+ <b>Release Date:</b> 2009-11-28
+
+
+ 
+[Snyder_ANTIAMA_WIG_COMB:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_ANTIAMA_WIG_COMB]
+feature      = WIG:4275
+	       WIG:4283
+	       WIG:4308
+	       WIG:5876
+	       WIG:6105
+               WIG:5739
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: ChIP Seq
+pos_color    = blue
+neg_color    = orange
+data source  = 594 592 590 2597 2596 2616
+track source = 4275 4283 4308 5876 6105 5739
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub { my $name = shift->name; 
+                    $name =~ s/_POLII//;
+                    $name =~ s/_/ /g;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name
+               MAB5_POLII_L3 #594
+	       DAF16_POLII_L4YA #592
+	       AMA1_POLII_L4YA #590
+               EGL5_POLII_L3 #2616
+	       HLH8_POLII_L3 #2597
+	       EOR1_POLII_L3 #2596
+key          = Combined (Pol II ChIP)
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs = (4275=>594,
+				 4283=>592,
+				 4308=>590,
+				 5876=>2597,
+				 6105=>2596,
+                                 5739=>2616);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=26756">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389312">GSM389312</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389650">GSM389650</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389309">GSM389309</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389647">GSM389647</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+ 
+
+# PHA4 grouping
+
+[Snyder_PHA4_POLII_COMB:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_PHA4_POLII_COMB]
+feature      = WIG:4219
+               WIG:4222
+               WIG:4225
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+graph_type   = histogram
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: PHA-4 
+pos_color    = blue
+neg_color    = orange
+data source  = 586 587 588
+track source = 4219 4222 4225
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+		    $name =~ s/POLII_//i;
+                    $name =~ s/_/ /g;
+                    $name =~ s/PHA4 //;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-14s",$1,$2) : sprintf("%-6s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 16
+select       = name 
+               PHA4_POLII_StarvedL1 #588
+	       PHA4_POLII_FedL1 #587
+	       PHA4_POLII_emb #586
+key          = PHA-4 (Pol II ChIP): Combined
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs = (4225=>586,
+                                 4222=>587,
+                                 4219=>588);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology.
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391296">GSM391296</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363860">GSM363860</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391297">GSM391297</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391299">GSM391299</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363862">GSM363862</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+[Snyder_PHA4_GFP_COMB:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_PHA4_GFP_COMB]
+feature      = WIG:4239
+               WIG:4245
+               WIG:4249
+               WIG:4192
+	       WIG:5406
+	       WIG:5404
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+graph_type   = histogram
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: PHA-4
+pos_color    = blue
+neg_color    = orange
+data source  = 582 584 585 2452 2598 2599
+track source = 4239 4245 4249 4192 5406 5404
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+                    $name =~ s/_GFP(.*)/$1/;
+                    $name =~ s/_/ /g;
+                    $name =~ s/PHA4 //;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-14s",$1,$2) : sprintf("%-6s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 16
+select       = name
+               PHA4_L2_GFP #2452
+	       PHA4_FedL1_GFP #585
+	       PHA4_emb_GFP #582
+	       PHA4_StarvedL1_GFP #584
+	       PHA4_GFP_YA #2599
+	       PHA4_GFP_lemb #2598
+key          = PHA-4 (GFP ChIP): Combined
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs = (4245=>582,
+                                 4249=>584,
+                                 4239=>585,
+                                 4192=>2452,
+				 5404=>2599,
+				 5406=>2598);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391296">GSM391296</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363860">GSM363860</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391297">GSM391297</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391299">GSM391299</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363862">GSM363862</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+# N2 ChIP Seq
+
+[Snyder_N2_WIG_COMB:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_N2_WIG_COMB]
+feature      = WIG:4330
+	       WIG:4339
+	       WIG:4340
+	       WIG:4350
+	       WIG:4367
+	       WIG:4369
+	       WIG:4389
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: Pol II ChIP (N2)
+pos_color    = blue
+neg_color    = orange
+data source  = 2437 2439 2438 2436 2440 2441 2435
+track source = 4330 4339 4340 4350 4367 4369 4389
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub { my $name = shift->name;
+		    $name =~ s/_POLII//;
+		    $name =~ s/N2_//;
+                    $name =~ s/_/ /g;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-14s",$1,$2) : sprintf("%-5s",$name); }
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name
+               N2_POLII_L1 #2437
+	       N2_POLII_L3 #2439
+	       N2_POLII_L2 #2438
+	       N2_POLII_lemb #2436
+	       N2_POLII_L4 #2440
+	       N2_POLII_YA #2441
+	       N2_POLII_eemb #2435
+key          = Pol II ChIP (N2): Combined
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs = (4330=>2437,
+				 4339=>2439,
+				 4340=>2438,
+				 4350=>2436,
+				 4367=>2440,
+				 4369=>2441,
+				 4389=>2435);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:Young_Adult:MS:1&oldid=24812">Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:late_embryo_20dC_4.5_hrs_post-early_embryo:RW:Reinke&oldid=19886">late embryo 20dC 4.5 hours post-early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:early_embryo:RW:Reinke&oldid=19885">early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-28
+
+
+# raplicates:
+
+[Snyder_ANTIGFP_WIG_REPS:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_ANTIGFP_WIG_REPS]
+feature      = WIG:4099
+               WIG:4101
+               WIG:4176
+               WIG:4177
+               WIG:4182
+               WIG:4183
+               WIG:4188
+               WIG:4189
+               WIG:4216
+               WIG:4220
+               WIG:4259
+               WIG:4260
+               WIG:4274
+               WIG:4276
+               WIG:4277
+               WIG:4278
+               WIG:4289
+               WIG:4295
+               WIG:4303
+               WIG:4306
+               WIG:4327
+               WIG:4329
+               WIG:4331
+               WIG:4332
+               WIG:4356
+               WIG:4357
+               WIG:4371
+               WIG:4373
+               WIG:4382
+               WIG:4383
+               WIG:4392
+               WIG:4394
+	       WIG:5395
+	       WIG:5398
+	       WIG:5409
+	       WIG:5413
+	       WIG:5428
+	       WIG:5429
+	       WIG:5432
+	       WIG:5433
+	       WIG:5439
+	       WIG:5442
+	       WIG:5444
+	       WIG:5449
+	       WIG:5457
+	       WIG:5458
+	       WIG:5459
+	       WIG:5461
+	       WIG:5463
+	       WIG:5464
+	       WIG:5470
+	       WIG:5472
+	       WIG:5473
+	       WIG:5474
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: ChIP Seq
+pos_color    = blue
+neg_color    = orange
+data source  = 2416 734 2434 2418 589 2430 2429 2417 593 591 2431 2432 2433 2451 2450 2453 2601 2600 2614 2622 2613 2612 2621 2620 2623 2617 2610
+track source = 4099 4101 4176 4177 4182 4183 4188 4189 4216 4220 4259 4260 4274 4276 4277 4278 4289 4295 4303 4306 4327 4329 4331 4332 4356 4357 4371 4373 4382 4383 4392 4394 5395 5398 5409 5413 5428 5429 5432 5433 5439 5442 5444 5449 5457 5458 5459 5461 5463 5464 5470 5472 5473 5474
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name; 
+                    $name =~ s/_GFP//;
+                    $name =~ s/_/ /g;
+		    return $name =~ /(.+?) (.*) (rep\d)/ ? sprintf("%-6s %-5s %-5s",$1,$2,$3) : sprintf("%-5s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name   DPY27_emb_GFP_rep1 #2416
+		      DPY27_emb_GFP_rep2 #2416
+		      CEH14_L2_GFP_rep1 #734
+		      CEH14_L2_GFP_rep2 #734
+		      ALR1_L2_GFP_rep1 #2434
+		      ALR1_L2_GFP_rep2 #2434
+		      HLH8_L3_GFP_rep1 #2418
+		      HLH8_L3_GFP_rep2 #2418
+		      AMA1_L4YA_GFP_rep1 #589
+		      AMA1_L4YA_GFP_rep2 #589
+		      UNC130_L1_GFP_rep1 #2430
+		      UNC130_L1_GFP_rep2 #2430
+		      LIN11_L2_GFP_rep1 #2429
+		      LIN11_L2_GFP_rep2 #2429
+		      EOR1_L3_GFP_rep1 #2417
+		      EOR1_L3_GFP_rep2 #2417
+		      MAB5_L3_GFP_rep1 #593
+		      MAB5_L3_GFP_rep2 #593
+		      DAF16_L4YA_GFP_rep1 #591
+		      DAF16_L4YA_GFP_rep2 #591
+		      HLH1_emb_GFP_rep1 #2431
+		      HLH1_emb_GFP_rep2 #2431
+		      LIN39_L3_GFP_rep1 #2432
+		      LIN39_L3_GFP_rep2 #2432
+		      NHR6_L2_GFP_rep1 #2433
+		      NHR6_L2_GFP_rep2 #2433
+		      GEI11_L4_GFP_rep1 #2451
+		      GEI11_L4_GFP_rep2 #2451
+		      PES1_L4_GFP_rep1 #2450
+		      PES1_L4_GFP_rep2 #2450
+		      EGL5_L3_GFP_rep1 #2453
+		      EGL5_L3_GFP_rep2 #2453
+		      MDL1_GFP_L1_rep1 #2601
+		      MDL1_GFP_L1_rep2 #2601
+		      MEP1_GFP_emb_rep1 #2600
+		      MEP1_GFP_emb_rep2 #2600
+		      ELT3_GFP_L1_rep1 #2614
+		      ELT3_GFP_L1_rep2 #2614
+		      SKN1_GFP_L1_rep1 #2622
+		      SKN1_GFP_L1_rep2 #2622
+		      LIN13_GFP_emb_rep1 #2613
+		      LIN13_GFP_emb_rep2 #2613
+		      BLMP1_GFP_L1_rep1 #2612
+		      BLMP1_GFP_L1_rep2 #2612
+		      EGL27_GFP_L1_rep1 #2621
+		      EGL27_GFP_L1_rep2 #2621
+		      CEH30_GFP_lemb_rep1 #2620
+		      CEH30_GFP_lemb_rep2 #2620
+		      PQM1_GFP_L3_rep1 #2623
+		      PQM1_GFP_L3_rep2 #2623
+		      NHR105_GFP_L3_rep1 #2617
+		      NHR105_GFP_L3_rep2 #2617
+		      LIN15B_GFP_L3_rep1 #2610
+		      LIN15B_GFP_L3_rep2 #2610
+key          = Replicates (GFP ChIP)
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs =(4099=>2416,
+                                4101=>2416,
+                                4176=>734,
+                                4177=>734,
+                                4182=>2434,
+                                4183=>2434,
+                                4188=>2418,
+                                4189=>2418,
+                                4216=>589,
+                                4220=>589,
+                                4259=>2430,
+                                4260=>2430,
+                                4274=>2429,
+                                4276=>2429,
+                                4277=>2417,
+                                4278=>2417,
+                                4289=>593,
+                                4295=>593,
+                                4303=>591,
+                                4306=>591,
+                                4327=>2431,
+                                4329=>2431,
+                                4331=>2432,
+                                4332=>2432,
+                                4356=>2433,
+                                4357=>2433,
+                                4371=>2451,
+                                4373=>2451,
+                                4382=>2450,
+                                4383=>2450,
+                                4392=>2453,
+                                4394=>2453,
+				5395=>2601,
+				5398=>2601,
+				5409=>2600,
+				5413=>2600,
+				5428=>2614,
+				5429=>2614,
+				5432=>2622,
+				5433=>2622,
+				5439=>2613,
+				5442=>2613,
+				5444=>2612,
+				5449=>2612,
+				5457=>2621,
+				5458=>2621,
+				5459=>2620,
+				5461=>2620,
+				5463=>2623,
+				5464=>2623,
+				5470=>2617,
+				5472=>2617,
+				5473=>2610,
+				5474=>2610);
+		    return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = 
+ <h1>
+   Identification of Transcription Factors Binding Regions (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25653">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ </ol>
+ <br />
+ <ol>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389646">GSM389646</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435303">GSM435303</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435317">GSM435317</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435291">GSM435291</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435319">GSM435319</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388729">GSM388729</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435300">GSM435300</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391228">GSM391228</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389311">GSM389311</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391227">GSM391227</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389649">GSM389649</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388728">GSM388728</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435316">GSM435316</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435292">GSM435292</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388727">GSM388727</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435301">GSM435301</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435293">GSM435293</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391226">GSM391226</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389308">GSM389308</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391229">GSM391229</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388726">GSM388726</a>
+ </li>
+ </ol>
+ </br></br>
+ <b>Release Date:</b> 2009-11-28
+
+
+
+[Snyder_ANTIAMA_WIG_REPS:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_ANTIAMA_WIG_REPS]
+feature      = WIG:4288
+	       WIG:4290
+	       WIG:4293
+	       WIG:4301
+	       WIG:4316
+	       WIG:4321
+	       WIG:5744
+	       WIG:5745
+	       WIG:5879
+	       WIG:5880
+	       WIG:6107
+	       WIG:6108
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: ChIP Seq
+pos_color    = blue
+neg_color    = orange
+data source  = 586 587 588 594 592 590 2616 2597 2596
+track source = 4288 4290 4293 4301 4316 4321 5744 5745 5879 5880 6107 6108
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+variance_band= 1
+#autoscale    = local
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name; 
+                    $name =~ s/_POLII//;
+                    $name =~ s/_/ /g;
+		    return $name =~ /(.+?) (.*) (rep\d)/ ? sprintf("%-6s %-5s %-5s",$1,$2,$3) : sprintf("%-5s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name 
+                    MAB5_L3_GFP_rep1 #593
+		    MAB5_L3_GFP_rep2 #593
+		    DAF16_L4YA_GFP_rep1 #591
+		    DAF16_L4YA_GFP_rep2 #591
+		    AMA1_L4YA_GFP_rep1 #589
+		    AMA1_L4YA_GFP_rep2 #589
+		    EGL5_POLII_L3_rep1 #2616
+		    EGL5_POLII_L3_rep2 #2616
+		    HLH8_POLII_L3_rep1 #2597
+		    HLH8_POLII_L3_rep2 #2597
+		    EOR1_POLII_L3_rep1 #2596
+		    EOR1_POLII_L3_rep2 #2596
+key          = Replicates (Pol II ChIP)
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs =(4228=>588,
+                     		4230=>586,
+                     		4232=>587,
+                     		4233=>586,
+                     		4236=>588,
+                     		4238=>587,
+                     		4288=>592,
+                     		4290=>594,
+                     		4293=>592,
+                     		4301=>594,
+                     		4316=>590,
+                     		4321=>590,
+				5744=>2616,
+				5745=>2616,
+				5879=>2597,
+				5880=>2597,
+				6107=>2596,
+				6108=>2596);
+			return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Pol II Binding Regions 
+   (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389312">GSM389312</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389650">GSM389650</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389309">GSM389309</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389647">GSM389647</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+# PHA-4 tracks:
+
+[Snyder_PHA4_WIG_REPS_GFP:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_PHA4_WIG_REPS_GFP]
+feature      = WIG:4194
+               WIG:4195
+               WIG:4246
+               WIG:4250
+               WIG:4252
+               WIG:4253
+               WIG:4261
+               WIG:4263
+	       WIG:5412
+	       WIG:5414
+	       WIG:5416
+	       WIG:5420
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: PHA-4
+pos_color    = blue
+neg_color    = orange
+data source  = 2452 585 582 584 2599 2598
+track source = 4194 4195 4246 4253 4250 4252 4261 4263 5412 5414 5416 5420
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+                    $name =~ s/_GFP//;
+                    $name =~ s/(_rep\d)(.*)/$2$1/;
+                    $name =~ s/PHA4_//;
+                    $name =~ s/Starved/Stv/;
+                    $name =~ s/_/ /g;
+		    return $name =~ /(.+?) (rep\d)/ ? sprintf("%-8s %-5s",$1,$2) : sprintf("%-5s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name 
+                    PHA4_emb_GFP_rep1 #582
+		    PHA4_emb_GFP_rep2 #582
+		    PHA4_StarvedL1_GFP_rep1 #584
+		    PHA4_StarvedL1_GFP_rep2 #584
+		    PHA4_FedL1_GFP_rep1 #585
+		    PHA4_FedL1_GFP_rep2 #585
+	            PHA4_L2_GFP_rep1 #2452
+		    PHA4_L2_GFP_rep2 #2452
+		    PHA4_GFP_YA_rep1 #2599
+		    PHA4_GFP_YA_rep2 #2599
+		    PHA4_GFP_lemb_rep1 #2598
+		    PHA4_GFP_lemb_rep2 #2598
+key          = PHA-4 (GFP ChIP): Replicates
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs =(4194=>2452,
+                                4195=>2452,
+                                4246=>585,
+                                4250=>582,
+                                4252=>582,
+                                4253=>585,
+                                4261=>584,
+                                4263=>584,
+				5412=>2599,
+				5414=>2599,
+				5416=>2598,
+				5420=>2598);
+                    return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363860">GSM363860</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363862">GSM363862</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+[Snyder_PHA4_WIG_REPS_POLII:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_PHA4_WIG_REPS_POLII]
+feature      = WIG:4230
+               WIG:4233
+               WIG:4232
+               WIG:4238
+               WIG:4228
+               WIG:4236
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: PHA-4
+pos_color    = blue
+neg_color    = orange
+data source  = 586 587 588
+track source = 4230 4233 4232 4238 4228 4236
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+#autoscale    = local
+variance_band= 1
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+                    $name =~ s/_POLII//;
+                    $name =~ s/(_rep\d)(.*)/$2$1/;
+                    $name =~ s/PHA4_//;
+                    $name =~ s/Starved/Stv/;
+                    $name =~ s/_/ /g;
+                    return $name =~ /(.+?) (rep\d)/ ? sprintf("%-8s %-5s",$1,$2) : sprintf("%-5s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name 
+                    PHA4_emb_POLII_rep1 #586
+	            PHA4_emb_POLII_rep2 #586
+		    PHA4_FedL1_POLII_rep1 #587
+		    PHA4_FedL1_POLII_rep2 #587
+		    PHA4_StarvedL1_POLII_rep1 #588
+                    PHA4_StarvedL1_POLII_rep2 #588
+key          = PHA-4 (Pol II ChIP): Replicates
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs =(4230=>586,
+                                4233=>586,
+                                4232=>587,
+                                4238=>587,
+                                4228=>588,
+                                4236=>588);
+                    return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391296">GSM391296</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391299">GSM391299</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391297">GSM391297</a>     
+ </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+
+[Snyder_N2_WIG_REPS:200000]
+glyph        = wiggle_density
+height       = 8
+
+[Snyder_N2_WIG_REPS]
+feature      = WIG:4338
+	       WIG:4341
+	       WIG:4344
+	       WIG:4345
+	       WIG:4346
+	       WIG:4347
+	       WIG:4358
+	       WIG:4359
+	       WIG:4376
+	       WIG:4378
+	       WIG:4379
+	       WIG:4381
+	       WIG:4393
+	       WIG:4395
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+bump density = 250
+category     = modENCODE Tracks: Snyder Group: Pol II ChIP (N2)
+pos_color    = blue
+neg_color    = orange
+data source  = 2437 2439 2438 2436 2440 2441 2435
+track source = 4338 4341 4344 4345 4346 4347 4358 4359 4376 4378 4379 4381 4393 4395
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 20
+connector    = solid
+fgcolor      = black
+bgcolor      = blue
+variance_band= 1
+#autoscale    = local
+min_score    = 0
+max_score    = 200
+database     = snyder
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name; 
+		    $name =~ s/_POLII//;
+                    $name =~ s/(_rep\d)(.*)/$2$1/;
+		    $name =~ s/N2_//;
+		    $name =~ s/Starved/Stv/;
+                    $name =~ s/_/ /g;
+		    return $name =~ /(.+?) (rep\d)/ ? sprintf("%-8s %-5s",$1,$2) : sprintf("%-5s",$name);}
+label_position = left
+label density= 100
+smoothing_window = 10
+select       = name 
+                    N2_L1_POLII_rep1 #2437
+		    N2_L1_POLII_rep2 #2437
+		    N2_L3_POLII_rep1 #2439
+		    N2_L2_POLII_rep1 #2438
+		    N2_L3_POLII_rep2 #2439
+		    N2_L2_POLII_rep2 #2438
+		    N2_lemb_POLII_rep1 #2436
+		    N2_lemb_POLII_rep2 #2436
+		    N2_L4_POLII_rep1 #2440
+		    N2_YA_POLII_rep1 #2441
+		    N2_L4_POLII_rep2 #2440
+		    N2_YA_POLII_rep2 #2441
+		    N2_eemb_POLII_rep1 #2435
+		    N2_eemb_POLII_rep2 #2435
+key          = Pol II ChIP (N2): Replicates
+group_on     =
+link         = sub { my $src = shift->source;
+                     my %subs =(4338=>2437,
+                     		4341=>2437,
+                     		4344=>2439,
+                     		4345=>2438,
+                     		4346=>2439,
+                     		4347=>2438,
+                     		4358=>2436,
+                     		4359=>2436,
+                     		4376=>2440,
+                     		4378=>2441,
+                     		4379=>2440,
+                     		4381=>2441,
+                     		4393=>2435,
+                     		4395=>2435);
+			return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:Young_Adult:MS:1&oldid=24812">Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:late_embryo_20dC_4.5_hrs_post-early_embryo:RW:Reinke&oldid=19886">late embryo 20dC 4.5 hours post-early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:early_embryo:RW:Reinke&oldid=19885">early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-28
+
+# Transcription binding sites:
+
+[Snyder_GFP_BS:200000]
+vary_fg       = 1
+
+[Snyder_GFP_BS:50000]
+fgcolor       = lightgrey
+
+[Snyder_GFP_BS]
+feature       = binding_site:4088_DPY27_emb_GFP
+		binding_site:4169_CEH14_L2_GFP
+		binding_site:4178_ALR1_L2_GFP
+		binding_site:4184_HLH8_L3_GFP
+		binding_site:4206_AMA1_L4YA_GFP
+		binding_site:4254_UNC130_L1_GFP
+		binding_site:4264_LIN11_L2_GFP
+		binding_site:4267_EOR1_L3_GFP
+		binding_site:4279_MAB5_L3_GFP
+		binding_site:4294_DAF16_L4YA_GFP
+		binding_site:4315_HLH1_emb_GFP
+		binding_site:4320_LIN39_L3_GFP
+		binding_site:4351_NHR6_L2_GFP
+		binding_site:4360_GEI11_L4_GFP
+		binding_site:4374_PES1_L4_GFP
+		binding_site:4385_EGL5_L3_GFP
+		binding_site:5382_MDL1_GFP_L1
+		binding_site:5396_MEP1_GFP_emb
+		binding_site:5408_ELT3_GFP_L1
+		binding_site:5417_LIN13_GFP_emb
+		binding_site:5418_BLMP1_GFP_L1
+		binding_site:5423_SKN1_GFP_L1
+		binding_site:5438_CEH30_GFP_lemb
+		binding_site:5448_EGL27_GFP_L1
+		binding_site:5447_PQM1_GFP_L3
+		binding_site:5460_NHR105_GFP_L3
+		binding_site:5466_LIN15B_GFP_L3
+glyph         = heat_map
+vary_fg       = sub{ return shift->score>=0.00225 ? 0 : 1; }
+fgcolor       = black
+start_color   = blue
+end_color     = lightblue
+data source   = 2416 734 2434 2418 589 2430 2429 2417 593 591 2431 2432 2433 2451 2450 2453 2601 2600 2599 2598 2614 2613 2612 2622 2620 2621 2623 2617 2610
+track source  = 4088 4169 4178 4184 4206 4254 4264 4267 4279 4294 4315 4320 4351 4360 4374 4385 5388 5403 5404 5406 5415 5425 5426 5427 5446 5452 5454 5465 5469
+select        = name DPY27_emb_GFP #2416
+		     CEH14_L2_GFP #734
+		     ALR1_L2_GFP #2434
+		     HLH8_L3_GFP #2418
+		     AMA1_L4YA_GFP #589
+		     UNC130_L1_GFP #2430
+		     LIN11_L2_GFP #2429
+		     EOR1_L3_GFP #2417
+		     MAB5_L3_GFP #593
+		     DAF16_L4YA_GFP #591
+		     HLH1_emb_GFP #2431
+		     LIN39_L3_GFP #2432
+		     NHR6_L2_GFP #2433
+		     GEI11_L4_GFP #2451
+		     PES1_L4_GFP #2450
+		     EGL5_L3_GFP #2453
+		     MDL1_GFP_L1 #2601
+		     MEP1_GFP_emb #2600
+		     ELT3_GFP_L1 #2614
+		     LIN13_GFP_emb #2613
+		     BLMP1_GFP_L1 #2612
+		     SKN1_GFP_L1 #2622
+		     CEH30_GFP_lemb #2620
+		     EGL27_GFP_L1 #2621
+		     PQM1_GFP_L3 #2623
+		     NHR105_GFP_L3 #2617
+		     LIN15B_GFP_L3 #2610
+stranded      = 0
+connector     = false
+bump density  = 250
+label density = 100
+box_subparts  = 1
+database      = snyder
+category      = modENCODE Tracks: Snyder Group: ChIP Seq
+balloon hover = sub{my $f = shift;
+                    my $score = $f->score;
+                    my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                    return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+label         = sub{my $name = shift->name; 
+                    $name =~ s/_GFP//;
+                    $name =~ s/_/ /g;
+		    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-5s",$name); }
+label_position = left
+sort_order    = sub ($$) {shift->feature->name cmp shift->feature->name}
+key           = Binding Sites (GFP ChIP)
+group_on =
+citation = <h1>
+ Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25653">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <li>
+ <b>Growth Conditions:</b>
+ </li>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389646">GSM389646</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363860">GSM363860</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435303">GSM435303</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435317">GSM435317</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435291">GSM435291</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435319">GSM435319</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388729">GSM388729</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435300">GSM435300</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391228">GSM391228</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389311">GSM389311</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391227">GSM391227</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389649">GSM389649</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388728">GSM388728</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435316">GSM435316</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435292">GSM435292</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388727">GSM388727</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363862">GSM363862</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435301">GSM435301</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM435293">GSM435293</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391226">GSM391226</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389308">GSM389308</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM388726">GSM388726</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391229">GSM391229</a>       
+ </li>
+ </ol>
+ </br></br>
+ <b>Release Date:</b> 2009-11-28 
+           
+
+[Snyder_AMA_BS:200000]
+vary_fg       = 1
+
+[Snyder_AMA_BS:50000]
+fgcolor       = lightgrey
+
+[Snyder_AMA_BS]
+feature       = binding_site:4269_MAB5_L3_POLII
+		binding_site:4281_DAF16_L4YA_POLII
+		binding_site:4298_AMA1_L4YA_POLII
+		binding_site:5736_EGL5_POLII_L3
+		binding_site:5872_HLH8_POLII_L3
+		binding_site:6101_EOR1_POLII_L3
+glyph         = heat_map
+vary_fg       = sub{ return shift->score>=0.00225 ? 0 : 1; }
+fgcolor       = blue
+start_color   = blue
+end_color     = lightblue
+data source   = 594 592 590 2616 2597 2596
+track source  = 4269 4281 4298 5736 5872 6101
+select        = name 
+                MAB5_POLII_L3 #594
+		DAF16_POLII_L4YA #592
+		AMA1_POLII_L4YA #590
+		EGL5_POLII_L3 #2616
+		HLH8_POLII_L3 #2597
+		EOR1_POLII_L3 #2596
+stranded      = 0
+connector     = false
+bump density  = 250
+label density = 100
+box_subparts  = 1
+database      = snyder
+category      = modENCODE Tracks: Snyder Group: ChIP Seq
+balloon hover = sub {my $f = shift;
+                     my $score = $f->score;
+                     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+label         = sub{my $name = shift->name; 
+                    $name =~ s/_POLII//;
+                    $name =~ s/_/ /g;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+sort_order    = sub ($$) {shift->feature->name cmp shift->feature->name}
+key           = Binding Sites (Pol II ChIP)
+group_on =
+citation = <h1>
+ Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4-Young_Adult:MS:1&oldid=19737">L4-Young Adult</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389312">GSM389312</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389651">GSM389651</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389650">GSM389650</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389313">GSM389313</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389309">GSM389309</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389310">GSM389310</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389647">GSM389647</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM389648">GSM389648</a>
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+# PHA-4 BS:
+[Snyder_PHA4_AMA_BS:200000]
+vary_fg       = 1
+
+[Snyder_PHA4_AMA_BS:50000]
+fgcolor       = lightgrey
+
+[Snyder_PHA4_AMA_BS]
+feature       = binding_site:4211_PHA4_StarvedL1_POLII
+                binding_site:4215_PHA4_FedL1_POLII
+                binding_site:4221_PHA4_emb_POLII
+glyph         = heat_map
+vary_fg       = sub{ return shift->score>=0.00225 ? 0 : 1; }
+fgcolor       = black
+start_color   = blue
+end_color     = lightblue
+data source   = 588 587 586
+track source  = 4211 4215 4221
+select        = name 
+                     PHA4_POLII_StarvedL1 #588
+	    	     PHA4_POLII_FedL1 #587
+		     PHA4_POLII_emb #586
+stranded      = 0
+connector     = false
+bump density  = 250
+label density = 100
+box_subparts  = 1
+database      = snyder
+category      = modENCODE Tracks: Snyder Group: PHA-4
+balloon hover = sub {my $f = shift;
+                     my $score = $f->score;
+                     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+label         = sub{my $name = shift->name;
+                    $name =~ s/_POLII//;
+                    $name =~ s/_/ /g;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+sort_order    = sub ($$) {shift->feature->name cmp shift->feature->name}
+key           = PHA-4 (Pol II ChIP): Binding Sites 
+group_on =
+citation = <h1>
+ Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391296">GSM391296</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391299">GSM391299</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM391297">GSM391297</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+
+[Snyder_PHA4_GFP_BS:200000]
+vary_fg       = 1
+
+[Snyder_PHA4_GFP_BS:50000]
+fgcolor       = lightgrey
+
+[Snyder_PHA4_GFP_BS]
+feature       = binding_site:4190_PHA4_L2_GFP
+                binding_site:4235_PHA4_FedL1_GFP
+                binding_site:4241_PHA4_emb_GFP
+                binding_site:4240_PHA4_StarvedL1_GFP
+		binding_site:5397_PHA4_GFP_YA
+		binding_site:5401_PHA4_GFP_lemb
+glyph         = heat_map
+vary_fg       = sub{ return shift->score>=0.00225 ? 0 : 1; }
+fgcolor       = black
+start_color   = blue
+end_color     = lightblue
+data source   = 2452 585 582 584 2598 2599
+track source  = 4190 4235 4241 4240 5397 5401
+select        = name 
+                     PHA4_L2_GFP #2452
+		     PHA4_FedL1_GFP #585
+		     PHA4_emb_GFP #582
+		     PHA4_StarvedL1_GFP #584
+		     PHA4_GFP_YA #2599
+		     PHA4_GFP_lemb #2598
+stranded      = 0
+connector     = false
+bump density  = 250
+label density = 100
+box_subparts  = 1
+database      = snyder
+category      = modENCODE Tracks: Snyder Group: PHA-4
+balloon hover = sub {my $f = shift;
+                     my $score = $f->score;
+                     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+label         = sub{my $name = shift->name;
+                    $name =~ s/_GFP//;
+                    $name =~ s/_/ /g;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-5s",$name); }
+label_position = left
+sort_order    = sub ($$) {shift->feature->name cmp shift->feature->name}
+key           = PHA-4 (GFP ChIP): Binding Sites 
+group_on =
+citation = <h1>
+   Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:Anti-eGFP:MS:1&oldid=17974">Anti-eGFP</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:starved_L1:MS:1&oldid=19067">starved L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:embryo:MS:1&oldid=19065">embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ <li>
+ <b>External Links:</b>
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363860">GSM363860</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363863">GSM363863</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363862">GSM363862</a>,
+  <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM363861">GSM363861</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-11-27
+
+# Control BS:
+
+[Snyder_AMA_CNTR_BS:200000]
+vary_fg       = 1
+
+[Snyder_AMA_CNTR_BS:50000]
+fgcolor       = lightgrey
+
+
+[Snyder_AMA_CNTR_BS]
+feature       = binding_site:4325_N2_L1_POLII
+                binding_site:4336_N2_L3_POLII
+                binding_site:4333_N2_L2_POLII
+                binding_site:4348_N2_lemb_POLII
+                binding_site:4363_N2_L4_POLII
+                binding_site:4362_N2_YA_POLII
+                binding_site:4384_N2_eemb_POLII
+glyph         = heat_map
+vary_fg       = sub{ return shift->score>=0.00225 ? 0 : 1; }
+fgcolor       = black
+start_color   = blue
+end_color     = lightblue
+data source   = 2437 2439 2438 2436 2440 2441 2435
+track source  = 4325 4336 4333 4348 4363 4362 4384
+select        = name 
+                     N2_POLII_L1 #2437
+		     N2_POLII_L3 #2439
+		     N2_POLII_L2 #2438
+		     N2_POLII_lemb #2436
+		     N2_POLII_L4 #2440
+		     N2_POLII_YA #2441
+		     N2_POLII_eemb #2435
+stranded      = 0
+connector     = false
+bump density  = 250
+label density = 100
+box_subparts  = 1
+database      = snyder
+category      = modENCODE Tracks: Snyder Group: Pol II ChIP (N2)
+balloon hover = sub {my $f = shift;
+                     my $score = $f->score;
+                     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+label         = sub{my $name = shift->name;
+                    $name =~ s/_POLII//;
+                    $name =~ s/_/ /g;
+                    $name =~ s/Starved/Stv/;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+sort_order    = sub ($$) {shift->feature->name cmp shift->feature->name}
+key           = Pol II ChIP (N2): Binding Sites 
+group_on =
+citation = <h1>
+ Identification of Binding Regions for transcription factors in C. elegans (Snyder project, Snyder subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We are identifying the DNA binding sites for 300 transcription factors in C. elegans. Each transcription factor gene is tagged with the same GFP fusion protein, permitting validation of the gene's correct spatio-temporal expression pattern in transgenic animals.  Chromatin immunoprecipitation on each strain is peformed using an anti-GFP antibody, and any bound DNA is deep-sequenced using Solexa GA2 technology. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Worm_Growth_and_Harvest:MS:1&oldid=25516">Worm Growth and Harvest</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DNA_Sequencing_Illumina:MS:1&oldid=19139">Illumina Deep Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP:MS:1&oldid=19120">ChIP</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Merging:MS:1&oldid=23034">Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Skip_Illumina_Data_Merging:MS:1&oldid=25729">Skip Illumina Data Merging</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Data_Analysis:MS:1&oldid=21752">Illumina Data Analysis</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=ChIP-Seq_Peak-calling:MS:1&oldid=23035">Peak Calling</a>     
+ </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+ <b>Growth Conditions:</b>
+ <li>
+ <b>Antibodies:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Ab:RNA_Polymerase_II:MS:1&oldid=19074">RNA Polymerase II</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:fed_L1:MS:1&oldid=20167">fed L1</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L3:MS:1&oldid=19069">L3</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:Young_Adult:MS:1&oldid=24812">Young Adult</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L4:MS:1&oldid=24810">L4</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:late_embryo_20dC_4.5_hrs_post-early_embryo:RW:Reinke&oldid=19886">late embryo 20dC 4.5 hours post-early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStage:early_embryo:RW:Reinke&oldid=19885">early embryo</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=DevStageWorm:L2:MS:1&oldid=22953">L2</a>
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-11-28

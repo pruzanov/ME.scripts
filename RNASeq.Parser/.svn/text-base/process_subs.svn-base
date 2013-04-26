@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+use ParseDir;
+
+my @args = @ARGV;
+my @dirs;
+
+if (-e $args[0] && ! -d $args[0]) {
+ # we have list
+ print STDERR "List detected\n";
+ open LIST,"<$args[0]" or die "Couldn't read from the list";
+ while(<LIST>) {
+  chomp;
+  push @dirs,$_;
+ }
+ close LIST;
+} else {
+ 
+ foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+   map {push @dirs,$_} ($1..$2);
+  } else {push @dirs,$_;}
+ }
+}
+
+
+
+my $parse = ParseDir->new(@dirs);
+$parse->validate();
+$parse->parse();
+$parse->fields();
+

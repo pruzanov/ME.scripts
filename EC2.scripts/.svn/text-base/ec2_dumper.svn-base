@@ -1,0 +1,146 @@
+#!/usr/bin/perl
+
+=head2 NAME
+
+ ec2_dumper
+
+=head2 SYNOPSIS
+
+ This script rsyn-ing mysql dumps, fasta and track files for modENCODE GBrowse
+
+=head2 USAGE
+
+ To make this script work a couple of environmental variables should be set:
+  EC2_ACCESS_KEY and EC2_SECRET_KEY
+ (get them for your EC2 profile at amazon) 
+ 
+ may need to set these valiable using env when running as a cronjob .
+
+ Note that the script does not update mysql tables automatically, it just transfers the files
+ as they get updated. Some variables are hard-coded at the top. Please review before using.
+
+=cut
+
+
+use VM::EC2;
+use Env qw(HOME EC2_ACCESS_KEY EC2_SECRET_KEY);
+
+#
+# This is a test script for syncronizing GB mysql_dumps directory on modencode.oicr.on.ca to EC2 cloud volume attached to an instance (will switch to real GB in a future)
+#
+
+# ==============MY VARIABLES==========================================
+# This are variables which may change if we switch to another instance
+
+my $local_dumps  = '/browser_data/mysql_dumps/';
+my $rsync_ami    = 'ami-517afc38';
+my $rsync_ins    = 'i-01d1997e';
+my $remote_dumps = '/browser_data/mysql_dumps_new/';
+my $sshkey       = "$HOME/aws/rsyncuser_EC_key";
+my $user         = "rsyncuser";
+my $conf         = "/var/www/conf/";
+#=====================================================================
+
+
+
+my $USAGE = "Before using this script please set your Amazon EC2 access and secret keys as environment variables EC2_ACCESS_KEY and EC2_SECRET_KEY\n";
+
+if (!$EC2_ACCESS_KEY || !$EC2_SECRET_KEY) {die $USAGE;}
+
+my $ec2 = VM::EC2->new(-access_key => $EC2_ACCESS_KEY,
+                       -secret_key => $EC2_SECRET_KEY,
+                       -endpoint   => 'http://ec2.amazonaws.com');
+
+my @instances = $ec2->describe_instances(($rsync_ins));
+
+
+ print STDERR "Launching the rsync instance...\n";
+ 
+ # If it is running, do not touch it, come back later
+ if ($instances[0]->status =~/ing$/) {
+  print STDERR "Instance in use, cannot proceed\n";
+  exit;
+ }
+
+ $instances[0]->start;
+ $ec2->wait_for_instances(@instances);
+ sleep 30;
+ 
+ my $status = $instances[0]->status;
+ my $dns    = $instances[0]->dnsName;
+ 
+ print STDERR "$instances[0] : [$status] $dns\n";
+ print STDERR "Rsyncing to $dns...\n";
+
+ # Syncing mysql dumps
+ 
+ `rsync -azv $local_dumps -e \"ssh -i $sshkey\" $user\@$dns:$remote_dumps`;
+
+ sleep 10;
+ 
+ # Syncing tracks
+
+ my(@files,@species);
+ my $counter = 0;
+
+ open(GBROWSE,"grep -B 2 ^path ".$conf."GBrowse.conf |") or die "Cannot find ".$conf."GBrowse.conf";
+ print "Looking at your GBrowse.conf...\n";
+ while(<GBROWSE>){
+  chomp;
+  if (m/^path\s+=\s+(.+)/) {
+   push(@files,$1);
+  }
+  elsif (m/^\[(.*)\]/) {
+   (push @species, $1);
+  }
+ }
+ close(GBROWSE);
+ if (scalar(@species) !=scalar(@files)) {
+  die "The number of species does not match the number of file paths";
+ }
+ else {
+  print "Got species and files\n";
+ }
+
+ foreach my $file(@files){
+  print "Working with $species[$counter]...\n",
+        "Rsyncing fastas...\n";
+   
+  `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/fasta/* $user\@$dns:/modencode/browser_data/$species[$counter]/fasta`;
+  
+  print "Done with fasta\n";
+  if (-e "/browser_data/$species[$counter]/wiggle_binaries/" && -s "/browser_data/$species[$counter]/wiggle_binaries/"){
+   print "Rsyncing wiggle_binaries and sam_binaries...\n";
+   `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/wiggle_binaries/* $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries`;
+  }
+  print "Looking at $file...\n";
+  open(CONF,"<$conf$file") or die "Cannot find $conf$file";
+  while(<CONF>){
+   chomp;
+   if (m/^#include\s(.*?)[_.]/) {
+    if (-e "/browser_data/$species[$counter]/wiggle_binaries/$1") {
+     print "Working on /browser_data/$species[$counter]/wiggle_binaries/$1\n";
+    `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/wiggle_binaries/$1/* $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries/$1`;
+    }
+    my $sam_binaries = $1;
+    $sam_binaries =~ s/(\w+)/\u\L$1/g;
+    if (-e "/browser_data/$species[$counter]/sam_binaries/$sam_binaries") {
+     print "Working on /browser_data/$species[$counter]/sam_binaries/$sam_binaries\n";
+     `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/sam_binaries/$sam_binaries/* $user\@$dns:/modencode/browser_data/$species[$counter]/sam_binaries/$sam_binaries`;
+    }
+   }
+  }
+  print "Done rsyncing $species[$counter]\n\n";
+  close(CONF);
+  $counter++;
+ }
+
+ sleep 10;
+
+
+ print STDERR "Stopping rsync instance...\n";
+
+ map{if ($_->status eq 'running') {$_->stop;}} @instances;
+ $ec2->wait_for_instances(@instances);
+
+ print STDERR "Rsync to [$rsync_ins] complete\n";

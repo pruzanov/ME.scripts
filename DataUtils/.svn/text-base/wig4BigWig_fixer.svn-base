@@ -1,0 +1,121 @@
+#!/usr/bin/perl -w
+
+#
+# For variable step wiggle files only! Number of fields must be 4!
+#
+
+my $USAGE = <<END;
+Usage: wig4BigWig_fixer in.wig out.wig [window, optional (default is 1024)]
+Will change coordinates so the window-sized sections don't overlap
+this is hardcoded in Lincoln's wigToBigWig.pl script, so some files must be fixed
+END
+
+my $ABORT = <<END;
+This is supposed to be a ascii wiggle wile with 4 or 2 fields!
+Fixed step wiggle files are not supported. Fix your file and run the script again
+END
+
+my($in_file,$out_file,$winsize) = @ARGV;
+my($chrom,$end,$span,$sum,$rows);
+$winsize ||= 1024;
+if (!$in_file || !$out_file){die $USAGE;}
+
+open(FILE,"<$in_file") or die "Couldn't read from file [$in_file]\n";
+open(OUT,">$out_file") or die "Couldn't write to file [$out_file]\n";
+my $count = 1;
+my $line = 0;
+
+LINE:
+while (<FILE>) {
+ next if /^#/ || /^track/;
+ my @temp = split("\t");
+
+ if (@temp != 4 && @temp != 2) {
+  if (/chrom=(\S+).*span=(\d+)/) {
+   $chrom = $1;
+   $span = $2;
+   $count = 1;
+   print OUT;
+   next;
+  }
+  die "Error in line $_, $ABORT";
+ }
+ ++$line;
+
+
+# if ($chrom && @temp == 4 && $temp[0] ne $chrom) {
+#  $count = 1;
+# }
+ #if ($line % $winsize == 0) {$count = $winsize;} 
+ if ($count++ < ($winsize + 1)) {
+  print OUT join("\t",@temp);
+  if ($chrom && @temp == 4 && $temp[0] ne $chrom){$count = 1;$line = 1}
+  $chrom = $temp[0] if @temp == 4;
+  $end   = @temp == 4 ? $temp[2] : ($temp[0]+$span);
+  next LINE;
+ }
+
+ print STDERR join("\t",("END:$end"," COUNT:$count LINE:$line ",@temp)) if ($chrom eq "I" and $line<=$winsize*10);
+ $rows = 1;
+ $sum = 0;
+ #print STDERR "End is $temp[2], line number $line: $_ Count is $count";
+ #next;
+  
+  if (@temp == 4) {
+
+  if ($end - $temp[1] <= 10 && $temp[1] <= $end && $chrom eq $temp[0]) { 
+     $temp[1] = $end + 1;
+     print OUT join("\t",@temp);
+     #$line++;
+  } elsif ($chrom ne $temp[0]) {
+     print OUT join("\t",@temp);
+     $end = $temp[2];
+     $line++;
+   } else {
+     while ($end >= $temp[1] && $chrom eq $temp[0]) {
+       chomp($temp[3]);
+       $sum+=$temp[3];
+       $rows++;
+       $_ = <FILE>;
+       @temp = split("\t");
+     } 
+ 
+   $sum+=$temp[3];
+   $temp[3] = sprintf '%.2f',$sum/($rows);
+   $end = $temp[2];
+   print OUT join("\t",@temp);
+   print OUT "\n";
+   }
+  # Variable step flavour, 2 fields
+  } elsif (@temp == 2) {
+   chomp($temp[1]);
+   if ($temp[0] > $end) {
+     $temp[1] = sprintf '%.2f',$sum/($rows+1);
+     $temp[1].="\n";
+     $rows = 0;
+     $sum = 0;
+     if (scalar(@temp) == 3) {print STDERR "temp array stretched\n";}
+   } else {
+    $rows++;
+    $sum+=$temp[1];
+    next;
+   }
+  }
+  $count = 1;
+  
+ #$chrom = $temp[0] if @temp == 4;
+ #$end   = @temp == 4 ? $temp[2] : ($temp[0]+$span);
+
+ if (@temp == 4 && $temp[1] > $temp[2]) {
+  print STDERR "Some serious overlap at line $line, skipping\n";
+  next;
+ }
+
+ #print OUT join("\t",@temp);
+}
+close FILE;
+close OUT;
+
+my $diff = `diff -bw $in_file $out_file | wc -l`;
+chomp($diff);
+print STDOUT "$diff lines changed\n";

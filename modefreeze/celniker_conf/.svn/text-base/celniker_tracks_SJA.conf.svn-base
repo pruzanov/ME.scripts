@@ -1,0 +1,1079 @@
+# Tracks for splice junctions annotation
+
+[Transcript_regions_2688:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2688]
+feature       = transcript_region:5635_details
+glyph         = gene
+data source   = 2688
+track source  = 5635
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = quill
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+		    $name=~s/.*ID/ID/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*ID/ID/;
+                     my $score = $f->score;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key           = 0-2h embryo 
+
+[Transcript_regions_2689:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2689]
+feature       = experimental_feature:BS43
+glyph         = rainbow_gene
+data source   = 2689
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 2-4h
+
+
+[Transcript_regions_2690:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2690]
+feature       = experimental_feature:BS46
+glyph         = rainbow_gene
+data source   = 2690
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 4-6h
+
+
+[Transcript_regions_2691:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2691]
+feature       = experimental_feature:BS49
+glyph         = rainbow_gene
+data source   = 2691
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 6-8h
+
+
+[Transcript_regions_2692:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2692]
+feature       = experimental_feature:BS54
+glyph         = rainbow_gene
+data source   = 2692
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 8-10h
+
+
+[Transcript_regions_2693:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2693]
+feature       = experimental_feature:BS55
+glyph         = rainbow_gene
+data source   = 2693
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 10-12h
+
+
+[Transcript_regions_2694:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2694]
+feature       = experimental_feature:BS58
+glyph         = rainbow_gene
+data source   = 2694
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 12-14h
+
+
+[Transcript_regions_2695:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2695]
+feature       = experimental_feature:BS62
+glyph         = rainbow_gene
+data source   = 2695
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 14-16h
+
+
+[Transcript_regions_2696:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2696]
+feature       = experimental_feature:BS66
+glyph         = rainbow_gene
+data source   = 2696
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 16-18h
+
+
+[Transcript_regions_2697:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2697]
+feature       = experimental_feature:BS67
+glyph         = rainbow_gene
+data source   = 2697
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 18-20h
+
+
+[Transcript_regions_2698:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2698]
+feature       = experimental_feature:BS71
+glyph         = rainbow_gene
+data source   = 2698
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 20-22h
+
+
+[Transcript_regions_2699:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2699]
+feature       = experimental_feature:BS73
+glyph         = rainbow_gene
+data source   = 2699
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = embryo 22-24h
+
+
+[Transcript_regions_2700:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2700]
+feature       = experimental_feature:BS107
+glyph         = rainbow_gene
+data source   = 2700
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L1
+
+
+[Transcript_regions_2701:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2701]
+feature       = experimental_feature:BS111
+glyph         = rainbow_gene
+data source   = 2701
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L2
+
+
+[Transcript_regions_2702:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2702]
+feature       = experimental_feature:BS113
+glyph         = rainbow_gene
+data source   = 2702
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L3 12hr post-molt
+
+
+[Transcript_regions_2703:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2703]
+feature       = experimental_feature:BS196
+glyph         = rainbow_gene
+data source   = 2703
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L3 dark blue gut PS1-2
+
+
+[Transcript_regions_2704:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2704]
+feature       = experimental_feature:BS200
+glyph         = rainbow_gene
+data source   = 2704
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L3 light blue gut PS3-6
+
+
+[Transcript_regions_2705:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2705]
+feature       = experimental_feature:BS203
+glyph         = rainbow_gene
+data source   = 2705
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = L3 clear gut PS7-9
+
+
+[Transcript_regions_2706:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2706]
+feature       = experimental_feature:BS129
+glyph         = rainbow_gene
+data source   = 2706
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP
+
+
+[Transcript_regions_2707:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2707]
+feature       = experimental_feature:BS133
+glyph         = rainbow_gene
+data source   = 2707
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP+12h
+
+
+[Transcript_regions_2708:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2708]
+feature       = experimental_feature:BS136
+glyph         = rainbow_gene
+data source   = 2708
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP+24h
+
+
+[Transcript_regions_2709:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2709]
+feature       = experimental_feature:BS137
+glyph         = rainbow_gene
+data source   = 2709
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP+2d
+
+
+[Transcript_regions_2710:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2710]
+feature       = experimental_feature:BS140
+glyph         = rainbow_gene
+data source   = 2710
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP+3d
+
+
+[Transcript_regions_2711:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2711]
+feature       = experimental_feature:BS143
+glyph         = rainbow_gene
+data source   = 2711
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = WPP+4d
+
+
+[Transcript_regions_2712:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2712]
+feature       = experimental_feature:BS153
+glyph         = rainbow_gene
+data source   = 2712
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Female eclosion+1d
+
+
+[Transcript_regions_2713:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2713]
+feature       = experimental_feature:BS150
+glyph         = rainbow_gene
+data source   = 2713
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Male eclosion+1d
+
+
+[Transcript_regions_2714:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2714]
+feature       = experimental_feature:BS159
+glyph         = rainbow_gene
+data source   = 2714
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Female eclosion+5d
+
+
+[Transcript_regions_2715:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2715]
+feature       = experimental_feature:BS156
+glyph         = rainbow_gene
+data source   = 2715
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Male eclosion+5d
+
+
+[Transcript_regions_2716:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2716]
+feature       = experimental_feature:BS165
+glyph         = rainbow_gene
+data source   = 2716
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Female eclosion+30d
+
+
+[Transcript_regions_2717:50000]
+glyph         = heat_map
+vary_fg       = 1
+label         = 0
+
+[Transcript_regions_2717]
+feature       = experimental_feature:BS162
+glyph         = rainbow_gene
+data source   = 2717
+track source  = 
+start_color   = lightblue
+end_color     = blue
+min_score     = 0   
+max_score     = 5.75 
+database      = celniker_sj
+connector     = hat
+connector_color = sub{return shift->score>=5.75 ? "black" : "grey"; }
+stranded      = ends
+sort_order    = name
+category      = modENCODE Tracks: Celniker Group:Splice Junction Annotation
+height        = 10
+label         = sub{my $name = shift->name;
+                    $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+                    $name;
+                    }
+bump density  = 50
+label density = 100 
+balloon hover = sub {my $f = shift;
+                     my $name   = $f->name;
+                     $name=~s/.*_(\d+)_(\d+)_(\d+)_(\d+)_.*/$1\-$2:$3\-$4/;
+		     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=5.8;start_c=lightblue;end_c=blue";
+		     my $score = $f->score;
+		     return $score ? join (" ","<img width=120 height=23 src=\"".$img_url."\"/><br/>",$name,"(Score:".$score.")") : $name;}
+key    = Adult Male eclosion+30d

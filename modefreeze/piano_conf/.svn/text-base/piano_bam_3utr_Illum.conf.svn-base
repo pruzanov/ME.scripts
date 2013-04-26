@@ -1,0 +1,492 @@
+[modencode_bam_2484_3369:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/F_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2484_3367:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/C_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+
+[modencode_bam_2484_3366:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/A_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2484_3371:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/H_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2484_3370:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/G_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2484_3368:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/worm/fasta/elegans.WS190.dna.fa"
+		-bam   "/browser_data/worm/sam_binaries/Piano/D_bowtie.map.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+# Tracks:
+
+
+[UTRome_S_read_pair_3369_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3369_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3369
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3369
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool F
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16
+
+
+[UTRome_S_read_pair_3367_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3367_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3367
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3367
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool C
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16
+
+[UTRome_S_read_pair_3366_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3366_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3366
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3366
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool A
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16
+
+
+[UTRome_S_read_pair_3371_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3371_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3371
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3371
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool H
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16
+
+
+[UTRome_S_read_pair_3370_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3370_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3370
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3370
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool G
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16
+
+[UTRome_S_read_pair_3368_2484:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[UTRome_S_read_pair_3368_2484]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Piano Group: RNA-Seq: Mixed-stage 3RACE 3-UTR Illumina sequencing (alignments)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data source = 2484 2501
+stranded    = 1
+track source    = 3368
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts = 
+database    = modencode_bam_2484_3368
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    = 
+key         = pool D
+maxdepth    = 2
+bgcolor     = black
+citation = <h1>
+   Mixed-stage 3'RACE Illumina sequencing & alignment 
+   (Piano project, Piano subgroup)
+ </h1>
+ <h2>Details</h2>
+ <p>
+ Minipools containing 3'UTRs were amplified from mixed-stage N2 animals with target-specific primers.  These minipools may contain potentially different 3'UTR isoforms and were generated from cloning 3'RACE products for each targeted gene. Illumina generated sequences were aligned to the WS190 genome using Bowtie.
+ </p>
+ <h2>Series Description</h2>
+ The 3' untranslated region (3'UTR) constitutes a major site of post-transcriptional regulation of gene expression. Sequence elements in the 3'UTR interact with trans-acting regulators such as microRNAs that affect translation and stability. The overall aim is to use a 3'RACE cloning-sequencing stragety to identify the 3'UTRs of C. elegans transcripts and explore their heterogeneity in different developmental stages and tissues. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DNA_sample_preparation_for_Solexa_sequencing:FP:1&oldid=25480">DNA sample preparation for Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Solexa_sequencing:FP:1&oldid=25481">Solexa sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_alignment:FP:1&oldid=25536">Bowtie alignment</a>
+     </li>
+ </ol>
+ <ol>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM469439">GSM469439</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-2501</b>: <a href="/submit/public/citation/2501">3' UTRome 454 sample pools</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-11-16

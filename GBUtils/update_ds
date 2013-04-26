@@ -1,0 +1,173 @@
+#!/usr/bin/perl
+
+#
+# Process list with deprication info and process .conf files in a directory
+#
+
+use strict;
+use IO::File;
+use Digest::MD5 qw(md5 md5_hex md5_base64);
+my $base = shift @ARGV;					# Either /var/www/conf/ or ~/public_html/conf/
+my $listhome = "/home/pruzanov/scripts/deprication/";
+my $USAGE = "update_ds [config_base_dir] [list_ds_changes]\n";
+
+use constant DEBUG => 0;
+
+# Read from list (download it from http://submit.modencode.org/submit/public/list.txt)
+# and pass as an argument to this script
+
+my $list;
+
+&get_list;						# Get the list from the web or use an old copy
+
+$list ||= shift @ARGV;
+
+if(!$list || ! -e $list) { print STDERR "No updates available, now exiting...\n";
+                           exit; }
+
+my $fh = new IO::File("<$list") or die "Couldn't read from the list [$list]\n";
+my(%strings,%updates,%oldhash,$conf,$skip);
+
+#1 Read and sort the list so we have smaller id numbers first
+while (<$fh>) {
+ chomp;
+ my @temp = split "\t";
+ next if $temp[2]!~/\d+$/;
+ $strings{$temp[0]} = $_;
+}
+$fh->close;
+
+foreach (sort {$a<=>$b} keys %strings) {
+ my @temp = split("\t",$strings{$_});
+ my $pi = $temp[5];
+ $pi =~ s/(.+?)\,.*/$1/;
+
+ print STDERR "Found changes for $pi\n" if DEBUG;
+
+ next if $pi =~ /Stein/ || $pi =~/^\s*$/;		# Ignore these as the actual name of modENCODE PI is hard to guess from the submitted string
+ &check_ds($pi,\@temp);
+}
+
+#2 Form a 'change hash' and process conf files
+PI:
+foreach my $pi (keys %updates) {
+ print STDERR "Processing $pi...\n";
+ my %changes;
+
+ foreach my $seed (keys %{$updates{$pi}}) {
+  my @temp = (sort {$b<=>$a} keys %{$updates{$pi}->{$seed}});
+  my $max = shift @temp;
+  map{$changes{$_} = $max} @temp;
+ }
+
+ map{print $_."=>".$changes{$_}."\n"} (sort {$a<=>$b} keys %changes) if DEBUG;
+
+ &lookup($pi);
+ $skip = 1; # For cron job - skip missing conf files
+
+ while (!$conf && !$skip) {
+  print STDERR "Enter the full path to the .conf file\n";
+  $conf = <STDIN>;
+  $skip = $conf !~ /\w/ ? 1 : 0;
+  print STDERR "Skipping...\n" and next PI if $skip;
+ }
+ chomp ($conf);
+
+ print STDERR "Stopping before doing anything\n" and exit if DEBUG;
+
+ # backup
+ my $back = $conf;
+ $back =~ s/conf$/back/;
+ print STDERR "Backing up $conf as $back...\n" if DEBUG;
+ `cp $conf $back`;
+
+ #find all data source instructions and update the ids
+ $fh->open("<$back") or die "Couldn't read from [$back]\n";
+ my $fo = new IO::File(">$conf") or die "Cannot write to [$conf]\n";
+
+ while (<$fh>) {
+  
+  if (/(^data.*\=) (.*\d)$/) {
+   chomp;
+   my @before = split / /,$2;
+   my $revised = "";
+   DSID:
+   foreach my $b (@before) {
+    map{ if ($b == $_){$revised.=" $changes{$_}" and next DSID}} (keys %changes);
+   $revised.=" $b";
+   }
+   $_ = "$1$revised\n";
+  }
+  print $fo $_;
+
+ }
+ $fh->close;
+ $fo->close;
+} 
+
+
+
+# Recursive routine - makes sure that we have the most current 
+sub check_ds {
+ my $pi     = shift @_;
+ my @fields = @{shift @_};
+ 
+ foreach my $up (keys %{$updates{$pi}}) {
+  map{if ($_ == $fields[0] || $_ == $fields[2]) {$updates{$pi}->{$up}->{$fields[2]} = 1;
+                                                 $updates{$pi}->{$up}->{$fields[0]} = 1;
+                                                 return;} } keys %{$updates{$pi}->{$up}};
+
+ }
+
+ #Init if there are no keys or record is absent in any of the existing arrays:
+ map{$updates{$pi}->{$fields[0]}->{$_} = 1} ($fields[0],$fields[2]);
+
+}
+
+# Retrieve the config file for a pi (first look for pi_tracks.conf then pi.conf)
+
+sub lookup {
+ my $pi = shift @_;
+ my $name = $base.lc($pi)."_conf/".lc($pi)."_tracks.conf";
+ 
+ #try pi_ctracks.conf and then - pi.conf:
+ if ( -e $name ) { $conf = $name;
+ } elsif ( $name =~ s/_tracks// && -e $name ) {
+   $conf = $name;
+ }
+ print "Assuming $conf is the config file for $pi\n" if ($conf);
+}
+
+# Get the list from the web or use an old copy
+
+sub get_list {
+ my $temp_list = $listhome."temp_list.txt";
+ my $new_list = $listhome."list.txt";
+
+ my $success = system("lwp-request -a -t 30 http://submit.modencode.org/submit/public/list.txt > $temp_list");
+ if (!$success) {return undef;} # We don't have it
+
+ #Check the number of fields
+ my @fields = split "\n",`awk -F "\t" '{print NF}' $new_list | sort -u`;
+ map {if($_<6 || $_>7){$success = 0}} @fields; 
+ return undef if !$success;
+
+ my $ft = new IO::File("<$temp_list") or return undef; # Do not die, just return undef
+ my $fn = new IO::File("<$new_list")  or return undef; # At this point, we need two files (otherwise update is pointless)
+ 
+ my $md5 = Digest::MD5->new;
+ $md5->addfile($fn);
+ my $old_sum = $md5->hexdigest;
+ $md5->addfile($ft);
+ my $new_sum = $md5->hexdigest;
+ $fn->close;
+ $ft->close;
+
+ if ($old_sum eq $new_sum) {return undef;}
+ print STDERR "Old MD5 sum: $old_sum\nNew MD5 sum: $new_sum\n" if DEBUG;
+ 
+ `cp $temp_list $new_list`;
+
+ return $new_list;
+}
+

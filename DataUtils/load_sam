@@ -1,0 +1,42 @@
+#!/usr/bin/perl -w
+
+#
+# Simple script for loading track data from heartbroken  into dirs
+
+=head1 TITLE
+
+ load_sam - Maybe used for batch loading of files from a remote DCC server (presently hard-coded heartbroken)
+ Relies on gpg key so multiple password entering is avoided
+
+ needs a list of directories (submission ids) which maybe passed as n-n if there are successing numbers used as id names
+ 
+ example: ./load_sam 23 24-28 34-56 67
+
+=head1 SINOPSIS
+    
+ usage: load_sam [submission ids]
+
+
+=cut
+
+my @args = @ARGV;
+my @dirs;
+my $key    = "/home/pruzanov/cron/flyking-rsync-key";
+my @remote = ("modencode-www1.oicr.on.ca:/modencode/raw/data/",
+              "gb1.oicr.on.ca:/srv/gbrowse/gbrowse/data/modencode_raw/");
+
+foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @dirs,$_} ($1..$2);
+ } else {push @dirs,$_;}
+}
+
+foreach my $d (@dirs) {
+ if (! -d $d) { `mkdir $d`; }
+ #`scp -Cr -i $key pruzanov\@$remote[0]$d/tracks/* $d/`;
+ #`scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*txt $d/`;
+ `scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*.wig $d`;
+ #`scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*/*sam $d/`;
+ #`scp -Cr -i $key pruzanov\@$remote[0]$d/tracks/* $d/`;
+}

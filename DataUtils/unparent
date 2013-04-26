@@ -1,0 +1,50 @@
+#!/usr/bin/perl
+
+
+=head2 SYNOPSIS
+
+unparent script serves as a 'reverse' script to gff.fixer scripts
+removes scaffold features from gff and unparents features from it
+
+usage: unparent (run in directory with directories containing gff
+files to fix). GFF files should be uncompressed, Parent= field should
+be the last one in line (otherwise won't work as intended)
+
+END
+
+=cut
+
+use strict;
+use IO::File;
+
+opendir(DIR,".") or die "Couldn't read from current directory\n";
+
+my @dirs = grep {/^miRNA/i} grep {-d $_} readdir DIR;
+print STDERR "Got @dirs dirs to read from\n";
+close DIR;
+my $fh = new IO::File;
+my $fo = new IO::File;
+
+foreach my $d (@dirs) {
+  opendir(DIR,$d) or die "Cannot read from directory [$d]\n";
+  my @files = grep {/^*\.gff$/} readdir DIR;
+  close DIR;
+
+  foreach my $file(@files) {
+    $fh->open("<$d/$file") or die "Couldn't open [$d/$file] for reading\n";
+    $fo->open(">temp_$$") or die "Couldn't open file [temp_$$] for writing\n";
+    FILE:    
+    while (<$fh>) {
+     chomp;
+     if (!/_details/ && !/version/){next FILE;}
+     s/\;Parent=.*$//;
+     print $fo $_."\n";
+    }
+    $fh->close;
+    $fo->close;
+
+    print STDERR "Moving temp_$$ to $d/$file\n";
+    `mv temp_$$ $d/$file`;
+  }
+
+}

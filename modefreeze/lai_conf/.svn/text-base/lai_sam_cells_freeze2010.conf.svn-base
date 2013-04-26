@@ -1,0 +1,1250 @@
+#Databases:
+
+[modencode_bam_741_5816:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/GSM272651.gff.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2002_5133:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V010.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2003_5185:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V011.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2004_5545:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V019.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2005_5240:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V021.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2006_5243:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V026.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2007_5245:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V075.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2374_5132:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/GSM399110.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2375_5131:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/GSM371638.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2606_5040:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/Lai_Kc167_2rep.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2608_5042:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/Lai_S2RPlus_2rep.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2719_5044:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V076.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2721_5046:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/Lai_CMEW1_Cl_8.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2722_5048:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V008.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2725_5049:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/GSM361908.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2820_5289:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam   "/browser_data/fly/sam_binaries/Lai/V009.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+# Tracks:
+
+[Lai_GSM240749_read_pair_741_5816:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_GSM240749_read_pair_741_5816]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 741
+stranded    = 1
+track_id    = 5816
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_741_5816
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = S2/Kc167 + Ecdysone
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> S2/Kc167 + Ecdysone exposure smallRNA RNA-Seq (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Ecdysone_exposure:EL:1&oldid=27521">Ecdysone exposure</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:Kc-Rubin:EL:1&oldid=18941">Kc167</a>, <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-Rubin:EL:1&oldid=18945">S2-DRSC</a>, Oregon-R-modENCODE, S2/Kc167 + Ecdysone exposure smallRNA RNA-Seq_1, S2/Kc167 + Ecdysone exposure smallRNA RNA-Seq_2
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM272651">GSM272651</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2010-02-15
+
+[Lai_MLDmD20_read_pair_2002_5133:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_MLDmD20_read_pair_2002_5133]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2002
+stranded    = 1
+track_id    = 5133
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2002_5133
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = MLDmD20c5/BS16
+maxdepth    = 2
+bgcolor     = black
+citation = 
+ <h1> Lai - MLDmD20c5/BS16 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:187">Celniker/RNA:187</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-03 
+
+
+[Lai_Sg4_BS3_read_pair_2003_5185:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_Sg4_BS3_read_pair_2003_5185]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2003
+stranded    = 1
+track_id    = 5185
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2003_5185
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = Sg4/BS35 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai – Sg4/BS35 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:201">Celniker/RNA:201</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-555</b></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-04 
+
+
+[Lai_GM2cell_read_pair_2004_5545:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_GM2cell_read_pair_2004_5545]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2004
+stranded    = 1
+track_id    = 5545
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2004_5545
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = GM2cell/BS32 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai – GM2cell/BS32 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:9">Celniker/RNA:9</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-11 
+
+
+[Lai_ML-DmD2_read_pair_2005_5240:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_ML-DmD2_read_pair_2005_5240]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2005
+stranded    = 1
+track_id    = 5240
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2005_5240
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = ML-DmD21cell/BS90 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai – ML-DmD21cell/BS90 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:53">Celniker/RNA:53</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-08 
+
+
+[Lai_1182-4H_read_pair_2006_5243:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_1182-4H_read_pair_2006_5243]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2006
+stranded    = 1
+track_id    = 5243
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2006_5243
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = 1182-4Hcell/BS23
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_1182-4Hcell/BS23 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:39">Celniker/RNA:39</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-08 
+
+
+[Lai_ML-DmBG_read_pair_2007_5245:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_ML-DmBG_read_pair_2007_5245]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2007
+stranded    = 1
+track_id    = 5245
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2007_5245
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = ML-DmBG1c1/BS176 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai-ML-DmBG1-C1/BS176 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/>
+ <br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:115">Celniker/RNA:115</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-08
+
+[Lai_GSM3991_read_pair_2374_5132:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_GSM3991_read_pair_2374_5132]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2374
+stranded    = 1
+track_id    = 5132
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2374_5132
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = Kc167 (Rubin) 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai Kc167 Rubin (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:Kc-Rubin:EL:1&oldid=18941">Kc167</a>, Lai Kc-48
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM399110">GSM399110</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2010-02-04 
+
+
+[Lai_GSM3991_read_pair_2375_5131:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_GSM3991_read_pair_2375_5131]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2375
+stranded    = 1
+track_id    = 5131
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2375_5131
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = S2 (NP) 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai-S2-NP (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-NP:EL:1&oldid=27038">S2</a>, Lai S2-NP
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM371638">GSM371638</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2010-02-04 
+
+
+[Lai_Kc167_2_read_pair_2606_5040:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_Kc167_2_read_pair_2606_5040]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2606
+stranded    = 1
+track_id    = 5040
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2606_5040
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = Kc167 2reps
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_Kc167_2rep (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:Kc167:SC:1&oldid=13327">Kc167</a>, Lai_Kc167_2rep_1, Lai_Kc167_2rep_2
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM399100">GSM399100</a>, <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM399101">GSM399101</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2010-01-22
+
+[Lai_S2R_2r_read_pair_2608_5042:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_S2R_2r_read_pair_2608_5042]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2608
+stranded    = 1
+track_id    = 5042
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2608_5042
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = S2R+ 2reps
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_S2RPlus_2rep (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2R%2B:SC:1&oldid=13591">S2R+</a>, Lai_S2RPlus_2rep_1, Lai_S2RPlus_2rep_2
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM343832">GSM343832</a>, <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM343833">GSM343833</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2010-01-22 
+ 
+
+[Lai_ML-DmBG_read_pair_2719_5044:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_ML-DmBG_read_pair_2719_5044]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2719
+stranded    = 1
+track_id    = 5044
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2719_5044
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = ML-DmBG3-C2/BS179
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_ML-DmBG3-C2 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:121">Celniker/RNA:121</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-555</b></li>
+ <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ <li><b>DCC-366</b>: <a href="/submit/public/citation/366">Dm BG3-c2 m200 Tap RiboM C-tailed RNA-Seq NexAlign</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-01-28 
+
+ 
+[Lai_CMEW1_C_read_pair_2721_5046:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_CMEW1_C_read_pair_2721_5046]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2721
+stranded    = 1
+track_id    = 5046
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2721_5046
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = CMEW1 Cl.8
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_CMEW1_Cl_8 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:59">Celniker/RNA:59</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:63">Celniker/RNA:63</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+ <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ <li><b>DCC-364</b>: <a href="/submit/public/citation/364">Dm Cl.8 m200 Tap RiboM C-tailed RNA-Seq NexAlign</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-01-28
+
+
+[Lai_S2-DRSC_read_pair_2722_5048:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_S2-DRSC_read_pair_2722_5048]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2722
+stranded    = 1
+track_id    = 5048
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2722_5048
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = S2-DRSC/BS11 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai_S2-DRSC-BS11 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:15">Celniker/RNA:15</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+ <li><b>DCC-555</b></li>
+ <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ <li><b>DCC-362</b>: <a href="/submit/public/citation/362">Dm S2-DRSC m200 Tap RiboM C-tailed RNA-Seq NexAlign</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-01-28
+
+
+[Lai_GSM3619_read_pair_2725_5049:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_GSM3619_read_pair_2725_5049]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2725
+stranded    = 1
+track_id    = 5049
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2725_5049
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = S2 (Rubin) 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> S2 smallRNA RNA-Seq (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_line_growth:EL:1&oldid=20287">Cell Line Growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=Total_RNA_isolation_from_cultured_cells:EL:1&oldid=19933">RNA isolation</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-Rubin:EL:1&oldid=13375">S2-DRSC</a>, Oregon-R
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM361908">GSM361908</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2008-05-01 
+
+
+[Lai_CMEL1_B_read_pair_2820_5289:1000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Lai_CMEL1_B_read_pair_2820_5289]
+feature     = read_pair
+label       = sub { return shift->display_name; }
+bump        = fast
+category    = modENCODE Tracks: Lai Group: RNA-Seq Reads (Cell Lines)
+bump density = 250
+glyph       = segments
+draw_target = 1
+data_source_id = 2820
+stranded    = 1
+track_id    = 5289
+fgcolor     = black
+mismatch_color = red
+connector   = solid
+label_transcripts =
+database    = modencode_bam_2820_5289
+show_mismatch = 1
+height      = 4
+label density = 50
+group_on    =
+key         = CMEL1/BS28 
+maxdepth    = 2
+bgcolor     = black
+citation = <h1> Lai – CMEL1/BS28 (Lai project, Lai subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We plan to generate a comprehensive catalog of expressed and functional microRNAs, and generate biological evidence for their regulatory activity. We plan also to delineate the primary transcription units of microRNA genes. Finally, we plan to annotate other classes of non-miRNA expressed small RNAs, as least some of which may define novel classes of small RNA genes. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Small_RNA_library_construction:EL:1&oldid=18501">RNA library construction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Deep_sequencing:EL:1&oldid=26219">Deep Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA_sequence_processing:EL:1&oldid=22437">sequence analysis</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:85">Celniker/RNA:85</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-555</b></li>
+   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2010-02-09 
+ 

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+               creationComplete="{initApplication();}">
+<s:layout>
+<s:HorizontalLayout gap="0"
+  paddingLeft="0" paddingRight="3" paddingTop="0" />
+</s:layout>
+
+<fx:Script>
+        <![CDATA[
+        import mx.controls.Alert;
+        import mx.controls.TextArea;
+        import mx.collections.ArrayCollection;
+        import mx.collections.XMLListCollection;
+        import mx.events.CloseEvent;
+        import flash.net.navigateToURL;
+        import flash.external.ExternalInterface;
+
+
+        private var   submissionData:XMLList;
+        private var   indexArray:Object;
+        private const DC_ALPHA:Number  = 0.5;
+		private var   colorTable:Array = ["gray","0xa7ecad","0x05e800","0xec9da3","0xe91716"];
+		private var   linkTemplates:Object = {gbrowse:"http://modencode.oicr.on.ca/fgb2/gbrowse/$org?start=123000;stop=180000;ref=2L;l=$lab",
+											  citation:"http://submit.modencode.org/submit/public/citation/$id",
+											  modmine:"http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$id&class=Submission",
+											  tracks:"http://submit.modencode.org/submit/public/download/$id?root=tracks"};
+		
+		private var checkItems:Array = ["gbrowse","modmine","citation","tracks","machine"];
+		private var currentSubmission:XML;
+		
+		//Four things below should go into currentSubmission
+		private var currentStatus:Object = {gbrowse:"1",modmine:"0",citation:"0",tracks:"0",machine:"0"};
+		private var currentReport:String = "";
+		private var currentLinks:Object = {gbrowse:"",modmine:"",citation:"",tracks:""}; 	
+		private var currentSubID:String  = "###";
+		
+		private var currentType:String = "gbrowse";
+			
+ 
+        // Temp variables, need to substitute these with function calls
+        private var _baseURL:String = "http://modencode2.oicr.on.ca/~pruzanov/cgi-bin/clinic/clinic2.cgi";
+        
+        
+        //Utilities 
+        public function str_replace(mainStr:String, str1:String, str2:String):String {
+		 var temp:Array = mainStr.split(str1);
+		 return temp.join(str2);
+		}
+        
+        //Application functions
+        //Initialization (Reading data from DB, data processing
+        
+        private function initApplication():void {
+          
+          this.getService.url = this._baseURL;
+          this.setService.url = this._baseURL;
+          var initQuery:Object = {query:"get_ALL"};
+          this.getService.request = initQuery;
+
+          this.getService.send();
+ 
+          registerCallbacks();
+          listPanel.visible = false;
+          this.DataClinic.alpha = DC_ALPHA;
+          this.reportPanel.alpha = DC_ALPHA;
+        }
+        
+        private function registerCallbacks():void { 
+          if (ExternalInterface.available)
+          {
+        	ExternalInterface.addCallback("updateSubId", updateSubId);
+          }
+         }
+         
+         private function getResultHandler(event:Event):void {
+          
+          submissionData = XMLList(getService.lastResult.submissions);
+          //this.toggle_statusDialog();
+          this.indexData();
+          
+         }
+         
+         private function indexData():void {
+           this.indexArray = new Object();
+           for (var index:int=0; index < submissionData.children().length(); index++) {         
+             this.indexArray[submissionData.children()[index].@id] = index;
+             
+             if (index == 0) {
+             //Make the first submission current in Data Clinic interface
+               updateSubInfo(submissionData.children()[index].@id);
+             }
+            }
+            //subID.text = submissionData.children().length() + "entries";
+            //Update status icon on HTML page
+            for each(var idx:String in indexArray) {
+             updateStatusIcon(idx);
+            }
+         }
+         
+         // Main functions (Updating data for currently selected Submission)
+         
+         public function updateSubId(new_id:String):void {
+         
+         updateSubInfo(new_id);
+         
+         //Open the div with status icons if it's closed
+         if (this.DataClinic.alpha!=1) {
+          this.toggle_statusDialog();
+         }      
+        }
+        
+        
+        private function updateSubInfo(new_id:String):void {
+         this.subID.text = new_id;
+         this.currentSubID = new_id;
+         var index:String = this.indexArray[new_id];
+         
+         if (submissionData.children()[index]) {
+          var selectedSub:XML = submissionData.children()[index];
+
+          //Handle reports colors and links
+          this.currentReport = "";
+          for each (var type:String in this.checkItems) {
+          	this.currentStatus[type] = selectedSub['status'][type]  ? selectedSub['status'][type] : 0;
+          	var next_rep:String = selectedSub['reports'][type] ? selectedSub['reports'][type] : "";
+          	this.currentReport += this.currentReport && next_rep.length > 2 ? "; " + next_rep : next_rep;
+          	if (type != "machine") {
+          	 this.setStatusColor(type,this.colorTable[this.currentStatus[type]]);
+          	 prepareLink(selectedSub,type);
+          	}       	
+          }
+         this.report.text = this.currentReport;
+         }
+       
+        }
+        
+        private function commitChanges(mark:String):void {
+         var index:String = this.indexArray[this.currentSubID];
+         var updateParams:Object = {query:"update_field",
+                                    report:this.report.text,
+         							type:this.currentType,
+         							id:this.currentSubID};
+         var selectedSub:XML = submissionData.children()[index];
+         switch(mark) {
+         case "BAD":        
+          selectedSub['reports'][this.currentType] = this.report.text;
+          selectedSub['status'][this.currentType] = 4;
+          updateSubInfo(this.currentSubID);
+          break;
+         case "OK":
+          this.report.text = "";
+          updateParams.report = "OK";
+          selectedSub['reports'][this.currentType] = "";
+          selectedSub['status'][this.currentType] = 2;
+          updateSubInfo(this.currentSubID);
+          break;
+         }
+
+         updateStatusIcon(index);
+                 
+         //Send request to cgi
+         this.setService.request = updateParams;
+         this.setService.send();
+        }
+        
+         // User Interface functions
+         
+         private function prepareLink(submission:XML,type:String):void {
+          if (type != 'gbrowse') {
+           this.currentLinks[type] = this.str_replace(linkTemplates[type],'$id',this.currentSubID);
+           return;
+          }
+          var gblink:String = this.str_replace(linkTemplates['gbrowse'],'$org',submission.@organism);
+          this.currentLinks[type] = this.str_replace(gblink,'$lab',submission.@stanza);
+         }
+         
+        //Interface updates and navigation
+        private function showAlert_OK(type:String):void {
+         this.currentType = type;
+         if (this.reportPanel.alpha != 1){this.toggle_reportDialog(this.currentType);}
+         Alert.show("Mark " + type + " status as OK for " + this.subID.text + "?",null,Alert.OK|Alert.CANCEL,this,onOKclose);
+         
+        }
+        
+        private function showAlert_BAD(type:String):void {
+         this.currentType = type;
+         if (this.reportPanel.alpha != 1){this.toggle_reportDialog(this.currentType);}
+         Alert.show("Mark submission as BAD?",null,Alert.OK|Alert.CANCEL,this,onBADclose);
+        }
+        
+        private function onOKclose(evt:CloseEvent):void {
+         switch(evt.detail) {
+          case Alert.OK:
+          commitChanges("OK");
+          break;
+          case Alert.CANCEL:
+          break;
+         }
+        }
+        
+        private function onBADclose(evt:CloseEvent):void {
+         switch(evt.detail) {
+          case Alert.OK:
+          //open dialog for entering a report
+          commitChanges("BAD");
+          break;
+          case Alert.CANCEL:
+          this.toggle_reportDialog(this.currentType);      
+          break;
+         }
+         this.report.editable = false;
+         this.rep_update.enabled = false;
+        }
+        
+
+        
+       private function toggle_statusDialog():void {
+       this.listPanel.visible=!this.listPanel.visible;
+        if(this.DataClinic.alpha!=1){
+         this.DataClinic.alpha = 1;
+         this.repOpener.visible = true;
+        }else{this.DataClinic.alpha  = DC_ALPHA;
+              this.reportPanel.alpha = DC_ALPHA;}
+        if (ExternalInterface.available)
+          {
+          ExternalInterface.call("toggle_dwidth","-300px","-510px");
+          }
+       }
+       
+       private function toggle_reportDialog(type:String):void {
+        this.reportLabel.text = "merged";
+        if (type) {
+         this.currentType = type;
+        }
+        focusManager.hideFocus();
+        if (this.reportPanel.alpha!=1){
+         this.reportPanel.alpha = 1;
+         this.repOpener.visible = false;
+         this.report.editable   = false;
+         this.report.text = "";
+        }else{
+         this.reportPanel.alpha = DC_ALPHA;
+         this.report.editable   = false;
+         this.repOpener.visible = true;
+        }
+        if (ExternalInterface.available)
+          {
+          ExternalInterface.call("toggle_dwidth","0px","-300px");
+          }
+       }
+
+	   private function statIcon_Over(evtover:MouseEvent,type:String):void {
+	     var index:String = this.indexArray[this.currentSubID];
+	     this.reportLabel.text = type;
+	     report.text = submissionData.children()[index]['reports'][type];
+	   }
+	    
+	   private function statIcon_Out(evtout:MouseEvent):void {
+	     this.reportLabel.text = "merged";
+	     report.text = this.currentReport;
+	   }      
+  
+
+        // Status indicators udate functions, status reading:
+        
+        private function setStatusColor(type:String,color:String):void {
+           if (this[type]) {
+            this[type].setStyle("backgroundColor",color);
+           }
+        }
+         
+        private function updateStatusIcon(index:String):void {    
+         
+         var selectedSub:XML = submissionData.children()[index];
+         //Calculate status index
+         //Flag hieararchy: hBAD->pcBAD->pcOK->hOK->Undef (may need to be revised)
+         var flag_status:int = selectedSub['status'][this.checkItems[0]];
+         for each (var type:String in this.checkItems) {
+          var s:int = selectedSub['status'][type];
+          switch(s) {
+          case 0:
+           continue;
+          case 4:
+           if (flag_status < 4) {
+           flag_status = 4;
+           }
+          break;
+          case 3:
+           if (flag_status < 3) {
+           flag_status = 3;
+           }
+          break;
+          case 2:
+           if (flag_status == 0) {
+           flag_status = 2;
+           } 
+          break;
+          case 1:
+           if (flag_status == 2 || flag_status == 0) {
+           flag_status = 1;
+           }
+          break;
+          }
+         }
+         
+          if (ExternalInterface.available) {
+           ExternalInterface.call("toggle_staticon","modENCODE_" + selectedSub.@id,flag_status);
+          }    
+        }  
+     
+       //Report reading/writing 
+        
+        private function reportEnter():void {
+         showAlert_BAD(this.currentType)
+        }
+        
+        private function reportClose(type:String):void {
+          //this.rep_update.enabled = false;
+          this.toggle_reportDialog(type);
+        }
+        
+        private function reportOpen(type:String):void {
+          if (this.reportPanel.alpha != 1) {
+           this.toggle_reportDialog(type);
+          }
+          this.report.editable = true;
+          this.reportLabel.text = type;
+          this.rep_update.enabled = true;
+          this.currentType = type;
+          focusManager.setFocus(this.report);
+          focusManager.hideFocus();
+          
+          var index:String = this.indexArray[this.currentSubID];
+	      report.text = submissionData.children()[index]['reports'][type];
+        }
+
+        
+       //Browser communication functions
+  
+	    private function openLink(entlink:MouseEvent,type:String):void {
+	     var link:String = this.currentLinks[type];
+	     if (link != null) {
+	      navigateToURL(new URLRequest(link),"_blank");
+	     }
+	     
+	    }
+	    
+     
+        ]]>
+</fx:Script>
+
+<fx:Declarations>
+ <mx:HTTPService
+  id="getService"
+  url=""
+  useProxy="false" 
+  method="GET"
+  showBusyCursor="true"
+  result = "getResultHandler(event)"
+  resultFormat="e4x">
+ </mx:HTTPService>
+ <mx:HTTPService
+  id="setService"
+  url=""
+  useProxy="false" 
+  method="PUT"
+  resultFormat="e4x">
+ </mx:HTTPService>
+</fx:Declarations>
+
+<mx:Canvas id="DataClinic">
+
+ <mx:HBox>
+  <s:Graphic x="0" y="0" click="toggle_statusDialog()" >
+   <s:BitmapImage id="bg1" source="@Embed('/../assets/DataClinic_vBar.png')" fillMode="clip"/>
+  </s:Graphic>
+ 
+  <s:BorderContainer id="listPanel" height="200" width="200" backgroundColor="0xf0e68c" borderColor="0xffffa1" >
+  <mx:VBox paddingLeft="10" paddingRight="10" verticalGap="10" >
+  
+  <mx:HBox>
+   <s:Label text="Submission" color="0xDAA520" fontWeight="bold" fontSize="19"/>
+   <s:Label id="subID" text="###" color="0xDAA520" fontWeight="bold" fontSize="19"/>
+  </mx:HBox>
+  
+  <!-- These are GBrowse Buttons -->
+  <mx:HBox> 
+   
+  <s:BorderContainer id="gbrowse" backgroundColor="gray" cornerRadius="5" borderVisible="false" height="10" width="10" mouseOver="statIcon_Over(event,'gbrowse')" mouseOut="statIcon_Out(event)" />
+ 
+   <s:Label text="GBrowse" fontWeight="bold" fontSize="14" minWidth="100"/>
+   <s:Graphic x="100" y="0" click="showAlert_OK('gbrowse')" >
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_ok.png')" fillMode="scale"/>
+   </s:Graphic>
+   <s:Graphic x="115" y="0" click="reportOpen('gbrowse')">
+   <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_bad.png')" fillMode="scale"/>
+   </s:Graphic>
+   <s:Graphic x="130" y="0" click="openLink(event,'gbrowse')" >
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_link.png')" fillMode="scale"/>
+   </s:Graphic>
+  </mx:HBox>
+  
+  <!-- These are modMINE Buttons -->
+  <mx:HBox>
+   <s:BorderContainer id="modmine" backgroundColor="0xb53030" cornerRadius="5" borderVisible="false" height="10" width="10" mouseOver="statIcon_Over(event,'modmine')" mouseOut="statIcon_Out(event)" />
+
+   <s:Label text="modMINE" fontWeight="bold" fontSize="14" minWidth="100"/>
+   <s:Graphic x="100" y="0" click="showAlert_OK('modmine')">
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_ok.png')" fillMode="scale"/>
+   </s:Graphic>
+   <s:Graphic x="115" y="0" click="reportOpen('modmine')" >
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_bad.png')" fillMode="scale"/>
+   </s:Graphic>
+   <s:Graphic x="130" y="0" click="openLink(event,'modmine')" >
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_link.png')" fillMode="scale"/>
+   </s:Graphic>
+   </mx:HBox>
+   
+   <!-- These are Citation Buttons -->
+   <mx:HBox>
+    <s:BorderContainer id="citation" backgroundColor="0x00e700" cornerRadius="5" borderVisible="false" height="10" width="10" mouseOver="statIcon_Over(event,'citation')" mouseOut="statIcon_Out(event)" />
+    
+    <s:Label text="Citation" fontWeight="bold" fontSize="14" minWidth="100"/>
+    <s:Graphic x="100" y="0" click="showAlert_OK('citation')" >
+     <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_ok.png')" fillMode="scale"/>
+    </s:Graphic>
+    <s:Graphic x="115" y="0" click="reportOpen('citation')" >
+     <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_bad.png')" fillMode="scale"/>
+    </s:Graphic>
+    <s:Graphic x="130" y="0" click="openLink(event,'citation')" >
+     <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_link.png')" fillMode="scale"/>
+    </s:Graphic>
+   </mx:HBox>
+   
+   <!-- These are Files Buttons -->
+   <mx:HBox>
+    <s:BorderContainer id="tracks" backgroundColor="green" cornerRadius="5" borderVisible="false" height="10" width="10" mouseOver="statIcon_Over(event,'tracks')" mouseOut="statIcon_Out(event)" />
+    
+     <s:Label text="Files" fontWeight="bold" fontSize="14" minWidth="100"/>
+    <s:Graphic x="100" y="0" click="showAlert_OK('tracks')">
+    <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_ok.png')" fillMode="scale"/>
+    </s:Graphic>
+    <s:Graphic x="115" y="0" click="reportOpen('tracks')" >
+     <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_bad.png')" fillMode="scale"/>
+    </s:Graphic>
+    <s:Graphic x="130" y="0" click="openLink(event,'tracks')" >
+     <s:BitmapImage width="10" height="10" source="@Embed('/../assets/icons/mark_link.png')" fillMode="scale"/>
+    </s:Graphic>
+   </mx:HBox>
+  </mx:VBox>
+  <s:Graphic id="repOpener" bottom="3" right="5" click="toggle_reportDialog(this.currentType)" >
+     <s:BitmapImage width="20" height="20" source="@Embed('/../assets/icons/unwrap_report.png')" fillMode="scale"/>
+    </s:Graphic>
+  </s:BorderContainer>
+
+  
+  <!-- Report Container -->
+  <s:BorderContainer id="reportPanel" height="200" width="300" backgroundColor="0xf0e68c" borderColor="0xffffa1" >
+    <mx:VBox>
+    <mx:HBox>
+    <s:Label left="5" text="Error Report [" color="0xDAA520" fontWeight="bold" fontSize="19"/>
+    <s:Label id="reportLabel" text="merged" color="0xDAA520" fontWeight="bold" fontSize="19"/>
+    <s:Label text="]:" color="0xDAA520" fontWeight="bold" fontSize="19"/>
+    </mx:HBox>
+    <s:TextArea id="report" height="120" width="290" left="5" editable="false" />
+     <s:Button id="rep_update" left="5" label="Update Report" click="reportEnter()" enabled="false" />
+    </mx:VBox>
+    <s:Graphic bottom="3" left="5" click="toggle_reportDialog(this.currentType)" >
+     <s:BitmapImage width="20" height="20" source="@Embed('/../assets/icons/wrap_report.png')" fillMode="scale"/>
+    </s:Graphic>
+  </s:BorderContainer>
+ </mx:HBox>
+ </mx:Canvas>
+</s:Application>

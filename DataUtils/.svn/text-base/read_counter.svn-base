@@ -1,0 +1,86 @@
+#!/usr/bin/perl -w
+
+use strict;
+# Simple script for counting seqs
+# Needs a sam file(s) as an input
+# Will print out Total, Uniquely mapped and Non-uniquely mapped seqs
+
+my @files;
+
+map{chomp;push(@files,$_)} @ARGV;
+
+
+foreach my $file (@files){
+my $type = $file =~ /\.bam/ ? "bam" : "sam";
+
+if ($type eq "sam") { 
+ if ($file =~ /\.gz$/) {
+  open SAM, "gunzip -c $file | grep -v \^\@ | awk \'{print \$10,\$3,\$4,\$12}\' |" or die "Cannot fork!";
+ } else {
+  open SAM, "grep -v \^\@ $file | awk \'{print \$10,\$3,\$4,\$12}\' |" or die "Cannot fork!";
+ }
+} else {
+# We assume that bam files are not gzipped
+ die "If this is a bam file, it shouldn't be gzipped" if $file =~ /\.gz/; #JIC
+ open SAM, "samtools view $file | awk '{print \$10,\$3,\$4,\$12}' |" or die "Cannot fork!";
+}
+
+print STDERR "Reading from sam file [$file]\n";
+
+my($total,$uni,$nuni,%seqs,%loci,$read_placements,$loci);
+
+#my %seen; 
+open(TEMP,">temp_$$") or die "Cannot write to [temp_$$]";
+
+#my $count = 1;
+while(<SAM>) {
+ if (/NH:i:1$/) {
+  $uni++;
+  next;
+ }
+# last if $count++ > 100000;
+ chomp;
+ my @temp = split / /,$_;
+ print TEMP join("\t",@temp[0..2]);
+ print TEMP "\n";
+# if ($seen{$temp[0]}) {
+#  $seen{$temp[0]}->{$temp[1].$temp[2]} ? $nuni++ : next;
+# } else {
+#  $seen{$temp[0]}->{$temp[1].$temp[2]}++;
+#  $nuni++;
+# }
+
+}
+close TEMP;
+close SAM;
+
+print STDERR "Sorting temp file...\n";
+#print STDERR "Can check temp_$$ now\n";
+#exit;
+#`sort temp_$$ | uniq -c | awk 
+open SORTED, "sort temp_$$ | uniq -c | awk '{OFS=\"\t\";print \$2,\$1}' | " or die "Cannot fork!";
+my $current;
+
+SORTED:
+while (<SORTED>) {
+ chomp;
+ my @temp = split("\t");
+ if ($current && $current eq $temp[0]) {next SORTED;}
+ $current = $temp[0];
+ $nuni+=$temp[1];
+}
+close SORTED;
+`rm temp_$$`;
+$total = $nuni + $uni;
+
+#Print the results:
+print STDERR join("\t",("Total","Uniquely Mapped","Non-unuquely mapped")),"\n";
+print STDERR join("\t",($total,$uni,$nuni)),"\n";
+
+foreach my $s (keys %loci) {
+ if (scalar(keys %{$loci{$s}}) == 1) {
+  my($loc) = keys %{$loci{$s}};
+  if (scalar(keys %{$loci{$s}->{$loc}}) > 1) {print $s."\n";}
+ }
+}
+}

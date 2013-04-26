@@ -1,0 +1,2464 @@
+[modencode_bam_2801:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_18_20.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2805:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_4_6.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2806:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_6_8.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2807:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_8_10.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2796:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_0_2.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2804:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_2_4.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2797:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_10_12.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2798:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_12_14.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2799:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_14_16.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2800:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_16_18.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2802:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_20_22.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2803:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/embryos_22_24.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2814:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_RnaSeq.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2815:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_12h.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2816:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_24h.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2817:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_2d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2818:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_3d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2819:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/WPP_4d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2808:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/larvae_L1.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2809:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/larvae_L2.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2810:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/larvae_L3_12h.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2811:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/L3blue_PS1_2.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2812:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/L3blue_PS3_6.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2813:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/L3blue_PS7_9.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2794:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Female_Ecl_1d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2793:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Female_Ecl_30d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2795:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Female_Ecl_5d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2790:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Male_Ecl_1d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2792:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Male_Ecl_30d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2791:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/Male_Ecl_5d.sam.gz.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+
+
+
+# Tracks:
+
+[Dev_Timecou_read_pair_2801:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2801]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2801 574
+track source  = 1210 1211 1213 1216 1219 1221 1223 1226 1228
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2801
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 18-20h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 18-20 hr after egg laying RNA-Seq (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:266">Celniker/RNA:266</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19 
+ 
+
+
+[Dev_Timecou_read_pair_122805:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_122805]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2805 574
+track source  = 1621 1623 1625 1629 1630 1631
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2805
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 4-6h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 4-6 hr after egg laying RNA-Seq 
+   (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:224">Celniker/RNA:224</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19
+
+
+
+[Dev_Timecou_read_pair_132806:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_132806]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2806 574
+track source  = 1673 1674 1675 1676 1677 1678 1679 1681
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2806
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 6-8h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 6-8 hr after egg laying RNA-Seq 
+   (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:230">Celniker/RNA:230</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19 
+
+
+[Dev_Timecou_read_pair_142807:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_142807]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2807 574
+track source  = 1732 1733 1734 1735 1736 1737 1738 1739 1740 1741
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2807
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 8-10h 
+maxdepth     = 2
+citation = <h1> Dm embryos, 8-10 hr after egg laying RNA-Seq (Celniker project) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:240">Celniker/RNA:240</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19
+
+
+[Dev_Timecou_read_pair_102796:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_102796]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2796 574
+track source  = 1617 1618 1619 1620 1622 1624 1626 1627
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2796
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 0-2h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 0-2 hr after egg laying RNA-Seq 
+   (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:212">Celniker/RNA:212</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19
+
+[Dev_Timecou_read_pair_112804:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_112804]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2804 574
+track source  = 1212 1215 1217 1220 1224 1229
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2804
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 2-4h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 2-4 hr after egg laying RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) 2-4h Embryos, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:218">Celniker/RNA:218</a>
+     </li>
+    <li>
+       <b>SRA accessions</b>: SRR023722,SRR023705,SRR023745,SRR023660,SRR027112,SRR023502
+    </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-118</b>: <a href="/submit/public/citation/118">Dm_y[1]cn[1] bw[1] sp[1]_embryo_2-4h_TotalRNA_p200_218-220-222_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2797:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2797]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2797 574
+track source  = 1069 1070 1071 1072 1073 1074 1075
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2797
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 10-12h 
+maxdepth     = 2
+citation = 
+ <h1> Dm embryos, 10-12 hr after egg laying RNA-Seq ( project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. #RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then #distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The #Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-#end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated #using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification #from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a #href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:242">Celniker/RNA:242</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-105</b>: <a href="/submit/public/citation/105">Dm_y[1]cn[1] bw[1] sp[1]_embryo_10-12h_TotalRNA_p200_242-244-246_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-05 
+ 
+
+[Dev_Timecou_read_pair_2798:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2798]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2798 574
+track source  = 1214 1218 1222 1225 1227 1230 
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2798
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 12-14h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 12-14 hr after egg laying RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) 12-14h Embryos, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:248">Celniker/RNA:248</a>
+     </li>
+     <li><b>SRA accessions:</b>
+         SRR023602, SRR023724, SRR023643, SRR023832, SRR024012, SRR023703
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-107</b>: <a href="/submit/public/citation/107">Dm_y[1]cn[1] bw[1] sp[1]_embryo_12-14h_TotalRNA_p200_248-250-252_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+ 
+
+[Dev_Timecou_read_pair_2799:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2799]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2799 574
+track source  = 1032 1033 1034 1035 1036 1037 1038
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2799
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 14-16h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 14-16 hr after egg laying RNA-Seq (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:256">Celniker/RNA:256</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-109</b>: <a href="/submit/public/citation/109">Dm_y[1]cn[1] bw[1] sp[1]_embryo_14-16h_TotalRNA_p200_254-256-258_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-05 
+
+
+[Dev_Timecou_read_pair_2802:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2802]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2802 574
+track source  = 1231 1232 1233 1234 1238 1242
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2802
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 20-22h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 20-22 hr after egg laying RNA-Seq (Celniker project)
+ </h1><h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) 20-22h Embryos, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:274">Celniker/RNA:274</a>
+     </li>
+     <li><b>SRA accessions:</b> SRR023684, SRR023665, SRR023718, SRR023728, SRR027109, SRR023506</li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-116</b>: <a href="/submit/public/citation/116">Dm_y[1]cn[1] bw[1] sp[1]_embryo_20-22h_TotalRNA_p200_274-276_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2803:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2803]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2803 574
+track source  = 1235 1236 1240 1243 1245 1248
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2803
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 22-24h 
+maxdepth     = 2
+citation = <h1>
+   Dm embryos, 22-24 hr after egg laying RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) 22-24h Embryos, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:278">Celniker/RNA:278</a>
+     </li>
+     <li>
+       <b>SRA accessions</b>:SRR023538,SRR023711,SRR023685,SRR023834,SRR023733,SRR024015
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-117</b>: <a href="/submit/public/citation/117">Dm_y[1]cn[1] bw[1] sp[1]_embryo_22-24h_TotalRNA_p200_278-280-282_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+[Dev_Timecou_read_pair_2814:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2814]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2814 574
+track source  = 1253 1256 1258 1265 1269 1275
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2814
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP 
+maxdepth     = 2
+citation = <h1>
+   Dm white prepupae (WPP) RNA-Seq 
+   (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white preupae, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:328">Celniker/RNA:328</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>
+   SRR023704, SRR023837, SRR023784, SRR026432, SRR023695, SRR023687
+   </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-95</b>: <a href="/submit/public/citation/95">Dm_y[1]cn[1] bw[1] sp[1]_prepupa_WhitePrePupae_TotalRNA_p200_326-328-330_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+[Dev_Timecou_read_pair_2815:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2815]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2815 574
+track source  = 1259 1262 1263 1266 1270 1272
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2815
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP +12hr
+maxdepth     = 2
+citation = <h1>
+   Dm WPP + 12 hr RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white prepupae plus 12h, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:336">Celniker/RNA:336</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>
+   SRR023544, SRR023689, SRR023647, SRR023833, SRR023716, SRR023639
+ </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-544</b>: <a href="/submit/public/citation/544">Dm_y[1]cn[1] bw[1] sp[1]_prepupa_WhitePrePupap12h_TotalRNA_p200_332-334-336_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+
+
+[Dev_Timecou_read_pair_2816:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2816]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2816 574
+track source  = 1267 1271 1274 1281 1284
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2816
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP +24hr
+maxdepth     = 2
+citation = <h1>
+   Dm WPP + 24 hr RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white prepupae +24h, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:342">Celniker/RNA:342</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>
+ SRR023541, SRR023756, SRR023656, SRR023830, SRR023708
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-545</b>: <a href="/submit/public/citation/545">Dro2_AS_Dm_WPP+24hr</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2817:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2817]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2817 574
+track source  = 1276 1280 1285 1290 1302 1310
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2817
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP +2days
+maxdepth     = 2
+citation = <h1>
+   Dm pupae, WPP + 2 days RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white prepupae +2days, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:344">Celniker/RNA:344</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+   SRR023721, SRR023829, SRR023785, SRR023743, SRR026431, SRR023667
+ </li>  
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-541</b>: <a href="/submit/public/citation/541">Dro2_AS_Dm_WPP+2days</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2818:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2818]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2818 574
+track source  = 1279 1282 1289 1294 1300 1305
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2818
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP +3days
+maxdepth     = 2
+citation = <h1>
+   Dm pupae, WPP + 3 days RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white prepupae +3days, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:350">Celniker/RNA:350</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>
+ SRR023738, SRR023783, SRR023744, SRR023748, SRR026430, SRR024216
+ </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-542</b>: <a href="/submit/public/citation/542">Dm_y[1]cn[1] bw[1] sp[1]_pupa_WhitePrePupaep3day_TotalRNA_p200_350-352-354_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2819:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2819]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2819 574
+track source  = 1283 1288 1293 1296 1299 1303
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2819
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = WPP +4days
+maxdepth     = 2
+citation = <h1>
+   Dm pupae, WPP + 4 days RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) white prepupae +4days, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:356">Celniker/RNA:356</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>SRR023609, SRR023735, SRR023827, SRR023723, SRR023653, SRR023740
+ </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-543</b>: <a href="/submit/public/citation/543">Dro2_AS_Dm_WPP+4days</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+
+
+[Dev_Timecou_read_pair_2808:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2808]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2808 574
+track source  = 1237 1239 1241 1244 1246 1249
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2808
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L1
+maxdepth     = 2
+citation = <h1>
+   Dm L1 stage larvae RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) L1 larvae, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:284">Celniker/RNA:284</a>
+     </li>
+     <li><b>SRA accessions</b>: SRR023597, SRR023661, SRR023835, SRR023666, SRR023646, SRR023706
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-93</b>: <a href="/submit/public/citation/93">Dm_y[1]cn[1] bw[1] sp[1]_larval_L1_TotalRNA_p200_284-286-288_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_2809:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2809]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2809 574
+track source  = 1247 1250 1252 1255 1257 1260
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2809
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L2
+maxdepth     = 2
+citation = <h1>
+   Dm L2 stage larvae RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) L2 larvae, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:292">Celniker/RNA:292</a>
+     </li>
+     <li><b>SRA accessions:</b>
+ SRR023542, SRR023670, SRR023719, SRR023824, SRR023761, SRR024016. 
+ </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-94</b>: <a href="/submit/public/citation/94">Dm_y[1]cn[1] bw[1] sp[1]_larval_L2_TotalRNA_p200_290-292-294_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+
+
+[Dev_Timecou_read_pair_2810:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2810]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2810 574
+track source  = 1756 1757 1758 1759 1760 1761
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2810
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L3 +12hr
+maxdepth     = 2
+citation = <h1>
+   Dm L3 stage larvae, 12 hr post-molt RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) L3 larvae +12h, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:296">Celniker/RNA:296</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>
+   SRR023649,SRR023677,SRR023731,SRR023760,SRR027111,SRR023507
+ </li>  
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-538</b>: <a href="/submit/public/citation/538">Dro2_AS_Dm_L3-12hr_larvae</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-08 
+
+
+[Dev_Timecou_read_pair_2811:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2811]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2811 574
+track source  = 1742 1743 1744 1745 1746 1747 1748
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2811
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L3 blue PS(1-2)
+maxdepth     = 2
+citation = <h1>Dm L3 stage larvae, dark blue gut PS(1-2) RNA-Seq (Celniker project) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:442">Celniker/RNA:442</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-20 
+
+
+[Dev_Timecou_read_pair_2812:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2812]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2812 574
+track source  = 1749 1750 1751 1752 1753 1754 1755
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2812
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L3 blue PS(3-6)
+maxdepth     = 2
+citation = <h1>Dm L3 stage larvae, light blue gut PS(3-6) RNA-Seq (Celniker project)</h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:450">Celniker/RNA:450</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-540</b>: <a href="/submit/public/citation/540">Dro2_AS_L3-larvae-light-blue</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-20
+
+
+[Dev_Timecou_read_pair_2813:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2813]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2813 574
+track source  = 1251 1254 1261 1264 1268
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2813
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = L3 blue PS(7-9)
+maxdepth     = 2
+citation = <h1>
+   Dm L3 stage larvae, clear gut PS (7-9) RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) clear gut L3 larvae (PS 7-9), using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:456">Celniker/RNA:456</a>
+     </li>
+     <li>
+       <b>SRA accessions:</b>  SRR023865, SRR023782, SRR026433, SRR023729, SRR023739. </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-539</b>: <a href="/submit/public/citation/539">Dro2_AS_L3-larvae-clear</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+
+
+[Dev_Timecou_read_pair_92793:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92793]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2794 574
+track source  = 1076 1077 1078 1079 1080 1081 1082
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2794
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Female Eclosion 1 day
+maxdepth     = 2
+citation = 
+ <h1>
+   Dm adult female, eclosion + 1 day RNA-Seq ( project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:376">Celniker/RNA:376</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-96</b>: <a href="/submit/public/citation/96">Dm_y[1]cn[1] bw[1] sp[1]_adult_Female_1dayPostEclosion_TotalRNA_p200_374-376-378_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06  
+ 
+
+[Dev_Timecou_read_pair_92795:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92795]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2793 574
+track source  = 1724 1725 1726 1727 1728 1729 1730 1731
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2793
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Female Eclosion 30 days
+maxdepth     = 2
+citation = <h1>Dm adult female, eclosion + 30 days RNA-Seq ( project, Gingeras subgroup)</h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:400">Celniker/RNA:400</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-19
+
+
+[Dev_Timecou_read_pair_92794:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92794]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2795
+track source  = 1189 1190 1193 1196 1199 1201 1204 1207
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2795
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Female Eclosion 5 days
+maxdepth     = 2
+citation = <h1>
+   Dm adult female, eclosion + 5 days RNA-Seq (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of Adult female D. melanogaster (y cn bw sp) 5 days after eclosure, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:388">Celniker/RNA:388</a>
+     </li>
+ <li>
+   <b>SRA accessions</b>: SRR023645, SRR023717, SRR023607, SRR023651, SRR023547, SRR023753, SRR023652, SRR023730 
+   </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-97</b>: <a href="/submit/public/citation/97">Dm_y[1]cn[1] bw[1] sp[1]_adult_Female_5dayPostEclosion_TotalRNA_p200_386-388-390_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06
+
+
+[Dev_Timecou_read_pair_92790:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92790]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2790 574
+track source  = 1191 1195 1198 1201 1205 1208
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2790
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Male Eclosion 1 day
+maxdepth     = 2
+citation = <h1>
+   Dm adult male, eclosion + 1 day RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) Adult males, 1 day past eclosure, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:370">Celniker/RNA:370</a>
+     </li>
+   <li>
+       <b>SRA accessions:</b>
+   SRR023543,SRR023741,SRR023664,SRR023825,SRR023678,SRR023648 </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-98</b>: <a href="/submit/public/citation/98">Dm_y[1]cn[1] bw[1] sp[1]_adult_Male_1dayPostEclosion_TotalRNA_p200_368-370-372_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+ 
+
+
+[Dev_Timecou_read_pair_92792:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92792]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2792 574
+track source  = 1192 1194 1197 1200 1203 1206 1209
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2792
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Male Eclosion 30 days
+maxdepth     = 2
+citation = <h1>
+   Dm adult male, eclosion + 30 days RNA-Seq (Celniker project)
+ </h1>
+ <h2>Details</h2>
+ RNA-seq was performed on a single biological sample of D. melanogaster (y cn bw sp) Adult males, 30 days past eclosure, using a combination of single- and paired-end sequencing. Splice junctions were identified de novo using Tophat.<br />
+ <br />
+ <h2>Series Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:394">Celniker/RNA:394</a>
+     </li>
+       <li>
+       <b>SRA accessions:</b>SRR023601, SRR023698, SRR023823, SRR023650, SRR023752, SRR023714, SRR024218
+   </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-06 
+ 
+
+
+[Dev_Timecou_read_pair_92791:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_92791]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2791 574
+track source  = 1656 1658 1659 1660 1661 1662 1663 1664 1666 1667 1668
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2791
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Male Eclosion 5 days
+maxdepth     = 2
+citation = <h1>
+   Dm adult male, eclosion + 5 days RNA-Seq 
+   (Celniker project)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Celniker&oldid=23300">Single-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:382">Celniker/RNA:382</a> (DCC-574)
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-20
+
+[Dev_Timecou_read_pair_2800:1000]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dev_Timecou_read_pair_2800]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: Developmental Stage
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data source = 2800 574
+track source  = 1083 1084 1085 1086 1087 1088
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2800
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Embryo 16-18h
+maxdepth     = 2
+citation = 
+ <h1>
+   Dm embryos, 16-18 hr after egg laying RNA-Seq ( project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA from 30 developmental stages spanning the life cycle of Drosophila melanogaster, from 0-2 embryos thru 30-day adults. RNA was isolated by the Peter Cherbas group, and sent to Brenton Graveley's lab for polyA isolation and library production.  The libraries were then distributed among 5 labs in the Drosophila transcriptome group for sequencing.  The Susan Celniker Lab performed pair-end sequencing exclusively.  The Brenton Graveley, Tom Gingeras, and Michael Brent labs performed single-end sequencing exclusively.  The Brian Oliver lab performed both single and paired-end sequencing runs.  All labs used the same Illumina hardware GAII, and called bases using the Illumina processing pipeline.  Fastaq files were generated using pipeline version 1.3 before 5/07/09 and using 1.4  after.  Reads were aligned using Tophat v.1.0.10. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Library_Prep:SC:1&oldid=23298">Sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Celniker&oldid=23290">Paired-end Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNAseq_alignment:SC:1&oldid=23295">TopHat alignment</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:264">Celniker/RNA:264</a>
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+      <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+   <li><b>DCC-574</b>: <a href="/submit/public/citation/574">Dev Timecourse TotalRNA isolation</a></li>
+ <li><b>DCC-111</b>: <a href="/submit/public/citation/111">Dm_y[1]cn[1] bw[1] sp[1]_embryo_16-18h_TotalRNA_p200_260-262-264_38bp</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-05 
+ 
+

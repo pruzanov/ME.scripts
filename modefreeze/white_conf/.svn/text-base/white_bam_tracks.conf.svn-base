@@ -1,0 +1,939 @@
+# Databases
+
+[modencode_bam_2010:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/0-4_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2019:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/4-8_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2020:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/8-12_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2021:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/12-16_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2022:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/16-20_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2023:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/20-24_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2024:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/L1_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2025:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/L2_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2026:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/AdultFemale_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2027:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/AdultMale_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2029:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/L3_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2030:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/White/Pupae_accepted_hits.sam.bam.sorted.bam"
+                -split_splices 1
+search options = none
+# Tracks
+
+[E0-4_TotalR_read_pair_958_2010:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E0-4_TotalR_read_pair_958_2010]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2010
+track_id     = 958
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2010
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 0-4h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 0-4h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E0-4_collection_histone_timecourse:KW:1&oldid=24427">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E0-4:KW:1&oldid=23066">Embryo 0-4h</a>, Embryo_0-4h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+       
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451806">GSM451806</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+
+
+[E4-8_TotalR_read_pair_960_2019:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E4-8_TotalR_read_pair_960_2019]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2019
+track_id     = 960
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2019
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 4-8h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 4-8h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E4-8_collection_histone_timecourse:KW:1&oldid=24428">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E4-8:KW:1&oldid=23065">Embryo 4-8h</a>, Embryo_4-8h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451809">GSM451809</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+
+
+[E8-12_Total_read_pair_959_2020:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E8-12_Total_read_pair_959_2020]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2020
+track_id     = 959
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2020
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 8-12h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 8-12h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E8-12_collection_histone_timecourse:KW:1&oldid=24429">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E8-12:KW:1&oldid=23069">Embryo 8-12h</a>, Embryo_8-12h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451808">GSM451808</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04
+
+
+[E12-16_Tota_read_pair_961_2021:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E12-16_Tota_read_pair_961_2021]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2021
+track_id     = 961
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2021
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 12-16h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 12-16h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E12-16_collection_histone_timecourse:KW:1&oldid=24431">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E12-16:KW:1&oldid=23068">Embryo 12-16h</a>, Embryo_12-16h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451803">GSM451803</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+ 
+
+[E16-20_Tota_read_pair_981_2022:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E16-20_Tota_read_pair_981_2022]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2022
+track_id     = 981
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2022
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 16-20h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 16-20h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E16-20_collection_histone_timecourse:KW:1&oldid=24432">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E16-20:KW:1&oldid=23062">Embryo 16-20h</a>, Embryo_16-20h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451807">GSM451807</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04
+
+
+
+[E20-24_Tota_read_pair_973_2023:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[E20-24_Tota_read_pair_973_2023]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2023
+track_id     = 973
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2023
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Embryo 20-24h  RNA-seq
+maxdepth     = 2
+citation = <h1> Embryo 20-24h RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=E20-24_collection_histone_modification:KW:1&oldid=24433">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:E20-24:KW:1&oldid=23064">Embryo 20-24h</a>, Embryo_20-24h_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451810">GSM451810</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+
+
+[L1_TotalRNA_read_pair_962_2024:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[L1_TotalRNA_read_pair_962_2024]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2024
+track_id     = 962
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2024
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = L1  RNA-seq
+maxdepth     = 2
+citation = <h1> L1 RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=L1_collection_histone_timecourse:KW:1&oldid=24434">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L1:KW:1&oldid=19704">L1</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>, L1_TotalRNA
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451811">GSM451811</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+
+
+
+[L2_TotalRNA_read_pair_964_2025:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[L2_TotalRNA_read_pair_964_2025]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2025
+track_id     = 962
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2025
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = L2  RNA-seq
+maxdepth     = 2
+citation = <h1> L2 RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=L2_collection_histone_timecourse:KW:1&oldid=24435">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L2:KW:1&oldid=23043">L2</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>, L2_TotalRNA
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM453867">GSM453867</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-04
+
+
+[AdultFemale_read_pair_965_2026:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[AdultFemale_read_pair_965_2026]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2026
+track_id     = 965
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2026
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = AdultFemale  RNA-seq
+maxdepth     = 2
+citation = <h1> AdultFemale RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Adult_Female_collection_histone_tc:KW:1&oldid=24439">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       AdultFemale_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_Female:KW:1&oldid=15423">Adult_Female</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451805">GSM451805</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+ 
+
+[AdultMale_T_read_pair_963_2027:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[AdultMale_T_read_pair_963_2027]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2027
+track_id     = 963
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2027
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = AdultMale  RNA-seq
+maxdepth     = 2
+citation = <h1> AdultMale RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Adult_Male_collection_histone_tc:KW:1&oldid=24436">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       AdultMale_TotalRNA, <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_Male:KW:1&oldid=19570">Adult_Male</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451804">GSM451804</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+
+
+[L3_TotalRNA_read_pair_967_2029:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[L3_TotalRNA_read_pair_967_2029]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2029
+track_id     = 967
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2029
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = L3 RNA-seq
+maxdepth     = 2
+citation = <h1> L3 RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=L3_collection_histone_timecourse:KW:1&oldid=24437">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3:KW:1&oldid=19707">L3</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>, L3_TotalRNA
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451812">GSM451812</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+ 
+
+[Pupae_Total_read_pair_966_2030:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Pupae_Total_read_pair_966_2030]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: White Group: RNA-Seq
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2030
+track_id     = 966
+stranded     = 0
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2030
+show_mismatch = 1
+height       = 4
+label density = 50
+group_on     = 
+key          = Pupae RNA-seq
+maxdepth     = 2
+citation = <h1> Pupae RNA-seq ( project, White subgroup) </h1>
+ <h2>General Description</h2>
+ RNA-seq was performed on polyA-RNA for developmental stages of Drosophila melanogaster on which ChIP-chip or ChIP-seq has been performed. The RNA was isolated from the same material used for ChIP experiments and, after purification and production of the Solexa libraries, sequenced (single-end) at Argonne National Lab. For RNA-seq, 2 lanes per sample are bieng run. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Pupae_collection_histone_timecourse:KW:1&oldid=24438">Animal Staging & collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_Extraction_for_Illumina_Sequencing:KW:1&oldid=24183">MRNA Extraction for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNA-seq_Library_Preparation_for_Illumina_Sequencing:KW:1&oldid=24181">RNA-seq Library Preparation for Illumina Sequencing</a>, <a href="http://wiki.modencode.org/project/index.php?title=Solexa_RNAseq:KW:1&oldid=24199">Solexa_RNAseq</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=TopHat_RNA-seq_Alignments:KW:1&oldid=24226">TopHat RNA-seq Alignments:KW:1</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae:KW:1&oldid=19710">Pupae</a>, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Y_cn_bw_sp&oldid=19925">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>, Pupae_TotalRNA
+     </li>
+     <li>
+       <b>External Links:</b>
+       <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM451813">GSM451813</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-04 
+ 
+

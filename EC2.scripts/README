@@ -1,0 +1,4 @@
+Starting March 1st 2013 Amazon Cloud started behaving differently
+Status for an instance gets set to stopped when initializing and then
+suddenly the instance becomes 'running' although the reachability may not
+be achived yet. Additional checks were introduced into the script 

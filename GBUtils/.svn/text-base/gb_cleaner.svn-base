@@ -1,0 +1,69 @@
+#!/usr/bin/perl -w
+
+use strict;
+use IO::File;
+use Time::localtime;
+
+# This script looks after temporary files in gbrowse tmp directories and removes old entries
+# All configure parameters are below. Needs to be run by apache user (www-data). 
+# Optionally writes log, if a directory becomes empty and www-data owns it, the dir gets removed
+
+# If another instance is running (looks for gb_cleaner with a different process id) don't start cleaning, exit
+my @processes = `ps -A | grep gb_cleaner`;
+if (@processes) {
+  foreach (@processes) { chomp; if (/gb_cleaner/ && !/defunct/ && !/$$/){exit;}
+ }
+}
+
+#--------------------------------------------------------------------------------------------
+# PARAMETERS:
+
+my $basedir = '/var/tmp/gbrowse2';
+my $LIM     = 30; # Days we allow the stuff to stay alive 
+my $tm      = localtime;
+my $today   = sprintf("(%04d:%02d:%02d)", $tm->year+1900, $tm->mon+1, $tm->mday);
+my $lf      = new IO::File(">>/var/log/gb_cleaner/delete.log") or die "Can't write to log file";
+
+#--------------------------------------------------------------------------------------------
+opendir(DIR,"$basedir") or die "Can't read from [$basedir]\n";
+my @dirs = grep {!/^locks|^chrom_sizes/} grep {!/^\.\.?$/} readdir(DIR);
+closedir DIR;
+
+## Log activity
+print $lf "$today Cleaning session started\n";
+
+foreach my $dir (@dirs) {
+ next if ! -d $basedir."/".$dir;
+ # Read inside each dir recursively
+ # warn "Got $dir";
+ &clean_dir($basedir."/".$dir);
+}
+
+$lf->close;
+
+# Insert logging code here and there
+
+sub clean_dir {
+ my $d = shift @_;
+ opendir(SUBDIR, "$d") or return; # If we can't read from a dir, just skip it (log it maybe?)
+ my @files =  grep {!/^\.\.?$/} readdir(SUBDIR);
+ closedir SUBDIR;
+
+ if (@files == 0) {
+  ## Remove dir and log
+  print $lf "$today Deleted directory $d accessed ".(-A $d)." days ago\n";
+  `rmdir $d`;  
+ }
+
+ foreach my $file(@files){
+  &clean_dir($d."/".$file) if -d $d."/".$file;
+  next if -d $d."/".$file;
+  
+  my $full_path = $d."/".$file;
+  if ( -e $full_path && -A $full_path > $LIM ) {
+   ## Remove file and log
+   # print $lf "$today Deleted file ".$d."/".$file." accessed ".(-A $d."/".$file)." days ago\n";
+   `rm $full_path`;
+  }
+ }
+}

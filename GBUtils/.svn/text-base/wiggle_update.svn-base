@@ -1,0 +1,137 @@
+#!/usr/bin/perl -w
+
+use strict;
+use IO::File;
+use Getopt::Long;
+
+=head1 TITLE
+
+ update_wiggle - Updates earlier created wiggle files with new (retrofitted) tracks 
+ Basically, salvages the names from older wiggle files
+ needs two arguments - 1. stanza file (*.conf) with data source and track source fields (may also use the track=>sub hash
+ present in some of the configs, the latter overrides the order used in data/track source fields)
+                       2. Old wiggle file (for salvaging names)
+ will write in a wiggle.gff file using the name from the older wiggle_gff + suffix "new"
+ (someData_wiggle.gff will produce someData_wiggle.new.gff in the same dir)
+
+ example: ./update_wiggle --conf=[conf file] --old=[older wiggle file]
+
+=head1 SINOPSIS
+    
+ usage: update_wiggle --conf=[conf file] --old=[older wiggle file]
+ needs a *.conf file and old wiggle file will also output the sub->name table which may later be used by scripts like gff_filer.batch
+
+=cut
+
+my ($conf_file,$old_wig,$base_path);
+
+GetOptions(
+           'conf=s'       => \$conf_file,
+           'old=s'  => \$old_wig,
+           'base=s' => \$base_path
+           );
+($conf_file && $old_wig) || die <<END;
+Usage:
+update_wiggle --conf=[conf file] --old=[older wiggle file]
+update_wiggle - Updates earlier created wiggle files with new (retrofitted) tracks 
+Basically, salvages the names from older wiggle files
+needs two arguments 1. stanza file (*.conf) with data source and track source fields
+                    2. old wiggle files (for name salvaging)
+                    3. path for binary wiggle files
+END
+
+# First, we reading from the conf file:
+$base_path .= "/" if $base_path !~m!/$!;
+my $fh = new IO::File ($conf_file) or die "Can't read from config stanza file\n";
+my $first = 1;
+my %tsubs = (); # Track/sub table (track id is the key)
+my (@data,@tracks,$stanza,$new_stanza);
+
+while (<$fh>) {
+ chomp;
+ my $line = $_;
+ next if /\:(\d+)\]/ || /\:database\]/; # Skip semantic zoom stanza
+ if (/^\[(.+)\]$/) { # new track 
+  $new_stanza = $1;
+  if (!$first) {
+   #print STDERR "[$stanza]\n data source = @data\n track source = @tracks\n\n";
+   map {if (!$tsubs{$tracks[$_]}){$tsubs{$tracks[$_]} = $data[$_]}} (0..$#tracks);
+   @data = ();
+   @tracks = ();
+  }
+  $stanza = $new_stanza;
+  $first = 0;
+ }
+
+ next if ! $stanza;
+
+ if (/^data[ _].+\=/)  { while ($' =~ m/(\d+)/) {push @data,$1;}}
+ if (/^track[ _].+\= /){ while ($' =~ m/(\d+)/) {push @tracks,$1; }}
+ 
+ if (/(\d+)=>(\d+)/) {$tsubs{$1} = $2;} # a track may belong only to one submission 
+}
+$fh->close;
+#print STDERR "[$stanza]\n data source = @data\n track source = @tracks\n\n";
+
+
+# Second, we are reading from the old wiggle file:
+$fh->open("<$old_wig") or die "Unable to read from the old wiggle file\n";
+my $new_wig = $old_wig=~/(.+)\.([a-z]{3})/ ? $1."_new.".$2 : $old_wig."_new";
+my $fn = new IO::File(">$new_wig") or die "Can't write to the new wiggle file\n";
+
+my(%new_tsubs,%newdata);
+
+while (<$fh>) {
+ chomp;
+ my @temp = split("\t");
+ if(! @temp || @temp != 9) {print $fn $_."\n";
+                            next;}
+ if (!$new_tsubs{$temp[1]}) { # read from directory and use 
+  &check_dir($tsubs{$temp[1]},$temp[1]);
+  if (!$new_tsubs{$temp[1]}) {
+    print STDERR "No new track for submission $tsubs{$temp[1]}, keeping the old info\n";
+    print $fn $_."\n";
+    next;
+  }
+ }
+ 
+ if (exists $new_tsubs{$temp[1]}) {
+  my $newline = $newdata{$temp[1]}->{$temp[0]};
+  my $name = $1 if $temp[8]=~/Name=(.+?)\;/;
+  $newline =~ s/Name=.+?\;/Name=$name\;/;
+  $newline =~ s!wigfile=.+\/(.+?)!wigfile=$base_path$1!;
+  print $fn $newline."\n";
+ }else{
+  die "ERROR processing files!\n";
+ }
+ 
+}
+$fh->close;
+$fn->close;
+
+# This subroutine will check if there is a newer wiggle.gff file in the corresponding submission directory
+sub check_dir {
+ my($sub,$old_t) = @_;
+ opendir(SUB,$sub) or die "It appears that there's no directory for submission $sub";
+
+ my @wigfiles = grep {/wiggle.gff/} readdir(SUB);
+ foreach (@wigfiles) {
+  next if !/(\d+)_wiggle.gff/;
+  next if $1 == $old_t;
+  $new_tsubs{$old_t} = join("/",$sub,$_);
+  last;
+ }
+
+ return if (! $new_tsubs{$old_t});
+ open(FILE,$new_tsubs{$old_t}) or die "Cannot read from file [$new_tsubs{$old_t}]";
+ while(<FILE>) {
+  chomp;
+  next if /^\#/ || /^$/;
+  my @temp = split("\t");
+  next if @temp != 9; # control for gff format
+  $newdata{$old_t}->{$temp[0]} = $_;
+  #print STDERR "$temp[0] for track $old_t UPDATED\n";
+ }
+ close FILE;
+}
+

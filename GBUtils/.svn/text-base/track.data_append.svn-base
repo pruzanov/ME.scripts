@@ -1,0 +1,42 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+#
+# Script for appending links for track data files to citation field 
+# works only with tracks which have a single bam (and optionally, + one bigwig) file
+
+my $file = shift @ARGV;
+my $ID;
+my %files;
+
+
+open(FILE,"<$file") or die "Couldn't read from file [$file]\n";
+while(<FILE>){
+ if (/^\[(.+)\]$/ && !/\:\d+\]$/ && !/\:database\]$/) {
+  $ID = $1;
+  #%files = ();
+ } elsif (/bigwig\s*=>\s*\'(\S+)\'/ || /bam\s+(\S+)/) {
+  #print STDERR "Got file [$1]\n"; 
+  my $bam = $1;
+  $bam =~s/\'//g;
+  $bam =~s!.*/!!;
+  $files{bam} = $bam if $bam =~/\.bam$/;
+  $files{bw}  = $bam if $bam =~/\.bw$/;
+ }
+
+ if (/^(citation\s*\=\s*)/) {
+  print $1;
+  my $reminder = $';
+  $reminder = undef if $reminder!~/\w/;
+  print 'Track ID=<b>'.$ID.'</b> [Download entire dataset as <a href="http://modencode.oicr.on.ca/files/bam/piano/'.$files{bam}.'">BAM</a>'."\n" if $files{bam};
+  print ' or <a href="http://modencode.oicr.on.ca/files/bw/piano/'.$files{bw}.'">BigWig</a>]'."\n" if $files{bw};
+  print " ".$reminder if ($reminder);
+  next;
+ }
+
+ print;
+
+}
+
+close FILE;

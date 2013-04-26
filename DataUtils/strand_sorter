@@ -1,0 +1,90 @@
+#!/usr/bin/perl -w
+
+use strict;
+
+#
+# This script produces two .bam files (for negative and positive strand) from one bam file
+# using samtools (samtools need to be in PATH)
+#
+
+#my $pattern = 'submission_\d+.*\.bam$';
+my $pattern = 'ed.bam$';
+
+my @args = @ARGV;
+my @dirs;
+
+foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @dirs,$_} ($1..$2);
+ } else {push @dirs,$_;}
+}
+
+DIR:
+foreach my $d (@dirs) {
+ 
+ if (! -d $d) { print STDERR "Directory $d does not exist\n";
+                next DIR; }
+ opendir(DIR,$d) or die "Cannot read from directory [$d]\n";
+ my @files = grep {!/(plus\.bam)|(minus\.bam)/} grep {/$pattern/} readdir DIR;
+ print STDERR "Got ".scalar(@files)." files\n";
+ if (@files == 0) {
+  rewinddir(DIR);
+  @files = grep {!/(plus\.bam)|(minus\.bam)/} grep {/sorted.bam$/} readdir DIR;
+  if (@files != 1) {@files = ();}
+ }
+
+ closedir DIR;
+
+ foreach my $file (@files) {
+  my $name = $1 if $file =~ /(.+?)\.bam$/;
+ # my $file1 = "$d/$name"."plus.bam";
+ # my $file2 = "$d/$name"."minus.bam";
+ # if (-e $file1 && -e $file2) {
+ #  print STDERR "Directory $d seems processed already, skipping...\n";
+ #  next DIR;
+ # } 
+  open BAM, "samtools view -h $d/$file |" or die "Cannot fork!";
+ 
+  #if (! -e "$d/$d.header.sam") {
+  #  print STDERR "Header not found, creating\n";
+  #  `samtools view -H $d/$file | sed 's/dmel_mitochondrion_genome/M/' > $d/$d.header.sam`;
+  #}
+  #`cp $d/$d.header.sam $d/$name.plus.sam`;
+  #`cp $d/$d.header.sam $d/$name.minus.sam`;
+  
+  open(POSSAM,">>$d/$name.plus.sam") or die "Cannot write to SAM for + strand";
+  open(NEGSAM,">>$d/$name.minus.sam") or die "Cannot write to SAM for - strand";
+  
+  print STDERR "Sorting alignments from $d/$file ...\n";
+  while(<BAM>) {
+   chomp;
+   #s/dmel_mitochondrion_genome/M/;
+   if (/^@/) {
+    print POSSAM $_."\n";
+    print NEGSAM $_."\n";
+    next;
+   }
+   next if !/^\w/;
+   my @temp = split("\t");
+   my $binary = sprintf '%#b',$temp[1];
+   # First, check the XS:A+/- tag:
+   if ($temp[$#temp] =~/XS\:A\:(.)/){
+    $1 eq '-' ? print NEGSAM $_."\n" : print POSSAM $_."\n";
+   }else{
+   # Fifth bit marks the strand (0 = positive 1 = negative)
+    $binary =~ /1\d{4}$/ ? print NEGSAM $_."\n" : print POSSAM $_."\n";
+   }
+  }
+  close BAM;
+  close POSSAM;
+  close NEGSAM;
+
+  print STDERR "Creating BAM files...\n";
+  `samtools view -Sb $d/$name.plus.sam > $d/$name.plus.bam`;
+  `samtools view -Sb $d/$name.minus.sam > $d/$name.minus.bam`;
+
+  `rm $d/$name.plus.sam $d/$name.minus.sam`;
+ }
+ 
+}

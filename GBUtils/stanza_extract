@@ -1,0 +1,47 @@
+#!/usr/bin/perl -w
+
+#
+# Extract stanza from existing conf files!
+# (and write them into cache/ directory using track ids as file names)
+#
+
+use strict;
+use IO::File;
+
+# Supply a .conf file
+my $file = shift @ARGV;
+
+my $fh = new IO::File("<$file") or die "Cannot read from configuration file [$file]\n";
+my $fo = new IO::File;
+my($current,$in,@lines);
+
+while (<$fh>) {
+ $in = /^\s/ ? $in : /^citation/;
+ 
+ $current = $1 if (/^data.source.*\=\s*(\d+)/);
+ 
+ # Write to a file if empty string (after citation field) is met:
+ if (/^\s*$/ && $current) {
+  print STDERR "Printing for $current\n";
+  $in = 0;
+
+  if (-f "cache\/$current\.stanza") {
+   print STDERR "File Exists, overwrite?\n",
+                "(y/n)\n";
+   my $answer = <STDIN>;
+   if ($answer =~/^n/i) {
+    @lines = ();
+    $current = undef;
+    next;
+   }
+  }
+  $fo->open(">cache/$current.stanza") or die "Cannot write to stanza file [$current.stanza]\n";
+  map{print $fo $_} (@lines);
+  $fo->close;
+  @lines = ();
+  $current = undef;
+  }
+ push @lines,$_ if $in;
+}
+
+$fh->close;

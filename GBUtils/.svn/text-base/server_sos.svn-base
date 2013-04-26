@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+use strict;
+# script: remoteSOS (Checks if the modENCODE GBrowse server is up)
+
+ use LWP::Simple;
+ my %SERVERS = (
+        "Modencode Production server FLY"   => 'http://modencode.oicr.on.ca/fgb2/gbrowse/fly',
+        "Modencode Production server WORM"  => 'http://modencode.oicr.on.ca/fgb2/gbrowse/worm'
+        );
+ my $MAIL                 =  '/usr/sbin/sendmail';
+ my $MAIL_FLAGS           =  '-t -oi';
+ my @WEBMASTERS           =  ('pruzanov@gmail.com','lincoln.stein@gmail.com');
+ my $ATTEMPTS             = 3;
+
+ my $success;
+
+ foreach my $serv (sort keys %SERVERS) {
+    #warn "Checking $serv";
+    ATT:
+    for (1..$ATTEMPTS) {
+    #warn "Attempt $_...";
+    #my($content_type, $document_length, $modified_time, $expires, $server) = head($SERVERS{$_});
+    $success = head($SERVERS{$serv});
+    if ($success) {last ATT;}
+    sleep 10;
+    }
+    if (! $success){map{sos($serv,$_)} @WEBMASTERS;}
+ }
+
+sub sos {
+ my $server = shift;
+ my $mail   = shift;
+ open (MAIL,"| $MAIL $MAIL_FLAGS") || die "mail: $!";
+ my $date = localtime();
+
+print MAIL <<END;
+To: $mail
+From: modENCODE GBrowse Monitor <nobody>
+Subject: $server is down
+
+I tried to call $server at $date but there was
+no one at home.
+
+Respectfully yours,
+
+The Watchful Web Server Monitor   
+END
+
+ close MAIL;
+}
+

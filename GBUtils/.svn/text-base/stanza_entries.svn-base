@@ -1,0 +1,87 @@
+#!/usr/bin/perl -w
+
+#
+# Simple script for getting data for stanza (numeric ids for feature field, data source field and track source field +hash for track links
+# Use it to prepare merged stanza code (useful when processing multiple wig/gff files for GBrowse)
+#
+
+use strict;
+use IO::File;
+
+# Only shell scripting!
+
+my $file    = shift @ARGV;
+my $gff_dir = shift @ARGV;
+my(%info,$sub);
+
+# 1. Get tracks
+my @tracks = `grep -v version $file | awk -F "\t" '{print \$2,\$9}' | sed 's/\;.*//' | sort -nu`;
+my @subs = `ls */*_wiggle.gff*`;
+
+
+foreach my $track (@tracks) {
+ chomp($track);
+ next if $track!~/^\d+/;
+ my($t,$name) = ($1,$2) if $track=~/^(\d+) (.+)/;
+ $name =~ s/.*Name=//;
+ print STDERR "Processing track $t...\n";
+
+ foreach my $s (@subs) {
+  next if $s =~/^$/;
+  if ($s =~/^(\d+)\/$t\_wiggle\.gff.*/) { 
+   $sub = $1;
+   last;
+  }
+ }
+
+ next if !$sub;
+
+
+ my @gff_files = `ls $sub\/*gff`;
+ my ($gff_file,$gff_entry,$gfile_id);
+
+ map{$gff_file = $_ if $_!~/wiggle/} (@gff_files);
+ if ($gff_file) {
+
+  chomp($gff_file);
+  #print STDERR "GFF file is $gff_file\n";
+
+  my $bait = `grep -v version $gff_file | awk '{print \$2}' | sort -u`;
+  chomp($bait);
+  $gfile_id = $1 if $gff_file =~/\/(\d+).*\.gff/;
+ 
+  $gff_entry = `head $gff_dir/*gff | grep -B 1 $bait | sed 's/.*Parent=//' | grep $gfile_id | awk '{OFS=\":\";print \$3,\$2}' | sort -u`;
+  chomp($gff_entry);
+ }
+ #print STDERR "For track $t we've got submission $sub with gff file $gfile_id and record $gff_entry\n";
+
+ $info{$t} =     {sub => $sub,
+                  name=> $name,
+		  gfid=> $gfile_id ? $gfile_id : "NA",
+                  gff => $gff_entry ? $gff_entry : "NA"};
+}
+
+map{print "WIG:$_\n"} (sort {$a<=>$b} keys %info);
+print "\n";
+
+map{print "$_=>$info{$_}->{sub}\n"} (sort {$a<=>$b} keys %info);
+print "\n\n";
+
+print "data source =";
+map {print " $info{$_}->{sub}"} (sort {$a<=>$b} keys %info);
+print "\n";
+
+print "track source = ";
+print join (" ",(sort {$a<=>$b} keys %info));
+print "\n\n";
+
+print "select  = name ";
+map{ print $info{$_}->{name} =~ / / ? "\t\"$info{$_}->{name}\"\#$info{$_}->{sub}\n" 
+                                    : "\t$info{$_}->{name}\#$info{$_}->{sub}\n"} (sort {$a<=>$b} keys %info);
+print "\n\n";
+
+map{ print $info{$_}->{gff}."\n" } (sort {$a<=>$b} keys %info);
+print "\ntrack source = ";
+map{ print " $info{$_}->{gfid}" } (sort {$a<=>$b} keys %info);
+print "\n\n";
+

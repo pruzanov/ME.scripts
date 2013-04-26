@@ -1,0 +1,401 @@
+[GENERAL]
+description   = C. elegans modENCODE (WormBase build WS190)
+database      = worm
+
+initial landmark = I:143000..180000
+
+default features = Genes
+
+# examples to show in the introduction
+examples = I:110643..112642
+           V:625000..675000
+	   X:120000..140000
+	   lin-12
+
+header =
+  <table style="border-bottom:5px groove blue;margin-bottom:10px;width:98%">
+    <tr>
+      <td valign=top>
+        <a href="http://www.modencode.org">
+          <img src="/images/worm_small.png"
+               border=0 alt="modENCODE logo worm" />
+        </a>
+      </td>
+      <th valign=middle>
+        <span style="font:arial;font-size:18pt"><i>C. elegans</i> Genome Browser (Freeze Feb.2010)</span>
+      </th>
+      <td width="20%"></td>
+    </tr>
+  </table>
+
+# "automatic" classes to try when an unqualified identifier is given
+automatic classes = Transcript Locus Gene GMap PCR_product Operon Genbank Variation Allele CDS Transposon Sequence Clone
+pad_left          = 180
+image_padding     = 100
+truecolor         = 1
+autocomplete      = 1
+
+#################################
+# database definitions
+#################################
+
+[worm:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    worm
+                -user   nobody
+search options = default +autocomplete
+
+[imported:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    worm_imported
+		-user   nobody
+
+#[henikoff:database]
+#db_adaptor    = Bio::DB::SeqFeature::Store
+#db_args       = -adaptor DBI::mysql
+#                -dsn    henikoff_ce
+#                -user   nobody
+
+[hillier_genelets:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    hillier_genelets
+	        -user   nobody
+
+[hillier_itranscripts:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    hillier_itranscripts
+                -user   nobody
+
+[lieb:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    lieb
+                -user   nobody
+
+[piano:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    piano
+                -user   nobody
+
+[waterston:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    waterston
+                -user   nobody
+
+[snyder:database]
+db_adaptor    = Bio::DB::SeqFeature::Store
+db_args       = -adaptor DBI::mysql
+                -dsn    snyder
+                -user   nobody
+
+
+# Default glyph settings
+[TRACK DEFAULTS]
+glyph         = generic
+database      = worm
+height        = 8
+bgcolor       = lightgrey
+fgcolor       = black
+label density = 100
+bump density  = 500
+feature_limit = 500
+link          = AUTO
+discoverable  = 1
+
+#Ucsc plugin configuration
+[UcscPlugin:plugin]
+db = ce6
+user = viewer
+pass = viewer
+seq_prefix = chr
+split_prefix = chr
+
+[UcscChain:plugin]
+default_enable = chainCb3
+
+[UcscNet:plugin]
+default_enable = netCb3 netCaeRem3
+
+[UcscConservation:plugin]
+default_enable = multiz6way
+
+### TRACK CONFIGURATION ####
+# the remainder of the sections configure individual tracks
+
+[Genes:100000]
+glyph        = generic
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+
+[Genes]
+feature      = gene:Coding_transcript
+               Pseudogene
+glyph        = gene
+#gene
+#sub {shift->primary_tag eq 'pseudogene' ? 'box' : 'gene';}
+bgcolor      = sub {my $f = shift;
+                    return 'white' if $f->primary_tag eq 'pseudogene';
+                    return $f->strand < 1 ? 'turquoise' : 'violet';
+                    }
+fgcolor      = black
+strand_arrow = sub {my $f = shift;
+                    return $f->primary_tag eq 'pseudogene';}
+forwardcolor = violet
+reversecolor = cyan
+utr_color    = gray
+category     = Genes
+height       = sub {shift->primary_tag eq 'pseudogene' ? 6 : 8;}
+label        = sub {my $f = shift;
+                my $dn = $f->load_id =~ /^Gene/? $f->display_name : $f->load_id;
+                $dn =~ s/Transcript://;
+                my @aliases = $f->each_tag_value('Note');
+                foreach (@aliases) {
+                   return lc($1)." ($dn) " if /(\w{3}-\d+)$/;
+                }
+                return $dn;
+               }
+link         = sub{my $name = shift->name;
+                   return qq[http://www.wormbase.org/db/get?name=$name;class=Gene];}
+label_transcripts =  1
+das category = transcription
+key          = Curated WormBase Genes
+sort_order   = name
+citation     = <h2>WS190 freeze</h2> 
+             These are gene predictions that have been reviewed by WormBase curators.  The
+             purple and blue colors indicate CDS regions on the forward and
+             reverse strands respectively.  The grey areas represent 5' and
+             3' ESTs assigned automatically using the extents of
+             overlapping ESTs and full-length cDNAs.  The UTR predictions
+             have <b>not</b> been reviewed by WormBase curators, and are
+             known to contain artifacts. If sufficient room is available
+             between features, gene models end with a triangle; if not a
+             small arrow is used.  The tRNAs are predicted by Sean Eddy&#146;s
+             tRNAscan program, and miRNA transcripts taken from a variety
+             of literature sources. RNAz-derived ncRNAs were predicted using
+             the <a href="http://www.tbi.univie.ac.at/~wash/RNAz/">RNAz algorithm</a>.
+             Please select the RNA for more details.
+title        = Curated wormbase gene $name
+
+
+
+[NCRNA]
+feature           = gene:snRNA gene:miRNA gene:snoRNA gene:rRNA
+database          = worm
+filter            = sub {
+                      my @subf = eval{shift->get_SeqFeatures};
+		      return grep {!/mRNA|tRNA/} @subf;
+		      }
+glyph            = generic
+strand_arrow     = 1
+bgcolor          = sub {return shift->strand < 1 ? 'orange' : 'wheat';}
+fgcolor          = black
+height           = 5
+description      = 1
+key              = Non-coding RNAs
+label            = sub{
+                       my $f = shift;
+		       my $dn = $f->display_name;
+		       $dn =~ s/Transcript://;
+		       my @aliases = $f->each_tag_value('Note');
+		       foreach (@aliases) {
+		              $dn = $_;
+		              return "$1 " if /(\w{3}-\d+)$/;
+		       }
+		       return $dn;
+		       }
+label_transcripts =  1
+category         = Genes
+citation         = noncoding RNAs, including snRNAs, snoRNA, miRNAs, ncRNAs and rRNAs. Extent of transcribed region corresponding
+		   to an annotated non-coding RNA (intron structure not shown)
+
+               Gene models are available for download at ftp://ftp.wormbase.org/pub/wormbase/nGASP/final_gene_predictions/predictions
+
+
+[TranslationF]
+glyph        = translation
+global feature = 1
+height       = 20
+fgcolor      = purple
+start_codons = 0
+strand       = +1
+arrow_height = 2
+translation  = 3frame
+category     = Sequence
+key          = 3-frame translation (forward)
+citation     = This track shows the position of stop codons at low magnifications,
+	and the 3-frame translation at high magnifications.  Only the forward strand
+	is shown.
+
+[DNA/GC Content]
+glyph          = dna
+global feature = 1
+strand         = both
+gc_window      = auto
+height         = 40
+fgcolor        = red
+key            = DNA/GC Content
+category       = Sequence
+
+[TranslationR]
+glyph        = translation
+global feature = 1
+height       = 20
+fgcolor      = blue
+strand       = -1
+start_codons = 0
+arrow_height = 2
+translation  = 3frame
+category     = Sequence
+key          = 3-frame translation (reverse)
+citation     = This track shows the position of stop codons at low magnifications,
+	and the 3-frame translation at high magnifications.  Only the reverse
+	strand is shown.
+
+
+[OSTB]
+feature       = expressed_sequence_match:BLAT_OST_BEST
+glyph         = segments
+category      = Expression
+draw_target   = 1
+show_mismatch = 1
+ragged_start  = 1
+height        = 5
+bgcolor       = black
+fgcolor       = black
+connector     = solid
+group_pattern = /^Sequence:OST[RF]/
+link          = sub {
+                        my $feature = shift;
+                        my $name = $feature->name;
+                        $name =~ s/^Sequence:OST[FR](10|30)/$1/;
+                        $name =~ s/^Sequence:OST[FR]/10/;
+                        $name =~ s/_\d*//;
+                        $name =~ s/([A-Z]+\d+)$/\@$1/;
+                        return qq[http://worfdb.dfci.harvard.edu/searchallwormorfs.pl?by=plate&sid=$name];
+                        }
+label       = sub{my $name = shift->id;
+                  $name =~ s/Sequence:(.+)_\d$/$1/;
+	          return $name;}
+link_target   = _blank
+key           = ORFeome sequence tags
+citation      = These are <a href="http://worfdb.dfci.harvard.edu/">ORFeome project</a> sequence reads.
+        The ORFeome project designs primer assays for spliced mRNAs and then performs sequence reads
+        on rtPCR material, producing "OSTs."  This track shows ORFeome project OSTs aligned to the
+        <i>C. elegans</i> genome using Jim Kent's BLAT program
+        [<a href="http://genome.cse.ucsc.edu/cgi-bin/hgBlat">http://genome.cse.ucsc.edu/cgi-bin/hgBlat</a>].
+        This track shows the best unique location for each OST.  Blue boxes
+        show RST sequences from 5' and 3' RACE experiments using SL1/and SL2 as the 5' universal primer (Kourosh
+        Salehi-Ashtiani, Vidal Lab).
+
+[OSTB:50000]
+feature   = expressed_sequence_match:BLAT_OST_BEST
+
+[OSTB:101]
+fontcolor     = black
+height        = 5
+
+[ESTB:100000]
+label        = 0
+bump         = 0
+desciption   = 0
+
+[ESTB:50000]
+feature   = EST_match:BLAT_EST_BEST
+
+[ESTB:101]
+fontcolor     = black
+height        = 5
+
+[ESTB]
+feature       = EST_match:BLAT_EST_BEST
+glyph         = segments
+sort_order    = name
+category      = Expression
+stranded      = 1
+draw_target   = 1
+show_mismatch = 1
+ragged_start  = 1
+height        = 5
+bgcolor       = limegreen
+fgcolor       = black
+label         = sub {my $lab = shift->name;
+		     $lab =~ s/Sequence://i;
+                     $lab;}
+connector     = solid
+group_pattern = /\.[35]$/
+key           = ESTs (all)
+citation      = These are C. elegans expressed sequence tags (ESTs), that have been aligned to
+        the C. elegans genome using Jim Kent&#146;s BLAT program [<a href="http://genome.cse.ucsc.edu/cgi-bin/hgBlat">
+        http://genome.cse.ucsc.edu/cgi-bin/hgBlat</a>].
+        This track shows the best unique location for each EST.
+        The paired 5' and 3' ESTs from the same cDNA clone are connected by a dashed line.
+
+
+[ESTBSPLICED:100000]
+label        = 0
+bump         = 0
+desciption   = 0
+
+[ESTBSPLICED]
+feature       = EST_match:BLAT_EST_BEST
+glyph         = segments
+sort_order    = name
+filter        = sub {shift->segments > 1}
+category      = Expression
+stranded      = 1
+draw_target   = 1
+show_mismatch = 1
+ragged_start  = 1
+height        = 5
+bgcolor       = limegreen
+fgcolor       = black
+label         = sub {my $lab = shift->name;
+                     $lab =~ s/Sequence://i;
+		     $lab;}
+connector     = solid
+group_pattern = /\.[35]$/
+key           = ESTs (spliced)
+citation      = The subset of C. elegans expressed sequence tags (ESTs) that span introns, aligned to
+        the C. elegans genome using Jim Kent&#146;s BLAT program [<a href="http://genome.cse.ucsc.edu/cgi-bin/hgBlat">
+        http://genome.cse.ucsc.edu/cgi-bin/hgBlat</a>].
+        This track shows the best unique location for each EST.  
+        The paired 5' and 3' ESTs from the same cDNA clone are connected by a dashed line.
+
+
+## IMPORTED TRACKS:
+
+#include imported_conf/worm*.conf
+
+## MODENCODE TRACKS:
+
+## LIEB TRACKS:
+
+#include lieb_conf/*.conf
+
+## HENIKOFF TRACKS:
+
+##include henikoff.ce_conf/*.conf
+
+## PIANO TRACKS:
+
+#include piano_conf/*.conf
+
+## SNYDER TRACKS:
+
+#include snyder_conf/*.conf
+
+## WATERSTON TRACKS:
+
+#include waterston_conf/*.conf
+
+

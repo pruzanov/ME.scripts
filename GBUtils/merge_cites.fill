@@ -1,0 +1,66 @@
+#!/usr/bin/perl -w
+
+# A modified version of merge_cites script -
+# Process config file, after finding 'data source' parameter generates citation text
+# and waits for a string containing either 'citation; placeholder or empty string
+# (used if there's no citation)
+
+use strict;
+use IO::File;
+my $USAGE = "merge_cites.fill [conf file]\n";
+
+my $file = shift @ARGV;
+
+# Ok, we do have some data, let's start stanza extraction
+my $fh = new IO::File();
+$fh->open("<$file") or die "Cannot read from the config file [$file]";
+my(%ds,@strings);
+
+while (<$fh>) {
+ chomp;
+ if (/^$/ || /^\s+$/ || /^citation/){
+  if (/^citation/){
+    print $_."\n";
+    next;
+  }
+  if (-e "temp_$$"){
+   my $th = new IO::File("<temp_$$") or die "Failed to read from cache file temp_$$";
+   my @lines = @{&clean_cite($th)};
+   $th->close;
+   map{print $_} @lines;
+   `rm temp_$$`;
+   next;
+  }
+  print $_."\n";
+  next;
+ }elsif(/^data source *= */){
+  print $_."\n";
+  print STDERR "Getting citation for $' ....\n";
+  `./merge_cites $' > temp_$$`;
+  next;
+ }
+ print $_."\n";
+ 
+}
+
+$fh->close;
+exit;
+
+
+#=====================Removes spaces, other junk
+sub clean_cite ($) {
+ my(@results,$in);
+ my $f = shift;
+ 
+ while (<$f>) {
+  if (/^citation/ || $in) {
+   last if (/^\w/ && !/^citation/);
+   $in = 1;
+   if (/^\s*$/ || /^\#/ || /^$/){next;};
+   push @results,$_;
+  } 
+ }
+ return \@results;
+}
+
+

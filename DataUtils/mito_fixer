@@ -1,0 +1,88 @@
+#!/usr/bin/perl -w
+
+#
+# Simple script for removing references to dmel_mitochondrial_genome
+
+=head1 TITLE
+
+ mito_fixer - Maybe used for batch processing of bam files with dmel_mitochondrion_genome (instead of M) refs
+
+ needs a list of directories (submission ids) which maybe passed as n-n if there are successing numbers used as id names
+ 
+ example: ./mito_fixer 23 24-28 34-56 67
+
+=head1 SINOPSIS
+    
+ usage: mito_fixer [submission ids]
+
+
+=cut
+
+my @args = @ARGV;
+my @dirs;
+my %to_fix = ();
+my $mito = "dmel_mitochondrion_genome";
+my $mito_swap = "M";
+use constant AUTOYES=>1;
+
+foreach (@args) {
+ next if (!/^\d+/);
+ if (/(\d+)\-(\d+)/) {
+  map {push @dirs,$_} ($1..$2);
+ } else {push @dirs,$_;}
+}
+
+DIR:
+foreach my $d (@dirs) {
+ if (! -d $d) { next; } #`mkdir $d`; }
+ opendir(DIR,$d) or die "Couldn't read directory [$d]\n";
+
+ @bams = grep{/\.bam$/} readdir DIR;
+ if (@bams == 0) {
+  print STDERR "No bam files in $d, skipping...\n";
+  next DIR;
+ }
+
+ BFILE:
+ foreach my $bfile(@bams) {
+  print STDERR "Checking $d/$bfile\n";
+  my $m = `samtools view -H $d/$bfile | grep $mito | wc -l`;
+  if ($m == 0){next BFILE;}
+
+  print STDERR "$mito detected in [$d/$bfile]\n";
+  $to_fix{"$d/$bfile"}++;
+ }
+}
+
+# Fix the stuff if we have errors:
+exit if (scalar(keys %to_fix) == 0);
+
+print STDERR "We have ".scalar(keys %to_fix)." files to fix, proceed (y/n)?\n";
+my $answer = AUTOYES;
+$answer ||= <STDIN>;
+exit if ($answer =~/n/i);
+
+
+
+foreach my $file (keys %to_fix) {
+  my $dir = $file=~m!(\d+)/! ? $1 : "."; 
+  open BAM, "samtools view -h $file |" or die "Cannot fork!";
+  open(SAM,">$dir/temp.sam") or die "Cannot write to [$dir/temp.sam]\n";
+
+  print STDERR "Sorting alignments from $file ...\n";
+  while(<BAM>) {
+   chomp;
+   s/$mito/$mito_swap/;
+   print SAM $_."\n";
+  }
+  close BAM;
+  close SAM;
+
+  print STDERR "Creating BAM file...\n";
+  `samtools view -Sb $dir/temp.sam > $file`;
+
+  `rm $dir/temp.sam`;
+}
+ 
+
+

@@ -1,0 +1,2285 @@
+# Databases
+
+[modencode_bam_983:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_Untreated.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1011:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG10128_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1012:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG10203_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1013:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG10851_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1014:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG12749_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1015:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG13425_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1016:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG1559_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1017:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG16901_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1018:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG17136_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1019:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG17838_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1020:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG18426_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1021:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG1987_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1022:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG30122_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1023:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG31000_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1024:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG3249_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1025:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG4602_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1026:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG5099_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1027:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG5442_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1028:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG5655_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1029:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG5821_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1030:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG5836_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1031:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG6946_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1032:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG7437_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1033:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG7878_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_1034:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG7971_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2301:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG9983_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2302:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_CG9373_RNAi-1.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+[modencode_bam_2305:database]
+db_adaptor    = Bio::DB::Sam
+db_args       = -fasta "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta"
+                -bam "/browser_data/fly/sam_binaries/Celniker/S2_DRSC_Untreated_RNAi-5.SAM.bam.sorted.bam"
+                -split_splices 1
+search options = none
+
+# Tracks:
+
+[Dm_splicefct_read_pair_1034:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1034]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1034
+track_id     = 171
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1034
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG7971
+maxdepth     = 2
+citation = <h1> RNAi CG7971 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG7971&oldid=24040">S2-DRSC CG7971</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-22 
+
+
+[Dm_splicefct_read_pair_1033:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1033]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1033
+track_id     = 331
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1033
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG7878
+maxdepth     = 2
+citation = <h1> RNAi CG7878 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG7878&oldid=24056">S2-DRSC CG7878</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+
+
+[Dm_splicefct_read_pair_1032:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1032]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1032
+track_id     = 330
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1032
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG7437 (mub)
+maxdepth     = 2
+citation = <h1> RNAi CG7437 (mub) in S2-DRSC RNA-Seq (Celniker project, Gingeras subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG7437&oldid=24046">S2-DRSC CG7437</a>
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+
+
+[Dm_splicefct_read_pair_1031:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1031]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1031
+track_id     = 306
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1031
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG6946 (glo)
+maxdepth     = 2
+citation = <h1> RNAi CG6946 (glo) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG6946&oldid=24007">S2-DRSC CG6946</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+
+
+[Dm_splicefct_read_pair_1030:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1030]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1030
+track_id     = 190
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1030
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG5836 (SF1)
+maxdepth     = 2
+citation = <h1> RNAi CG5836 (SF1) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG5836&oldid=24052">S2-DRSC CG5836</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-22
+
+[Dm_splicefct_read_pair_1029:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1029]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1029
+track_id     = 169
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1029
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG5821 (qkr58E-2)
+maxdepth     = 2
+citation = <h1> RNAi CG5821 (qkr58E-2) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG5821&oldid=24050">S2-DRSC CG5821</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-22
+
+[Dm_splicefct_read_pair_1028:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1028]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1028
+track_id     = 280
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1028
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG5655 (Rsf1)
+maxdepth     = 2
+citation = <h1> RNAi CG5655 (Rsf1) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG5655&oldid=24028">S2-DRSC CG5655</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-23
+
+
+[Dm_splicefct_read_pair_1027:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1027]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1027
+track_id     = 279
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1027
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG5442 (SC35)
+maxdepth     = 2
+citation = <h1>
+   RNAi CG5442 (SC35) in S2-DRSC RNA-Seq 
+   (Celniker project, Graveley subgroup)
+ </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+       
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG5442&oldid=24034">S2-DRSC CG5442</a>
+       
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+ 
+
+
+[Dm_splicefct_read_pair_1026:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1026]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1026
+track_id     = 168
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1026
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG5099 (msi)
+maxdepth     = 2
+citation = <h1> RNAi CG5099 (msi) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG5099&oldid=24012">S2-DRSC CG5099</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-22 
+
+
+
+[Dm_splicefct_read_pair_1025:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1025]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1025
+track_id     = 172
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1025
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG4602 (Srp54)
+maxdepth     = 2
+citation = <h1> RNAi CG4602 (Srp54) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG4602&oldid=24026">S2-DRSC CG4602</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-22
+
+
+[Dm_splicefct_read_pair_1024:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1024]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1024
+track_id     = 305
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1024
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG3249 (yu)
+maxdepth     = 2
+citation = <h1> RNAi CG3249 (yu) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG3249&oldid=24054">S2-DRSC CG3249</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+ 
+
+
+[Dm_splicefct_read_pair_1023:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1023]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1023
+track_id     = 166
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1023
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG31000 (heph)
+maxdepth     = 2
+citation = <h1> RNAi CG31000 (heph) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG31000&oldid=24044">S2-DRSC CG31000</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_1022:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1022]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1022
+track_id     = 163
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1022
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG30122
+maxdepth     = 2
+citation = <h1> RNAi CG30122 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG30122&oldid=24024">S2-DRSC CG30122</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+[Dm_splicefct_read_pair_1021:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1021]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1021
+track_id     = 329
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1021
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG1987 (Rbp1-like)
+maxdepth     = 2
+citation = <h1> RNAi CG1987 (Rbp1-like) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG1987&oldid=23882">S2-DRSC CG1987</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-23
+
+[Dm_splicefct_read_pair_1020:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1020]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1020
+track_id     = 276
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1020
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG18426 (ytr)
+maxdepth     = 2
+citation = <h1> RNAi CG18426 (ytr) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG18426&oldid=24038">S2-DRSC CG18426</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-22
+
+[Dm_splicefct_read_pair_1019:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1019]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1019
+track_id     = 343
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1019
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG17838
+maxdepth     = 2
+citation = <h1> RNAi CG17838 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG17838&oldid=24018">S2-DRSC CG17838</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-23
+
+
+[Dm_splicefct_read_pair_1018:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1018]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1018
+track_id     = 164
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1018
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG17136 (Rbp1)
+maxdepth     = 2
+citation = <h1> RNAi CG17136 (Rbp1) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG17136&oldid=24032">S2-DRSC CG17136</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-21 
+
+
+[Dm_splicefct_read_pair_1017:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1017]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1017
+track_id     = 160
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1017
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG16901 (sqd)
+maxdepth     = 2
+citation = <h1>
+   RNAi CG16901 (sqd) in S2-DRSC RNA-Seq 
+   (Celniker project, Graveley subgroup)
+ </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG16901&oldid=24020">S2-DRSC CG16901</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_1016:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1016]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1016
+track_id     = 167
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1016
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG1559 (Upf1)
+maxdepth     = 2
+citation = <h1> RNAi CG1559 (Upf1) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG1559&oldid=24048">S2-DRSC CG1559</a>
+     </li>
+ </ol>
+ <br />
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_1015:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1015]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1015
+track_id     = 165
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1015
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG13425 (bl)
+maxdepth     = 2
+citation = <h1> RNAi CG13425 (bl) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG13425&oldid=24022">S2-DRSC CG13425</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_1014:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1014]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1014
+track_id     = 162
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1014
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG12749 (Hrb87F)
+maxdepth     = 2
+citation = <h1> RNAi CG12749 (Hrb87F) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG12749&oldid=24016">S2-DRSC CG12749</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-21 
+
+
+[Dm_splicefct_read_pair_1013:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1013]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1013
+track_id     = 158
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1013
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG10851 (B52)
+maxdepth     = 2
+citation = <h1> RNAi CG10851 (B52) in S2-DRSC RNA-Seq (Celniker project, Gravely subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG10851&oldid=24036">S2-DRSC CG10851</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_1012:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1012]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1012
+track_id     = 342
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1012
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG10203 (xl6)
+maxdepth     = 2
+citation = <h1> RNAi CG10203 (xl6) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG10203&oldid=24030">S2-DRSC CG10203</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-23 
+
+
+
+[Dm_splicefct_read_pair_1011:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_1011]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 1011
+track_id     = 300
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_1011
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG10128 (tra2)
+maxdepth     = 2
+citation = <h1>RNAi CG10128 (tra2) in S2-DRSC RNA-Seq ( project,  subgroup) </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>, <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG10128&oldid=24042">S2-DRSC CG10128</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-21
+
+
+[Dm_splicefct_read_pair_983:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_983]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 983
+track_id     = 300
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_983
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Untreated control 
+maxdepth     = 2
+citation = <h1>RNAi Control (untreated) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup)</h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>, <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>, <a href="http://wiki.modencode.org/project/index.php?title=Paired-end_Illumina_Sequencing:SC:Gravely&oldid=23409">Paired-end Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>
+     </li>
+ </ol>
+ <ol>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_Untreated&oldid=24003">S2-DRSC Untreated</a>
+     </li>
+ </ol>
+ <br />
+ <ul>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-09-23
+
+
+[Dm_splicefct_read_pair_2301:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_2301]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2301
+track_id     = 1665
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2301
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG9983
+maxdepth     = 2
+citation = <h1>
+   RNAi CG9983 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup)
+ </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>,<a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>     
+ </li>
+ <li>
+ <b>Samples:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG9983&oldid=24014">S2-DRSC CG9983</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-08
+
+
+[Dm_splicefct_read_pair_2302:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_2302]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2302
+track_id     = 1669
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2302
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = CG9373
+maxdepth     = 2
+citation = <h1>
+   RNAi CG9373 in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup)
+ </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>,<a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>     
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>     
+ </li>
+ <li>
+ <b>Samples:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_CG9373&oldid=24010">S2-DRSC CG9373</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-08
+
+
+[Dm_splicefct_read_pair_2305:2001]
+feature     = coverage
+glyph       = wiggle_xyplot
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+[Dm_splicefct_read_pair_2305]
+feature      = read_pair
+label        = sub { return shift->display_name; }
+bump         = fast
+category     = modENCODE Tracks: Celniker Group:RNA-Seq: RNAi of splicing factors (S2 cells)
+bump density = 250
+glyph        = segments
+draw_target  = 1
+data_source_id = 2305
+track_id     = 1793
+stranded     = 1
+fgcolor      = black
+bgcolor      = black
+mismatch_color = red
+connector    = solid
+label_transcripts = 
+database     = modencode_bam_2305
+show_mismatch = 1
+height       = 5
+label density = 50
+group_on     = 
+key          = Untreated-B control
+maxdepth     = 2
+citation = <h1>
+   RNAi Control (untreated-B) in S2-DRSC RNA-Seq (Celniker project, Graveley subgroup)
+ </h1>
+ <h2>General Description</h2>
+ The goal of these experiments are to identify splicing events that are regulated by specific RNA binding proteins in Drosophila S2 cells.  From this collection of regulated exons, we will identify motifs that are enriched in and/or around the regulated exons and are therefore the best candidates for being recognized by the RNA binding protein.  To do this, we are using RNAi to deplete individual RNA binding protein mRNAs from Drosophila S2-DRSC cells and then using RNA-Seq to characterize the resulting transcriptome.  Comparison of the transcriptome from depleted cells to that of un-depleted cells will allow us to identify regulated splicing events. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+ <li>
+ <b>Growth and isolation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Cell_Line_Growth_S2-DRSC:SC:1&oldid=22112">S2-DRSC cell line growth</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=MRNA_purfication_from_total_RNA_for_Illumina_seqencing:SC:1&oldid=18645">mRNA purification from total RNA</a>
+ </li>
+ <li>
+ <b>Sample preparation:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Single-end_Illumina_Sequencing:SC:Graveley&oldid=23412">Single-end Sequencing</a>,
+  <a href="http://wiki.modencode.org/project/index.php?title=Illumina_Paired_End_mRNA-Seq_Sample_Prep:SC:1&oldid=23298">Paired-end sample prep</a>
+ </li>
+ <li>
+ <b>Data Analysis:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=Bowtie_Single_Read_mRNA-Seq_Alignments:SC:1&oldid=23642">Bowtie alignment for single-end reads</a>     
+ </li>
+ <li>
+ <b>Other Protocols:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=RNAi_in_cell_culture:SC:Brenton&oldid=23643">RNAi in cell culture</a>     
+ </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+ <li>
+ <b>Animals/Lines:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>     
+ </li>
+ <li>
+ <b>Samples:</b>
+  <a href="http://wiki.modencode.org/project/index.php?title=S2-DRSC_Untreated-B&oldid=24006">S2-DRSC Untreated-B</a>     
+ </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-10-09

@@ -1,0 +1,61 @@
+Script to map GFF files bewteen various Wormbase releases
+
+remap_gff_between_releases.pl - map forwards e.g. from version 150 to 160
+unmap_gff_between_releases.pl - map backwards e.g. from version 160 back to 150 (not maintained, not used much)
+
+CHROMOSOME_DIFFERENCES/ - directory of mapping data files
+test.gff - example input GFF file
+test.out - example output GFF file
+
+Input file
+----------
+
+This script expects to read in a GFF file.
+See original GFF definition: http://www.sanger.ac.uk/Software/formats/GFF/GFF_Spec.shtml
+See the GFF3 definition:     http://www.sequenceontology.org/gff3.shtml
+
+The first column must specify the C. elegans chromosome, as one of: 
+I, II, III, IV, V, X
+
+(You may also specify it as the common variants: CHROMOSOME_I, and chrI)
+No other sequence-IDs in the first column are recognised.
+
+Comment lines starting with a # character are passed through unchanged.
+
+Embedded Fasta format sequences at the end of the file are passed
+through unchanged.
+
+Output file
+-----------
+
+This script outputs a GFF file.
+
+The start, end and sense columns will be changed to remap regions
+between the specified releases.
+
+The attribute field (the 9th column) will not be changed, so any
+positions or alignment (Gap= CIGAR;) data specified here will NOT be
+remapped.
+
+Usage
+-----
+
+To map from 150 to 160:
+
+perl remap_gff_between_releases.pl -gff test.gff -out test.out -release1 150 -release2 160
+
+If an object specified in the GFF file has a genomic change within it,
+then the changed line will be output to the screen, the object will
+probablymight now have an erroneous structure now and should be
+investigated.
+
+Unmapping
+---------
+
+For mapping positions back to an older release of the genome, there is
+a script 'unmap_gff_between_releases.pl'. It is not expected that this
+script will be used very much and it is not maintained.
+
+To map from 160 back to 150:
+perl unmap_gff_between_releases.pl -gff test.gff -out test.out -release1 150 -release2 160
+

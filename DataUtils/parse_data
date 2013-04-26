@@ -1,0 +1,176 @@
+#!/usr/bin/perl -w
+
+#
+# Script should be able to create an index hash for all genes
+# index->chr->{start|stop}->{type=>TYPE,gene=>GENE,coord=>[start,stop]}
+# and use this hash to create tables with microarray data
+# that would look like 
+# id start chr TYPE GENE data1 data2 ... data#
+#
+
+use strict;
+
+use IO::File;
+use Storable qw(store retrieve);
+use List::Util qw(first);
+# Index gene data
+my %genes = ();
+my %loci  = ();       # a derived hash, has only genes in it
+my %first_break;      # The coordinate of the start of the first gene on current chromosome
+my %last_break;       # The coordinate of the end of the last gene on current chromosome
+my(%coords,%gcoords); # For indexing coordinates of genes and gene elements (exons, UTRs)
+my $USAGE = "Use as ./parse_data [tab-delimited expression data file] [gff3 file from *Base (Fly or Worm)]";
+my $PROBESIZE = 25;
+
+my($data_file,$gff_file) = @ARGV;
+%genes = -f "gene_index.hash" ? %{retrieve("gene_index.hash")} : %{&index_genes($gff_file)};
+foreach my $CHR (keys %genes) {
+ print STDERR "Preparing chromosome $CHR ...\n";
+ map{if($genes{$CHR}{$_}{gene}){$loci{$CHR}{$_}{gene} = $genes{$CHR}{$_}{gene}}} (keys %{$genes{$CHR}});
+ 
+ $coords{$CHR} = [sort {$a<=>$b} keys %{$genes{$CHR}}];
+ $gcoords{$CHR}= [sort {$a<=>$b} keys %{$loci{$CHR}}];
+
+ $first_break{$CHR} = first {$_ >= 0} @{$gcoords{$CHR}};
+ $last_break{$CHR}  = first {$_ > 0}  reverse @{$gcoords{$CHR}};
+}
+
+my $fh = new IO::File("<$data_file") or die "Couldn't read from [$data_file]";
+print STDERR "Parsing data...\n";
+while (<$fh>) {
+ chomp;
+ if (/^(START\tCHR)/) {print join("\t",($1,"TYPE\tGENE",$'));
+                       print "\n";
+                       next;}
+
+ my($start,$chrom) = ($1,$2) if /^(\d+)\t(\S+)\t/;
+ my $data = $';
+ my($type,$gene) = &lookup_probe($start,$chrom);
+ if (!$type && !$gene) {$type = "noncoding";$gene = "NA";}
+
+ print join("\t",($start,$chrom,$type,$gene,$data));
+ print "\n";
+}
+$fh->close;
+
+
+# Subroutine which looks through the index file and extracts information about type and gene for a probe
+# Do the binary search here for finding location of the probe
+sub lookup_probe {
+ my($s,$c) = @_;
+ my(@to_check,$erange,$grange);
+ my($t,$g) = ("noncoding","NA");
+ if ($s+$PROBESIZE  > $first_break{$c} && $s+$PROBESIZE < $last_break{$c}) {
+  $erange = &get_range($s,$coords{$c});
+  $grange = &get_range($s,$gcoords{$c});
+ }
+
+ if ($grange && @{$grange} > 0) {map{push(@to_check,$_)} @{$grange};}
+ if ($erange && @{$erange} > 0) {map{push(@to_check,$_)} @{$erange};}
+
+ # Check for overlap with exons:
+ SITE:
+ foreach my $COORD (@to_check) {
+   foreach (keys %{$genes{$c}{$COORD}}) {
+    if ($genes{$c}{$COORD}{$_}{coord}[0] <= $s && 
+        $s+$PROBESIZE <= $genes{$c}{$COORD}{$_}{coord}[1]) { # inside an element or gene
+         $g = $genes{$c}{$COORD}{$_}->{gene};
+         $t = $_;
+         if ($_ ne "gene"){last SITE;}
+    }
+   }
+ }
+
+ #my $message = "$s ";
+ #if (@to_check){$message.= $to_check[0] < $s ? "is between $to_check[0] and" : "is between 0 and $to_check[0]";
+ #               if (@to_check > 1){$message.=" $to_check[$#to_check]";}elsif($to_check[0] < $s){$message.=" END ";}
+ #}
+ #$message.=", TYPE $t GENE $g\n";
+ #print STDERR $message;
+ return ($t,$g);
+}
+
+
+# Binary search
+sub get_range {
+ my $val = shift @_;
+ chomp($val);
+ my @numbers = @{shift @_};
+
+ if (@numbers <= 2) {
+  my @results = ();
+  if (@numbers == 1 && abs($numbers[0]-$val) <= $PROBESIZE){
+   push(@results,$numbers[0]);
+  } elsif (@numbers == 2) {
+   if ($val <= $numbers[0]){@numbers = abs($numbers[0]-$val) <= $PROBESIZE ? ($numbers[0]) : ();}
+   if ($val >= $numbers[1]){@numbers = abs($numbers[1]-$val) <= $PROBESIZE ? ($numbers[1]) : ();}
+   map{push(@results,$_)} (@numbers);
+  }
+  return \@results;
+ } else {
+   my $mid = int(scalar(@numbers)/2);
+   if ($numbers[$mid] < $val) {
+    &get_range($val,[@numbers[$mid..$#numbers]]);
+   }else{
+    &get_range($val,[@numbers[0..$mid]]);
+   }
+ }
+}
+
+
+# Subroutine for creation of indexfie (will write a hash into the working directory)
+sub index_genes {
+ my $file = shift @_;
+ if(!$file || ! -f $file){die $USAGE;}
+
+ my $gffh = new IO::File("<$file") or die "Couldn't read from [$file]";
+ 
+ my %TYPES = (exon=>1,
+              five_prime_UTR=>1,
+              mRNA=>1,
+              three_prime_UTR=>1);
+ my %index;
+ my $species;
+
+ while(<$gffh>){
+  chomp;
+  my @temp = split("\t");
+  next if @temp != 9; # control that we have 9 fields
+  next unless($TYPES{$temp[2]});
+  # Uncomment the next line if we want only Coding transcripts
+  #next unless($temp[1] eq "Coding_transcript" || $temp[1] eq "FlyBase"); 
+ 
+  unless ($species){$species = $_=~/^I|^V|^X|^4\t/ ? "worm" : "fly";
+                    print STDERR "Species are $species !\n";}
+  # worm parsing:
+  if ($species eq "worm") {
+   $temp[8] =~ s/.*Transcript\://;
+   $temp[8] =~ s/\;.*//;
+
+   $temp[8] =~ s/(\S+\.\S+)\.\d+/$1/;
+   $temp[8] =~ s/[a-z]{1}$//;
+  } else {
+  # fly parsing:
+   $temp[8] =~ s/ID=.*(C[G,R]{1}\d+).*/$1/;
+   $temp[8] =~ s/.*Name=(.+):\d+\;.*/$1/;
+   $temp[8] =~ s/.*Name=(.+)-\S+?\;.*/$1/;
+   $temp[8] =~ s/.*Name=(.+?)\;.*/$1/;
+  }
+
+   foreach my $coord ($temp[3],$temp[4]) {  
+    if ($temp[2] eq "mRNA") {
+     $index{$temp[0]}->{$coord}->{gene} = {gene => $temp[8],
+                                           coord=> [$temp[3],$temp[4]]};
+    }else {
+     $index{$temp[0]}->{$coord}->{$temp[2]} = {gene => $temp[8],
+                                               coord=> [$temp[3],$temp[4]]};
+    }
+   }
+  
+  }
+  $gffh->close;
+
+  store \%index,"gene_index.hash";
+  return \%index;
+}
+

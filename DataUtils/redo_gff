@@ -1,0 +1,124 @@
+#!/usr/bin/perl -w
+
+# Redo load gff from wigdb to bw (For vista_plot) using tables sub->sig_id->peak_id
+# And existing load gff Should be run in a directory with subdirectories containing .bw files for 
+# retrofitted load gff
+use strict;
+use IO::File;
+
+my($file,$table) = @ARGV;
+my $org = "hs";
+my $pi;
+my %tracks;
+my %files;
+my %subs;
+
+while ($org ne "fly" && $org ne "worm") {
+ print STDERR "Is this worm or fly?\n";
+ $org = <STDIN>;
+ chomp $org;
+}
+
+while (! $pi) {
+ print STDERR "Enter the name of the PI\n";
+ $pi = lc(<STDIN>);
+ chomp $pi;
+}
+
+
+my %fasta    = (worm=>"/browser_data/worm/fasta/elegans.WS190.dna.fa",
+                fly =>"/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta");
+
+my $fh = new IO::File("<$table") or die "Cannot read the table [$table]";
+while (<$fh>) {
+ chomp;
+ my @temp = split("\t");
+ $tracks{$temp[1]} = $temp[2] ? "binding_site\:".$temp[2]."_details" : "\"\"";
+ $subs{$temp[0]}->{$temp[1]}++;
+}
+$fh->close;
+
+opendir(DIR,".") or die "Couldn't open current directory";
+my @dirs = grep {-d $_} readdir(DIR);
+close DIR;
+
+foreach my $d (@dirs) {
+ next if ! $subs{$d};
+ opendir(DIR,$d) or die "Couldn't open directory [$d]";
+ my @bws = grep {/\.bw$/} readdir(DIR);
+ if (!@bws || @bws == 0) {
+  print STDERR "There are no BigWig files in $d\n";
+  next;
+ }
+
+ my $filename;
+
+ if (@bws == 1) {
+  $filename = $bws[0];
+
+  # Change this:
+  my $t_id;
+  foreach (keys %{$subs{$d}}) {
+   $t_id = $_;
+   last;
+  }
+  if ($filename !~/^$t_id\_/) {
+   $filename =~ s/$t_id//; 
+   $filename = join("_",($t_id,"signal.bw"));
+  # Change end
+ 
+  if ($bws[0] ne $filename) {
+   print STDERR "Moving $d/$bws[0] to $d/$filename\n";
+   `mv $d/$bws[0] $d/$filename`;
+   }
+  }
+  foreach my $t (keys %{$subs{$d}}) {
+   $files{$t} = $filename if $filename =~/^$t\_/;
+   last;
+  }
+ }else{
+  foreach $b(@bws) {
+   #print STDERR "Got file [$b] in [$d], may require manual rename\n";
+   foreach my $t (keys %{$subs{$d}}) {
+    if ($b =~ /^$t\_/) {
+     $filename = $b;
+     $files{$t} = $filename;
+    }
+   }
+  }
+ }
+ 
+  if (!$filename) {
+    print STDERR "No file found for track in submission [$d]\n";
+    next;
+  }
+ 
+} 
+
+
+$fh->open("<$file") or die "Cannot read from the file {$file]\n";
+
+
+while (<$fh>) {
+ if (/^\#/ || !/\S/) {
+   print;
+   next;
+ }
+
+ my @temp = split("\t");
+ if (!$tracks{$temp[1]}){
+   print STDERR "Track $temp[1] doesn't have any info in table! Skipping line [$_]...\n";
+   next;
+ } 
+ my $filename = $files{$temp[1]} ? $files{$temp[1]} : "mean";
+ if ($filename eq "mean") {print STDERR "No bw file awailable for track [$temp[1]]\n";}
+
+ chomp;
+ s/WIG/VISTA/;
+ s/Signal_Graph_File/VISTA/;
+ s!wigfile=.+!wigfile=/browser_data/$org/wiggle_binaries/$pi/$filename\;peak_type=$tracks{$temp[1]}\;fasta=$fasta{$org}!;
+ print;
+ print "\n";
+}
+
+$fh->close;

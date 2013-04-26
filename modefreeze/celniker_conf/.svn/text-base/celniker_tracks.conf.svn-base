@@ -1,0 +1,2712 @@
+### CELNIKER TRACKS
+
+[Celniker_cDNA_2481]
+feature       = cDNA_match:5318_details
+glyph         = segments
+label         = sub {shift->id}
+database      = celniker_wig
+category      = modENCODE Tracks: Celniker Group: cDNA
+draw_target   = 1
+show_mismatch = 1
+ragged_start  = 1
+stranded      = 1
+height        = 5
+bgcolor       = limegreen
+fgcolor       = black
+connector     = solid
+key           = cDNAs
+balloon hover = sub {
+                 my $f = shift;
+                 my $n = $f->name;
+		 my $i = $f->id;
+                 return $n && $i ? "$n<br>GenBank ID: $i" : $n;
+                 }
+citation      = cDNAs analyzed by Celniker Group (more details to follow)
+
+
+[CEL_CLINES_Signal_Graph:20001]
+glyph            = wiggle_density
+height           = 8
+
+[CEL_CLINES_Signal_Graph]
+feature = Signal_Graph_File:239
+	  Signal_Graph_File:250
+	  Signal_Graph_File:266
+	  Signal_Graph_File:270
+	  Signal_Graph_File:360
+	  Signal_Graph_File:392
+	  Signal_Graph_File:394
+	  Signal_Graph_File:396
+	  Signal_Graph_File:398
+	  Signal_Graph_File:399
+	  Signal_Graph_File:402
+	  Signal_Graph_File:404
+	  Signal_Graph_File:406
+	  Signal_Graph_File:407
+	  Signal_Graph_File:410
+	  Signal_Graph_File:412
+	  Signal_Graph_File:414
+	  Signal_Graph_File:416
+	  Signal_Graph_File:418
+	  Signal_Graph_File:420
+	  Signal_Graph_File:422
+	  Signal_Graph_File:428
+	  Signal_Graph_File:430
+	  Signal_Graph_File:432
+	  Signal_Graph_File:438
+	  Signal_Graph_File:440
+	  Signal_Graph_File:442
+	  Signal_Graph_File:444
+	  Signal_Graph_File:445
+	  Signal_Graph_File:468
+	  Signal_Graph_File:507
+	  Signal_Graph_File:638
+glyph            = wiggle_xyplot
+glyph select     = wiggle_density wiggle_xyplot
+graph_type       = histogram
+autoscale        = local
+variance_band    = 1
+bump density     = 250
+bump             = 1
+category         = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+pos_color        = blue
+neg_color        = orange
+stranded         = 0
+height           = 20
+connector        = solid
+fgcolor          = black
+scale            = right
+database         = celniker_wig
+data source = 268 713 715 718 267 717 48 140 69 55 56 60 57 59 62 50 52 51 53 54 64 67 65 66 63 61 58 49 139 40 337 716
+track source = 239 250 266 270 360 392 394 396 398 399 402 404 406 407 410 412 414 416 418 420 422 428 430 432 438 440 442 444 445 468 507 638
+label density    = 100
+smoothing        = mean
+smoothing_window = 16
+key              = Cell Lines Signal Graph
+group_on = 
+bgcolor          = lightgrey
+bicolor_pivot    = zero
+label_position   = left
+label            = sub { my $n = shift->name;
+			 if($n){$n =~s/Dm\_//;
+			        $n =~s/\_Total.+//;}
+			 my $name = $n;
+			 $name=~s/_/-/g;
+			 $name=~s/\.RNA//;
+			 $name=~s/C1-8/C1\.8/;
+			 return sprintf("%-20s",$name); }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~s/Dm\_//;
+                             $n2 =~s/Dm\_//;
+			     $n1=~s/_/-/g;
+                             $n2=~s/_/-/g;
+                             $n1 cmp $n2;}
+select   = name	Kc167-polyA.RNA#268
+	   ML_DmBG3_c2_polyA#713
+	   S2_DRSC_nucl#715
+	   S2_DRSC_polyA#718
+	   Kc167-nucl.RNA#267
+	   C1_8_polyA#717
+	   CME-L1#48
+	   CME_W2#140
+	   ML-DmD16-c3#69
+	   ML-DmD17-c3#55
+	   ML-DmD20-c2#56
+	   ML-DmD4-c1#60
+	   ML-DmD20-c5#57
+	   ML-DmD32#59
+	   ML-DmD9#62
+	   GM2#50
+	   ML-DmBG1-c2#52
+	   Kc167#51
+	   ML-DmBG3-c2#53
+	   ML-DmD11#54
+	   S2-DRSC#64
+	   Sg4#67
+	   S2R%2B#65
+	   S3#66
+	   S1#63
+	   ML-DmD8#61
+	   ML-DmD21#58
+	   CME-W1-CL8%2B#49
+	   mbn2#139
+	   1182-4H#40
+	   ML-DmBG2-c2#337
+	   ML_DmBG3_c2_nucl#716
+link = sub { my $src = shift->source;
+         my %subs = (239=>268,
+		     250=>713,
+		     266=>715,
+		     270=>718,
+		     360=>267,
+		     392=>717,
+		     394=>48,
+		     396=>140,
+		     398=>69,
+		     399=>55,
+		     402=>56,
+		     404=>60,
+		     406=>57,
+		     407=>59,
+		     410=>62,
+		     412=>50,
+		     414=>52,
+		     416=>51,
+		     418=>53,
+		     420=>54,
+		     422=>64,
+		     428=>67,
+		     430=>65,
+		     432=>66,
+		     438=>63,
+		     440=>61,
+		     442=>58,
+		     444=>49,
+		     445=>139,
+		     468=>40,
+		     507=>337,
+		     638=>716);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Cell Lines: TotalRNA Signal intensities
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA&oldid=10126">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=14303">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+        <b>Animals:</b><br>
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Mbn2:SC:1&oldid=13369">mbn2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME_W2:SC:1&oldid=13311">CME W2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:1182-4H:SC:1&oldid=13596">1182-4H</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME-L1:SC:1&oldid=13923">CME L1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME-W1-Cl.8%2B:SC:1&oldid=13924">CME W1 Cl.8+</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:GM2:SC:1&oldid=13323">GM2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Kc167:SC:1&oldid=13327">Kc167</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmBG1-c1:SC:1&oldid=13331">ML-DmBG1-c1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmBG3-c2:SC:1&oldid=13333">ML-DmBG3-c2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD11:SC:1&oldid=13343">ML-DmD11</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD17-c3:SC:1&oldid=13347">ML-DmD17-c3</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD20-c2:SC:1&oldid=13349">ML-DmD20-c2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD20-c5:SC:1&oldid=13351">ML-DmD20-c5</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD21:SC:1&oldid=13353">ML-DmD21</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD32:SC:1&oldid=13361">ML-DmD32</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD4-c1:SC:1&oldid=13363">ML-DmD4-c1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD8:SC:1&oldid=13365">ML-DmD8</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD9:SC:1&oldid=13367">ML-DmD9</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S1:SC:1&oldid=13589">S1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2R%2B:SC:1&oldid=13591">S2R+</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S3:SC:1&oldid=13592">S3</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Sg4:SC:1&oldid=13381">Sg4</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD16-c3:SC:1&oldid=13345">ML-DmD16-c3</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+ </ol>
+ <br>
+ <b>Release Date:</b> 2009-01-27
+
+[CEL_TransFrags]
+feature      =  transcript_region:241_Kc167-polyA.RNA
+		transcript_region:251_ML_DmBG3_c2_polyA
+		transcript_region:267_S2_DRSC_nucl
+		transcript_region:271_S2_DRSC_polyA
+		transcript_region:364_Kc167-nucl.RNA
+		transcript_region:393_C1_8_polyA
+		transcript_region:395_CME-L1
+		transcript_region:397_CME_W2
+		transcript_region:400_ML-DmD16-c3
+		transcript_region:401_ML-DmD17-c3
+		transcript_region:403_ML-DmD20-c2
+		transcript_region:405_ML-DmD4-c1
+		transcript_region:408_ML-DmD20-c5
+		transcript_region:409_ML-DmD32
+		transcript_region:411_ML-DmD9
+		transcript_region:413_GM2
+		transcript_region:415_ML-DmBG1-c2
+		transcript_region:417_Kc167
+		transcript_region:419_ML-DmBG3-c2
+		transcript_region:421_ML-DmD11
+		transcript_region:423_S2-DRSC
+		transcript_region:429_Sg4
+		transcript_region:431_S2R+
+		transcript_region:433_S3
+		transcript_region:439_S1
+		transcript_region:441_ML-DmD8
+		transcript_region:443_ML-DmD21
+		transcript_region:446_CME-W1-CL8+
+		transcript_region:447_mbn2
+		transcript_region:469_1182-4H
+		transcript_region:508_ML-DmBG2-c2
+		transcript_region:640_ML_DmBG3_c2_nucl
+vary_fg       = 1
+glyph         = heat_map
+glyph_select  = generic heat_map
+bgcolor       = black
+fgcolor       = black
+end_color     = black
+height        = 8
+min_score     = 1
+max_score     = 1
+bump density  = 250
+category      = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+stranded      = 0
+connector     = none
+database      = celniker_wig
+track source  = 241 251 267 271 364 393 395 397 400 401 403 405 408 409 411 413 415 417 419 421 423 429 431 433 439 441 443 446 447 469 508 640
+data source   = 268 713 715 718 267 717 48 140 69 55 56 60 57 59 62 50 52 51 53 54 64 67 65 66 63 61 58 49 139 40 337 716
+label density = 100
+key           = Cell Lines TransFrags
+box_subparts  = 1
+sort_order    = sub ($$) {my $n1 = shift->feature->name;
+                          my $n2 = shift->feature->name;
+			  $n1 =~s/^\d+_//;
+			  $n2 =~s/^\d+_//;
+                          $n1 =~s/Dm\_//;
+                          $n2 =~s/Dm\_//;
+                          $n1=~s/_/-/g;
+                          $n2=~s/_/-/g;
+                          $n1 cmp $n2;}
+group_on = 
+label_position = left
+label         = sub { my $n = shift->name;
+                      $n =~s/Dm\_//;
+                      $n =~s/\_Total.+//;
+ 		      $n =~s/_/-/g;
+                      $n =~s/\.RNA//;
+                      $n =~s/C1-8/C1\.8/;
+                      return $n =~/(.+-.+)_/ ? sprintf "%-18s",$1 : sprintf "%-18s",$n; }
+select   = name Kc167-polyA#268
+		ML_DmBG3_c2_polyA#713
+		S2_DRSC_nucl#715
+		S2_DRSC_polyA#718
+		Kc167-nucl#267
+		C1_8_polyA#717
+		CME-L1#48
+		CME_W2#140
+		ML-DmD16-c3#69
+		ML-DmD17-c3#55
+		ML-DmD20-c2#56
+		ML-DmD4-c1#60
+		ML-DmD20-c5#57
+		ML-DmD32#59
+		ML-DmD9#62
+		GM2#50
+		ML-DmBG1-c2#52
+		Kc167#51
+		ML-DmBG3-c2#53
+		ML-DmD11#54
+		S2-DRSC#64
+		Sg4#67
+		S2R+#65
+		S3#66
+		S1#63
+		ML-DmD8#61
+		ML-DmD21#58
+		CME-W1-CL8+#49
+		mbn2#139
+		1182-4H#40
+		ML-DmBG2-c2#337
+		ML_DmBG3_c2_nucl#716
+citation = <h1>
+   Cell Lines: Transcription sites
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA&oldid=10126">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=14303">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b><br>
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Mbn2:SC:1&oldid=13369">mbn2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME_W2:SC:1&oldid=13311">CME W2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:1182-4H:SC:1&oldid=13596">1182-4H</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME-L1:SC:1&oldid=13923">CME L1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:CME-W1-Cl.8%2B:SC:1&oldid=13924">CME W1 Cl.8+</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:GM2:SC:1&oldid=13323">GM2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Kc167:SC:1&oldid=13327">Kc167</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmBG1-c1:SC:1&oldid=13331">ML-DmBG1-c1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmBG3-c2:SC:1&oldid=13333">ML-DmBG3-c2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD11:SC:1&oldid=13343">ML-DmD11</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD17-c3:SC:1&oldid=13347">ML-DmD17-c3</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD20-c2:SC:1&oldid=13349">ML-DmD20-c2</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD20-c5:SC:1&oldid=13351">ML-DmD20-c5</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD21:SC:1&oldid=13353">ML-DmD21</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD32:SC:1&oldid=13361">ML-DmD32</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD4-c1:SC:1&oldid=13363">ML-DmD4-c1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD8:SC:1&oldid=13365">ML-DmD8</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD9:SC:1&oldid=13367">ML-DmD9</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S1:SC:1&oldid=13589">S1</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2-DRSC:SC:1&oldid=13590">S2-DRSC</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S2R%2B:SC:1&oldid=13591">S2R+</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:S3:SC:1&oldid=13592">S3</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:Sg4:SC:1&oldid=13381">Sg4</a>, Drosophila melanogaster
+	<a href="http://wiki.modencode.org/project/index.php?title=CellLine:ML-DmD16-c3:SC:1&oldid=13345">ML-DmD16-c3</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+ </ol>
+ <br>
+ <b>Release Date:</b> 2009-01-27
+
+
+
+[POST_EMBRYO_SG_Total:20001]
+glyph            = wiggle_density
+height           = 8
+
+[POST_EMBRYO_SG_Total]
+feature   = Signal_Graph_File:260
+	    Signal_Graph_File:264
+	    Signal_Graph_File:385
+	    Signal_Graph_File:387
+	    Signal_Graph_File:436
+	    Signal_Graph_File:462
+	    Signal_Graph_File:464
+	    Signal_Graph_File:465
+	    Signal_Graph_File:486
+	    Signal_Graph_File:488
+	    Signal_Graph_File:493
+	    Signal_Graph_File:503
+	    Signal_Graph_File:511
+	    Signal_Graph_File:513
+	    Signal_Graph_File:518
+	    Signal_Graph_File:632
+glyph        = wiggle_xyplot
+glyph select = wiggle_xyplot wiggle_density
+graph_type   = histogram
+autoscale    = local
+variance_band= 1
+height       = 20
+fgcolor      = black
+bgcolor      = lightgrey
+pos_color    = blue
+neg_color    = orange
+scale        = right
+stranded     = 0
+smoothing    = mean
+bicolor_pivot = zero
+category     = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density = 250
+label density= 100
+label_position = left
+label     = sub { my $n = shift->name;
+                  $n =~ s/Dm\_//;
+                  $n =~s/\_Total.+//;
+                  $n =~s/larval_//;
+                  $n =~s/prepupae_White/WPP/;
+                  $n =~s/adult_Female/AdFem/;
+                  $n =~s/adult_Male/AdM/;
+                  $n =~s/Eclosion/Ecl/;
+		  $n =~s/\-(\d+?(hr|days))/\+$1/;
+		  $n =~s/[-_]/ /g;
+                  my $name = $n =~/(.+-.+)_/ ? $1 : $n;
+                  return sprintf("%-22s",$name); }
+database     = celniker_wig
+data source  = 545 543 542 541 98 99 97 96 94 95 100 93 539 540 538 544
+track source = 260 264 385 387 436 462 464 465 486 488 493 503 511 513 518 632
+group_on  = 
+key       = Post-embryonic Signal Graph (Total)
+smoothing_window = 10
+sort_order       = sub ($$) {int(shift->feature->{'attributes'}->{'rank'}[0]) <=> int(shift->feature->{'attributes'}->{'rank'}[0])}
+select    = name 
+	Dm_prepupae_White-24hr#545
+	Dm_prepupae_White-4days#543
+	Dm_prepupae_White-3days#542
+	Dm_prepupae_White-2days#541
+	Dm_adult_Male_1dayPostEclosion#98
+	Dm_adult_Male_5dayPostEclosion#99
+	Dm_larval_L1#97
+	Dm_adult_Female_5dayPostEclosion#96
+	Dm_prepupae_White#94
+	Dm_adult_Female_1dayPostEclosion#95
+	Dm_larval_L3_gut_stage1#100
+	Dm_larval_L2#93
+	Dm_larval_L3-clear#539
+	Dm_larval_L3-light-blue#540
+	Dm_larval_L3-12hr#538
+	Dm_prepupae_White-12hr#544
+link         = sub { my $src = shift->source;
+                     my %subs = (260=>545,
+		     		 264=>543,
+				 385=>542,
+				 387=>541,
+				 436=>98,
+				 462=>99,
+				 464=>97,
+				 465=>96,
+				 486=>94,
+				 488=>95,
+				 493=>100,
+				 503=>93,
+				 511=>539,
+				 513=>540,
+				 518=>538,
+				 632=>544);
+                     return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation  = <h1>
+   Post-embryonic Signal Intensities 
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>, <a href="http://wiki.modencode.org/project/index.php?title=Larval_L1%2C_L2_and_Early_L3_Stage_Collection:SC:1&oldid=14861">Animal Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L1_stage_larvae:SC:1&oldid=13954">DevStage: L1 stage larvae</a>,
+       Drosophila melanogaster,
+       <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L2_stage_larvae:SC:1&oldid=13955">L2 stage larvae</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:White_prepupae_%28WPP%29:SC:1&oldid=13956">White prepupae (WPP)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_female%2C_eclosion_%2B_1_day:SC:1&oldid=13607">Adult female eclosion+1 day</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_male%2C_eclosion_%2B_1_day:SC:1&oldid=13610">Adult male eclosion+1 day</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_male%2C_eclosion_%2B_5_days:SC:1&oldid=13612">Adult male eclosion+5 days</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_Dark_Blue_Gut:SC:1&oldid=13389">DevStage: L3 stage larvae</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_2_days:SC:1&oldid=19690">DevStage:Pupae%2C_WPP_%2B_2_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_3_days:SC:1&oldid=19692">DevStage:Pupae%2C_WPP_%2B_3_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_4_days:SC:1&oldid=19695">DevStage:Pupae%2C_WPP_%2B_4_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:WPP_%2B_12_hr:SC:1&oldid=19698">DevStage:WPP_%2B_12_hr:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:WPP_%2B_24_hr:SC:1&oldid=19700">DevStage:WPP_%2B_24_hr:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_12_hr_post-molt:SC:1&oldid=19668">12 h post-molt</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_clear_gut_PS%287-9%29_stage:SC:1&oldid=19681">clear gut PS(7-9)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_light_blue_gut_PS%283-6%29_stage:SC:1&oldid=19685">light blue gut PS(3-6)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:284">Celniker/RNA:284</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:286">Celniker/RNA:286</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:288">Celniker/RNA:288</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:290">Celniker/RNA:290b</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:292">Celniker/RNA:292</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:294">Celniker/RNA:294</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:326">Celniker/RNA:326</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:328">Celniker/RNA:328</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:330">Celniker/RNA:330</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:374">Celniker/RNA:374</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:376">Celniker/RNA:376</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:378">Celniker/RNA:378</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:386">Celniker/RNA:386</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:388">Celniker/RNA:388</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:390">Celniker/RNA:390</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:368">Celniker/RNA:368</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:370">Celniker/RNA:370</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:372">Celniker/RNA:372</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:380">Celniker/RNA:380</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:382">Celniker/RNA:382</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:384">Celniker/RNA:384</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:440">Celniker/RNA:440</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:442">Celniker/RNA:442</a>,        <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:444">Celniker/RNA:444</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:344">Celniker/RNA:344</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:346">Celniker/RNA:346</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:348">Celniker/RNA:348</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:350">Celniker/RNA:350</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:352">Celniker/RNA:352</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:354">Celniker/RNA:354</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:356">Celniker/RNA:356</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:358">Celniker/RNA:358</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:360">Celniker/RNA:360</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:332">Celniker/RNA:332</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:334">Celniker/RNA:334</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:336">Celniker/RNA:336</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:338">Celniker/RNA:338</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:340">Celniker/RNA:340</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:342">Celniker/RNA:342</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:296">Celniker/RNA:296</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:298">Celniker/RNA:298</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:300">Celniker/RNA:300</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:452">Celniker/RNA:452</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:454">Celniker/RNA:454</a>, 
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:456">Celniker/RNA:456</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:444">Celniker/RNA:444</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:446">Celniker/RNA:446</a>, 
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:450">Celniker/RNA:450</a>
+     </li>
+     </ol>
+     <b>Release Date:</b> 2009-01-28
+
+
+[POST_EMBRYO_TF_Total]
+feature = transcript_region:263_WPP-24hr
+	  transcript_region:265_WPP-4days
+	  transcript_region:388_WPP-3days
+	  transcript_region:389_WPP-2days
+	  transcript_region:437_AdM_1dayPostEcl
+	  transcript_region:463_AdM_5dayPostEcl
+	  transcript_region:466_L1
+	  transcript_region:467_AdFem_5dayPostEcl
+	  transcript_region:490_WPP
+	  transcript_region:491_AdFem_1dayPostEcl
+	  transcript_region:495_L3_gut_stage1
+	  transcript_region:504_L2
+	  transcript_region:512_L3-clear
+	  transcript_region:514_L3-light-blue
+	  transcript_region:519_L3-12hr
+	  transcript_region:633_WPP-12hr
+vary_fg       = 1
+glyph         = heat_map
+category      = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density  = 250
+label density = 100
+stranded      = 0
+fgcolor       = black
+bgcolor       = black
+end_color     = black
+connector     = none
+height        = 8
+min_score     = 1
+max_score     = 1
+database      = celniker_wig
+track source  = 263 265 388 389 437 463 466 467 490 491 495 504 512 514 519 633
+data source   = 545 543 542 541 98 99 97 96 94 95 100 93 539 540 538 544
+group_on = 
+key           = Post-embryonic TransFrags (Total)
+box_subparts  = 1
+label_position = left
+label         = sub { my $n = shift->name;
+                      $n =~ s/Dm\_//;
+                      $n =~ s/larval_//;
+                      $n =~ s/prepupae_White/WPP/;
+		      $n =~s/\-(\d+?(hr|days))/\+$1/;
+                      $n =~s/[-_]/ /g;
+                      return $n =~/(.+-.+)_/ ? sprintf "%-20s",$1 : sprintf "%-20s",$n; }
+sort_order  = sub ($$) { my $n1 = shift->feature->name;
+                         my $n2 = shift->feature->name;
+			 $n1 =~ s/^A/ZA/;
+			 $n2 =~ s/^A/ZA/;
+			 $n1 cmp $n2; }
+select      = name    
+	WPP-24hr#545
+	WPP-4days#543
+	WPP-3days#542
+	WPP-2days#541
+	AdM_1dayPostEcl#98
+	AdM_5dayPostEcl#99
+	L1#97
+	AdF_5dayPostEcl#96
+	WPP#94
+	AdF_1dayPostEcl#95
+	L3_gut_stage1#100
+	L2#93
+	L3-clear#539
+	L3-light-blue#540
+	L3-12hr#538
+	WPP-12hr#544
+citation = <h1>
+   Post-Embryonic Transcript regions (total RNA) 
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>,  <a href="http://wiki.modencode.org/project/index.php?title=Larval_L1%2C_L2_and_Early_L3_Stage_Collection:SC:1&oldid=14861">Animal Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L1_stage_larvae:SC:1&oldid=13954">DevStage: L1 stage larvae</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L2_stage_larvae:SC:1&oldid=13955">L2 stage larvae</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:White_prepupae_%28WPP%29:SC:1&oldid=13956">White prepupae (WPP)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_female%2C_eclosion_%2B_1_day:SC:1&oldid=13607">Adult female eclosion+1 day</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_male%2C_eclosion_%2B_1_day:SC:1&oldid=13610">Adult male eclosion+1 day</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Adult_male%2C_eclosion_%2B_5_days:SC:1&oldid=13612">Adult male eclosion+5 days</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_Dark_Blue_Gut:SC:1&oldid=13389">DevStage: L3 stage larvae</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+      <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_2_days:SC:1&oldid=19690">DevStage:Pupae%2C_WPP_%2B_2_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_3_days:SC:1&oldid=19692">DevStage:Pupae%2C_WPP_%2B_3_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Pupae%2C_WPP_%2B_4_days:SC:1&oldid=19695">DevStage:Pupae%2C_WPP_%2B_4_days:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:WPP_%2B_12_hr:SC:1&oldid=19698">DevStage:WPP_%2B_12_hr:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:WPP_%2B_24_hr:SC:1&oldid=19700">DevStage:WPP_%2B_24_hr:SC:1</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_12_hr_post-molt:SC:1&oldid=19668">12 h post-molt</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_clear_gut_PS%287-9%29_stage:SC:1&oldid=19681">clear gut PS(7-9)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:L3_stage_larvae%2C_light_blue_gut_PS%283-6%29_stage:SC:1&oldid=19685">light blue gut PS(3-6)</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">y[1]; Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]; LysC[1] MstProx[1] GstD5[1] Rh6[1]</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:284">Celniker/RNA:284</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:286">Celniker/RNA:286</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:288">Celniker/RNA:288</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:290">Celniker/RNA:290a</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:292">Celniker/RNA:292</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:294">Celniker/RNA:294</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:326">Celniker/RNA:326</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:328">Celniker/RNA:328</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:330">Celniker/RNA:330</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:374">Celniker/RNA:374</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:376">Celniker/RNA:376</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:378">Celniker/RNA:378</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:386">Celniker/RNA:386</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:388">Celniker/RNA:388</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:390">Celniker/RNA:390</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:368">Celniker/RNA:368</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:370">Celniker/RNA:370</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:372">Celniker/RNA:372</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:380">Celniker/RNA:380</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:382">Celniker/RNA:382</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:384">Celniker/RNA:384</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:440">Celniker/RNA:440</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:442">Celniker/RNA:442</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:444">Celniker/RNA:444</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:344">Celniker/RNA:344</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:346">Celniker/RNA:346</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:348">Celniker/RNA:348</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:350">Celniker/RNA:350</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:352">Celniker/RNA:352</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:354">Celniker/RNA:354</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:356">Celniker/RNA:356</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:358">Celniker/RNA:358</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:360">Celniker/RNA:360</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:332">Celniker/RNA:332</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:334">Celniker/RNA:334</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:336">Celniker/RNA:336</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:338">Celniker/RNA:338</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:340">Celniker/RNA:340</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:342">Celniker/RNA:342</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:296">Celniker/RNA:296</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:298">Celniker/RNA:298</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:300">Celniker/RNA:300</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:452">Celniker/RNA:452</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:454">Celniker/RNA:454</a>, 
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:456">Celniker/RNA:456</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:444">Celniker/RNA:444</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:446">Celniker/RNA:446</a>, 
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:450">Celniker/RNA:450</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-01-28
+
+[EMBRYO_SG_Total:20001]
+glyph     = wiggle_density
+height    = 8
+
+[EMBRYO_SG_Total]
+feature = Signal_Graph_File:374
+	  Signal_Graph_File:424
+	  Signal_Graph_File:434
+	  Signal_Graph_File:449
+	  Signal_Graph_File:452
+	  Signal_Graph_File:455
+	  Signal_Graph_File:460
+	  Signal_Graph_File:471
+	  Signal_Graph_File:472
+	  Signal_Graph_File:478
+	  Signal_Graph_File:479
+	  Signal_Graph_File:485
+glyph          = wiggle_xyplot
+glyph select   = wiggle_density wiggle_xyplot
+graph_type     = histogram
+autoscale      = local
+variance_band  = 1
+fgcolor        = black
+bgcolor        = lightgrey
+pos_color      = blue
+neg_color      = orange
+height         = 20
+scale          = right
+label_position = left
+stranded       = 0
+smoothing      = mean
+bicolor_pivot  = zero
+category       = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density   = 250
+label density  = 100
+label     = sub { my $n = shift->name;
+		  my $name = "";
+		  if ($n) {
+		   $n =~s/Dm\_.+?_//;
+                   $n =~s/\_Total.+//;
+		  }
+                  $name = $n && $n =~/(.+-.+)_/ ? $1 : $n;
+                  return sprintf("%-15s",$name); }
+database = celniker_wig
+data source    = 763 118 116 120 117 105 101 107 109 111 113 103
+track source   = 374 424 434 449 452 455 460 471 472 478 479 485
+key       = Embryonic Signal Graph (Total)
+group_on  = 
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+			     $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+			     $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+			     $n1 <=> $n2;}
+select    = name embryo_20-22h#763
+		 embryo_16-18h#118
+		 embryo_18-20h#116
+		 embryo_6-8h#120
+		 embryo_2-4h#117
+		 embryo_4-6h#105
+		 embryo_12-14h#101
+		 embryo_0-2h#107
+		 embryo_8-10h#109
+		 embryo_10-12h#111
+		 embryo_14-16h#113
+		 embryo_22-24h#103
+link      = sub {my $src = shift->source;
+                 my %subs = (374=>763,
+		 	     424=>118,
+			     434=>116,
+			     449=>120,
+			     452=>117,
+			     455=>105,
+			     460=>101,
+			     471=>107,
+			     472=>109,
+		 	     478=>111,
+		 	     479=>113,
+			     485=>103);
+		return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation  = <h1>
+   Embryonic Signal Intensities 
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>, <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol_-_Kaufman_Lab&oldid=14361">Embryo Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_0-2h:SC:1&oldid=13226">Embryo 0-2h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h:SC:1&oldid=13766">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_4-6h:SC:1&oldid=13767">Embyro 4-6 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_8-10h:SC:1&oldid=13770">Embyro 8-10 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_10-12h:SC:1&oldid=13614">Embyro 10-12 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_12-14h:SC:1&oldid=13790">Embyro 12-14 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13789">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_16-18h:SC:1&oldid=13788">Embyro 16-18 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_18-20h:SC:1&oldid=13787">Embyro 18-20 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_22-24hSC:1&oldid=13786">Embyro 22-24 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:212">Celniker/RNA:212</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:214">Celniker/RNA:214</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:216">Celniker/RNA:216</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:218">Celniker/RNA:218</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:220">Celniker/RNA:220</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:222">Celniker/RNA:222</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:224">Celniker/RNA:224</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:226">Celniker/RNA:226</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:228">Celniker/RNA:228</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:236">Celniker/RNA:236</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:238">Celniker/RNA:238</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:240">Celniker/RNA:240</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:242">Celniker/RNA:242</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:244">Celniker/RNA:244</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:246">Celniker/RNA:246</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:248">Celniker/RNA:248</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:250">Celniker/RNA:250</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:252">Celniker/RNA:252</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:254">Celniker/RNA:254</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:256">Celniker/RNA:256</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:258">Celniker/RNA:258</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:260">Celniker/RNA:260</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:262">Celniker/RNA:262</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:264">Celniker/RNA:264</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:266">Celniker/RNA:266</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:268">Celniker/RNA:268</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:270">Celniker/RNA:270</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:278">Celniker/RNA:278</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:280">Celniker/RNA:280</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:282">Celniker/RNA:282</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-01-27
+
+
+[EMBRYO_TF_Total]
+feature = transcript_region:376_embryo_20-22h_T
+	  transcript_region:425_embryo_16-18h_T
+	  transcript_region:435_embryo_18-20h_T
+	  transcript_region:451_embryo_6-8h_T
+	  transcript_region:453_embryo_2-4h_T
+	  transcript_region:457_embryo_4-6h_T
+	  transcript_region:461_embryo_12-14h_T
+	  transcript_region:476_embryo_0-2h_T
+	  transcript_region:475_embryo_8-10h_T
+	  transcript_region:480_embryo_10-12h_T
+	  transcript_region:481_embryo_14-16h_T
+	  transcript_region:487_embryo_22-24h_T
+vary_fg        = 1
+glyph          = heat_map
+category       = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density   = 250
+label density  = 100
+stranded       = 0
+fgcolor        = black
+bgcolor        = black
+end_color      = black
+connector      = none
+height         = 8
+min_score      = 1
+max_score      = 1
+database       = celniker_wig
+track source   = 376 425 427 435 451 453 457 461 476 475 480 481 487
+data source    = 763 118 114 116 120 117 105 101 107 109 111 113 103
+group_on = 
+key            = Embryonic TransFrags (Total)
+box_subparts   = 1
+label_position = left
+label    = sub { my $n = shift->name;
+                 $n =~s/Dm_//;
+	  	 $n =~s/\_(T|pA)//;
+                 $n =~s/\_Total.+//;
+                 return $n =~/(.+-.+)_/ ? sprintf "%-13s",$1 : sprintf "%-13s",$n; }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+			     $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+			     $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+			     $n1 <=> $n2;}
+select   = name embryo_20-22h#763
+		embryo_16-18h#118
+		embryo_18-20h#116
+		embryo_6-8h#120
+		embryo_2-4h#117
+		embryo_4-6h#105
+		embryo_12-14h#101
+		embryo_0-2h#107
+		embryo_8-10h#109
+		embryo_10-12h#111
+		embryo_14-16h#113
+		embryo_22-24h#103
+citation = <h1>
+   Dm_y[1]cn[1] bw[1] sp[1]_embryo_4-6h_TotalRNA_p200_224-226-228_38bp 
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>, <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol_-_Kaufman_Lab&oldid=14361">Embryo Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_0-2h:SC:1&oldid=13226">Embryo 0-2h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h:SC:1&oldid=13766">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_4-6h:SC:1&oldid=13767">Embyro 4-6 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_8-10h:SC:1&oldid=13770">Embyro 8-10 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_10-12h:SC:1&oldid=13614">Embyro 10-12 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_12-14h:SC:1&oldid=13790">Embyro 12-14 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13789">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_16-18h:SC:1&oldid=13788">Embyro 16-18 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_18-20h:SC:1&oldid=13787">Embyro 18-20 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_22-24hSC:1&oldid=13786">Embyro 22-24 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>    
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:212">Celniker/RNA:212</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:214">Celniker/RNA:214</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:216">Celniker/RNA:216</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:218">Celniker/RNA:218</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:220">Celniker/RNA:220</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:222">Celniker/RNA:222</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:224">Celniker/RNA:224</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:226">Celniker/RNA:226</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:228">Celniker/RNA:228</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:236">Celniker/RNA:236</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:238">Celniker/RNA:238</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:240">Celniker/RNA:240</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:242">Celniker/RNA:242</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:244">Celniker/RNA:244</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:246">Celniker/RNA:246</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:248">Celniker/RNA:248</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:250">Celniker/RNA:250</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:252">Celniker/RNA:252</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:254">Celniker/RNA:254</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:256">Celniker/RNA:256</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:258">Celniker/RNA:258</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:260">Celniker/RNA:260</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:262">Celniker/RNA:262</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:264">Celniker/RNA:264</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:266">Celniker/RNA:266</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:268">Celniker/RNA:268</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:270">Celniker/RNA:270</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:278">Celniker/RNA:278</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:280">Celniker/RNA:280</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:282">Celniker/RNA:282</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-01-27
+
+
+[EMBRYO_SG_polyA:20001]
+glyph     = wiggle_density
+height    = 8
+
+[EMBRYO_SG_polyA]
+feature = Signal_Graph_File:426
+	  Signal_Graph_File:448
+	  Signal_Graph_File:454
+	  Signal_Graph_File:458
+	  Signal_Graph_File:470
+	  Signal_Graph_File:474
+	  Signal_Graph_File:482
+	  Signal_Graph_File:484
+	  Signal_Graph_File:497
+	  Signal_Graph_File:498
+	  Signal_Graph_File:499
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+graph_type   = histogram
+autoscale    = local
+variance_band= 1
+fgcolor      = black
+height       = 20
+bgcolor      = lightgrey
+pos_color    = blue
+neg_color    = orange
+scale        = right
+label_position = left
+stranded     = 0
+smoothing    = mean
+bicolor_pivot= zero
+category     = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density = 250
+label density = 100
+label     = sub { my $n = shift->name;
+                  $n =~s/Dm\_.+?_//;
+                  $n =~s/\_poly.+//;
+                  return sprintf("%-15s",$n); }
+database = celniker_wig
+data source  = 114 119 115 102 106 110 122 108 112 104 121
+track source = 426 448 454 458 470 474 484 497 498 499 482
+key       = Embryonic Signal Graph (PolyA)
+group_on  = 
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n1 <=> $n2;}
+select    = name embryo_0-2h embryo_2-4h embryo_4-6h embryo_6-8h embryo_8-10h embryo_10-12h embryo_12-14h embryo_14-16h embryo_16-18h embryo_18-20h embryo_20-22h
+link      = sub {my $src = shift->source;
+                 my %subs = (426=>114,
+		 	     448=>119,
+			     454=>115,
+			     458=>102,
+			     470=>106,
+			     474=>110,
+			     484=>122,
+			     484=>121,
+			     497=>108,
+			     498=>112,
+			     499=>104);
+                return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation  = <h1>
+   Embryonic Signal Intensities 
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>, <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol_-_Kaufman_Lab&oldid=14361">Embryo Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_0-2h:SC:1&oldid=13226">Embryo 0-2h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h:SC:1&oldid=13766">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_4-6h:SC:1&oldid=13767">Embyro 4-6 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_8-10h:SC:1&oldid=13770">Embyro 8-10 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_10-12h:SC:1&oldid=13614">Embyro 10-12 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_12-14h:SC:1&oldid=13790">Embyro 12-14 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13789">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_16-18h:SC:1&oldid=13788">Embyro 16-18 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_18-20h:SC:1&oldid=13787">Embyro 18-20 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_22-24hSC:1&oldid=13786">Embyro 22-24 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:403">Celniker/RNA:403</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:404">Celniker/RNA:404</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:405">Celniker/RNA:405</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:415">Celniker/RNA:415</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:416">Celniker/RNA:416</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:417">Celniker/RNA:417</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:418">Celniker/RNA:418</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:419">Celniker/RNA:419</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:420">Celniker/RNA:420</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:421">Celniker/RNA:421</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:422">Celniker/RNA:422</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:423">Celniker/RNA:423</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:427">Celniker/RNA:427</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:428">Celniker/RNA:428</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:429">Celniker/RNA:429</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:433">Celniker/RNA:433</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:434">Celniker/RNA:434</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:435">Celniker/RNA:435</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:406">Celniker/RNA:406</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:407">Celniker/RNA:407</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:408">Celniker/RNA:408</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:409">Celniker/RNA:409</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:410">Celniker/RNA:410</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:411">Celniker/RNA:411</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:412">Celniker/RNA:412</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:413">Celniker/RNA:413</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:414">Celniker/RNA:414</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-01-27
+
+
+
+[EMBRYO_TF_polyA]
+feature = transcript_region:427_embryo_12-14h_pA
+	  transcript_region:450_embryo_20-22h_pA
+	  transcript_region:456_embryo_16-18h_pA
+	  transcript_region:459_embryo_10-12h_pA
+	  transcript_region:473_embryo_4-6h_pA
+	  transcript_region:477_embryo_0-2h_pA
+	  transcript_region:483_embryo_18-20h_pA
+	  transcript_region:489_embryo_14-16h_pA
+	  transcript_region:501_embryo_6-8h_pA
+	  transcript_region:502_embryo_8-10h_pA
+	  transcript_region:500_embryo_2-4h_pA
+vary_fg       = 1
+glyph         = heat_map
+category      = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density  = 250
+label density = 100
+stranded      = 0
+fgcolor       = black
+bgcolor       = black
+end_color     = black
+connector     = none
+height        = 8
+min_score     = 1
+max_score     = 1
+database      = celniker_wig
+track source  = 427 450 456 459 473 477 483 489 501 502 500
+data source   = 114 119 115 102 106 110 121 122 108 112 104
+group_on = 
+key           = Embryonic TransFrags (PolyA)
+box_subparts  = 1
+label_position= left
+label    = sub { my $n = shift->name;
+                 $n =~s/Dm_//;
+                 $n =~s/\_(T|pA)//;
+                 return $n =~/(.+-.+)_/ ? sprintf "%-13s",$1 : sprintf "%-13s",$n; }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n1 <=> $n2;}
+select   = name	embryo_12-14h#114
+		embryo_20-22h#119
+		embryo_16-18h#115
+		embryo_10-12h#102
+		embryo_4-6h#106
+		embryo_0-2h#110
+		embryo_18-20h#121
+		embryo_14-16h#122
+		embryo_6-8h#108
+		embryo_8-10h#112
+		embryo_2-4h#104
+citation = <h1>
+   Dm_y[1]cn[1] bw[1] sp[1]_embryo_4-6h_TotalRNA_p200_224-226-228_38bp (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>, <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol_-_Kaufman_Lab&oldid=14361">Embryo Collection</a>, <a href="RNA_extraction">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_0-2h:SC:1&oldid=13226">Embryo 0-2h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h:SC:1&oldid=13766">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_4-6h:SC:1&oldid=13767">Embyro 4-6 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_8-10h:SC:1&oldid=13770">Embyro 8-10 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_10-12h:SC:1&oldid=13614">Embyro 10-12 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_12-14h:SC:1&oldid=13790">Embyro 12-14 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13789">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_16-18h:SC:1&oldid=13788">Embyro 16-18 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_18-20h:SC:1&oldid=13787">Embyro 18-20 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_22-24hSC:1&oldid=13786">Embyro 22-24 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=Y_cn_bw_sp&oldid=14853">Y_cn_bw_sp</a>    
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:403">Celniker/RNA:403</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:404">Celniker/RNA:404</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:405">Celniker/RNA:405</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:415">Celniker/RNA:415</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:416">Celniker/RNA:416</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:417">Celniker/RNA:417</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:418">Celniker/RNA:418</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:419">Celniker/RNA:419</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:420">Celniker/RNA:420</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:421">Celniker/RNA:421</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:422">Celniker/RNA:422</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:423">Celniker/RNA:423</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:427">Celniker/RNA:427</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:428">Celniker/RNA:428</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:429">Celniker/RNA:429</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:433">Celniker/RNA:433</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:434">Celniker/RNA:434</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:435">Celniker/RNA:435</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:406">Celniker/RNA:406</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:407">Celniker/RNA:407</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:408">Celniker/RNA:408</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:409">Celniker/RNA:409</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:410">Celniker/RNA:410</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:411">Celniker/RNA:411</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:412">Celniker/RNA:412</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:413">Celniker/RNA:413</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:414">Celniker/RNA:414</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-01-27
+
+
+[OR_EMBRYO_SG_polyA:20001]
+glyph     = wiggle_density
+height    = 8
+
+[OR_EMBRYO_SG_polyA]
+feature          = Signal_Graph_File:646
+		   Signal_Graph_File:647
+glyph            = wiggle_xyplot
+glyph select     = wiggle_density wiggle_xyplot
+graph_type       = histogram
+autoscale        = local
+variance_band    = 1
+height           = 20
+fgcolor          = black
+bgcolor          = lightgrey
+pos_color        = blue
+neg_color        = orange
+scale            = right
+label_position   = left
+stranded         = 0
+smoothing        = mean
+bicolor_pivot    = zero
+category         = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+bump density     = 250
+label density    = 100
+label     = sub { my $n = shift->name;
+                  my $name = "";
+                  if ($n) {
+                   $n =~s/Dm\_//;
+                   $n =~s/\_Total.+//;
+                  }
+                  $name = $n && $n =~/(.+-.+)_/ ? $1 : $n;
+                  return sprintf("%-13s",$name); 
+                }
+database         = celniker_wig
+data source = 514 513
+track source = 646 647
+key              = Oregon-R Embryonic Signal Graph (polyA)
+group_on  =
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n1 <=> $n2;}
+select    = name embryo_2-4h embryo_14-16h
+link      = sub {my $src = shift->source;
+                 my %subs = (646 =>514,
+                             647 =>513);
+                 return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+
+citation  = <h1>
+   Dm_OregonR_embryo_14-16h_poly-Ap_p200_130-131-132_38bp
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs.
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol:SC:1&oldid=14839">Embryo Collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA:_RNA_extraction_from_Insects:SC:1&oldid=14754">RNA_extraction</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA_polyA_purification:SC:1&oldid=14755">polyA_purification</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13226">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Oregon-R:DM:1&oldid=17741">FlyStrain:Oregon-R:DM:1</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h%2C_OregonR:SC:1&oldid=18371">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Oregon-R:DM:1&oldid=17741">FlyStrain:Oregon-R:DM:1</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>, GPL6629
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:130">Celniker/RNA:130</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:131">Celniker/RNA:131</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:132">Celniker/RNA:132</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:127">Celniker/RNA:127</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:128">Celniker/RNA:128</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:129">Celniker/RNA:129</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-15
+
+
+
+[OR_EMBRYO_TF_polyA]
+feature       = transcript_region:649_embryo_2-4h
+		transcript_region:648_embryo_14-16h
+vary_fg       = 1
+glyph         = heat_map
+category      = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp) 
+bump density  = 250
+label density = 100
+stranded      = 0
+fgcolor       = black
+bgcolor       = black
+end_color     = black
+connector     = none
+height        = 8
+min_score     = 1
+max_score     = 1
+database      = celniker_wig
+data source   = 514 513
+track source  = 649 648
+group_on =
+key           = Oregon-R Embryonic TransFrags (PolyA)
+box_subparts  = 1
+label_position = left
+label    = sub { my $n = shift->name;
+                 $n =~s/Dm\_//;
+                 return $n =~/(.+-.+)_/ ? sprintf "%-15s",$1 : sprintf "%-15s",$n; }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n2 =~ s/.*embryo_(\d+)\-.*/$1/;
+                             $n1 <=> $n2;}
+select   = name embryo_2-4h#514
+		embryo_14-16h#513
+citation = <h1>
+   Dm_OregonR_embryo_14-16h_poly-Ap_p200_130-131-132_38bp
+   (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs.
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>  
+     <li> 
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Population_Cage_Protocol_%28Drosophila%29:SC:1&oldid=14842">Population Cages</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=14289">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Embryo_staging_and_collection_Protocol:SC:1&oldid=14839">Embryo Collection</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA:_RNA_extraction_from_Insects:SC:1&oldid=14754">RNA_extraction</a>, <a href="http://wiki.modencode.org/project/index.php?title=RNA_polyA_purification:SC:1&oldid=14755">polyA_purification</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_14-16h:SC:1&oldid=13226">Embyro 14-16 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Oregon-R:DM:1&oldid=17741">FlyStrain:Oregon-R:DM:1</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=DevStage:Embryo_2-4h%2C_OregonR:SC:1&oldid=18371">Embyro 2-4 h</a>, Drosophila melanogaster, <a href="http://wiki.modencode.org/project/index.php?title=FlyStrain:Oregon-R:DM:1&oldid=17741">FlyStrain:Oregon-R:DM:1</a>
+     </li>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>, GPL6629
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:130">Celniker/RNA:130</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:131">Celniker/RNA:131</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:132">Celniker/RNA:132</a>,
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:127">Celniker/RNA:127</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:128">Celniker/RNA:128</a>, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:129">Celniker/RNA:129</a>
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-15
+
+
+[CEL_TISSUES_Signal_Graph:20001]
+glyph            = wiggle_density
+height           = 8
+
+[CEL_TISSUES_Signal_Graph]
+feature = Signal_Graph_File:1787
+	  Signal_Graph_File:1789
+	  Signal_Graph_File:1791
+glyph            = wiggle_xyplot
+glyph select     = wiggle_density wiggle_xyplot
+graph_type       = histogram
+autoscale        = local
+variance_band    = 1
+bump density     = 250
+bump             = 1
+category         = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+pos_color        = blue
+neg_color        = orange
+stranded         = 0
+height           = 20
+connector        = solid
+fgcolor          = black
+scale            = right
+database         = celniker_wig
+track source     = 1789 1787 1791
+data source      = 2340 2341 2342
+label density    = 100
+smoothing        = mean
+smoothing_window = 16
+key              = Tissues Signal Graph
+group_on =
+bgcolor          = lightgrey
+bicolor_pivot    = zero
+label_position   = left
+label            = sub { my $n = shift->name;
+                         $n =~s/Dm\_//;
+			 $n =~s/_F_/ Female /;
+			 $n =~s/_F_/ Male /;
+                         return sprintf("%-20s",$n); }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 cmp $n2;}
+select   = name Dm_VirginHead_F_1d#2341
+		Dm_MatedOvary_F_4d#2340
+		Dm_VirginHead_F_4d#2342
+link         = sub { my $src = shift->source;
+  		     my %subs = (1789 =>2340,
+                                 1787 =>2341,
+				 1791 =>2342);
+		    return "http://submit.modencode.org/submit/public/citation/$subs{$src}?wpName=Anonymous&wpPassword=modencode"; }
+citation = <h1>
+   Fly Tissues TotalRNA (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>, GPL6629
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       Celniker/RNA:531, Celniker/RNA:532
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-2403</b>: <a href="/submit/public/citation/2403">Tissue totalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-09
+
+
+[CEL_TISSUES_TransFrags]
+feature       = transcript_region:1788_VirginHead_F_1d
+		transcript_region:1792_VirginHead_F_4d
+		transcript_region:1790_MatedOvary_F_4d
+vary_fg       = 1
+glyph         = heat_map
+glyph_select  = generic heat_map
+bgcolor       = black
+fgcolor       = black
+end_color     = black
+height        = 8
+min_score     = 1
+max_score     = 1
+bump density  = 250
+category      = modENCODE Tracks: Celniker Group: RNA tiling arrays (38bp)
+stranded      = 0
+connector     = none
+database      = celniker_wig
+track source  = 1790 1788 1792
+data source   = 2340 2341 2342
+label density = 100
+key           = Tissues TransFrags
+box_subparts  = 1
+sort_order    = sub ($$) {my $n1 = shift->feature->name;
+                          my $n2 = shift->feature->name;
+                          $n1 cmp $n2;}
+group_on =
+label_position = left
+label         = sub { my $n = shift->name;
+                      $n =~s/Dm\_//;
+		      $n =~s/_F_/ Female /;
+                      $n =~s/_F_/ Male /;
+                      return $n =~/(.+-.+)_/ ? sprintf "%-16s",$1 : sprintf "%-16s",$n; }
+select        = name Dm_VirginHead_F_1d#2341
+		Dm_MatedOvary_F_4d#2340
+		Dm_VirginHead_F_4d#2342
+citation = <h1>
+   Fly Tissues: Transcription sites (Celniker project, Gingeras subgroup)
+ </h1>
+ <h2>General Description</h2>
+ We will generate over 600 RNA samples in biological triplicate and use them to generate expression profile maps detailing the sites of transcription across the fly genome using whole genome tiling arrays at 38 bp resolution as a broad survey of the transcriptome and 7 bp arrays resolution to identify at high resolution transcripts ends, splice sites, and small RNAs. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_synthesis_for_Expression_Arrays&oldid=13703">CDNA_synthesis_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Labeling_of_cDNA_for_Expression_Arrays&oldid=13704">Labeling_of_cDNA_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Hybridization_for_Expression_Arrays&oldid=13705">Array_Hybridization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Array_Scanning_for_Expression_Arrays&oldid=13707">Array_Scanning_for_Expression_Arrays</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Data_Normalization_for_Expression_Arrays&oldid=13578">Data_Normalization_for_Expression_Arrays</a>, <a href="http://wiki.modencode.org/project/index.php?title=Signal_Graph_generation_for_Expression_Arrays&oldid=13830">Signal Graph generation</a>, <a href="http://wiki.modencode.org/project/index.php?title=Transfrag_Analysis_for_Expression_Arrays&oldid=14304">Transfrag Analysis</a>
+     </li>
+ </ol>
+ <h2>Experimental Reagents</h2>
+ <ol>
+     <li>
+       <b>Arrays:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Array:Affymetrix_Drosophila_Tiling_Arrays_v2.0R:SC:1&oldid=13508">Affymetrix Drosophila Tiling Arrays v2.0R</a>, GPL6629
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       Celniker/RNA:531, Celniker/RNA:532
+     </li>
+ </ol>
+ <br />
+ <h2>Related modENCODE submissions:</h2>
+ <ul>
+   <li><b>DCC-2403</b>: <a href="/submit/public/citation/2403">Tissue totalRNA isolation</a></li>
+ </ul>
+ <br />
+ <b>Release Date:</b> 2009-10-09
+
+
+# GENE MODELS:
+
+[Celniker_DMG1:100000]
+glyph        = generic
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[Celniker_DMG1]
+feature      = gene:1460_details
+glyph        = gene
+category     = modENCODE Tracks: Celniker Group: Gene Models
+height       = 8
+bgcolor      = sub {shift->strand < 1 ? 'green' : 'red'}
+description  = 0
+label        = sub {my $name = shift->name;
+                    $name =~ s/.*DMG1\.//;
+                    return $name;}
+das category = transcription
+database     = celniker_gm
+data source  = 35
+track source = 1460
+key          = DMG1 gene models
+citation     = <h1>
+   DMG1 Model Building 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+ <br/>
+ The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+ <br/>
+ Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+ <br/>
+ Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+ <br/>
+ The cycles are numbered and prefixed "DMG". 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering_DMG1:SC:1&oldid=17878">cDNA_clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation_DMG1:SC:1&oldid=17879">Annotation</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       128up, 140up, 26-29-p, 312, 4EHP, 5-HT1B, A16, AB049435, ACXD, AF005629, AF030155, AF071502, AF086816, AF093454, AF099184
+       , and 18407 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-02-09<h1>
+
+
+[Celniker_DMG2:100000]
+glyph        = generic
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[Celniker_DMG2]
+feature      = gene:1468_details
+glyph        = gene
+category     = modENCODE Tracks: Celniker Group: Gene Models
+height       = 8
+bgcolor      = sub {shift->strand < 1 ? 'green' : 'red'}
+description  = 0
+label        = sub {return shift->name;}
+das category = transcription
+database     = celniker_gm
+data source  = 36
+track source = 1468
+key          = DMG2 gene models
+citation     = <h1>
+   DMG2 Model Building 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+ <br/>
+ The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+ <br/>
+ Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+ <br/>
+ Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+ <br/>
+ The cycles are numbered and prefixed "DMG". 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=9400">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=17930">Annotation</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       AF001621, AF003826, AF004674, AF004710, AF005629, AF005630, AF005847, AF007805, AF008228, AF009038, AF009676, AF010256, AF011332, AF011427, AF015270
+       , and 17815 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-02-09
+
+
+[Celniker_DMG3:100000]
+glyph        = generic
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[Celniker_DMG3]
+feature      = gene:1465_details
+glyph        = gene
+category     = modENCODE Tracks: Celniker Group: Gene Models
+height       = 8
+bgcolor      = sub {shift->strand < 1 ? 'green' : 'red'}
+description  = 0
+label        = sub {my $name = shift->name;
+                    $name =~ s/.*DMG3\.//;
+		    $name = "DMG3-".$name;
+                    return $name;}
+das category = transcription
+database     = celniker_gm
+data source  = 266
+track source = 1465
+key          = DMG3 gene models
+citation = <h1>
+  DMG3 Model Building
+  (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+ <br/>
+ The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+ <br/>
+ Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+ <br/>
+ Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+ <br/>
+ The cycles are numbered and prefixed "DMG". 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=9400">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=Contrast_Gene_Prediction:SC:1&oldid=17976">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=17930">Annotation</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       chr2L.10.b, chr2L.10.pred.a, chr2L.100.pred.a, chr2L.1000.pred.a, chr2L.1001.pred.a, chr2L.1003.pred.a, chr2L.1005.pred.a, chr2L.1006.pred.a, chr2L.1007.pred.a, chr2L.1008.pred.a, chr2L.1009.pred.a, chr2L.101.pred.a, chr2L.1010.pred.a, chr2L.1011.pred.a, chr2L.1012.b
+       , and 17357 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-03-17
+
+
+[Celniker_DMG4:100000]
+glyph        = generic
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[Celniker_DMG4]
+feature      = gene:1520_details
+glyph        = gene
+category     = modENCODE Tracks: Celniker Group: Gene Models
+height       = 8
+bgcolor      = sub {shift->strand < 1 ? 'green' : 'red'}
+description  = 0
+label        = sub {return shift->name;}
+das category = transcription
+database     = celniker_gm
+data source  = 37
+track source = 1520
+key          = DMG4 gene models
+citation = <h1>
+   DMG4 Model Building
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+ <br/>
+ The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+ <br/>
+ Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+ <br/>
+ Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+ <br/>
+ The cycles are numbered and prefixed "DMG".
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=9400">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=17930">Annotation</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       CG00000-RA.a, CG00000-RA.b, CG00000-RB.a, CG10000-RA.a, CG10001-RA.a, CG10005-RA.a, CG10006-RA.a, CG10006-RB.a, CG10007-RA.a, CG10009-RA.a, CG10011-RA.a, CG10014-RA.a, CG10016-RA.a, CG10016-RB.a, CG10018-RA.a
+       , and 21757 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-02-09
+
+
+[DMG1_RTPCR_cDNA_match_1278_214:100000]
+bump           = 0
+label          = 0
+
+
+[DMG1_RTPCR_cDNA_match_1278_214]
+feature        = cDNA_match:1278_details
+label          = sub { my $name = shift->name;
+                       $name =~ s/\.path*//;
+                       $name =~ s/DMG1_RTPCR\.//;
+                       return $name; }
+category       = modENCODE Tracks: Celniker Group: RTPCR
+bump density   = 250
+glyph          = segments 
+stranded       = 0
+fgcolor        = black
+connector      = solid
+database       = celniker_gm
+data source    = 214
+track source   = 1278
+label density  = 100
+group_on       =
+key            = DMG1 RTPCR
+bgcolor        = green
+citation = <h1>
+   DMG1 RTPCR (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       CG18472, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, DMG1-chr2L.1.019.a, DMG1-chr2L.1.022.a, DMG1-chr2L.1.135.a, DMG1-chr2L.1.138.a, DMG1-chr2L.10.029.a, DMG1-chr2L.10.041.a, DMG1-chr2L.10.044.a, DMG1-chr2L.10.055.a, DMG1-chr2L.10.107.a, DMG1-chr2L.11.010.a, DMG1-chr2L.11.042.a
+       , and 419 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-13
+
+
+[DMG2_RTPCR_cDNA_match_1412_215:100000]
+bump          = 0
+label         = 0
+
+[DMG2_RTPCR_cDNA_match_1412_215]
+feature        = cDNA_match:1412_details
+label          = sub { my $name = shift->name;
+                       $name =~ s/\.path*//;
+                       $name =~ s/DMG2_RTPCR\.//;
+                       return $name; }
+category       = modENCODE Tracks: Celniker Group: RTPCR
+bump density   = 250
+glyph          = segments
+stranded       = 0
+fgcolor        = black
+connector      = solid
+database       = celniker_gm
+data source    = 215
+track source   = 1412
+label density  = 100
+group_on       =
+key            = DMG2 RTPCR
+bgcolor        = green
+citation = <h1>
+   DMG2 RTPCR (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol> 
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li> 
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>   
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, DMG2-chr2L.1.018.a, DMG2-chr2L.1.119.a, DMG2-chr2L.10.042.a, DMG2-chr2L.10.063.a, DMG2-chr2L.10.093.a, DMG2-chr2L.11.015.a, DMG2-chr2L.11.043.a, DMG2-chr2L.12.030.a, DMG2-chr2L.12.085.a, DMG2-chr2L.13.018.a, DMG2-chr2L.13.029.a, DMG2-chr2L.13.052.a, and 428 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-14
+
+
+[DMG1_RTPCR_mRNA_1273_215:100000]
+glyph        = box
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[DMG1_RTPCR_mRNA_1273_215]
+feature         = mRNA:1273_details
+label           = sub { return shift->name; }
+category        = modENCODE Tracks: Celniker Group: RTPCR
+bump density    = 250
+glyph           = gene
+stranded        = 0
+fgcolor         = black
+connector       = solid
+database        = celniker_gm
+data source     = 215
+track source    = 1273
+label density   = 100
+group_on        = 
+key             = DMG1 RTPCR target gene models
+bgcolor         = sub { my $strand = shift->strand; if ($strand < 0) { return "indianred"; } elsif ($strand == 0) { return "lightsalmon"; } else { "gold" } }
+citation = <h1>
+   DMG1 RTPCR (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       CG18472, <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, DMG1-chr2L.1.019.a, DMG1-chr2L.1.022.a, DMG1-chr2L.1.135.a, DMG1-chr2L.1.138.a, DMG1-chr2L.10.029.a, DMG1-chr2L.10.041.a, DMG1-chr2L.10.044.a, DMG1-chr2L.10.055.a, DMG1-chr2L.10.107.a, DMG1-chr2L.11.010.a, DMG1-chr2L.11.042.a
+       , and 419 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-13
+
+[DMG2_RTPCR_mRNA_1404_214:100000]
+glyph        = box
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[DMG2_RTPCR_mRNA_1404_214]
+feature         = mRNA:1404_details
+label           = sub { return shift->name; }
+category        = modENCODE Tracks: Celniker Group: RTPCR
+bump density    = 250
+glyph           = gene
+stranded        = 0
+fgcolor         = black
+connector       = solid
+database        = celniker_gm
+track source    = 1404
+data source     = 214
+label density   = 100
+group_on        = 
+key             = DMG2 RTPCR target gene models
+bgcolor         = sub { my $strand = shift->strand; if ($strand < 0) { return "indianred"; } elsif ($strand == 0) { return "lightsalmon"; } else { "gold" } }
+citation = <h1>
+   DMG2 RTPCR (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol> 
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li> 
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>   
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, DMG2-chr2L.1.018.a, DMG2-chr2L.1.119.a, DMG2-chr2L.10.042.a, DMG2-chr2L.10.063.a, DMG2-chr2L.10.093.a, DMG2-chr2L.11.015.a, DMG2-chr2L.11.043.a, DMG2-chr2L.12.030.a, DMG2-chr2L.12.085.a, DMG2-chr2L.13.018.a, DMG2-chr2L.13.029.a, DMG2-chr2L.13.052.a, and 428 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-04-14
+
+
+[DMG3_RTPCR_mRNA_1429_339:100000]
+glyph        = box
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0 
+description  = 0
+
+
+[DMG3_RTPCR_mRNA_1429_339]
+feature         = mRNA:1429_details
+label           = sub { return shift->name; }
+category        = modENCODE Tracks: Celniker Group: RTPCR
+bump density    = 250
+glyph           = gene
+stranded        = 0
+fgcolor         = black
+connector       = solid
+database        = celniker_gm
+track source    = 1429
+data source     = 339
+label density   = 100
+group_on        = 
+key             = DMG3 RTPCR target gene models
+bgcolor         = sub { my $strand = shift->strand; if ($strand < 0) { return "indianred"; } elsif ($strand == 0) { return "lightsalmon"; } else { "gold" } }
+citation        = <h1>
+   DMG3 RTPCR 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, chr2L.1095.pred.a, chr2L.1096.pred.a, chr2L.1176.pred.a, chr2L.1179.pred.a, chr2L.1204.pred.a, chr2L.1313.pred.a, chr2L.1443.pred.a, chr2L.1455.pred.a, chr2L.1458.pred.a, chr2L.1461.pred.a, chr2L.1491.pred.a, chr2L.1557.pred.a
+       , and 212 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-03-23 
+ 
+
+[DMG3_RTPCR_cDNA_match_1431_339:100000]
+bump          = 0
+label         = 0
+
+[DMG3_RTPCR_cDNA_match_1431_339]
+feature        = cDNA_match:1431_details
+label          = sub { my $name = shift->name;
+                       $name =~ s/\.path*//; 
+                       $name =~ s/DMG3_RTPCR\.//; 
+                       return $name; }
+category       = modENCODE Tracks: Celniker Group: RTPCR
+bump density   = 250
+glyph          = segments
+stranded       = 0
+fgcolor        = black
+connector      = solid
+database       = celniker_gm
+track source   = 1431
+data source    = 339
+label density  = 100
+group_on       = 
+key            = DMG3 RTPCR
+bgcolor        = green
+citation       = <h1>
+   DMG3 RTPCR 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, chr2L.1095.pred.a, chr2L.1096.pred.a, chr2L.1176.pred.a, chr2L.1179.pred.a, chr2L.1204.pred.a, chr2L.1313.pred.a, chr2L.1443.pred.a, chr2L.1455.pred.a, chr2L.1458.pred.a, chr2L.1461.pred.a, chr2L.1491.pred.a, chr2L.1557.pred.a
+       , and 212 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-03-23 
+
+[DMG4_RTPCR_mRNA_1452_340:100000]
+glyph        = box
+bump         = 0
+maxdepth     = 1
+stranded     = 1
+label        = 0
+description  = 0
+
+[DMG4_RTPCR_mRNA_1452_340]
+feature         = mRNA:1452_details
+label           = sub { return shift->name; }
+category        = modENCODE Tracks: Celniker Group: RTPCR
+bump density    = 250
+glyph           = gene
+stranded        = 0
+fgcolor         = black
+connector       = solid
+database        = celniker_gm
+data source     = 340
+track source    = 1452
+label density   = 100
+key             = DMG4 RTPCR target gene models
+group_on        = 
+bgcolor         = sub { my $strand = shift->strand; if ($strand < 0) { return "indianred"; } elsif ($strand == 0) { return "lightsalmon"; } else { "gold" } }
+citation        = <h1>
+   DMG4 RTPCR 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, chr2L.1.004.a, chr2L.10.001.a, chr2L.10.002.a, chr2L.10.010.a, chr2L.10.013.a, chr2L.11.003.a, chr2L.11.018.a, chr2L.11.020.a, chr2L.12.009.a, chr2L.13.001.a, chr2L.13.005.a, chr2L.13.006.a
+       , and 300 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-03-23
+
+
+[DMG4_RTPCR_cDNA_1456_340:100000]
+bump         = 0
+label        = 0
+ 
+[DMG4_RTPCR_cDNA_match_1456_340]
+feature      = cDNA_match:1456_details
+glyph        = segments
+bump density = 250
+category     = modENCODE Tracks: Celniker Group: RTPCR
+stranded     = 0
+connector    = solid
+fgcolor      = black
+database     = celniker_gm
+data source  = 340
+track source = 1456
+label density= 100
+key          = DMG4 RTPCR
+group_on     = 
+bgcolor      = green
+label        = sub { my $name = shift->name;
+                     $name =~ s/\.path*//;
+                     $name =~ s/DMG4_RTPCR\.//;
+                     return $name; }
+citation     = <h1>
+   DMG4 RTPCR 
+   (Celniker project, Brent subgroup)
+ </h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ PCR targets are selected based on existing evidence for predicted gene models.  The latest ESTs, mRNAs and experimental data (if not already in Genbank) are collapsed into clusters, aligned, processed into  multi-exon predicted transcripts, then classified into 3 main categories: known, novel, and partially novel. These categories are defined as follows:<br/>
+ <br/>
+    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+ <br/>
+ These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+ <br/>
+ In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+ <br/>
+ PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Growth and isolation:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Total_cellular_RNA:SC:1&oldid=18527">RNA_extraction</a>
+     </li>
+     <li>
+       <b>Sample preparation:</b>
+       <a href="cDNA_Preparation">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+     </li>
+     <li>
+       <b>Data Analysis:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+     </li>
+ </ol>
+ <h2>Reagents</h2>
+ <ol>
+     <li>
+       <b>Animals:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CME_L1&oldid=10127">CME L1</a>, Drosophila melanogaster
+     </li>
+     <li>
+       <b>Samples:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a>, chr2L.1.004.a, chr2L.10.001.a, chr2L.10.002.a, chr2L.10.010.a, chr2L.10.013.a, chr2L.11.003.a, chr2L.11.018.a, chr2L.11.020.a, chr2L.12.009.a, chr2L.13.001.a, chr2L.13.005.a, chr2L.13.006.a
+       , and 300 more.
+     </li>
+ </ol>
+ <b>Release Date:</b> 2009-03-23 
+ 
+#[MB5:200000]
+#glyph        = generic
+#bump         = 0
+#maxdepth     = 1
+#stranded     = 1
+#label        = 0
+#description  = 0
+
+#[MB5]
+#feature      = gene:1632_details
+#glyph        = gene
+#category     = modENCODE Tracks: Celniker Group: Gene Models
+#height       = 8
+#bgcolor      = sub {shift->strand < 1 ? 'turquoise' : 'violet';}
+#description  = 0
+#label        = sub {shift->name;}
+#das category = transcription
+#key          = MB5 gene models
+#database     = celniker
+#track source = 1632
+#data source  = 146
+#citation = <h1>
+#   MB annotation 5 (Celniker project, Brent subgroup)
+# </h1>
+# <h2>General Description</h2>
+# These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+# <br/>
+# Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+# <br/>
+# The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+# <br/>
+# Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+# <br/>
+# Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+# <br/>
+# The cycles are numbered and prefixed "DMG".
+# <br/><br/>
+# <h2>Protocols</h2>
+# <ol>
+#     <li>
+#       <b>Other Protocols:</b>
+#       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=9400">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=15366">Annotation</a>
+#     </li>
+# </ol>
+# <h2>Reagents</h2>
+# <ol>
+#     <li>
+#       <b>Animals:</b>
+#       Drosophila melanogaster
+#     </li>
+#     <li>
+#       <b>Samples:</b>
+#       CG00000.a, CG00000.b, CG10001.a, CG10005.a, CG10006.a, CG10006.b, CG10007.a, CG10009.a, CG10011.a, CG10014.a, CG10016.a, CG10016.b, CG10018.a, CG10021.a, CG10021.b
+#       , and 19713 more.
+#     </li>
+# </ol>
+# <b>Release Date:</b> 2009-02-02
+
+
+#[MB6:200000]
+#glyph        = generic 
+#label        = 0
+#bump         = 0
+#bgcolor      = sub {my $f = shift;
+#                    return "darkgreen" if ($f->score == 1 || $f->score == 31);
+#                    return "forestgreen" if $f->score == 2;
+#                    return "limegreen" if ($f->score == 3 || $f->score == 34);
+#                    return "yellow" if $f->score == 11;
+#                    return "gold" if ($f->score == 12 || $f->score == 35); 
+#                    return "darkorange" if $f->score == 21;
+#                    return "red" if $f->score == 99;
+#                    return "greenyellow";
+#                   }
+#box_subparts  = 0
+#balloon hover = sub {shift->name;}
+
+#[MB6]
+#feature      = gene:1715_details
+#glyph        = gene
+#category     = modENCODE Tracks: Celniker Group: Gene Models
+#height       = 8
+#transcript_only = 1
+#stranded     = ends
+#bgcolor      = sub {my ($f,$option_name,$part_no,$total_parts,$glyph) = @_;
+#                    my $par = $glyph->parent_feature();
+#                    return if $par->primary_tag ne 'mRNA';
+#                    return "darkgreen" if ($par->score == 1 || $par->score == 31);
+#                    return "forestgreen" if $par->score == 2;
+#                    return "limegreen" if ($par->score == 3 || $par->score == 34);
+#                    return "yellow" if $par->score == 11;
+#                    return "gold" if ($par->score == 12 || $par->score == 35);
+#                    return "darkorange" if $par->score == 21;
+#                    return "red" if $par->score == 99;
+#                    return "greenyellow";
+#                   }
+#label_transcripts =  sub { return shift->primary_tag eq 'mRNA' }
+#bump density  = 250
+#label density = 100
+#description  = 0
+#box_subparts  = 1
+#balloon hover = sub {my $f = shift;
+#                     my $name = $f->name;
+#                     return $name if !$f->primary_tag || $f->primary_tag ne 'mRNA';
+#                     $name.=": ";
+#                       return $name."annotations that have all introns in common with a single cDNA" if $f->score == 1;
+#                       return $name."annotations that have all introns in common with an assembly of overlapping cDNAs/ESTsg cDNAs/ESTs" if $f->score == 2;
+#                       return $name."annotations that have full support from multiple clusters (these may be merged gene models)" if $f->score == 3;
+#                       return $name."annotations that have partial support" if $f->score == 11;
+#                       return $name."annotations that are shorter than their overlapping evidence" if $f->score == 12;
+#                       return $name."annotations with retained introns" if $f->score == 99;
+#                       return $name."annotations that have no EST/RTPCR support" if $f->score == 21;
+#                       return $name."single exon annotations that are 100% overlapped by a single exon transcript" if $f->score == 31;
+#                       return $name."single exon annotations that between 50 and 99% overlapped by a single exon transcript" if $f->score == 34;
+#                       return $name."single exon annotations that are less than 50% overlapped by a single exon transcript" if $f->score == 35;
+#                       return $name."No additional information available";
+#                     }
+#label        = sub {shift->name;}
+#das category = transcription
+#key          = MB6 gene models
+#database     = celniker
+#data source  = 2269
+#track source = 1715
+#citation = 
+# <h1>MB annotation 6 (Celniker project, Brent subgroup)
+# </h1>
+# <h2>General Description</h2>
+# These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+# <br/>
+# Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+# <br/>
+# The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+# <br/>
+# Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+# <br/>
+# Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+# <br/>
+# The cycles are numbered and prefixed &quot;DMG&quot;. 
+# <br/><br/>
+# <h2>Protocols</h2>
+# <ol>
+#     <li>
+#       <b>Other Protocols:</b>
+#       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=18274">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=19577">Annotation</a>
+#     </li>
+# </ol>
+# <h2>Reagents</h2>
+# <ol>
+#     <li>
+#       <b>Animals:</b>
+#       Drosophila melanogaster
+#     </li>
+#     <li>
+#       <b>Samples:</b>
+#       CG00000-RA, CG00000-RB, CG00000.a, CG00000.b, CG10000-RA.5d, CG10001-RA.5d, CG10002-RA, CG10002-RB, CG10005-RA, CG10006-RB.5d3d, CG10007-RA, CG10009-RA, CG10011-RA, CG10013-RA, CG10014-RA
+#       , and 21488 more.
+#     </li>
+# </ol>
+# <br />
+# <h2>Related modENCODE submissions:</h2>
+# <ul>
+#   <li><b>DCC-34</b>: 5' RACE (mixed-stage embryos)</li>
+# </ul>
+# <br />
+# <b>Release Date:</b> 2009-05-01
+
+
+[MB7:200000]
+glyph        = generic
+label        = 0
+bump         = 0
+bgcolor      = sub {my $f = shift;
+                    return "darkgreen" if ($f->score == 1 || $f->score == 31);
+                    return "forestgreen" if $f->score == 2;
+                    return "limegreen" if ($f->score == 3 || $f->score == 34);
+                    return "yellow" if $f->score == 11;
+                    return "gold" if ($f->score == 12 || $f->score == 35);
+                    return "blue" if ($f->score == 81  || $f->score == 82);
+                    return "darkorange" if $f->score == 21;
+                    return "red" if $f->score > 99;
+                    return "greenyellow";
+                   }
+box_subparts  = 0
+balloon hover = sub {shift->name;}
+
+[MB7]
+feature      = gene:2811_details
+glyph        = gene
+category     = modENCODE Tracks: Celniker Group: Gene Models
+data source  = 744
+track source = 2811
+height       = 8
+transcript_only = 1
+stranded     = ends
+database     = celniker_gm
+bgcolor      = sub {my ($f,$option_name,$part_no,$total_parts,$glyph) = @_;
+                   my $par = $glyph->parent_feature();
+                   return if $par->primary_tag ne 'mRNA';
+                   return "darkgreen" if ($par->score == 1 || $par->score == 31);
+                   return "forestgreen" if $par->score == 2;
+                   return "limegreen" if ($par->score == 3 || $par->score == 34);
+                   return "yellow" if $par->score == 11;
+                   return "gold" if ($par->score == 12  || $par->score == 13  || $par->score == 14 || $par->score == 35);
+                   return "blue" if ($par->score == 81  || $par->score == 82);
+                   return "darkorange" if $par->score == 21;
+                   return "red" if $par->score > 90;
+                   return "greenyellow";
+                  }
+label_transcripts =  sub { return shift->primary_tag eq 'mRNA' }
+bump density  = 250
+label density = 100
+description  = 0
+box_subparts  = 1
+balloon hover = sub {my $f = shift;
+                    my $name = $f->name;
+                    return $name if !$f->primary_tag || $f->primary_tag ne 'mRNA';
+                    $name.=": ";
+                      return $name."has all introns in common with a single cDNA" if $f->score == 1;
+                      return $name."has all introns in common with an assembly of overlapping cDNAs/ESTs" if $f->score == 2;
+                      return $name."has full support from multiple clusters (these may be merged gene models)" if $f->score == 3;
+                      return $name."has partial support" if $f->score == 11;
+                      return $name."incomplete: shorter than overlapping evidence" if $f->score == 12;
+                      return $name."incomplete: has no start codon" if $f->score == 13;
+                      return $name."incomplete: has no stop codon" if $f->score == 14;
+                      return $name."is single exon but overlaps multiexon evidence on the same strand" if $f->score == 93;
+                      return $name."has unconfirmed non-consensus splices" if $f->score == 94;
+                      return $name."has misannotated start codon" if $f->score == 95;
+                      return $name."has misannotated start codon" if $f->score == 96;
+                      return $name."is a pseudogene" if $f->score == 97;
+                      return $name."has inframe stop codon" if $f->score == 98;
+                      return $name."is a transcribed pseudogene" if $f->score == 81;
+                      return $name."is probably non-coding" if $f->score == 82;
+                      return $name."has a retained intron" if $f->score == 99;
+                      return $name."has no EST/RTPCR support" if $f->score == 21;
+                      return $name."single exon annotation that is 100% overlapped by a single exon transcript" if $f->score == 31;
+                      return $name."single exon annotation that is between 50 and 99% overlapped by a single exon transcript" if $f->score == 34;
+                      return $name."single exon annotation that is less than 50% overlapped by a single exon transcript" if $f->score == 35;
+                      return $name."No additional information available";
+                    }
+label        = sub {shift->name;}
+das category = transcription
+key          = MB7 gene models
+citation = <h1>MB annotation 7 (Celniker project, Brent subgroup)</h1>
+ <h2>General Description</h2>
+ These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+ <br/>
+ Genome annotation is done in cycles consisting of gene prediction, target selection and RT-PCR sequencing of the targets. <br/>
+ <br/>
+ The gene prediction programs used are N-SCAN (Brent Lab) and Contrast (Sam Gross), both of which use conservation and transcription evidence. Before each round of gene prediction, new cDNAs and ESTs are downloaded from GenBank, and are clustered using the PASA pipeline developed by Brian Haas at TIGR. These clusters are then converted to an 'EST evidence track' that can be used by the program. Similarly, a conservation track is created from alignments of 'informant' species to the target genome.<br/>
+ <br/>
+ Predicted transcripts (models) are classified as 'supported', 'partially supported', and 'novel' based on overlap with transcripts. If all splice sites of a transcript model are present in cDNAs, this transcript is supported. Transcripts with no supported splice sites are novel.<br/>
+ <br/>
+ Novel and partially supported genes are targeted for PCR on reverse transcribed RNA from one or multiple tissues. Primers are designed around unsupported splices. If a spliced sequence results from the PCR it is submitted to GenBank (whether or not it supports the transcript model) and it becomes part of the EST/cDNA download for the next round of gene predictions.<br/>
+ <br/>
+ The cycles are numbered and prefixed "DMG". 
+ <br/><br/>
+ <h2>Protocols</h2>
+ <ol>
+     <li>
+       <b>Other Protocols:</b>
+       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_clustering&oldid=18274">cDNA_Clustering</a>, <a href="http://wiki.modencode.org/project/index.php?title=NSCAN_Gene_Prediction:SC:1&oldid=14354">Gene Prediction</a>, <a href="http://wiki.modencode.org/project/index.php?title=Annotation&oldid=19577">Annotation</a>
+     </li>
+ </ol>
+ <h2> Sample Details </h2>
+ <ol>
+     <li>
+       <b>Animals/Lines:</b>
+       Drosophila melanogaster
+     </li>
+ </ol>
+ <br />
+ <b>Release Date:</b> 2009-08-03
+
+
+
+# RTPCR for MB gene models:
+
+#[MB6_RTPCR_cDNA_match_642_2270]
+#feature        = cDNA_match:642_details
+#label          = sub { my $name = shift->name;
+#                       $name =~ s/\.path*//;
+#                       $name =~ s/MB6_RTPCR\.//;
+#		       $name =~ s/\.$//;
+#                       return $name; }
+#category       = modENCODE Tracks: Celniker Group: RTPCR
+#bump density   = 250
+#glyph          = segments
+#stranded       = 0
+#fgcolor        = black
+#connector      = solid
+#database       = celniker
+#data source    = 2270
+#track source   = 642
+#label density  = 100
+#group_on       =
+#key            = MB6 RTPCR
+#bgcolor        = green
+#citation = <h1>
+# MB6 RTPCR (Celniker project, Brent subgroup)
+# </h1>
+# <h2>Description</h2>
+# These experiments aim to annotate the genome of Drosophila melanogaster.<br/>
+# <br/>
+#    1. Known: All introns are overlapped by EST or mRNA sequence<br/>
+#    2. Partial: Some, but not all, introns are overlapped by EST or mRNA sequence<br/>
+#    3. Novel: No introns are overlapped by EST or mRNA sequence <br/>
+# <br/>
+# These categories may be further sub-categorized depending on whether the predicted intron/exon structure is supported, whether the overlapping ESTs are spliced, etc. PCR primers are designed to amplify regions of partially and totally novel predictions which have unverified introns.<br/>
+# <br/>
+# In some cases, protein homology with other species is used to prioritize novel predictions for testing. An initial test set of completely novel predictions may have 35-75% homology to proteins of other Drosophila species, for example. <br/>
+# <br/>
+# PCR products are amplified by reverse transcription using Superscript III (Invitrogen) followed by standard PCR with Phusion polymerase, from pools of RNA from Cherbas et al.  Products were cycle sequenced using both F and R pcr primers performed either in-house by the standard ABI Big Dye version 3.1 protocol or outsourced.  The resulting EST is aligned to the dm3/Release 5 Drosophila genome using GMAP. An EST is considered a hit if it results in a spliced alignment with over 90 percent identity that aligns to the same locus as it was designed for, or if it aligns to a locus in the genome that is not covered by any transcript in the experiment.  Positive EST sequences are submitted to genbank. 
+# <br/><br/>
+# <h2>Protocols</h2>
+# <ol>
+#     <li>
+#       <b>Sample preparation:</b>
+#       <a href="http://wiki.modencode.org/project/index.php?title=CDNA_Preparation:SC:1&oldid=18266">cDNA_Preparation</a>, <a href="http://wiki.modencode.org/project/index.php?title=PCR:SC:1&oldid=18461">PCR</a>, <a href="http://wiki.modencode.org/project/index.php?title=Sequencing:SC:1&oldid=18491">Sequencing</a>
+#     </li>
+#     <li>
+#       <b>Data Analysis:</b>
+#       <a href="http://wiki.modencode.org/project/index.php?title=Analysis:SC:1&oldid=18239">Analysis</a>
+#     </li>
+# </ol>
+# <h2> Sample Details </h2>
+# <ol>
+#     <li>
+#       <b>Animals/Lines:</b>
+#       Drosophila melanogaster
+#     </li>
+#     <li>
+#       <b>Samples:</b>
+#       <a href="http://wiki.modencode.org/project/index.php?title=Celniker/RNA:86">Celniker/RNA:86</a> (DCC-555)
+#     </li>
+#     <li>
+#       <b>External Links:</b>
+#       TraceArchive_record:2239708162, TraceArchive_record:2239708163, TraceArchive_record:2239708164, TraceArchive_record:2239708165, TraceArchive_record:2239708166, TraceArchive_record:2239708167, TraceArchive_record:2239708168, TraceArchive_record:2239708169, TraceArchive_record:2239708170, TraceArchive_record:2239708171, TraceArchive_record:2239708172, TraceArchive_record:2239708173, TraceArchive_record:2239708174
+#       , and 1929 more.
+#     </li>
+# </ol>
+# <br />
+# <h2>Related modENCODE submissions:</h2>
+# <ul>
+#   <li><b>DCC-2269</b>: <a href="/submit/public/citation/2269">MB6 gene models</a></li>
+#   <li><b>DCC-555</b>: <a href="/submit/public/citation/555">Cell line Total RNA samples</a></li>
+#   <li><b>DCC-48</b>: <a href="/submit/public/citation/48">Dm_CME-L1_TotalRNA_p200_086-088-090_38bp</a></li>
+# </ul>
+# <br />
+# <b>Release Date:</b> 2009-09-30 
+

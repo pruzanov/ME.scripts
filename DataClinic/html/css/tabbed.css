@@ -1,0 +1,89 @@
+body {
+        margin:0;
+        padding:0;
+        background-color: #BBBBBB;  
+        font: bold 11px/1.5em Verdana;
+}
+
+html { height:100%; }
+#flashContent { display:none; }
+
+h2 {
+        font: bold 14px Verdana, Arial, Helvetica, sans-serif;
+        color: #000;
+        margin: 0px;
+        padding: 0px 0px 0px 15px;
+}
+
+img {
+border: none;
+}
+
+    #tabs10 {
+      float:left;
+      width:100%;
+      font-size:93%;
+      line-height:normal;
+      }
+    #tabs10 ul {
+          margin:0;
+          padding:10px 10px 0 50px;
+          list-style:none;
+      }
+    #tabs10 li {
+      display:inline;
+      margin:0;
+      padding:0;
+      }
+    #tabs10 a {
+      float:left;
+      background:url("tableft10.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+      }
+    #tabs10 a span {
+      float:left;
+      display:block;
+      background:url("tabright10.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#FFF;
+      }
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    #tabs10 a span {float:none;}
+    /* End IE5-Mac hack */
+    #tabs9 a:hover span {
+      color:#FFF;
+      }
+    #tabs10 a:hover {
+      background-position:0% -42px;
+      }
+    #tabs10 a:hover span {
+      background-position:100% -42px;
+     }
+    .tab_active   { cursor: pointer;
+                    color: black;
+                    background-color: #D0D0D0;
+                    font-size: 10pt;
+                    font-weight: bold;
+                    font-family: sans-serif;
+                    padding-top: 5px;
+                    padding-left: 5px;
+                    padding-right: 5px
+             }
+    .tab_inactive {background-color: #F0F0F0;
+               color: blue;
+               cursor: pointer;
+               font-family: sans-serif;
+               font-size: 10pt;
+               font-weight: bold;
+               padding-left: 5px;
+               padding-right: 5px;
+              }
+     div.inactive {
+               display:none;
+              }
+    .tab_inactive:hover {
+               text-decoration: underline;
+               }
+      

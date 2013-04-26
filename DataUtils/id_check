@@ -1,0 +1,61 @@
+#!/usr/bin/perl -w
+use strict;
+
+
+my $id_file = shift;
+
+my %ids = ();
+my @right = ();
+
+open(IDS,$id_file) or die "Couldn't read from id file [$id_file]";
+
+while(<IDS>) {
+ chomp;
+ my @temp = split("\t");
+ $ids{$temp[0]} = {sig => $temp[1],
+                   peak => $temp[2]};
+ 
+}
+close IDS;
+
+SUB:
+foreach my $sub (keys %ids) {
+ my $file = join("/","cache","$sub\.stanza");
+ print STDERR "Checking $file\n";
+ next unless (-f "cache\/$sub\.stanza");
+
+ open(FILE,"<$file") or die "Couldn't read from [$file]";
+ my @lines = ();
+ map{push @lines,$_} (<FILE>);
+ close FILE;
+
+ my @combs = grep {!/Input/i} grep {/combined/} grep{/^key/} @lines;
+ print STDERR scalar(@combs)." combined tracks found\n";
+ 
+ next if @combs == 0;
+
+ my $track;
+
+ foreach my $c (@combs) {
+  print STDERR $c;
+  if ($c=~(/wig\:(\d+)/i)) {
+   $track = $1;
+   if ($track == $ids{$sub}->{sig}) {
+     print STDERR "$track equal $ids{$sub}->{sig}\n";
+     next SUB;
+   } else { 
+     $ids{$sub}->{sig} = $track;
+     push @right,$sub;
+   }
+  }
+ }
+
+ #if ($track) {
+ # $ids{$sub}->{sig} = $track;
+ # push @right,$sub;
+ #} 
+}
+
+print STDERR "Corrected submissions: \n";
+map{print $ids{$_}->{peak} ? join("\t",($_,$ids{$_}->{sig},$ids{$_}->{peak})) : join("\t",($_,$ids{$_}->{sig})) and print "\n"} (sort {$a<=>$b} @right);
+
