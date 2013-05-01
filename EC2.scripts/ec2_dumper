@@ -6,7 +6,7 @@
 
 =head2 SYNOPSIS
 
- This script rsyn-ing mysql dumps, fasta and track files for modENCODE GBrowse
+ This script rsync-ing mysql dumps, fasta and track files for modENCODE GBrowse
 
 =head2 USAGE
 
@@ -39,6 +39,7 @@ my $remote_dumps = '/browser_data/mysql_dumps_new/';
 my $sshkey       = "$HOME/aws/rsyncuser_EC_key";
 my $user         = "rsyncuser";
 my $conf         = "/var/www/conf/";
+my $abnormal_stop= 0;
 #=====================================================================
 
 
@@ -55,28 +56,64 @@ my @instances = $ec2->describe_instances(($rsync_ins));
 
 
  print STDERR "Launching the rsync instance...\n";
+ opendir(THISDIR,".") or die "Cannot read curent directory";
+ my @flags = grep{/temp_/} readdir THISDIR;
+ close THISDIR;
+
+ if (@flags && @flags > 0) {
+     print STDERR "Detected previously aborted rsync session\n";
+     $abnormal_stop = 1;
+     `rm temp_*`;
+ }
+  
+ `touch temp_$$`; # If we finish ok, this will be deleted
  
  # If it is running, do not touch it, come back later
- if ($instances[0]->status =~/ing$/) {
+ if ($instances[0]->status =~/ing$/ && $abnormal_stop == 0) {
   print STDERR "Instance in use, cannot proceed\n";
   exit;
+ } else {
+  if ($abnormal_stop == 0) {
+   $instances[0]->start;
+   $ec2->wait_for_instances(@instances,'running');
+   sleep 30;
+  } else {
+   print STDERR "Instance is running, but it looks like rsync was aborted, rsyncing will start now\n";
+  }
  }
-
- $instances[0]->start;
- $ec2->wait_for_instances(@instances);
- sleep 30;
+ 
+ `touch temp_$$`; # If we finish ok, this will be deleted
  
  my $status = $instances[0]->status;
  my $dns    = $instances[0]->dnsName;
- 
+
+ # Give instance 5 tries to start properly
+ my $all_good = 0;
+ if ($status !~/running/) {
+ TRY:
+ for (my $try = 0;$try < 5; $try++) {
+   $status = $instances[0]->status;
+   $dns    = $instances[0]->dnsName;
+   if ($status =~/running/) {
+    $all_good++;
+    last TRY;
+   }
+   print STDERR "Instance is still not up, sleeping another 5 minutes...\n";
+   sleep 300; # Sleep for 5 min
+ }
+
+  if (!$all_good) {
+   print STDERR "Couldn't launch the instance, giving up...\n";
+   &stop_all;
+   exit;
+  }
+ }
+
  print STDERR "$instances[0] : [$status] $dns\n";
  print STDERR "Rsyncing to $dns...\n";
 
- # Syncing mysql dumps
- 
- `rsync -azv $local_dumps -e \"ssh -i $sshkey\" $user\@$dns:$remote_dumps`;
-
- sleep 10;
+ # Syncing mysql dumps, Check if the instance is reachable at this point
+ `rsync -azvO $local_dumps -e \"ssh -i $sshkey\" $user\@$dns:$remote_dumps`;
  
  # Syncing tracks
 
@@ -106,12 +143,12 @@ my @instances = $ec2->describe_instances(($rsync_ins));
   print "Working with $species[$counter]...\n",
         "Rsyncing fastas...\n";
    
-  `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/fasta/* $user\@$dns:/modencode/browser_data/$species[$counter]/fasta`;
+  `rsync -azvO /browser_data/$species[$counter]/fasta/* -e \"ssh -o LogLevel=quiet -i $sshkey\" $user\@$dns:/modencode/browser_data/$species[$counter]/fasta`;
   
   print "Done with fasta\n";
   if (-e "/browser_data/$species[$counter]/wiggle_binaries/" && -s "/browser_data/$species[$counter]/wiggle_binaries/"){
    print "Rsyncing wiggle_binaries and sam_binaries...\n";
-   `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/wiggle_binaries/* $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries`;
+   `rsync -azvO /browser_data/$species[$counter]/wiggle_binaries/* -e \"ssh -o LogLevel=quiet -i $sshkey\" $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries`;
   }
   print "Looking at $file...\n";
   open(CONF,"<$conf$file") or die "Cannot find $conf$file";
@@ -120,13 +157,14 @@ my @instances = $ec2->describe_instances(($rsync_ins));
    if (m/^#include\s(.*?)[_.]/) {
     if (-e "/browser_data/$species[$counter]/wiggle_binaries/$1") {
      print "Working on /browser_data/$species[$counter]/wiggle_binaries/$1\n";
-    `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/wiggle_binaries/$1/* $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries/$1`;
+    `rsync -azvO /browser_data/$species[$counter]/wiggle_binaries/$1/* -e \"ssh -o LogLevel=quiet -i $sshkey\" $user\@$dns:/modencode/browser_data/$species[$counter]/wiggle_binaries/$1`;
     }
     my $sam_binaries = $1;
-    $sam_binaries =~ s/(\w+)/\u\L$1/g;
+    $sam_binaries =~ s/(\w+)/\u$1/g;
+    #$sam_binaries =~ s/(\w+)/\u\L$1/g;
     if (-e "/browser_data/$species[$counter]/sam_binaries/$sam_binaries") {
      print "Working on /browser_data/$species[$counter]/sam_binaries/$sam_binaries\n";
-     `rsync -Paz --rsh \"ssh -o LogLevel=quiet -i $sshkey\" /browser_data/$species[$counter]/sam_binaries/$sam_binaries/* $user\@$dns:/modencode/browser_data/$species[$counter]/sam_binaries/$sam_binaries`;
+     `rsync -azvO /browser_data/$species[$counter]/sam_binaries/$sam_binaries/* -e \"ssh -o LogLevel=quiet -i $sshkey\" $user\@$dns:/modencode/browser_data/$species[$counter]/sam_binaries/$sam_binaries`;
     }
    }
   }
@@ -140,7 +178,12 @@ my @instances = $ec2->describe_instances(($rsync_ins));
 
  print STDERR "Stopping rsync instance...\n";
 
- map{if ($_->status eq 'running') {$_->stop;}} @instances;
- $ec2->wait_for_instances(@instances);
+ &stop_all; 
 
  print STDERR "Rsync to [$rsync_ins] complete\n";
+
+ sub stop_all {
+  map{if ($_->status eq 'running') {$_->stop;}} @instances;
+  $ec2->wait_for_instances(@instances,'stopped');
+  `rm temp_$$`;
+ }
