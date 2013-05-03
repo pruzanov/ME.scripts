@@ -1,0 +1,38 @@
+[miRNA_WFIELD_ds:database]
+db_adaptor = Bio::DB::BigWig
+db_args    = sub { require Bio::DB::Sam;
+                   return (
+                       -bigwig => '/browser_data/worm/sam_binaries/Waterston/FIELD_ts_miRNA.bw',
+                       -fasta  => Bio::DB::Sam::Fai->open('/browser_data/worm/fasta/c_elegans.WS220.genomic.fa'),
+                       );
+                 }
+
+[miRNA_WFIELD_ds:2000]
+database      = FIELD_name_bw
+feature       = summary
+glyph         = wiggle_whiskers
+mean_color    = blue
+max_color     = lightblue
+height        = 20
+label            = 0
+
+[miRNA_WFIELD_ds]
+feature          = miRNA:FIELD_ts_details
+glyph            = generic
+database         = waterston
+category         = FIELD_cat
+data source      = FIELD_ds
+track source     = FIELD_ts
+strand_arrow     = 1
+bgcolor          = wheat
+fgcolor          = black
+height           = 5
+key              = FIELD_key
+label            = 1
+sort_order       = name
+balloon hover    = sub {my $f = shift;
+                        my $name   = $f->name;
+                        my @features = $f->get_SeqFeatures();
+                        my $child = shift @features;
+                        my $score = $child->score;
+                        return $score ? join (" ",$name,"(Score:".$score.")") : $name;}

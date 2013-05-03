@@ -1,0 +1,56 @@
+[LIEB_WIG_TEMP_:70001]
+glyph_subtype = density
+height        = 12
+
+[LIEB_WIG_TEMP_]
+feature      = 
+track source = 
+data source  = 
+glyph        = vista_plot
+glyph select = vista_plot
+autoscale     = z_score
+variance_band = 1
+graph type   = boxes
+database     = lieb
+min_peak     = 0
+box_subparts = 1
+neg_color    = blue
+max_peak     = 0.01
+start_color  = black
+fgcolor      = black
+pos_color    = blue
+bgcolor      = orange
+alpha        = 80
+group_label  = 0
+end_color    = black
+glyph_subtype= signal
+bump density = 250
+select       = name;
+category     = Chromatin Structure: Test
+sort_order   = name
+stranded     = 0
+height       = 30
+connector    = solid
+label density= 100
+smoothing    = mean
+smoothing_window = 10
+key          = Put your key here
+group_on     =
+bicolor_pivot= min
+balloon hover = sub {my $f = shift;
+                     my $score = $f->score;
+                     my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.01;start_c=blue;end_c=lightblue";
+                     return $score ? join (" ","<img width=215 height=88 src=\"/images/vista_legend.png\"/><br/><img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(z_score:".$score.")") : $f->name;}
+group_label  = 0
+label_position= left
+label        = sub {  my $name = shift->name;
+                      $name =~s/^.+?_//;
+                      $name =~s/(.+)_N2(.*)/$1$2/;
+                      $name =~s/_/ /;
+                      $name =~s/_/./g;
+                      return $name =~/(.+?) (.+)$/ ? sprintf "%-10s %-7s",$1,$2 : sprintf "%-15s",$name;
+                    }
+link         = sub { my $src = shift->source;
+                     my %subs =(
+                     return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
+citation =

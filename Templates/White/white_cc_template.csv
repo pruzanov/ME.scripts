@@ -1,0 +1,52 @@
+[White_CC_FIELD_name:20000]
+height           = 8
+glyph            = wiggle_density
+smoothing window = 0
+
+[White_CC_FIELD_name]
+feature      = WIG:FIELD_ts
+glyph        = wiggle_xyplot
+glyph select = wiggle_density wiggle_xyplot
+graph_type   = histogram
+database     = white
+data source  = FIELD_ds
+track source = FIELD_ts
+autoscale    = local
+variance_band= 1
+connector    = none
+height       = 20
+category     = Chromatin Structure: Histone Modifications:FIELD_cat
+description  = 0
+pos_color    = blue
+neg_color    = orange
+fgcolor      = black
+bicolor_pivot = min
+key          = FIELD_key
+bgcolor      = blue
+label_position = left
+box_subparts = 1
+label        = sub {
+                my $name = shift->name;
+                if($name){
+		 $name=~s/_/-/g;
+                 $name =~s/E(\d+\-\d+)/embryo\_$1h/;
+                 return sprintf "%-17s",$name;
+                }
+               }
+sort_order       = sub ($$) {my $n1 = shift->feature->name;
+                             my $n2 = shift->feature->name;
+                             $n1 =~ s/^E_*(\d+)[_-].*/0$1/;
+                             $n2 =~ s/^E_*(\d+)[_-].*/0$1/;
+                             $n1 =~ s/^L(\d)/29$1/;
+                             $n2 =~ s/^L(\d)/29$1/;
+                             $n1 =~ s/^Pupae/399/;
+                             $n2 =~ s/^Pupae/399/;
+                             $n1 =~ s/^Ad/999Ad/;
+                             $n2 =~ s/^Ad/999Ad/;
+                             $n1 =~ s/H3.*_([KS])/9999$1/i;
+                             $n2 =~ s/H3.*_([KS])/9999$1/i;
+                             $n1 <=> $n2;}
+select   = name FIELD_sel#FIELD_ds
+link     = sub {my $src = shift->source;
+                my %subs= (FIELD_ts=>FIELD_ds);
+                return "http://intermine.modencode.org/query/portal.do?externalid=$subs{$src}&class=Submission";}

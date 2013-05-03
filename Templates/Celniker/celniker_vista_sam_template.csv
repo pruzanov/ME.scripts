@@ -1,0 +1,83 @@
+[FIELD_name_bam:database]
+db_adaptor = Bio::DB::Sam
+db_args    = -fasta /browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta
+             -bam   /browser_data/fly/sam_binaries/Celniker/FIELD_name.bam
+             -split_splices 1
+search options = none
+
+
+[FIELD_name:2000]
+feature      = VISTA:FIELD_ts
+glyph        = vista_plot
+glyph select = vista_plot
+graph_type   = boxes
+stranded     = 0
+height       = 30
+connector    = solid
+autoscale    = z_score
+variance_band= 1
+database     = celniker_wig
+min_peak     = 0
+box_subparts = 1
+neg_color    = blue
+max_peak     = 0.002
+start_color  = blue
+balloon hover = sub {my $f = shift;
+                my $score = $f->score;
+                my $img_url = "/cgi-bin/gb2/gbrowse_key_img?min=0;max=0.002;start_c=blue;end_c=lightblue";
+                return $score ? join (" ","<img width=215 height=88 src=\"/images/vista_legend.png\"/><br/><img width=120 height=23 src=\"".$img_url."\"/>",$f->name,"(q-value:".$score.")") : $f->name;}
+fgcolor      = black
+pos_color    = blue
+bgcolor      = orange
+alpha        = 80
+group_label  = 0
+end_color    = lightblue
+bicolor_pivot= zero
+smoothing    = mean
+label        = sub {my $name = shift->name;
+                    $name =~ s/_GFP//;
+                    $name =~ s/_/ /g;
+                    return $name =~ /(.+?) (.+)/ ? sprintf("%-6s %-5s",$1,$2) : sprintf("%-18s",$name); }
+label_position = left
+label density= 100
+smoothing_window = 16
+link         = sub { my $feature = shift;
+                     my $src = $feature->source;
+                     my %subs = (FIELD_ts=>FIELD_ds);
+                     if (!$subs{$src}) {
+                      my $c     = $feature->seq_id;
+                      my $name  = $feature->name;
+                      my $class = eval {CGI::escape($feature->class)}||'';
+                      my $ref   = CGI::escape("$c");
+                      my $start = CGI::escape($feature->start);
+                      my $end   = CGI::escape($feature->end);
+                      my $id    = eval {CGI::escape($feature->primary_id)};
+                      return "../../gbrowse_details/fly?name=$name;class=$class;ref=$ref;start=$start;end=$end;feature_id=$id;db_id=celniker:database";
+                    }
+                    return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
+
+[FIELD_name]
+database      = FIELD_name_bam
+feature       = read_pair
+glyph         = segments
+data source   = FIELD_ds
+track source  = FIELD_ts
+category      = FIELD_cat
+draw_target   = 1
+show_mismatch = 1
+mismatch_color= orange
+indel_color   = yellow
+bgcolor       = black
+fgcolor       = black
+height        = 4
+label         = 1
+label_position= left
+label density = 50
+bump          = fast
+connector     = sub {
+                  my $glyph = pop;
+                  return $glyph->level == 0 ? 'dashed' : 'solid';
+                }
+maxdepth      = 2
+box_subparts  = 2
+key           = FIELD_key

@@ -1,0 +1,40 @@
+[Henikoff_Salt_Ext_WIG:70001]
+glyph_subtype = density
+height        = 12
+
+[Henikoff_Salt_Ext_WIG]
+feature       =
+glyph         = vista_plot
+glyph select  = vista_plot
+data source   = 
+track source  = 
+bump density  = 250
+variance_band = 1
+autoscale     = z_score
+category      = Chromatin Structure: Nucleosome Structure
+pos_color     = blue
+neg_color     = blue
+sort_order    = sub ($$) {my $n1 = shift->feature->name;
+                          my $n2 = shift->feature->name;
+                          return $n1 <=> $n2;}
+stranded      = 0
+connector     = none
+fgcolor       = black
+height        = 30
+select        = name;
+database      = henikoff
+label density = 100
+smoothing     = mean
+smoothing_window = 10
+glyph_subtype = signal
+key           = Chromatin fractions extracted with NaCl
+group_on      =
+bgcolor       = lightgrey
+bicolor_pivot = min
+group_label   = 0
+label_position = left
+label         = sub { return sprintf("%-25s",shift->name); }
+link      = sub {my $src = shift->source;
+                 my %subs = (
+                 return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
+citation  =

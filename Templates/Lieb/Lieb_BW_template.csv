@@ -1,0 +1,39 @@
+[Henikoff_FIELD_name]
+feature         = VISTA:FIELD_ts
+glyph           = vista_plot
+glyph select    = vista_plot
+label           = sub { my $name = shift->name;
+                        $name =~ s/Dm_//;
+                        return sprintf "%-25s",$name; }
+smoothing       = mean
+smoothing_window = 10
+category        = Chromatin Structure: Nucleosome Structure
+bump density    = 250
+data source     = FIELD_ds
+track source    = FIELD_ts
+autoscale       = local
+variance_band   = 1
+max_peak        = 3
+min_peak        = -3
+start_color     = lightblue
+end_color       = blue
+pos_color       = blue
+neg_color       = blue
+stranded        = 0
+bgcolor         = blue
+alpha           = 80
+fgcolor         = black
+connector       = solid
+database        = peter
+only_show       = signal
+height          = 30
+label density   = 100
+label_position  = left
+box_subparts    = 1
+bicolor_pivot   = min
+key             = FIELD_key
+select          = name FIELD_sel#FIELD_ds
+link             = sub {my $src = shift->source;
+                        my %subs= (FIELD_ts=>FIELD_ds);
+                        return "http://intermine.modencode.org/query/portal.do?externalid=$subs{$src}&class=Submission";}
+citation        = 

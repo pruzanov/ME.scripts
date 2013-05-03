@@ -1,0 +1,57 @@
+[FIELD_name_bam:database]
+db_adaptor = Bio::DB::Sam
+db_args    = -fasta /browser_data/cbriggsae/fasta/c_briggsae.WS225.genomic.fa
+             -bam   /browser_data/cbriggsae/sam_binaries/Waterston/FIELD_name.bam
+             -split_splices 1
+search options = none
+
+
+[FIELD_name:2000]
+feature       = WIG:FIELD_ts
+glyph         = hybrid_plot
+glyph select  = hybrid_plot
+graph_type    = boxes
+group_label   = 0
+label         = 1
+smoothing     = mean
+smoothing_window = 10
+bicolor_pivot = zero
+bump density  = 250
+max_score     = 500
+min_score     = -500
+flip_sign     = 1
+pos_color     = blue
+neg_color     = orange
+stranded      = 0
+bgcolor       = lightgrey
+fgcolor       = black
+database      = waterston
+height        = 40
+link          = sub {return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_FIELD_ds&class=Submission";}
+
+
+[FIELD_name]
+database      = FIELD_name_bam
+feature       = read_pair
+glyph         = segments
+data source   = FIELD_ds
+track source  = FIELD_ts
+category      = FIELD_cat
+draw_target   = 1
+show_mismatch = 1
+mismatch_color= orange
+indel_color   = yellow
+bgcolor       = black
+fgcolor       = black
+height        = 4
+label         = 1
+label_position= left
+label density = 50
+bump          = fast
+connector     = sub {
+                  my $glyph = pop;
+                  return $glyph->level == 0 ? 'dashed' : 'solid';
+                }
+maxdepth      = 2
+box_subparts  = 2
+key           = FIELD_key

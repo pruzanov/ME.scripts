@@ -1,0 +1,45 @@
+[FIELD_name_bam:database]
+db_adaptor = Bio::DB::Sam
+db_args    = -fasta /browser_data/worm/fasta/elegans.WS190.dna.fa
+             -bam   /browser_data/worm/sam_binaries/Waterston/FIELD_name.bam
+             -split_splices 1
+search options = none
+
+                 
+[FIELD_name:20000]
+feature     = coverage:1000
+glyph       = wiggle_xyplot
+graph_type  = histogram
+pos_color   = blue
+neg_color   = blue
+autoscale   = local
+height      = 20
+bump        = 0
+label       = 0
+
+
+[FIELD_name]
+database      = FIELD_name_bam
+feature       = read_pair
+glyph         = segments
+data source   = FIELD_ds
+track source  = FIELD_ts
+category      = modENCODE Tracks: Waterston Group:RNA-Seq: FIELD_cat
+draw_target   = 1
+show_mismatch = 1
+mismatch_color= red
+indel_color   = orange
+bgcolor       = black
+fgcolor       = black
+height        = 4
+label         = 1
+label_position= left
+label density = 50
+bump          = fast
+connector     = sub {
+                  my $glyph = pop;
+                  return $glyph->level == 0 ? 'dashed' : 'solid';
+                }
+maxdepth      = 2
+box_subparts  = 2
+key           = FIELD_key

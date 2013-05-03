@@ -1,0 +1,50 @@
+[FIELD_name_bam:database]
+db_adaptor = Bio::DB::Sam
+db_args    = -fasta /browser_data/fly/fasta/dmel-all-chromosome-r5.22.fasta
+             -bam   /browser_data/fly/sam_binaries/Henikoff/FIELD_name.bam
+             -split_splices 1
+search options = none
+
+[FIELD_name_bw:database]
+db_adaptor = Bio::DB::BigWig
+db_args    = sub { require Bio::DB::Sam;
+                   return (
+                       -bigwig => '/browser_data/fly/sam_binaries/Henikoff/FIELD_name.bw',
+                       -fasta  => Bio::DB::Sam::Fai->open('/browser_data/fly/fasta/dmel-all-chromosome-r5.22.fasta'),
+                       );
+                 }
+
+[FIELD_name:2000]
+database      = FIELD_name_bw
+feature       = summary
+glyph         = wiggle_whiskers
+mean_color    = blue
+max_color     = lightblue
+Height        = 30
+link          = sub {return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_FIELD_ds&class=Submission";}
+
+[FIELD_name]
+database      = FIELD_name_bam
+feature       = read_pair
+glyph         = segments
+data source   = FIELD_ds
+track source  = FIELD_ts
+category      = FIELD_cat
+draw_target   = 1
+show_mismatch = 1
+mismatch_color= red
+indel_color   = orange
+bgcolor       = black
+fgcolor       = black
+height        = 4
+label         = 1
+label_position= left
+label density = 50
+bump          = fast
+connector     = sub {
+                  my $glyph = pop;
+                  return $glyph->level == 0 ? 'dashed' : 'solid';
+                }
+maxdepth      = 2
+box_subparts  = 2
+key           = FIELD_key
