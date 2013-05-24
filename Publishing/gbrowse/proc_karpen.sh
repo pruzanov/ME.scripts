@@ -37,15 +37,15 @@ prologue ()
 
   # Get signal and peak/binding site track IDs
 
-  SIGID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'smoothedM.wig' | cut -d' ' -f5 | cut -d':' -f2)
+  SIGID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'smoothedM.wig' | sed 's/.*bigwig/bigwig/' | cut -d':' -f2)
   echo $SIGID | grep -q '^[0-9]\+$'
   if [ $? -ne 0 ]; then
     echo "	No bigwigs for this submission!" | tee -a "$LOGFILE"
-    PEAKID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'repset' | cut -d' ' -f5 | cut -d':' -f2)
+    PEAKID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'repset' | sed 's/.*binding_site/binding_site/' | cut -d':' -f2)
     SIGID=$PEAKID
     BIGWIGS=0
   else
-    PEAKID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'binding_site' | grep -v 'smoothedM' | cut -d' ' -f5 | cut -d':' -f2)
+    PEAKID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'binding_site' | grep -v 'smoothedM' | sed 's/.*binding_site/binding_site/' | cut -d':' -f2)
     BIGWIGS=1
   fi
 
