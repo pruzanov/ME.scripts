@@ -66,8 +66,9 @@ prologue ()
 # Subroutine to do additional processing on ChIP-seq submissions
 chipseq_subroutine ()
 {
-    process_subs "$SUBID" >> "$LOGFILE" 2>&1
-    find "$SUBID" -type f \( -iname '*bam*' ! -iname 'sub*' \) -print0 | xargs -0 rm -v
+    samtools merge "$SUBID/merged_$SUBID.bam" "$SUBID"/*bam
+    #process_subs "$SUBID" >> "$LOGFILE" 2>&1
+    find "$SUBID" -type f \( -iname '*bam*' ! -iname 'sub*' ! -iname 'merged*' \) -print0 | xargs -0 rm -v
     ps_kcs_bw.sh "$SUBID"
 }
 
