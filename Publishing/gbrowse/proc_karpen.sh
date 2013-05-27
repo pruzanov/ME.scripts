@@ -33,14 +33,14 @@ exec 2>&1
 prologue ()
 {
   cd ~/Data
-  echo "Processing submission $SUBID..." | tee -a "$LOGFILE"
+  echo "Processing submission $SUBID..."
 
   # Get signal and peak/binding site track IDs
 
   SIGID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'smoothedM.wig' | sed 's/.*bigwig/bigwig/' | cut -d':' -f2)
   echo $SIGID | grep -q '^[0-9]\+$'
   if [ $? -ne 0 ]; then
-    echo "	No bigwigs for this submission!" | tee -a "$LOGFILE"
+    echo "	No bigwigs for this submission!"
     PEAKID=$(merge_cites "$SUBID" &>/dev/null; grep '^key ' "cache/$SUBID.stanza" | grep 'repset' | sed 's/.*binding_site/binding_site/' | cut -d':' -f2)
     SIGID=$PEAKID
     BIGWIGS=0
@@ -49,12 +49,12 @@ prologue ()
     BIGWIGS=1
   fi
 
-  echo "	Found signal track $SIGID and peak track $PEAKID" | tee -a "$LOGFILE"
+  echo "	Found signal track $SIGID and peak track $PEAKID"
 
   # Map these to the submission ID; remove duplicate lines first
   sed -i "/$SUBID/d" "$MAPFILE"
   echo "$SUBID	$SIGID	$PEAKID" >> "$MAPFILE"
-  echo "	Adding line: \"$SUBID	$SIGID	$PEAKID\" to $MAPFILE" | tee -a "$LOGFILE"
+  echo "	Adding line: \"$SUBID	$SIGID	$PEAKID\" to $MAPFILE"
 
   if [ $BIGWIGS -eq 0 ]; then
     chipseq_subroutine
@@ -76,7 +76,7 @@ chipseq_subroutine ()
 epilogue ()
 {
   # Remove bigwig tracks not mapped in $MAPFILE
-  find "$SUBID" -type f | grep -v "$SIGID\|$PEAKID\|$SUBID" | grep -vi "SDRF\|IDF" | xargs -I '{}' rm -v '{}'; rm "$SUBID"/*binding_site* -v;
+  find "$SUBID" -type f | grep -v "$PEAKID\|$SIGID" | grep -v "$SUBID/.*$SUBID.*" | grep -vi "SDRF\|IDF" | xargs -I '{}' rm -v '{}'; rm "$SUBID"/*binding_site* -v;
 
   # Generate the loader GFF.
   dir2load_gff.pl "$SUBID" > "VISTA_$SUBID.gff"
@@ -104,7 +104,7 @@ epilogue ()
   #if [ $BIGWIGS -eq 1 ]; then
   echo "$FIELD_NAME	$FIELD_KEY	$FIELD_DS	$FIELD_TS	$FIELD_CAT	$FIELD_SEL" > "$SUBID/$SUBID.fields"
   #fi
-  echo "	Using $TEMPLATEFILE, writing to $SUBID/$SUBID.fields" | tee -a "$LOGFILE"
+  echo "	Using $TEMPLATEFILE, writing to $SUBID/$SUBID.fields"
   template_filler "$TEMPLATEFILE" "$SUBID/$SUBID.fields" > "$SUBID/$SUBID.conf"
 }
 
@@ -112,14 +112,14 @@ epilogue ()
 # Also, loads the GFF into the SeqFeature DB.
 #upload ()
 #{
-#  #echo "	Copying $SUBID/$SUBID.conf to rdevilla@modencode.oicr.on.ca:~/public_html/conf/karpen_conf/$SUBID.conf" | tee -a "$LOGFILE"
+#  #echo "	Copying $SUBID/$SUBID.conf to rdevilla@modencode.oicr.on.ca:~/public_html/conf/karpen_conf/$SUBID.conf"
 #  #scp "$SUBID/$SUBID.conf" "rdevilla@modencode.oicr.on.ca:/home/rdevilla/public_html/conf/karpen_conf/$SUBID.conf"
-#  #echo "	Copying $SUBID/$SIGID.bw to rdevilla@modencode.oicr.on.ca:/browser_data/fly/wiggle_binaries/karpen/$SIGID.bw" | tee -a "$LOGFILE"
+#  #echo "	Copying $SUBID/$SIGID.bw to rdevilla@modencode.oicr.on.ca:/browser_data/fly/wiggle_binaries/karpen/$SIGID.bw"
 #  #scp "$SUBID/$SIGID.bw" "rdevilla@modencode.oicr.on.ca:/browser_data/fly/wiggle_binaries/karpen/$SIGID.bw"
-#  #echo "	Copying $SUBID/VISTA_$SUBID.gff to rdevilla@modencode.oicr.on.ca:~/Data/VISTA_$SUBID.gff" | tee -a "$LOGFILE"
+#  #echo "	Copying $SUBID/VISTA_$SUBID.gff to rdevilla@modencode.oicr.on.ca:~/Data/VISTA_$SUBID.gff"
 #  #scp "$SUBID/VISTA_$SUBID.gff" "rdevilla@modencode.oicr.on.ca:/home/rdevilla/Data/VISTA_$SUBID.gff"
 #  #
-#  #echo "	Loading $SUBID/VISTA_$SUBID.gff into SeqFeatures DB" | tee -a "$LOGFILE"
+#  #echo "	Loading $SUBID/VISTA_$SUBID.gff into SeqFeatures DB"
 #  #ssh rdevilla@modencode.oicr.on.ca "bp_seqfeature_load.pl -d ryantesting -u modencode -p modencode+++ /home/rdevilla/Data/VISTA_$SUBID.gff"
 #}
 
