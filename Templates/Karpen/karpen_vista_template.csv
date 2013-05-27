@@ -1,11 +1,11 @@
-[KARPEN_CHIPCHIP_HISMODENZ_:70001]
+[KARPEN_CHIPCHIP_HISMODENZ_FIELD_name:70001]
 glyph_subtype = density
 height        = 12
 
-[KARPEN_CHIPCHIP_HISMODENZ_]
-feature      = 
-track source = 
-data source  = 
+[KARPEN_CHIPCHIP_HISMODENZ_FIELD_name]
+feature      = VISTA:FIELD_ts
+track source = FIELD_ts
+data source  = FIELD_ds
 glyph        = vista_plot
 glyph select = vista_plot
 autoscale     = z_score
@@ -25,7 +25,7 @@ group_label  = 0
 end_color    = black
 glyph_subtype= signal
 bump density = 250
-select       = name;
+select	     = name;
 category     = Chromatin Structure: Histone Modifying Enzymes:ChIP-chip (Grouped by Cell Line)
 sort_order   = name
 stranded     = 0
@@ -34,7 +34,7 @@ connector    = solid
 label density= 100
 smoothing    = mean
 smoothing_window = 10
-key          = Put your key here
+key          = FIELD_key
 group_on     =
 bicolor_pivot= min
 balloon hover = sub {my $f = shift;
@@ -51,6 +51,16 @@ label        = sub {  my $name = shift->name;
                       return $name =~/(.+?) (.+)$/ ? sprintf "%-10s %-7s",$1,$2 : sprintf "%-15s",$name;
                     }
 link         = sub { my $src = shift->source;
-                     my %subs =(
-                     return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
+                     my %subs = (FIELD_ts=>FIELD_ds);
+                     if (!$subs{$src}) {
+                      my $c     = $feature->seq_id;
+                      my $name  = $feature->name;
+                      my $class = eval {CGI::escape($feature->class)}||'';
+                      my $ref   = CGI::escape("$c");
+                      my $start = CGI::escape($feature->start);
+                      my $end   = CGI::escape($feature->end);
+                      my $id    = eval {CGI::escape($feature->primary_id)};
+                      return "../../gbrowse_details/fly?name=$name;class=$class;ref=$ref;start=$start;end=$end;feature_id=$id;db_id=karpen:database";
+                    }
+                    return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
 citation =
