@@ -121,7 +121,7 @@ foreach (split /^/, $geo_email) {
         # The page should contain an instance of an "expt." string, which will
         # tell us the experiment number for this GSM ID. If it doesn't exist,
         # we cannot continue so we die.
-        if ($geo_page =~ m/expt\.[0-9]+\s/) {
+        if ($geo_page =~ m/expt\.[0-9]+\s*/) {
             my $expt_number = $&;
             $expt_number =~ s/expt\.//g;
             $expt_number = shave($expt_number);
@@ -197,7 +197,8 @@ foreach my $sub (@subs) {
 
     if ($mech->uri() =~ m/login/i) {
         print "[Main] Logging into modENCODE DCC...\n";
-        $mech->submit_form(form_number => 1, fields => { login => 'aramadhan', password => '$72831TesFF]Mod' });
+        $mech->submit_form(form_number => 1, fields => { login => 'rdevilla',
+                password => 'nope' });
     }
 
     if ($mech->content() =~ m/A set of GEO ids has already been successfully attached to this project/i) {
