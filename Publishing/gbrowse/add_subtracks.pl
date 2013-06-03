@@ -102,6 +102,7 @@ sub update_stanza {
         # "subs" hash kv-pairs
         push @subs_lines, sprintf "\t\t\t$_->{SignalID}=>$_->{SubID},\n";
     }
+    $subs_lines[-1] =~ s/,$/\);/;
 
     ######################################################
     # End stanza lines
@@ -109,7 +110,15 @@ sub update_stanza {
 
     ## Add new VISTA:nnnnn lines.
     my $lastidx = lastidx { /VISTA:[0-9]{1,5}/ } @{$stanza};
-    splice @{$stanza}, $lastidx, 0, @vista_lines;
+    my $firstidx = firstidx { /VISTA:[0-9]{1,5}/ } @{$stanza};
+
+    # If there is only one VISTA:nnnnn entry, splice AFTER that line, not
+    # before.
+    if ($lastidx == $firstidx) {
+        splice @{$stanza}, $lastidx+1, 0, @vista_lines;
+    } else {
+        splice @{$stanza}, $lastidx, 0, @vista_lines;
+    }
 
     ## Update the "track source" field.
     chomp $stanza->[firstidx { /^track source/ } @{$stanza}];
@@ -124,7 +133,16 @@ sub update_stanza {
     splice @{$stanza}, $lastidx, 0, @select_lines;
 
     $lastidx = lastidx { /[0-9]{1,5}\s*=>\s*[0-9]{1,4}\s*\);/ } @{$stanza};
-    splice @{$stanza}, $lastidx, 0, @subs_lines;
+    $firstidx = firstidx { /[0-9]{1,5}\s*=>\s*[0-9]{1,4}\s*\);/ } @{$stanza};
+
+    # If there is only one mapping in %subs, we need to adjust the parentheses
+    # slightly to stay syntactically correct.
+    if ($lastidx == $firstidx) {
+        # Change the ); at the end of line to a comma
+        $stanza->[$firstidx] =~ s/\);/,/;
+    }
+    # Insert our new line after the newly created comma
+    splice @{$stanza}, $lastidx+1, 0, @subs_lines;
 
     print STDOUT @{$stanza};
 }
