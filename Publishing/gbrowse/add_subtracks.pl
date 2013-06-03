@@ -83,9 +83,15 @@ sub update_stanza {
 
     # Update the "track source" field.
     chomp $stanza->[$index];
+    print STDOUT "$stanza->[$index] ";
     foreach (@{$subtracks}) {
-        print STDOUT "$stanza->[$index] $_->{SignalID} $_->{PeakID}\n";
+        if ($_->{"SignalID"} != $_->{"PeakID"}) {
+            print STDOUT "$_->{SignalID} $_->{PeakID} ";
+        } else {
+            print STDOUT "$_->{SignalID} ";
+        }
     }
+    print STDOUT "\n";
 
     # Skip over the old "track source" line.
     $index++;
@@ -98,9 +104,15 @@ sub update_stanza {
 
     # Update it.
     chomp $stanza->[$index];
+    print STDOUT "$stanza->[$index] ";
     foreach (@{$subtracks}) {
-        print STDOUT "$stanza->[$index] $_->{SubID}\n"
+        if ($_->{"SignalID"} == $_->{"PeakID"}) {
+            print STDOUT "$_->{SubID} "
+        } else {
+            print STDOUT "$_->{SubID} $_->{SubID} "
+        }
     }
+    print STDOUT "\n";
 
     # Skip over the old "data source" line.
     $index++;
@@ -174,6 +186,7 @@ sub parse_mapfile {
     my @new_subs;
     foreach (@{$lines}) {
         my @fields = split('\t', $_);
+        chomp @fields;
         my $sub = {
             "Name" => $fields[0],
             "SubID" => $fields[1],
