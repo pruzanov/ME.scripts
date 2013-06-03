@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Data::Dumper;
+use List::MoreUtils qw(lastidx firstidx);
 
 =pod
 
@@ -62,112 +63,70 @@ Track.2	1002	36136	13563
 sub update_stanza {
     my $index = 0;
     my ($stanza, $subtracks) = @_;
+    #print STDERR @{$stanza};
 
-    # Find the "feature" field.
-    until ($stanza->[$index] =~ /^feature/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
+    ######################################################
+    # Generate new stanza lines here
+    ######################################################
 
-    # Find the last VISTA: parameter.
-    while ($stanza->[$index] =~ /\s*VISTA:[0-9]{1,5}/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
+    my @vista_lines;
+    my $track_ids = '';
+    my $data_ids = '';
+    my @select_lines;
+    my @subs_lines;
 
-    # We are at the line after the last VISTA: parameter in the stanza.
-    # Insert our new lines here.
     foreach (@{$subtracks}) {
-        printf STDOUT "\t\tVISTA:%s\n", $_->{"SignalID"};
-    }
 
-    # Update the "track source" field.
-    chomp $stanza->[$index];
-    print STDOUT "$stanza->[$index] ";
-    foreach (@{$subtracks}) {
+        # VISTA:nnnnn lines
+        push @vista_lines, sprintf "\t\tVISTA:%s\n", $_->{"SignalID"};
+
+        # New IDs to be appended to "track source" line
         if ($_->{"SignalID"} != $_->{"PeakID"}) {
-            print STDOUT "$_->{SignalID} $_->{PeakID} ";
+            $track_ids .= "$_->{SignalID} $_->{PeakID} ";
         } else {
-            print STDOUT "$_->{SignalID} ";
+            $track_ids .= "$_->{SignalID} ";
         }
-    }
-    print STDOUT "\n";
+        chomp $track_ids;
 
-    # Skip over the old "track source" line.
-    $index++;
-
-    # Find "data source" field.
-    until ($stanza->[$index] =~ /^data source/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
-
-    # Update it.
-    chomp $stanza->[$index];
-    print STDOUT "$stanza->[$index] ";
-    foreach (@{$subtracks}) {
+        # New IDs to be appended to "data source" line
         if ($_->{"SignalID"} == $_->{"PeakID"}) {
-            print STDOUT "$_->{SubID} "
+            $data_ids .= "$_->{SubID} "
         } else {
-            print STDOUT "$_->{SubID} $_->{SubID} "
+            $data_ids .= "$_->{SubID} $_->{SubID} "
         }
-    }
-    print STDOUT "\n";
+        chomp $data_ids;
 
-    # Skip over the old "data source" line.
-    $index++;
+        # "select" lines
+        push @select_lines, sprintf "\t\t$_->{Name} \"$_->{Name}\" = $_->{SubID};\n";
 
-    # Find "select" field.
-    until ($stanza->[$index] =~ /^select/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
-    print STDOUT "$stanza->[$index]";
-    $index++;
-
-    # Find the last parameter in this field.
-    while ($stanza->[$index] =~ /.+\s*".+"\s*=\s*[0-9]{1,4}/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
+        # "subs" hash kv-pairs
+        push @subs_lines, sprintf "\t\t\t$_->{SignalID}=>$_->{SubID},\n";
     }
 
-    # Add our new subtrack selections.
-    foreach (@{$subtracks}) {
-        printf STDOUT "\t\t$_->{Name} \"$_->{Name}\" = $_->{SubID};\n";
-    }
+    ######################################################
+    # End stanza lines
+    ######################################################
 
-    # Find "link" field.
-    until ($stanza->[$index] =~ /^link/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
-    print STDOUT "$stanza->[$index]";
-    $index++;
+    ## Add new VISTA:nnnnn lines.
+    my $lastidx = lastidx { /VISTA:[0-9]{1,5}/ } @{$stanza};
+    splice @{$stanza}, $lastidx, 0, @vista_lines;
 
-    # Find "%subs" hash.
-    until ($stanza->[$index] =~ /.*%subs.*/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
+    ## Update the "track source" field.
+    chomp $stanza->[firstidx { /^track source/ } @{$stanza}];
+    $stanza->[firstidx { /^track source/ } @{$stanza}] .= " $track_ids\n";
 
-    # Print everything out until the very last key-value pair.
-    until ($stanza->[$index] =~ /[0-9]{1,5}\s*=>\s*[0-9]{1,4}\s*\);/) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
+    ## Update the "data source" field.
+    chomp $stanza->[firstidx { /^data source/ } @{$stanza}];
+    $stanza->[firstidx { /^data source/ } @{$stanza}] .= " $data_ids\n";
 
-    # Add our new subtrack links.
-    foreach (@{$subtracks}) {
-        printf STDOUT "\t\t\t$_->{SignalID}=>$_->{SubID},\n";
-    }
-    print STDOUT "$stanza->[$index]";
-    $index++;
+    ## Update the "select" field.
+    $lastidx = lastidx { /.+\s*".+"\s*=\s*[0-9]{1,4}/ } @{$stanza};
+    splice @{$stanza}, $lastidx, 0, @select_lines;
 
-    until ($index > $#{$stanza}) {
-        print STDOUT "$stanza->[$index]";
-        $index++;
-    }
+    $lastidx = lastidx { /[0-9]{1,5}\s*=>\s*[0-9]{1,4}\s*\);/ } @{$stanza};
+    splice @{$stanza}, $lastidx, 0, @subs_lines;
 
+    print STDOUT @{$stanza};
 }
 
 ################################################################################
