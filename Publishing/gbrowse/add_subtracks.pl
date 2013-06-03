@@ -5,6 +5,32 @@ use warnings;
 
 use Data::Dumper;
 
+=pod
+
+=head1 NAME
+
+add_subtracks.pl - Add new subtracks to a GBrowse VISTA stanza.
+
+=head2 SYNOPSIS
+
+add_subtracks.pl [STANZAFILE] [MAPFILE]
+
+=head3 DESCRIPTION
+
+add_subtracks.pl accepts a SINGLE GBrowse stanza and a MAPFILE as input.
+
+MAPFILE is a tab-delimited plain text file specifying the details of the new
+subtracks to be added to the stanza.
+
+[Name in GBrowse]	[modENCODE Submission ID]	[Signal track ID]	[Peak track ID]
+Track.1	1001	16353	16356
+Track.2	1002	36136	13563
+.	.	.	.
+.	.	.	.
+.	.	.	.
+
+=cut
+
 ################################################################################
 # A "subtrack" is a hash keyed as such:
 # {
@@ -31,7 +57,7 @@ use Data::Dumper;
 #
 #	@SUBTRACKS is a list of hashrefs, keyed by Name, SubID, SignalID, PeakID.
 ################################################################################
-# Returns an updated stanza with new subtracks added as a list of strings.
+# Prints an updated stanza with new subtracks added to STDOUT.
 ################################################################################
 sub update_stanza {
     my $index = 0;
@@ -132,16 +158,44 @@ sub update_stanza {
 
 }
 
-my @lines;
-while (<>) {
-    push @lines, $_;
+################################################################################
+# parse_mapfile \@LINES
+# Where:
+#
+# 	@LINES is a list of strings, each string a line from the user-supplied
+# 	mapfile. One line represents one NEW subtrack to be added to the stanza.
+#
+################################################################################
+# Returns an arrayref of hashrefs, each hash containing the submission details for
+# each new subtrack
+################################################################################
+sub parse_mapfile {
+    my $lines = shift;
+    my @new_subs;
+    foreach (@{$lines}) {
+        my @fields = split('\t', $_);
+        my $sub = {
+            "Name" => $fields[0],
+            "SubID" => $fields[1],
+            "SignalID" => $fields[2],
+            "PeakID" => $fields[3]
+        };
+        push @new_subs, $sub;
+    }
+    return \@new_subs;
 }
 
-my @new;
-push @new, {
-    "Name" => "Test",
-    "SubID" => 4242,
-    "SignalID" => 69696,
-    "PeakID" => 93939
-};
-update_stanza(\@lines, \@new);
+open(my $stanzafh, "<", $ARGV[0]);
+open(my $mapfh, "<", $ARGV[1]);
+
+my @stanza_lines;
+while (<$stanzafh>) {
+    push @stanza_lines, $_;
+}
+
+my @mapfile_lines;
+while (<$mapfh>) {
+    push @mapfile_lines, $_;
+}
+
+update_stanza(\@stanza_lines, parse_mapfile(\@mapfile_lines));
