@@ -33,7 +33,7 @@ Track.2	1002	36136	13563
 =cut
 
 ################################################################################
-# A "subtrack" is a hash keyed as such:
+# A "Subtrack" is a hashref keyed as such:
 # {
 # 	"Name" => $name,
 # 	"SubID" => $subID,
@@ -56,7 +56,7 @@ Track.2	1002	36136	13563
 #   Use this function only to UPDATE an existing stanza, NOT CREATE a new
 #   one.
 #
-#	@SUBTRACKS is a list of hashrefs, keyed by Name, SubID, SignalID, PeakID.
+#	@SUBTRACKS is a list of Subtracks (see definition above).
 ################################################################################
 # Prints an updated stanza with new subtracks added to STDOUT.
 ################################################################################
@@ -102,6 +102,8 @@ sub update_stanza {
         # "subs" hash kv-pairs
         push @subs_lines, sprintf "\t\t\t$_->{SignalID}=>$_->{SubID},\n";
     }
+    $track_ids =~ s/\s+$//;
+    $data_ids =~ s/\s+$//;
     $subs_lines[-1] =~ s/,$/\);/;
 
     ######################################################
