@@ -12,20 +12,11 @@ use WWW::Mechanize; # To submit forms on the DCC and attach the GEO ID's.
 
 # Takes in a string and returns a shaved (more than just trimmed!) version of
 # the string, stripping any spaces.
-# The reason for this sub is because it seems that regular expressions nor
-# chomping would remove the one tailing space character on strings I get using
-# LWP::Simple. So until I figure out why, I'll continue to use this hack.
 sub shave {
     my $str = shift;
-    my $shaved_str = '';
-    
-    foreach (split "", $str) {
-        if ($_ ne ' ') {
-            $shaved_str .= $_;
-        }
-    }
-
-    return $shaved_str;
+    # Remove all whitespace. (\s = any whitespace char).
+    $str =~ s/\s//g;
+    return $str;
 }
 
 # Prints one dot/period per second for n seconds. Also sleeps for n seconds.
