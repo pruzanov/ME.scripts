@@ -12,23 +12,33 @@ use List::MoreUtils qw(lastidx firstidx);
 
 add_subtracks.pl - Add new subtracks to a GBrowse VISTA stanza.
 
-=head2 SYNOPSIS
+=head1 SYNOPSIS
 
 add_subtracks.pl [STANZAFILE] [MAPFILE]
 
-=head3 DESCRIPTION
+=head1 DESCRIPTION
 
 add_subtracks.pl accepts a SINGLE GBrowse stanza and a MAPFILE as input.
 
 MAPFILE is a tab-delimited plain text file specifying the details of the new
-subtracks to be added to the stanza.
+subtracks to be added to the stanza:
 
 [Name in GBrowse]	[modENCODE Submission ID]	[Signal track ID]	[Peak track ID]
+
 Track.1	1001	16353	16356
+
 Track.2	1002	36136	13563
+
 .	.	.	.
+
 .	.	.	.
+
 .	.	.	.
+
+NOTICE: This script does not really parse MAPFILE correctly. I will fix this
+later perhaps, but for now use the following workaround:
+
+add_subtracks.pl [STANZAFILE] <(grep "$SUBID" [MAPFILE])
 
 =cut
 
