@@ -128,15 +128,21 @@ sub fix_gff3 {
                 # Additionally, if we have already intersected the feature with another, we don't
                 # care about it any more.
 
-                if ($features->{$chrom}->[$j]->[0] > $features->{$chrom}->[$i]->[1] or $features->{$chrom}->[$j]->[3]) {
-                    # AL CODA
+                if ($features->{$chrom}->[$j]->[0] >= $features->{$chrom}->[$i]->[1] or $features->{$chrom}->[$j]->[3]) {
+                    ###########
+                    # AL CODA #
+                    ###########
                     last;
                 } else {
-                    # Keep track of which intervals overlap the "interval in question" (i.e. the one at the index in the outer loop).
                     $hasOverlap = 1;
+
+                    # Keep track of which intervals overlap the "interval in question" (i.e. the one at the index in the outer loop).
                     push @overlaps, [$features->{$chrom}->[$j]->[0],$features->{$chrom}->[$j]->[1],$features->{$chrom}->[$j]->[2]];
+
+                    # Mark these features as intersected so we will not look at them again.
                     $features->{$chrom}->[$i]->[3] = 1;
                     $features->{$chrom}->[$j]->[3] = 1;
+
                     print STDERR "\t[$features->{$chrom}->[$i]->[0],$features->{$chrom}->[$i]->[1]] OVERLAPS WITH [$features->{$chrom}->[$j]->[0],$features->{$chrom}->[$j]->[1]]\n" if $verbose;
                 }
             }
