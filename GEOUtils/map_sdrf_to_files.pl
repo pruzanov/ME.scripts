@@ -3,13 +3,15 @@
 use strict;
 use warnings;
 
+use Carp qw(confess);
+
 use Cwd;
 use Data::Dumper;
 use List::Util qw(max);
 #use Digest::Md5 qw(md5 md5_hex md5_base64);
 
 ####################################################################################################
-# Stuff for dealing with the SOFT file.
+# Stuff for dealing with Samples.
 
 my $input_str = "_Input";
 my $chip_str = "_ChIP";
@@ -19,7 +21,7 @@ my $rep_str = "_Rep";
 # A Sample is:
 # {
 #   "Name" => name					:: String => String
-#   "SourceName" => sourcename		:: String => String
+#   "Sourcename" => sourcename		:: String => String
 # 	"Type" => type					:: String => String
 # 	"Replicate" => replicate		:: String => Number
 #   "Files" => [SFILE, SFILE, ...]	:: String => Arrayref of Supplementary Files
@@ -34,7 +36,7 @@ my $rep_str = "_Rep";
 sub mk_sample {
     return {
         "Name" => shift,
-        "SourceName" => shift,
+        "Sourcename" => shift,
         "Type" => shift,
         "Replicate" => shift,
         "Files" => shift || [],
@@ -64,9 +66,9 @@ sub get_source_name {
     die "Attempt to get source name from unnamed Sample!\n" unless defined $sample->{"Name"};
 
     if ($sample->{"Name"} =~ m/^Snyder_(.+)$/) {
-        $sample->{"SourceName"} = $1;
+        $sample->{"Sourcename"} = $1;
     } else {
-        $sample->{"SourceName"} = undef;
+        $sample->{"Sourcename"} = undef;
     }
 }
 
@@ -109,6 +111,7 @@ my %exts_to_ftypes = (
 # {
 # 	"Filename" => filename			:: String => String
 # 	"Replicate" => replicate		:: String => Integer
+#   "Exptype"  => exptype			:: String => String
 # 	"Filetype" => filetype			:: String => String
 #   "Checksum" => checksum			:: String => String
 # }
@@ -125,6 +128,7 @@ sub mk_sfile {
         "Replicate" => shift,
         "Filetype" => shift,
         "Checksum" => "FOOBAR",
+        "Exptype" => shift,
     };
 }
 
@@ -142,6 +146,20 @@ sub validate_sfile {
     return 1;
 }
 
+# determine_exptype SFILE
+#
+# Determine if an SFILE is Input or ChIP.
+sub determine_exptype {
+    my $sfile = shift;
+    my $sfname = lc $sfile->{"Filename"};
+
+    if ($sfname =~ m/_input_/) {
+        $sfile->{"Exptype"} = "Input";
+    } else {
+        $sfile->{"Exptype"} = "ChIP";
+    }
+}
+
 
 # determine_filetype SFILE
 #
@@ -156,6 +174,8 @@ sub determine_filetype {
             $ft_guess = lc $supfile->{"Filename"} =~ m/fastq/ ? "fastq.gz" : "unknown";
         }
         $supfile->{"Filetype"} = $exts_to_ftypes{$ft_guess};
+    } else {
+        #print Dumper($supfile);
     }
 }
 
@@ -183,6 +203,7 @@ sub determine_replicate {
     }
 }
 
+# TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 # get_md5sum SFILE
 #
 # Given an SFILE, calculate its md5 checksum.
@@ -210,6 +231,7 @@ sub get_supfile_info {
     my $sfile = shift;
 
     determine_filetype($sfile);
+    determine_exptype($sfile);
     determine_replicate($sfile);
 }
 
@@ -270,12 +292,30 @@ sub find_samples {
             $source_basename = undef;
         }
 
+        my @input_files = map { #print Dumper($_);
+        ($_->{"Exptype"} eq "Input" or $_->{"Filetype"} eq "GFF3") and
+        ($_->{"Replicate"} == $i or
+        $_->{"Replicate"} == -1) ? $_ : () } @{$sub};
+
+        my @chip_files = map { #print Dumper($_);
+        ($_->{"Exptype"} eq "ChIP" or $_->{"Filetype"} eq "GFF3") and
+        ($_->{"Replicate"} == $i or
+        $_->{"Replicate"} == -1) ? $_ : () } @{$sub};
+
+        #print Dumper(\@input_files);
+        #print Dumper(\@chip_files);
+
         my $input_sample = mk_sample($basename . $input_str . $rep_str . $i, 
             $source_basename . $input_str . $rep_str . $i,
-            "Input", $i, $sub);
+            #"Input", $i, $sub);
+            #"Input", $i, map { defined $_->{"Exptype"} and defined $_->{"Replicate"} ? ($_->{"Exptype"} eq "Input" and $_->{"Replicate"} == $i ? $_ : ()) : () } @{$sub});
+            #"Input", $i, map { $_->{"Exptype"} eq "Input" and $_->{"Replicate"} == $i ? $_ : () } @{$sub});
+            "Input", $i, \@input_files);
         my $chip_sample = mk_sample($basename . $chip_str . $rep_str . $i, 
             $source_basename . $chip_str . $rep_str . $i,
-            "ChIP", $i, $sub);
+            #"ChIP", $i, $sub);
+            #"ChIP", $i, map { $_->{"Exptype"} eq "ChIP" and $_->{"Replicate"} == $i ? $_ : () } @{$sub});
+            "ChIP", $i, \@chip_files);
         push @samples, ($input_sample, $chip_sample);
     }
 
@@ -306,16 +346,48 @@ sub sfiles_from_sdrf {
 
 my $sdrfmap = sfiles_from_sdrf();
 
+####################################################################################################
+# Stuff for dealing with the SOFT file.
+
+my $series_sample_id_str = "!Series_sample_id = ";
+my $sample_str = "^Sample = ";
+my $sample_title_str = "!Sample_title = ";
+my $sample_source_name_str = "!Sample_source_name = ";
+
+# read_soft FILENAME SAMPLES
+#
+# Read through the SOFT file, make adjustments as necessary.
+sub read_soft {
+    open(my $softfh, "<", shift) or die ($!);
+    my $orig_samples = shift;
+    my @samples = map { $_ } @{$orig_samples};
+    while (<$softfh>) {
+
+        next unless @samples;
+        my $sample = shift @samples;
+        if (m/^!Series_sample_id/) {
+            print $series_sample_id_str . "GSM for " . $sample->{"Name"} . "\n";
+        } elsif (m/^\^Sample/) {
+            print $sample_str . "GSM for " . $sample->{"Name"} . "\n";
+        } elsif (m/^\!Sample_title/) {
+            print $sample_title_str . $sample->{"Name"} . "\n";
+        } elsif (m/^!Sample_source_name/ ) {
+            print $sample_source_name_str . $sample->{"Sourcename"} . "\n";
+        }
+    }
+}
+
 ################################################################################
 # ENTRY POINT
 ################################################################################
 foreach my $sdrf (keys %{$sdrfmap}) {
     foreach my $file (@{$sdrfmap->{$sdrf}}) {
         get_supfile_info($file);
-        #print Dumper($file) unless validate_sfile($file);
+        print Dumper($file) unless validate_sfile($file);
     }
     #printf "$sdrf\t%d\n", get_num_reps($sdrfmap->{$sdrf});
-    print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
+    #print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
+    my $samples = find_samples($sdrfmap->{$sdrf}, $sdrf);
 }
 
 #print Dumper($sdrfmap);
