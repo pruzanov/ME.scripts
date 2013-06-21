@@ -168,6 +168,7 @@ sub determine_filetype {
     my $supfile = shift;
     my $ft_guess = "unknown";
 
+    # NOTE: This regex chokes on things like .wig.combined.wig
     if ($supfile->{"Filename"} =~ m/^.*\.(.+)$/) {
         $ft_guess = lc $1;
         if ($ft_guess eq "gz") {
@@ -349,45 +350,114 @@ my $sdrfmap = sfiles_from_sdrf();
 ####################################################################################################
 # Stuff for dealing with the SOFT file.
 
-my $series_sample_id_str = "!Series_sample_id = ";
-my $sample_str = "^Sample = ";
-my $sample_title_str = "!Sample_title = ";
-my $sample_source_name_str = "!Sample_source_name = ";
+my $series_sample_id_str = "!Series_sample_id";
+my $sample_str = "^Sample";
+my $sample_title_str = "!Sample_title";
+my $sample_source_name_str = "!Sample_source_name";
+my $sample_sup_file_str = "!Sample_supplementary_file_";
+my $sample_raw_file_str = "!Sample_raw_file_";
 
 # read_soft FILENAME SAMPLES
 #
 # Read through the SOFT file, make adjustments as necessary.
+#
+# We make a number of assumptions in this sub:
+# 	> The following lines MUST be present in the input SOFT:
+#
+# 		- !Series_sample_id,	in one contiguous block before the sample blocks
+#
+# 		As a contiguous block, for every sample:
+#
+# 		- ^Sample
+# 		- !Sample_title
+# 		- !Sample_source_name
+#
+#			As a contiguous block, for all files in a sample:
+# 			- !Sample_supplementary_file_n
+# 			- !Sample_raw_file_n
+#
+# If any of the above lines are missing, we will exit.
 sub read_soft {
+
     open(my $softfh, "<", shift) or die ($!);
+
     my $orig_samples = shift;
     my @samples = map { $_ } @{$orig_samples};
-    while (<$softfh>) {
 
-        next unless @samples;
-        my $sample = shift @samples;
-        if (m/^!Series_sample_id/) {
-            print $series_sample_id_str . "GSM for " . $sample->{"Name"} . "\n";
-        } elsif (m/^\^Sample/) {
-            print $sample_str . "GSM for " . $sample->{"Name"} . "\n";
-        } elsif (m/^\!Sample_title/) {
-            print $sample_title_str . $sample->{"Name"} . "\n";
-        } elsif (m/^!Sample_source_name/ ) {
-            print $sample_source_name_str . $sample->{"Sourcename"} . "\n";
+    my @lines;
+    my %seen_lines;
+
+    while (<$softfh>) {
+        if (m/^$series_sample_id_str/) {
+            next if $seen_lines{$series_sample_id_str};
+            $seen_lines{$series_sample_id_str} = 1;
+            push @lines, "%SSI BLOCK MARKER\n";
+        } elsif (m/^\Q$sample_str\E/) {
+            $seen_lines{$sample_sup_file_str} = 0;
+            last unless @samples;
+            print STDERR "RESET\n";
+            push @lines, $sample_str . " = GSM for " . $samples[0]->{"Name"} . "\n";
+        } elsif (m/^$sample_title_str/) {
+            push @lines, $sample_title_str . " = " . $samples[0]->{"Name"} . "\n";
+        } elsif (m/^$sample_source_name_str/) {
+            push @lines, $sample_source_name_str . " = " . $samples[0]->{"Sourcename"} . "\n";
+        } elsif (m/^(${sample_sup_file_str}|${sample_raw_file_str})(type_)?(checksum_)?[0-9]+/) {
+            next if $seen_lines{$sample_sup_file_str};
+            $seen_lines{$sample_sup_file_str} = 1;
+            push @lines, "%FILE BLOCK MARKER\n";
+            shift @samples;
+        } else {
+            push @lines, $_;
         }
     }
+    print STDOUT @lines;
 }
+
+# dirty hack for now
+sub build_softmap {
+    open(my $fh, "<", shift) or die($!);
+    my %struct;
+    while (<$fh>) {
+        chomp;
+        my @fields = split("\t");
+        $struct{$fields[0]} = $fields[1];
+    }
+    return \%struct;
+}
+
+#    while (<$softfh>) {
+#
+#        next unless @samples;
+#        my $sample = shift @samples;
+#        if (m/^!Series_sample_id/) {
+#            print $series_sample_id_str . "GSM for " . $sample->{"Name"} . "\n";
+#        } elsif (m/^\^Sample/) {
+#            print $sample_str . "GSM for " . $sample->{"Name"} . "\n";
+#        } elsif (m/^\!Sample_title/) {
+#            print $sample_title_str . $sample->{"Name"} . "\n";
+#        } elsif (m/^!Sample_source_name/ ) {
+#            print $sample_source_name_str . $sample->{"Sourcename"} . "\n";
+#        }
+#    }
 
 ################################################################################
 # ENTRY POINT
 ################################################################################
+my $softmap = build_softmap(getcwd . "/sdrf-soft.map");
+
+my $hack = 0;
 foreach my $sdrf (keys %{$sdrfmap}) {
     foreach my $file (@{$sdrfmap->{$sdrf}}) {
         get_supfile_info($file);
-        print Dumper($file) unless validate_sfile($file);
+        #print Dumper($file);#unless validate_sfile($file);
     }
     #printf "$sdrf\t%d\n", get_num_reps($sdrfmap->{$sdrf});
     #print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
+
     my $samples = find_samples($sdrfmap->{$sdrf}, $sdrf);
+    read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples) unless $hack;
+    $hack = 1;
 }
+
 
 #print Dumper($sdrfmap);
