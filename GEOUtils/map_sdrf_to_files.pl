@@ -312,12 +312,12 @@ sub find_samples {
             #"Input", $i, map { defined $_->{"Exptype"} and defined $_->{"Replicate"} ? ($_->{"Exptype"} eq "Input" and $_->{"Replicate"} == $i ? $_ : ()) : () } @{$sub});
             #"Input", $i, map { $_->{"Exptype"} eq "Input" and $_->{"Replicate"} == $i ? $_ : () } @{$sub});
             "Input", $i, \@input_files);
-        my $chip_sample = mk_sample($basename . $chip_str . $rep_str . $i, 
-            $source_basename . $chip_str . $rep_str . $i,
-            #"ChIP", $i, $sub);
-            #"ChIP", $i, map { $_->{"Exptype"} eq "ChIP" and $_->{"Replicate"} == $i ? $_ : () } @{$sub});
-            "ChIP", $i, \@chip_files);
-        push @samples, ($input_sample, $chip_sample);
+    my $chip_sample = mk_sample($basename . $chip_str . $rep_str . $i, 
+        $source_basename . $chip_str . $rep_str . $i,
+        #"ChIP", $i, $sub);
+        #"ChIP", $i, map { $_->{"Exptype"} eq "ChIP" and $_->{"Replicate"} == $i ? $_ : () } @{$sub});
+        "ChIP", $i, \@chip_files);
+push @samples, ($input_sample, $chip_sample);
     }
 
     return \@samples;
@@ -354,8 +354,57 @@ my $series_sample_id_str = "!Series_sample_id";
 my $sample_str = "^Sample";
 my $sample_title_str = "!Sample_title";
 my $sample_source_name_str = "!Sample_source_name";
+my $sample_description_str = "!Sample_description";
 my $sample_sup_file_str = "!Sample_supplementary_file_";
 my $sample_raw_file_str = "!Sample_raw_file_";
+my $sample_sup_file_type_str = "!Sample_supplementary_file_type_";
+my $sample_raw_file_type_str = "!Sample_raw_file_type_";
+my $sample_raw_file_checksum_str = "!Sample_raw_file_checksum_";
+
+# build_ssi_block SAMPLES
+# 
+# Return an array of lines that represents the "!Series_sample_id" block preceding the first
+# ^Sample block.
+sub build_ssi_block {
+    my $samples = shift;
+    my @lines;
+    foreach (@{$samples}) {
+        push @lines, $series_sample_id_str . " = GSM for " . $_->{"Name"} . "\n";
+    }
+    return @lines;
+}
+
+# build_file_block SAMPLE
+# 
+# Return a pair of arrays of lines that represent the "!Sample_supplementary_file_n" and 
+# "!Sample_raw_file_n_" blocks.
+sub build_file_block {
+    my $sample = shift;
+    my @sup_lines;
+    my @raw_lines;
+    my $rawnum = 1;
+    my $supnum = 1;
+    foreach (@{$sample->{"Files"}}) {
+        next if m/^$/;
+        my $fname_line = " = " . $_->{"Filename"} . "\n";
+        my $ftype_line = " = " . $_->{"Filetype"} . "\n";
+        if ($_->{"Filetype"} eq "FASTQ") {
+            my $cksum_line = $sample_raw_file_checksum_str . " = " . $_->{"Checksum"} . "\n";
+            $fname_line = $sample_raw_file_str . $rawnum . $fname_line;
+            $ftype_line = $sample_raw_file_type_str . $rawnum . $ftype_line;
+            push @raw_lines, ($fname_line, $ftype_line, $cksum_line);
+            ++$rawnum;
+        } else {
+            $fname_line = $sample_sup_file_str . $supnum . $fname_line;
+            $ftype_line = $sample_sup_file_type_str . $supnum . $ftype_line;
+            push @sup_lines, ($fname_line, $ftype_line);
+            ++$supnum;
+        }
+    }
+    my @lines;
+    push @lines, (@sup_lines, @raw_lines);
+    return @lines;
+}
 
 # read_soft FILENAME SAMPLES
 #
@@ -379,7 +428,8 @@ my $sample_raw_file_str = "!Sample_raw_file_";
 # If any of the above lines are missing, we will exit.
 sub read_soft {
 
-    open(my $softfh, "<", shift) or die ($!);
+    my $softname = shift;
+    open(my $softfh, "<", $softname) or die ($!);
 
     my $orig_samples = shift;
     my @samples = map { $_ } @{$orig_samples};
@@ -387,29 +437,53 @@ sub read_soft {
     my @lines;
     my %seen_lines;
 
+    my %sample_descs;
+
+    # TODO: A bit hacky, refactor later
+    while (<$softfh>) {
+        if (m/^$sample_description_str/) {
+            if (m/=\s+ChIP DNA;/) {
+                $sample_descs{"ChIP"} = $_;
+            } else {
+                $sample_descs{"Input"} = $_;
+            }
+        }
+    }
+
+    close($softfh);
+    open($softfh, "<", $softname) or die ($!);
+
     while (<$softfh>) {
         if (m/^$series_sample_id_str/) {
             next if $seen_lines{$series_sample_id_str};
             $seen_lines{$series_sample_id_str} = 1;
-            push @lines, "%SSI BLOCK MARKER\n";
+            push @lines, build_ssi_block($orig_samples);
         } elsif (m/^\Q$sample_str\E/) {
             $seen_lines{$sample_sup_file_str} = 0;
             last unless @samples;
-            print STDERR "RESET\n";
             push @lines, $sample_str . " = GSM for " . $samples[0]->{"Name"} . "\n";
         } elsif (m/^$sample_title_str/) {
             push @lines, $sample_title_str . " = " . $samples[0]->{"Name"} . "\n";
         } elsif (m/^$sample_source_name_str/) {
             push @lines, $sample_source_name_str . " = " . $samples[0]->{"Sourcename"} . "\n";
+        } elsif (m/^$sample_description_str/) {
+            if ($samples[0]->{"Type"} eq "Input") {
+                push @lines, $sample_descs{"Input"};
+            } else {
+                push @lines, $sample_descs{"ChIP"};
+            }
         } elsif (m/^(${sample_sup_file_str}|${sample_raw_file_str})(type_)?(checksum_)?[0-9]+/) {
             next if $seen_lines{$sample_sup_file_str};
             $seen_lines{$sample_sup_file_str} = 1;
-            push @lines, "%FILE BLOCK MARKER\n";
+            push @lines, build_file_block($samples[0]);
             shift @samples;
         } else {
             push @lines, $_;
         }
     }
+
+    # Should probably relegate this to its own sub and just have this one return @lines
+    my $i = 0;
     print STDOUT @lines;
 }
 
