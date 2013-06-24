@@ -8,7 +8,8 @@ use Carp qw(confess);
 use Cwd;
 use Data::Dumper;
 use List::Util qw(max);
-#use Digest::Md5 qw(md5 md5_hex md5_base64);
+use Digest::MD5 qw(md5 md5_hex md5_base64);
+use Net::SCP qw(scp iscp);
 
 ####################################################################################################
 # Stuff for dealing with Samples.
@@ -127,7 +128,7 @@ sub mk_sfile {
         "Filename" => shift,
         "Replicate" => shift,
         "Filetype" => shift,
-        "Checksum" => "FOOBAR",
+        "Checksum" => shift,
         "Exptype" => shift,
     };
 }
@@ -205,29 +206,47 @@ sub determine_replicate {
 }
 
 # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-# get_md5sum SFILE
+# get_md5sum SFILE SUBID
 #
 # Given an SFILE, calculate its md5 checksum.
+# Returns nothing, modifies the checksum field in SFILE.
 sub get_md5sum {
+    my $sub_prefix = "modencode-www1.oicr.on.ca:/modencode/raw/data/";
+    my $sub_postfix = "/extracted/Sny*/";
     my $sfile = shift;
+    my $subid = shift;
     die "Tried to get_md5sum an SFILE with no name!\n" unless defined $sfile->{"Filename"};
+
+    print STDERR "Getting md5sum for $sfile->{Filename}\n";
 
     opendir(my $dh, getcwd) or die($!);
 
     my $found_file = 0;
     while (readdir $dh) {
-        $found_file = 1 if m/$sfile/;
+        $found_file = 1 if m/$sfile->{"Filename"}/;
     }
 
-    # TODO:
-    # Some SCP subroutine here.
+    unless ($found_file) {
+        print STDERR "File not found; downloading from modencode-www1...\n";
+        scp($sub_prefix . $subid . $sub_postfix . $sfile->{"Filename"}, getcwd . "/" . $sfile->{"Filename"}) or die ($!);
+    }
 
+    open(my $sfh, "<", getcwd . "/" . $sfile->{"Filename"}) or die($!);
+
+    my $md5 = Digest::MD5->new;
+    $md5->addfile($sfh) or die($!);
+    my $hexdigest = $md5->hexdigest or die($!);
+
+    print STDERR "$hexdigest\n";
+    $sfile->{"Checksum"} = $hexdigest;
+
+    #unlink getcwd . "/" . $sfile->{"Filename"};
 }
 
-# get_supfile_info SFILE
+# get_supfile_info SFILE SUBID
 #
 # Given a Supplementary File, try to fill in its Replicate and Type fields,
-# based on its name alone.
+# based on its name alone and the modENCODE submission ID.
 sub get_supfile_info {
     my $sfile = shift;
 
@@ -380,16 +399,18 @@ sub build_ssi_block {
 # "!Sample_raw_file_n_" blocks.
 sub build_file_block {
     my $sample = shift;
+    my $subid = shift;
     my @sup_lines;
     my @raw_lines;
     my $rawnum = 1;
     my $supnum = 1;
-    foreach (@{$sample->{"Files"}}) {
-        next if m/^$/;
-        my $fname_line = " = " . $_->{"Filename"} . "\n";
-        my $ftype_line = " = " . $_->{"Filetype"} . "\n";
-        if ($_->{"Filetype"} eq "FASTQ") {
-            my $cksum_line = $sample_raw_file_checksum_str . " = " . $_->{"Checksum"} . "\n";
+    foreach my $file (@{$sample->{"Files"}}) {
+        next if ($file =~ m/^$/);
+        my $fname_line = " = " . $file->{"Filename"} . "\n";
+        my $ftype_line = " = " . $file->{"Filetype"} . "\n";
+        if ($file->{"Filetype"} eq "FASTQ") {
+            get_md5sum($file, $subid) unless defined $file->{"Checksum"};
+            my $cksum_line = $sample_raw_file_checksum_str . $rawnum . " = " . $file->{"Checksum"} . "\n";
             $fname_line = $sample_raw_file_str . $rawnum . $fname_line;
             $ftype_line = $sample_raw_file_type_str . $rawnum . $ftype_line;
             push @raw_lines, ($fname_line, $ftype_line, $cksum_line);
@@ -406,7 +427,23 @@ sub build_file_block {
     return @lines;
 }
 
-# read_soft FILENAME SAMPLES
+# TODO: A whole sub just for this functionality? Maybe we can integrate this
+# into another sub
+#
+# get_subid FILENAME
+#
+# Read through a SOFT file, using the !Series_summary line to ascertain the modENCODE
+# submission ID.
+sub get_subid {
+    open (my $softfh, "<", shift);
+    while (<$softfh>) {
+        if (m/^!Series_summary\s+=\s+modENCODE_submission_([0-9]{1,4})$/) {
+            return $1;
+        }
+    }
+}
+
+# read_soft FILENAME SAMPLES SUBID
 #
 # Read through the SOFT file, make adjustments as necessary.
 #
@@ -438,6 +475,8 @@ sub read_soft {
     my %seen_lines;
 
     my %sample_descs;
+
+    my $subid = shift;
 
     # TODO: A bit hacky, refactor later
     while (<$softfh>) {
@@ -475,7 +514,7 @@ sub read_soft {
         } elsif (m/^(${sample_sup_file_str}|${sample_raw_file_str})(type_)?(checksum_)?[0-9]+/) {
             next if $seen_lines{$sample_sup_file_str};
             $seen_lines{$sample_sup_file_str} = 1;
-            push @lines, build_file_block($samples[0]);
+            push @lines, build_file_block($samples[0], $subid);
             shift @samples;
         } else {
             push @lines, $_;
@@ -483,7 +522,6 @@ sub read_soft {
     }
 
     # Should probably relegate this to its own sub and just have this one return @lines
-    my $i = 0;
     print STDOUT @lines;
 }
 
@@ -522,14 +560,14 @@ my $softmap = build_softmap(getcwd . "/sdrf-soft.map");
 my $hack = 0;
 foreach my $sdrf (keys %{$sdrfmap}) {
     foreach my $file (@{$sdrfmap->{$sdrf}}) {
-        get_supfile_info($file);
+        get_supfile_info($file, get_subid(getcwd . "/" . $softmap->{$sdrf}));
         #print Dumper($file);#unless validate_sfile($file);
     }
     #printf "$sdrf\t%d\n", get_num_reps($sdrfmap->{$sdrf});
     #print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
 
     my $samples = find_samples($sdrfmap->{$sdrf}, $sdrf);
-    read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples) unless $hack;
+    read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples, get_subid(getcwd . "/" . $softmap->{$sdrf})) unless $hack;
     $hack = 1;
 }
 
