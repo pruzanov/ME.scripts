@@ -200,8 +200,10 @@ sub determine_replicate {
         $sfile->{"Replicate"} = $1;
     } elsif ($fname =~ m/combined/) {
         $sfile->{"Replicate"} = -1;
+    } elsif ($sfile->{"Filetype"} eq "WIG" and $fname =~ m/input/) {
+        $sfile->{"Replicate"} = -1;
     } else {
-        $sfile->{"Replicate"} = 0;
+        $sfile->{"Replicate"} = undef;
     }
 }
 
@@ -217,8 +219,6 @@ sub get_md5sum {
     my $subid = shift;
     die "Tried to get_md5sum an SFILE with no name!\n" unless defined $sfile->{"Filename"};
 
-    print STDERR "Getting md5sum for $sfile->{Filename}\n";
-
     opendir(my $dh, getcwd) or die($!);
 
     my $found_file = 0;
@@ -227,7 +227,6 @@ sub get_md5sum {
     }
 
     unless ($found_file) {
-        print STDERR "File not found; downloading from modencode-www1...\n";
         scp($sub_prefix . $subid . $sub_postfix . $sfile->{"Filename"}, getcwd . "/" . $sfile->{"Filename"}) or die ($!);
     }
 
@@ -237,7 +236,6 @@ sub get_md5sum {
     $md5->addfile($sfh) or die($!);
     my $hexdigest = $md5->hexdigest or die($!);
 
-    print STDERR "$hexdigest\n";
     $sfile->{"Checksum"} = $hexdigest;
 
     #unlink getcwd . "/" . $sfile->{"Filename"};
@@ -322,8 +320,8 @@ sub find_samples {
         ($_->{"Replicate"} == $i or
         $_->{"Replicate"} == -1) ? $_ : () } @{$sub};
 
-        #print Dumper(\@input_files);
-        #print Dumper(\@chip_files);
+        #print STDERR Dumper(\@input_files);
+        #print STDERR Dumper(\@chip_files);
 
         my $input_sample = mk_sample($basename . $input_str . $rep_str . $i, 
             $source_basename . $input_str . $rep_str . $i,
@@ -364,7 +362,6 @@ sub sfiles_from_sdrf {
     return \%struct;
 }
 
-my $sdrfmap = sfiles_from_sdrf();
 
 ####################################################################################################
 # Stuff for dealing with the SOFT file.
@@ -435,7 +432,8 @@ sub build_file_block {
 # Read through a SOFT file, using the !Series_summary line to ascertain the modENCODE
 # submission ID.
 sub get_subid {
-    open (my $softfh, "<", shift);
+    my $softname = shift;
+    open (my $softfh, "<", $softname) or die($!);
     while (<$softfh>) {
         if (m/^!Series_summary\s+=\s+modENCODE_submission_([0-9]{1,4})$/) {
             return $1;
@@ -477,6 +475,7 @@ sub read_soft {
     my %sample_descs;
 
     my $subid = shift;
+    print STDERR "\t\tBLEH $subid\n";
 
     # TODO: A bit hacky, refactor later
     while (<$softfh>) {
@@ -522,7 +521,11 @@ sub read_soft {
     }
 
     # Should probably relegate this to its own sub and just have this one return @lines
-    print STDOUT @lines;
+    #print STDOUT @lines;
+
+    open(my $newsoft, ">", getcwd . "/modencode_$subid.soft.softer") or die ($!);
+    print $newsoft @lines;
+    close($newsoft);
 }
 
 # dirty hack for now
@@ -555,10 +558,12 @@ sub build_softmap {
 ################################################################################
 # ENTRY POINT
 ################################################################################
+my $sdrfmap = sfiles_from_sdrf();
 my $softmap = build_softmap(getcwd . "/sdrf-soft.map");
 
 my $hack = 0;
 foreach my $sdrf (keys %{$sdrfmap}) {
+    print STDERR "Processing " . get_subid(getcwd . "/" . $softmap->{$sdrf}) . "\n";
     foreach my $file (@{$sdrfmap->{$sdrf}}) {
         get_supfile_info($file, get_subid(getcwd . "/" . $softmap->{$sdrf}));
         #print Dumper($file);#unless validate_sfile($file);
@@ -567,8 +572,7 @@ foreach my $sdrf (keys %{$sdrfmap}) {
     #print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
 
     my $samples = find_samples($sdrfmap->{$sdrf}, $sdrf);
-    read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples, get_subid(getcwd . "/" . $softmap->{$sdrf})) unless $hack;
-    $hack = 1;
+    read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples, get_subid(getcwd . "/" . $softmap->{$sdrf}));
 }
 
 
