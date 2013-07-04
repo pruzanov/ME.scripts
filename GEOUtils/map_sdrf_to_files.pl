@@ -104,6 +104,7 @@ my %exts_to_ftypes = (
     "gff3" => "GFF3",
     "wig" => "WIG",
     "fastq.gz" => "FASTQ",
+    "fastq" => "FASTQ",
     "unknown" => "UNKNOWN",
 );
 
@@ -154,7 +155,7 @@ sub determine_exptype {
     my $sfile = shift;
     my $sfname = lc $sfile->{"Filename"};
 
-    if ($sfname =~ m/_input_/) {
+    if ($sfname =~ m/input/) {
         $sfile->{"Exptype"} = "Input";
     } else {
         $sfile->{"Exptype"} = "ChIP";
@@ -203,6 +204,7 @@ sub determine_replicate {
     } elsif ($sfile->{"Filetype"} eq "WIG" and $fname =~ m/input/) {
         $sfile->{"Replicate"} = -1;
     } else {
+        print STDERR "Could not determine replicate number for $fname!\n";
         $sfile->{"Replicate"} = undef;
     }
 }
@@ -214,7 +216,9 @@ sub determine_replicate {
 # Returns nothing, modifies the checksum field in SFILE.
 sub get_md5sum {
     my $sub_prefix = "modencode-www1.oicr.on.ca:/modencode/raw/data/";
-    my $sub_postfix = "/extracted/Sny*/";
+    # This was changed to "/extracted/" for some reason in the past; it has now been
+    # changed back to "/extracted/Sny*". If something breaks, look into this.
+    my $sub_postfix = "/extracted/Sny*";
     my $sfile = shift;
     my $subid = shift;
     die "Tried to get_md5sum an SFILE with no name!\n" unless defined $sfile->{"Filename"};
@@ -239,6 +243,7 @@ sub get_md5sum {
     $sfile->{"Checksum"} = $hexdigest;
 
     #unlink getcwd . "/" . $sfile->{"Filename"};
+    #print STDERR Dumper($sfile) unless validate_sfile($sfile);
 }
 
 # get_supfile_info SFILE SUBID
@@ -475,7 +480,6 @@ sub read_soft {
     my %sample_descs;
 
     my $subid = shift;
-    print STDERR "\t\tBLEH $subid\n";
 
     # TODO: A bit hacky, refactor later
     while (<$softfh>) {
@@ -566,13 +570,16 @@ foreach my $sdrf (keys %{$sdrfmap}) {
     print STDERR "Processing " . get_subid(getcwd . "/" . $softmap->{$sdrf}) . "\n";
     foreach my $file (@{$sdrfmap->{$sdrf}}) {
         get_supfile_info($file, get_subid(getcwd . "/" . $softmap->{$sdrf}));
-        #print Dumper($file);#unless validate_sfile($file);
     }
     #printf "$sdrf\t%d\n", get_num_reps($sdrfmap->{$sdrf});
     #print Dumper(find_samples($sdrfmap->{$sdrf}, $sdrf));
 
     my $samples = find_samples($sdrfmap->{$sdrf}, $sdrf);
     read_soft(getcwd . "/" . $softmap->{$sdrf}, $samples, get_subid(getcwd . "/" . $softmap->{$sdrf}));
+
+    #foreach my $file (@{$sdrfmap->{$sdrf}}) {
+    #    print STDERR Dumper($file) unless (validate_sfile($file) or (not defined $file->{"Checksum"} and $file->{"Filetype"} ne "FASTQ"));
+    #}
 }
 
 
