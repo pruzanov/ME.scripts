@@ -155,7 +155,8 @@ sub proc_shared_sample {
                 }
                 $filenum = $1 if (m/^!Sample_raw_file_([0-9]+)\s+=\s+\Q$file\E$/i);
                 next if ($filenum and m/^!Sample_raw_\S+_$filenum/i);
-                push @newlines, $_ if m/^!Sample_title/ or m/^!Sample_\S+_file/ or m/^\^Sample/;
+                push @newlines, $_ if m/^!Sample_title/ or m/^\^Sample/;
+                push @newlines, "!Sample_geo_accession = $fastq_to_gsm->{$file}" if m/^\^Sample/;
             }
             $lines = \@newlines;
     }
