@@ -3,12 +3,15 @@
 =pod
 
 =head1 NAME
+
 geo_find_common_files.pl - Find supplementary/raw files common to multiple modENCODE submissions to be sent to GEO.
 
 =head1 SYNOPSIS
+
 geo_find_common_files.pl [FILE..]
 
 =head1 DESCRIPTION
+
 Just run this script in a directory full of "modencode_ID_chado_datafiles.txt" files, produced by chado2GEO.pl in
 reporter_seq. It will output a list of files found in two or more submissions.
 

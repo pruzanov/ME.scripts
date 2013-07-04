@@ -10,18 +10,25 @@ use Archive::Tar::Wrapper;
 =pod
 
 =head1 NAME
+
 geo_build_tarball_snyder.pl - Builds modENCODE_[SUBID].tar.gz and writes it to standard output. Designed for Snyder submissions.
 
 =head1 SYNOPSIS
+
 geo_build_tarball_snyder.pl [SUBIDS..]
 
 =head1 DESCRIPTION
+
 geo_build_tarball_snyder.pl should be run from a directory with the following structure:
 
 [currentworkingdirectory]
+
 	---> 9001
+
 	---> 9002
+
 	---> 9003
+
 	---> ....
 
 

@@ -11,27 +11,52 @@ use Data::Dumper;
 =pod
 
 =head1 NAME
+
 geo_sample_update.pl - Process GEO submissions that share files with other submissions
 
 =head1 SYNOPSIS
+
 geo_sample_update.pl [DUPEFILE] [MAPFILE] [SUBIDs..]
 
+=head1 DISCLAIMER
+
+This one-off script is pretty hacky, maybe I will refactor it later. Good luck with it.
+
 =head1 DESCRIPTION
-This script takes in a .softer (a .soft file produced by chado2GEO.pl that has been fixed) file,
-removes extraneous !Sample_* lines, and inserts !Sample_GEO_accession lines according to MAPFILE.
+
+DUPEFILE should be the exact output of geo_find_common_files.pl.
+
+MAPFILE is a two-column tab-delimited text file mapping GSM numbers to their
+corresponding FASTQ files:
+
+	Column 0: GSM numbers
+    Column 1: FASTQ files
+
+This script takes in a .softer (output of GEO publishing scripts) file, removes extraneous 
+!Sample_* lines, and inserts !Sample_GEO_accession lines.
 
 This script should be run in a directory with the following structure:
 
     [CWD]
+
         -> 9001
+
             > modencode_9001.soft.softer
+
             > ...
+
         -> 9002
+
             > modencode_9002.soft.softer
+
             > ...
+
         -> 9003
+
             > modencode_9003.soft.softer
+
             > ...
+
         -> ....
 
 DUPEFILE and MAPFILE should both be in the CWD.
