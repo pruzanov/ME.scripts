@@ -5,17 +5,21 @@ use warnings;
 
 use Cwd;
 use Data::Dumper;
+use Net::SCP qw(scp);
+use LWP::Simple;
 use List::MoreUtils qw(uniq);
+use File::Slurp qw(read_file);
+use Test::Deep::NoTest qw(eq_deeply);
 
 =pod
 
 =head1 NAME
 
-geo_find_rows.pl - Identify the experiment type (Input/ChIP) and replicate number of each row in an SDRF.
+geo_attach_snyder.pl - Identify the experiment type (Input/ChIP) and replicate number of each row in an SDRF.
 
 =head1 SYNOPSIS
 
- geo_find_rows.pl SDRF SUBID
+ geo_attach_snyder.pl EMAIL [SUBIDs..]
 
 =cut
 
@@ -25,6 +29,12 @@ geo_find_rows.pl - Identify the experiment type (Input/ChIP) and replicate numbe
 #                                                                              # 
 my $cwd = getcwd;
 my $exts = ["FASTQ(\.(gz|bz2))?", "GFF3", "WIG"];
+
+my $modencode_www1 = "modencode-www1.oicr.on.ca";
+my $modencode_datadir = "/modencode/raw/data/";
+my $modencode_extractdir = "extracted/Sny*/";
+
+my $geo_url = "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=";
 #                                                                              # 
 ################################################################################
 
@@ -107,6 +117,7 @@ my %exts_to_ftypes = (
     "wig" => "WIG",
     "fastq.gz" => "FASTQ",
     "fastq" => "FASTQ",
+    "fastq.bz2" => "FASTQ",
     "unknown" => "UNKNOWN",
 );
 
@@ -175,7 +186,7 @@ sub determine_filetype {
     # NOTE: This regex chokes on things like .wig.combined.wig
     if ($supfile->{"Filename"} =~ m/^.*\.(.+)$/) {
         $ft_guess = lc $1;
-        if ($ft_guess eq "gz") {
+        if ($ft_guess eq "gz" or $ft_guess eq "bz2") {
             $ft_guess = lc $supfile->{"Filename"} =~ m/fastq/ ? "fastq.gz" : "unknown";
         }
         $supfile->{"Filetype"} = $exts_to_ftypes{$ft_guess};
@@ -226,6 +237,112 @@ sub get_supfile_info {
 #                                                                                                  #
 ####################################################################################################
 
+# fetch_sdrf SUBID
+# 
+# Get the SDRF associated with a modENCODE submission.
+#
+# SUBID :: Integer
+sub fetch_sdrf {
+    my $subid = shift;
+    ((scp("$modencode_www1:${modencode_datadir}$subid/$modencode_extractdir/*{sdrf,SDRF}*", "$cwd/$subid.sdrf") or scp("$modencode_www1:${modencode_datadir}$subid/extracted/*{sdrf,SDRF}*", "$cwd/$subid.sdrf")) or die($!)) unless -e "$subid.sdrf";
+}
+
+# ids_from_email EMAIL
+#
+# Get the modENCODE submission IDs from a GEO accession email.
+#
+# EMAIL :: String
+sub ids_from_email {
+    my $email = shift;
+    my @ids;
+    foreach (grep { /^GSE/ } read_file($email)) {
+        my $acc_num = $1 if m/^(GSE[0-9]+)/;
+        my $content = get "${geo_url}$acc_num" or die ($!);
+        push @ids, $1 if ($content =~ m/modENCODE_submission_([0-9]+)/);
+    }
+    return \@ids;
+}
+
+
+# proc_email_block BLOCK
+#
+# Process a "block" from a GEO accession email - that is,
+# a series of lines starting from a line beginning with "GSE[0-9]+", running
+# to the next line starting with "GSE[0-9]+".
+# 
+# BLOCK :: Arrayref of Strings
+#
+# Return type:
+# { 
+# 	"Input" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+#	"ChIP" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+# }
+sub proc_email_block {
+    my $lines = shift;
+    my %attachment;
+    my $subid;
+    foreach (@{$lines}) {
+        if (m/^(GSE[0-9]+)/) {
+            my $acc_num = $1;
+            my $content = get "${geo_url}$acc_num" or die ($!);
+            if ($content =~ m/modENCODE_submission_([0-9]+)/) {
+                $subid = $1;
+            } else {
+                print STDERR Dumper($lines);
+                die "Could not determine submission ID!\n";
+            }
+        } elsif (m/^(GSM[0-9]+).*Input.*Rep([0-9])/) {
+            $attachment{"Input"} = [] unless exists $attachment{"Input"};
+            $attachment{"Input"}->[$2] = $1;
+        } elsif (m/^(GSM[0-9]+).*ChIP.*Rep([0-9])/) {
+            $attachment{"ChIP"} = [] unless exists $attachment{"ChIP"};
+            $attachment{"ChIP"}->[$2] = $1;
+        }
+    }
+    return ($subid, \%attachment);
+}
+
+# proc_email EMAIL
+#
+# Process a GEO accession email.
+#
+# EMAIL :: String
+#
+# Return type:
+# {
+# 	"SUBID_1" => { 
+# 		"Input" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+#		"ChIP" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+# 	}
+# 	"SUBID_2" => { 
+# 		"Input" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+#		"ChIP" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+# 	}
+#   ...
+# 	"SUBID_n" => { 
+# 		"Input" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+#		"ChIP" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
+# 	}
+# }
+sub proc_email {
+    my $email = shift;
+    my @block;
+    my %attachments;
+    foreach (read_file($email)) {
+        if (m/^(GSE[0-9]+)/) {
+            my ($subid, $attachment) = proc_email_block(\@block) if @block;
+            $attachments{$subid} = $attachment if @block;
+            @block = ();
+            push @block, $_;
+        } elsif (m/^(GSM[0-9]+)/) {
+            push @block, $_;
+        }
+    }
+    my ($subid, $attachment) = proc_email_block(\@block) if @block;
+    $attachments{$subid} = $attachment;
+    return \%attachments;
+}
+
 # An expt_info is:
 # {
 # 	"Type" => One of "Input" or "ChIP"
@@ -236,34 +353,50 @@ sub get_supfile_info {
 ################################################################################
 ############################## ENTRY POINT #####################################
 ################################################################################
-my $sdrf = read_sdrf(shift);
-my $sdrf_fcols = pick_file_cols($sdrf, $exts);
-my $expts = transpose($sdrf_fcols);
+my $geoemail = shift;
+my $attachments = proc_email($geoemail);
+#print STDERR Dumper($attachments);
+$attachments->{"3846"} = { 
+    'Input' => [ undef, 'GSM00001', 'GSM00002' ],
+    'ChIP' => [ undef, 'GSM00003', 'GSM00004' ],
+};
 
-print Dumper($expts);
-foreach my $expt (@{$expts}) {
-    my @sfiles;
-    my %expt_info;
-    foreach my $file (@{$expt}) {
-        my $new_sfile = mk_sfile($file);
-        push @sfiles, $new_sfile;
-        get_supfile_info($new_sfile);
+foreach (@ARGV) {
+    my $subid = $_;
+    fetch_sdrf($subid);
+    my $sdrf = read_sdrf("$_.sdrf");
+    my $sdrf_fcols = pick_file_cols($sdrf, $exts);
+    my $expts = transpose($sdrf_fcols);
+
+    #print Dumper($expts);
+    my @geoids;
+    foreach my $expt (@{$expts}) {
+        my @sfiles;
+        my %expt_info;
+
+        foreach my $file (@{$expt}) {
+            my $new_sfile = mk_sfile($file);
+            push @sfiles, $new_sfile;
+            get_supfile_info($new_sfile);
+        }
+
+        if (grep { $_->{"Exptype"} eq "Input" } @sfiles) {
+            $expt_info{"Type"} = "Input";
+        } else {
+            $expt_info{"Type"} = "ChIP";
+        }
+
+        my @rep_nums = uniq (map { $_->{"Replicate"} } (grep { $_->{"Replicate"} != -1 } @sfiles));
+
+        if (@rep_nums == 1) {
+            $expt_info{"Replicate"} = $rep_nums[0];
+        } else {
+            print STDERR "Something went wrong determining an experiment's replicate\n";
+            #print STDERR Dumper(\@sfiles);
+            #print STDERR Dumper(\%expt_info);
+        }
+        #print STDERR "\t$subid\t$expt_info{Type}\t$expt_info{Replicate}\n";
+        push @geoids, $attachments->{$subid}->{$expt_info{"Type"}}->[$expt_info{"Replicate"}];
     }
-    if (grep { $_->{"Exptype"} eq "Input" } @sfiles) {
-        $expt_info{"Type"} = "Input";
-    } else {
-        $expt_info{"Type"} = "ChIP";
-    }
-    my @rep_nums = uniq (map { $_->{"Replicate"} } (grep { $_->{"Replicate"} != -1 } @sfiles));
-    if (@rep_nums == 1) {
-        $expt_info{"Replicate"} = $rep_nums[0];
-    } else {
-        print STDERR "Something went wrong determining an experiment's replicate\n";
-        print STDERR Dumper(\@sfiles);
-        print STDERR Dumper(\%expt_info);
-    }
-    print Dumper(\%expt_info);
+    print STDERR Dumper(\@geoids);
 }
-
-#print Dumper($sdrf_fcols);
-#print Dumper($expts);
