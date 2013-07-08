@@ -15,7 +15,7 @@ use Test::Deep::NoTest qw(eq_deeply);
 
 =head1 NAME
 
-geo_attach_snyder.pl - Identify the experiment type (Input/ChIP) and replicate number of each row in an SDRF.
+geo_attach_snyder.pl - Attach GEO accession numbers provided by email.
 
 =head1 SYNOPSIS
 
@@ -274,6 +274,7 @@ sub ids_from_email {
 #
 # Return type:
 # { 
+#	"GSE" => GSE[0-9]+
 # 	"Input" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
 #	"ChIP" => [ GSM[0-9]+ GSM[0-9]+ ... GSM[0-9]+ ]
 # }
@@ -284,6 +285,7 @@ sub proc_email_block {
     foreach (@{$lines}) {
         if (m/^(GSE[0-9]+)/) {
             my $acc_num = $1;
+            $attachment{"GSE"} = $acc_num;
             my $content = get "${geo_url}$acc_num" or die ($!);
             if ($content =~ m/modENCODE_submission_([0-9]+)/) {
                 $subid = $1;
@@ -355,8 +357,9 @@ sub proc_email {
 ################################################################################
 my $geoemail = shift;
 my $attachments = proc_email($geoemail);
-#print STDERR Dumper($attachments);
+print STDERR Dumper($attachments);
 $attachments->{"3846"} = { 
+    'GSE' => 'GSE999999',
     'Input' => [ undef, 'GSM00001', 'GSM00002' ],
     'ChIP' => [ undef, 'GSM00003', 'GSM00004' ],
 };
