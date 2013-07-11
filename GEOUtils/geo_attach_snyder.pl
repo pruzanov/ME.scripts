@@ -244,7 +244,12 @@ sub get_supfile_info {
 # SUBID :: Integer
 sub fetch_sdrf {
     my $subid = shift;
-    ((scp("$modencode_www1:${modencode_datadir}$subid/$modencode_extractdir/*{sdrf,SDRF}*", "$cwd/$subid.sdrf") or scp("$modencode_www1:${modencode_datadir}$subid/extracted/*{sdrf,SDRF}*", "$cwd/$subid.sdrf")) or die($!)) unless -e "$subid.sdrf";
+    #((scp("$modencode_www1:${modencode_datadir}$subid/$modencode_extractdir/*{sdrf,SDRF}*", "$cwd/$subid.sdrf") or scp("$modencode_www1:${modencode_datadir}$subid/extracted/*{sdrf,SDRF}*", "$cwd/$subid.sdrf")) or die($!)) unless -e "$subid.sdrf";
+    my $scp = Net::SCP->new($modencode_www1);
+    #($scp->get("${modencode_datadir}$subid/$modencode_extractdir/*{sdrf,SDRF}*", "$cwd/$subid.sdrf") || $scp->get("${modencode_datadir}$subid/extracted/*{sdrf,SDRF}*", "$cwd/$subid.sdrf")) || die $scp->{"errstr"} unless -e "$subid.sdrf";
+    unless ((-e "$subid.sdrf") || $scp->get("${modencode_datadir}$subid/$modencode_extractdir/*{sdrf,SDRF}*", "$cwd/$subid.sdrf")) {
+        die $scp->{"errstr"} if ($scp->get("${modencode_datadir}$subid/extracted/*{sdrf,SDRF}*", "$cwd/$subid.sdrf"));
+    }
 }
 
 # ids_from_email EMAIL
@@ -358,11 +363,11 @@ sub proc_email {
 my $geoemail = shift;
 my $attachments = proc_email($geoemail);
 print STDERR Dumper($attachments);
-$attachments->{"3846"} = { 
-    'GSE' => 'GSE999999',
-    'Input' => [ undef, 'GSM00001', 'GSM00002' ],
-    'ChIP' => [ undef, 'GSM00003', 'GSM00004' ],
-};
+#$attachments->{"3846"} = { 
+#    'GSE' => 'GSE999999',
+#    'Input' => [ undef, 'GSM00001', 'GSM00002' ],
+#    'ChIP' => [ undef, 'GSM00003', 'GSM00004' ],
+#};
 
 foreach (@ARGV) {
     my $subid = $_;
