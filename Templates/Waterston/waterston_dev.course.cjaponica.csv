@@ -2,8 +2,8 @@
 
 [FIELD_name_bam:database]
 db_adaptor = Bio::DB::Sam
-db_args    = -fasta /browser_data/cjaponica/fasta/c_japonica.WS225.genomic.fa
-             -bam   /browser_data/cjaponica/sam_binaries/Waterston/FIELD_name
+db_args    = -fasta /browser_data/cjaponica/fasta/c_japonica.WS227.genomic.fa
+             -bam   /browser_data/cjaponica/sam_binaries/waterston/FIELD_name
              -split_splices 1
 search options = none
 
@@ -12,7 +12,7 @@ db_adaptor = Bio::DB::BigWig
 db_args    = sub { require Bio::DB::Sam;
                    return (
                        -bigwig => '/browser_data/cjaponica/wiggle_binaries/waterston/FIELD_name.bw',
-                       -fasta  => Bio::DB::Sam::Fai->open('/browser_data/cjaponica/fasta/c_japonica.WS225.genomic.fa'),
+                       -fasta  => Bio::DB::Sam::Fai->open('/browser_data/cjaponica/fasta/c_japonica.WS227.genomic.fa'),
                        );
                  }
 
