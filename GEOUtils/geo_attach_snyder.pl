@@ -10,6 +10,9 @@ use LWP::Simple;
 use List::MoreUtils qw(uniq);
 use File::Slurp qw(read_file);
 use Test::Deep::NoTest qw(eq_deeply);
+use HTTP::Cookies;
+use HTTP::Request;
+use WWW::Mechanize;
 
 =pod
 
@@ -19,7 +22,19 @@ geo_attach_snyder.pl - Attach GEO accession numbers provided by email.
 
 =head1 SYNOPSIS
 
- geo_attach_snyder.pl EMAIL [SUBIDs..]
+ geo_attach_snyder.pl EMAIL CREDENTIALSFILE [SUBIDs..]
+
+=head1 DESCRIPTION
+
+EMAIL is an email from GEO containing accession numbers. Be sure to remove any
+intervening line-breaks due to word-wrap. We expect each line to match the pattern
+
+	'GS[EM][0-9]+'
+
+CREDENTIALSFILE is a two-column tab-delimited text file. The first column should
+contain a modENCODE DCC username; the second should contain a password.
+
+SUBIDs is a space-separated list of submissions for which GEOids must be attached.
 
 =cut
 
@@ -27,6 +42,8 @@ geo_attach_snyder.pl - Attach GEO accession numbers provided by email.
 ############################## CONFIG VARS #####################################
 ################################################################################
 #                                                                              # 
+
+# Some of these should probably be "use constants". Meh.
 my $cwd = getcwd;
 my $exts = ["FASTQ(\.(gz|bz2))?", "GFF3", "WIG"];
 
@@ -35,6 +52,8 @@ my $modencode_datadir = "/modencode/raw/data/";
 my $modencode_extractdir = "extracted/Sny*/";
 
 my $geo_url = "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=";
+
+my $attach_geoids_url = "http://submit.modencode.org/submit/curation/attach_geoids/";
 #                                                                              # 
 ################################################################################
 
@@ -358,19 +377,110 @@ sub proc_email {
 
 
 ################################################################################
+########################## ATTACHMENT MECHANIZATION ############################
+################################################################################
+
+# auto_login CREDENTIALSFILE USERAGENT URL
+#
+# Read the file specified by CREDENTIALSFILE and log in to the modENCODE
+# submission pipeline, at the location provided by URL.
+#
+# We return the "Location" field in the response header if successful,
+# undef otherwise.
+#
+# INPUT SPECIFICATION:
+#
+# Two-column tab-delimited plaintext file. Example:
+# Username	Password
+#
+# We suggest making your credentials file readable by owner only.
+#
+# ARGUMENTS:
+# CREDENTIALSFILE :: String
+# USERAGENT :: LWP::UserAgent
+# URL :: String
+sub auto_login {
+    print STDERR "Logging into modENCODE pipeline...\n";
+    my ($credentialsfile, $ua, $url) = @_;
+    open(my $fh, "<", $credentialsfile) or die($!);
+    chomp(my $ln = <$fh>);
+    close($fh);
+    my @credentials = split("\t", $ln);
+
+    $ua->form_with_fields("login", "password");
+    $ua->field("login", $credentials[0]);
+    $ua->field("password", $credentials[1]);
+    my $resp = $ua->click("commit");
+
+    return undef unless $resp->code == 200;
+    print STDERR "Successfully logged into modENCODE pipeline.\n";
+
+    # This redirects us to the attach_geoids page, which is where we want to be.
+    return $resp->previous->header("Location");
+}
+
+# attach_geoids GEOIDS SUBID CREDENTIALSFILE USERAGENT
+#
+# Uses HTTP POST to automatically attach GEOIDs to a submission at
+# http://submit.modencode.org/submit/curation/attach_geoids/
+#
+# ARGUMENTS:
+# GEOIDS :: [ GSE[0-9]+, GSM[0-9]+, GSM[0-9]+, ..., GSM[0-9]+ ]
+# SUBID :: Integer
+# CREDENTIALSFILE :: String
+# USERAGENT :: LWP::UserAgent
+sub attach_geoids {
+    print STDERR "enter attach_geoids\n";
+    my ($orig_geoids, $subid, $credentialsfile, $ua) = @_;
+    my @geoids = @{$orig_geoids};
+
+    my $response = $ua->get($attach_geoids_url . $subid);
+
+    # Redirected to login page
+    if ($ua->uri() =~ m/login/i) {
+
+        # Location field in header is where we are being redirected.
+        my $login_redir = auto_login($credentialsfile, $ua, $response->header("Location"));
+        die "Failed to log in to modENCODE submission pipeline" unless $login_redir;
+        $response = $ua->get($login_redir);
+        die "Expected 200 OK after logging in, got $response->code" unless $response->code == 200;
+    }
+
+    my $gse = shift @geoids;
+    my $gsm_str = join(" ", @geoids);
+
+    print STDERR "="x120 . "\n";
+    print STDERR "We are about to attach the following to submission $subid:\n";
+    print STDERR "GSE: $gse\n";
+    print STDERR "GSM: $gsm_str\n";
+    print STDERR "="x120 . "\n";
+
+    die "Could not find appropriate fields in attachment form" unless $ua->form_with_fields("geo_column", "gse", "gsms");
+    $ua->field("gse", $gse);
+    $ua->field("gsms", $gsm_str);
+    my $commit_resp = $ua->click_button(name => "commit");
+    $ua->form_number(1);
+    $ua->click_button(value => 'Attach GEOids');
+    print STDERR "GEOids attached for submission $subid.\n";
+}
+
+################################################################################
 ############################## ENTRY POINT #####################################
 ################################################################################
 my $geoemail = shift;
+my $credentialsfile = shift;
 my $attachments = proc_email($geoemail);
-print STDERR Dumper($attachments);
-#$attachments->{"3846"} = { 
-#    'GSE' => 'GSE999999',
-#    'Input' => [ undef, 'GSM00001', 'GSM00002' ],
-#    'ChIP' => [ undef, 'GSM00003', 'GSM00004' ],
-#};
+my $ua = WWW::Mechanize->new(autocheck => 1, cookie_jar => {});
+$ua->add_header( Connection => 'keep-alive' );
+
+#print STDERR Dumper($attachments);
 
 foreach (@ARGV) {
     my $subid = $_;
+
+    print STDERR "\tCould not find submission $subid in our GEO email, skipping...\n" unless exists $attachments->{$subid};
+    next unless exists $attachments->{$subid};
+
     fetch_sdrf($subid);
     my $sdrf = read_sdrf("$_.sdrf");
     my $sdrf_fcols = pick_file_cols($sdrf, $exts);
@@ -378,6 +488,9 @@ foreach (@ARGV) {
 
     #print Dumper($expts);
     my @geoids;
+    push @geoids, $attachments->{$subid}->{"GSE"};
+
+    # We are proceeding row by row through the SDRF now.
     foreach my $expt (@{$expts}) {
         my @sfiles;
         my %expt_info;
@@ -406,5 +519,5 @@ foreach (@ARGV) {
         #print STDERR "\t$subid\t$expt_info{Type}\t$expt_info{Replicate}\n";
         push @geoids, $attachments->{$subid}->{$expt_info{"Type"}}->[$expt_info{"Replicate"}];
     }
-    print STDERR Dumper(\@geoids);
+    attach_geoids(\@geoids, $subid, $credentialsfile, $ua);
 }
