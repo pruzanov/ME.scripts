@@ -99,7 +99,7 @@ sub transpose {
     return $acc unless scalar(@{$matrix[0]});
 
     push(@{$acc}, [map { $_->[0] } @matrix]);
-    return transpose([map { shift $_; $_ } (my @matrix_ = @matrix)], $acc);
+    return transpose([map { shift @{$_}; $_ } (my @matrix_ = @matrix)], $acc);
 }
 
 # trim_sdrf SDRFMATRIX
@@ -263,6 +263,20 @@ sub proofread_sampleblock {
 sub proofread_soft {
     my ($firstdraft, $orig_samples) = @_;
 
+    my %descs;
+
+    foreach (@{$firstdraft}) {
+        chomp;
+        if (m/^!Sample_description/) {
+            if (m/^!Sample_description\s+=\s+input DNA/i) {
+                $descs{"Input"} = $_ unless exists $descs{"Input"};
+            } else {
+                $descs{"ChIP"} = $_ unless exists $descs{"ChIP"};
+            }
+        }
+        last if exists $descs{"Input"} and exists $descs{"ChIP"};
+    }
+
     my %samples = %{$orig_samples};
     my $num_inputs = 0;
     my $num_chips = 0;
@@ -357,7 +371,7 @@ sub proofread_soft {
         } elsif ($line =~ m/^!Sample_title\s+=/ or $line =~ m/^!Sample_source_name\s+=/) {
             next;
         } elsif ($line =~ m/^!Sample_description/) {
-            push @finaldraft, "!Sample_description = $samples{$cur_sample_name}->{Type} DNA";
+            push @finaldraft, $descs{$samples{$cur_sample_name}->{Type}};
         } else {
             push @finaldraft, $line;
         }
