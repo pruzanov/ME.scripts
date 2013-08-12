@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl 
 
 =head1 SUMMARY
 
@@ -36,7 +36,7 @@ Depending on the options intermediate files will or won't be cleaned
 
 =head1 EXAMPLES
 
-wig2sam.pl -m MYDIR  elegans-ws190.fa  - will read all wiggle files and create intermediate fake sam files
+wig2sam.pl --m 1 MYDIR  elegans-ws190.fa  - will read all wiggle files and create intermediate fake sam files
 
 wig2sam.pl -S MYDIR  elegans-ws190.fa  - will create sam files for each of wiggle files in MYDIR
 
@@ -49,6 +49,7 @@ use strict;
 use Getopt::Long;
  
 use constant PROBELENGTH=>36;
+use constant DEBUG=>0;
 
 my %options;
 my($bed,%fasta,%sizes);
@@ -56,13 +57,13 @@ my($bed,%fasta,%sizes);
 GetOptions(
            'out=s'  => \$options{output},
            'wigdir=s'   => \$options{wigdir},
-           'm'      => \$options{merge},
+           'm=i'      => \$options{merge},
            'f=s'    => \$options{fasta},
            'org=s'  => \$options{org},
            'rel=s'  => \$options{rel}
            ) || die <<END;
 Usage: 
-  wig2sam.pl [OPTIONS] -d directory_with_wigfiles -f fasta_file
+  wig2sam.pl [OPTIONS] --wigdir directory_with_wigfiles --f fasta_file
 END
 
 $options{output} ="bam" if !$options{output};
@@ -103,10 +104,9 @@ foreach my $wigfile (@wigfiles) {
  if ($id) {$id.="_$wigitem";}
  $wigitem++;
  $id ||= "TEMPSAM_";
- $sam =~ s/\.wig/\.sam/;
+ $sam =~ s/\.wig$/\.sam/;
 
  $sam = join("/",($options{wigdir},$sam));
- 
  push @samfiles,$sam;
  
  open(WIG,"<$wig") or die "Couldn't read from [$wigfile]";
@@ -114,7 +114,7 @@ foreach my $wigfile (@wigfiles) {
 
  map{print SAM $_."\n"} @sam_header;
  my($chrom,$span,$cur_pos,$score,$probe_seq,$seq_score,$probe,$lines); 
- $span = PROBELENGTH;
+ $probe = $span = PROBELENGTH;
 
  while(<WIG>) {
   if (/^\#/ || /^track/ || /^$/){next;}
@@ -125,18 +125,21 @@ foreach my $wigfile (@wigfiles) {
    $span = $2;
    $chrom =~s/^chr//; #strip the UCSC prefix
    print STDERR "Data for chromosome $chrom getting processed...\n";
+   %fasta = ();
    &get_fasta($options{fasta},$chrom);
 
    if($cur_pos) {
-    $probe = $span;
-    next if $probe <= 0;
+    #$probe = $span;
+    #next if $probe <= 0;
     $probe_seq = $cur_pos+$probe-2 <= $#{$fasta{$chrom}} ? join("",@{$fasta{$chrom}}[$cur_pos-1..$cur_pos+$probe-2]) : &get_dummy($probe);
     $seq_score = &get_dummy($probe,'h');
+    print STDERR "Score: $score\n" if DEBUG;
     map{print SAM join("\t",(join("_",($id,$line++)),0,$chrom,$cur_pos,255,$probe."M","*",0,0,$probe_seq,$seq_score,"NH:i:1"))."\n"} (1..$score);
    }
    next;
   }
   chomp;
+  s/\s+/\t/g if !/\t/;
   my @temp = split("\t");
   $bed = @temp == 4 ? 1 : 0;
   #Two different ways of parsing
@@ -146,35 +149,41 @@ foreach my $wigfile (@wigfiles) {
    if(!$chrom || $chrom ne $temp[0]) {
     $chrom = $temp[0];
     $chrom =~s/^chr//;
+    %fasta = ();
     &get_fasta($options{fasta},$chrom);
    }
   
-   $probe = $temp[2]-$temp[1];
-   next if $probe <= 0;
+   $span = $temp[2]-$temp[1];
+   #next if $probe <= 0;
    if ($temp[3]=~/\./ || $temp[3]=~/^\-/){die "It seems that wiggle file does not come from ChIP-Seq experiment";}
-   $score = $temp[3];
-   $probe_seq = join("",@{$fasta{$chrom}}[$temp[2]-1..$temp[3]-2]) || &get_dummy($probe);
+   $score = int($temp[3]);
+   $probe_seq = join("",@{$fasta{$chrom}}[$temp[2]-1..$temp[2]+$probe-2]) || &get_dummy($probe);
    $probe_seq = uc($probe_seq);
    $seq_score = &get_dummy($probe,'h');
-   
+   print STDERR "Score for BED: $score\n" if DEBUG;
    map{print SAM join("\t",(join("_",($id,$line++)),0,$chrom,$temp[1],255,$probe."M","*",0,0,$probe_seq,$seq_score,"NH:i:1"))."\n"} (1..$score);
+   print STDERR "Printed $score lines\n" if $score > 0;
    $lines++;
    next;
   #========VAR STEP WIGGLE========
   } else {
 
    if ($cur_pos) {
-    $probe = $temp[0]-$cur_pos >= $span ? $span : $temp[0]-$cur_pos;
-    if ($probe <= 0){$cur_pos = $temp[0];next;}
+    #$probe = $temp[0]-$cur_pos >= $span ? $span : $temp[0]-$cur_pos;
+    #if ($probe <= 0){$cur_pos = $temp[0];next;}
     #print STDERR @{$fasta{$chrom}}[$cur_pos-1..$cur_pos+$probe-1];
+    
+    #%fasta = ();
+    #&get_fasta($options{fasta},$chrom);
+    
     $probe_seq = join("",@{$fasta{$chrom}}[$cur_pos-1..$cur_pos+$probe-2]) || &get_dummy($probe);
     $probe_seq = uc($probe_seq);
     $seq_score = &get_dummy($probe,'h');
-    
     map{print SAM join("\t",(join("_",($id,$line++)),0,$chrom,$cur_pos,255,$probe."M","*",0,0,$probe_seq,$seq_score,"NH:i:1"))."\n"} (1..$score);
     $lines++;
    }
-    $score = $temp[1];
+    $score = int($temp[1]);
+    print STDERR "Score for VAR step : $score, temp array is @temp elements\n" if DEBUG;
     $cur_pos = $temp[0];
   }
  }
@@ -185,18 +194,17 @@ foreach my $wigfile (@wigfiles) {
  my $bam = $sam;
  $bam =~ s/\.sam$/\.bam/;
 
- #if (!$options{output} ||  $options{output} =~/bam/i || $options{m}) {
- # print STDERR "Creating $bam...\n";
- # `samtools view \-S $sam \-b > $bam`;
- # my $sorted = $bam;
- # $sorted =~s/\.bam$/_sorted/;
- # print STDERR "Sorting $bam\n";
- # `samtools sort $bam $sorted`;
- # $sorted.=".bam";
- # push @bamfiles,$sorted;
- #}
+ if ($options{output} =~/bam/i || $options{m}) {
+  print STDERR "Creating $bam...\n";
+  `samtools view -S $sam -b > $bam`;
+  my $sorted = $bam;
+  $sorted =~s/\.bam$/_sorted/;
+  print STDERR "Sorting $bam\n";
+  `samtools sort $bam $sorted`;
+  $sorted.=".bam";
+  push @bamfiles,$sorted;
+ }
 }
-
 
 
 # Clean up, merge bams if requested
@@ -206,29 +214,15 @@ if ($options{output} !~/sam/i) {
 
 if ($options{merge} && @bamfiles > 1) {
 
- # Construct a name for merged bam file
- my @matches;
- for (my $i=0; $i<@bamfiles; $i++) {
-  $matches[$i] = [];
-  my @letters = split //,$bamfiles[$i];
-  map{push @{$matches[$i]},$_} @letters;
- }
- 
- my($stop,$merge_name);
- while (!$stop) {
-  foreach my $l (1..length($matches[0]->[0])) {
-   map{$stop = 1 if $matches[$_]->[$l] ne $matches[0]->[$l]} (0..$#matches);
-   $merge_name.=$matches[0]->[$l] if !$stop;
-  }
-  last; #just in case
- }
- 
+ my $merge_name = $bamfiles[0];
+ $merge_name =~s/\..*//;
+
  length($merge_name) > 0 ? $merge_name.="_merged.bam" : $merge_name = "BAM_merged.bam";
 
  # Now merge the bamfiles
 
  my $mergestring = join("/",($options{wigdir},$merge_name))." ".join(" ",@bamfiles);
- #`samtools merge $mergestring`;
+ `samtools merge $mergestring`;
 }
 
 
