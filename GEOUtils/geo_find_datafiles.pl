@@ -1,5 +1,24 @@
 #!/usr/bin/perl -w
 
+=pod
+
+=head1 NAME
+
+geo_find_datafiles.pl - Generates a .txt list of raw and supplementary files associated with a modENCODE submission
+
+=head1 SYNOPSIS
+
+geo_find_datafiles.pl [-s] [SDRF]
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-s>
+Prints a display relating sample names in the SDRF to files within that sample.
+
+=cut
+
 use strict;
 use warnings;
 

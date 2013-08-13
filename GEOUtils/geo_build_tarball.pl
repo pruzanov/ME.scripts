@@ -46,7 +46,7 @@ need to be there so that we can pack them into the final tarball.
 
 =head1 OPTIONS
 
-=over 1
+=over 8
 
 =item B<-f>
 Fetch only; do not build tarball.
