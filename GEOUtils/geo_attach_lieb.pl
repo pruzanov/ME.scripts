@@ -29,7 +29,7 @@ geo_attach_lieb.pl - Attach GEO accession numbers provided by email.
 EMAIL is an email from GEO containing accession numbers. Be sure to remove any
 intervening line-breaks due to word-wrap. We expect each line to match the pattern
 
-	'GS[EM][0-9]+'
+	'^GS[EM][0-9]+'
 
 CREDENTIALSFILE is a two-column tab-delimited text file. The first column should
 contain a modENCODE DCC username; the second should contain a password.

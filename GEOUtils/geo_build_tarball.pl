@@ -13,7 +13,7 @@ our($opt_f);
 
 =head1 NAME
 
-geo_build_tarball.pl - Builds modENCODE_[SUBID].tar.gz and writes it to standard output. Designed for Snyder submissions.
+geo_build_tarball.pl - Builds modENCODE_[SUBID].tar.gz and writes it to standard output.
 
 =head1 SYNOPSIS
 
@@ -23,26 +23,35 @@ geo_build_tarball.pl [-f] [SUBIDS..]
 
 geo_build_tarball.pl should be run from a directory with the following structure:
 
-[currentworkingdirectory]
-
-	---> 9001
-
-	---> 9002
-
-	---> 9003
-
-	---> ....
+    	.
+	|-9000
+    	|---datafiles.txt
+    	|---modencode_9002.soft
+	|-9001
+    	|---datafiles.txt
+    	|---modencode_9002.soft
+	|-9002
+    	|---datafiles.txt
+    	|---modencode_9002.soft
 
 
 This script will descend into each directory in turn, and expects to find a text file called
 "datafiles.txt" with a list of all supplementary and raw files that should be present in the SOFT file.
+This file may be generated using the "geo_find_datafiles.pl" script.
+
 Lines beginning with '#' are ignored.
 
 We also expect modencode_[SUBID].soft files to be present in each directory. They really only
 need to be there so that we can pack them into the final tarball.
 
-	-f
-    	Fetch only; do not build tarball.
+=head1 OPTIONS
+
+=over 1
+
+=item B<-f>
+Fetch only; do not build tarball.
+
+=back
 
 =cut
 
