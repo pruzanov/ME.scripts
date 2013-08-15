@@ -1,17 +1,17 @@
-[LIEB_WIG_TEMP_:70001]
+[LIEB_FIELD_name_:70001]
 glyph_subtype = density
 height        = 12
 
-[LIEB_WIG_TEMP_]
-feature      = 
-track source = 
-data source  = 
+[LIEB_FIELD_name_]
+feature      = VISTA:modENCODE_FIELD_ds
+track source = FIELD_ds
+data source  = modENCODE_FIELD_ds
 glyph        = vista_plot
 glyph select = vista_plot
-autoscale     = z_score
+autoscale     = local
 variance_band = 1
 graph type   = boxes
-database     = lieb
+database     = ryantesting
 min_peak     = 0
 box_subparts = 1
 neg_color    = blue
@@ -25,7 +25,6 @@ group_label  = 0
 end_color    = black
 glyph_subtype= signal
 bump density = 250
-select       = name;
 category     = Chromatin Structure: Test
 sort_order   = name
 stranded     = 0
@@ -34,8 +33,7 @@ connector    = solid
 label density= 100
 smoothing    = mean
 smoothing_window = 10
-key          = Put your key here
-group_on     =
+key          = FIELD_key
 bicolor_pivot= min
 balloon hover = sub {my $f = shift;
                      my $score = $f->score;
@@ -44,8 +42,8 @@ balloon hover = sub {my $f = shift;
 group_label  = 0
 label_position= left
 label        = sub {  my $name = shift->name;
-                      $name =~s/^.+?_//;
-                      $name =~s/(.+)_N2(.*)/$1$2/;
+                      #$name =~s/^.+?_//;
+                      #$name =~s/(.+)_N2(.*)/$1$2/;
                       $name =~s/_/ /;
                       $name =~s/_/./g;
                       return $name =~/(.+?) (.+)$/ ? sprintf "%-10s %-7s",$1,$2 : sprintf "%-15s",$name;
