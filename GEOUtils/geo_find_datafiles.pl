@@ -10,6 +10,21 @@ geo_find_datafiles.pl - Generates a .txt list of raw and supplementary files ass
 
 geo_find_datafiles.pl [-s] [SDRF]
 
+=head1 CAVEATS
+
+=over 8
+
+=item Some SDRF files on the pipeline contain GEO:TMPID entries which will appear
+in this script's output.
+
+
+=item If you plan to use this script for building GEO tarballs, please ensure
+that you remove extraneous entries from the generated datafiles.txt file -
+this script may pick up 'GEO:TMPID' entries, bam and sam files, or other
+files that are not accepted by GEO.
+
+=back
+
 =head1 OPTIONS
 
 =over 8
