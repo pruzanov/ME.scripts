@@ -74,7 +74,8 @@ sub trim_sdrf {
     # This is the submatrix of SDRFMATRIX that only contains
     # those columns necessary for building a SOFT file out
     # of the entire SDRF.
-    my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ } @{$sdrftranspose};
+    #my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ } @{$sdrftranspose};
+    my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ or $_->[0] =~ m/Result Value \[fastq file\]/ } @{$sdrftranspose};
     splice(@softmatrix, 0, 0, $sdrftranspose->[0]);
 
     return transpose(\@softmatrix);
@@ -135,7 +136,12 @@ sub sample_view {
             push @{$samples{$_->[0]}}, $file unless grep { $_ eq $file } @{$samples{$_->[0]}};
         }
     }
-    print STDOUT Dumper(\%samples);
+
+    foreach my $sample (keys %samples) {
+        foreach my $file (@{$samples{$sample}}) {
+            print STDOUT "$sample\t$file\n";
+        }
+    }
 }
 
 getopts("s");

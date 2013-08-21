@@ -66,12 +66,12 @@ sub find_dupes {
     my @shared_files;
     foreach my $file (keys %{$files_to_subs}) {
         if (scalar @{$files_to_subs->{$file}} > 1) {
-            print "="x80 . "\n";
-            print "$file FOUND IN MULTIPLE SUBMISSIONS:\n";
-            print "="x80 . "\n";
+            #print "="x80 . "\n";
+            #print "$file FOUND IN MULTIPLE SUBMISSIONS:\n";
+            #print "="x80 . "\n";
             push @shared_files, $file;
             foreach my $sub (sort { $b <=> $a } @{$files_to_subs->{$file}}) {
-                print "\t$sub\n";
+                print "$file\t$sub\n";
                 if (exists $subid_tally{$sub}) {
                     $subid_tally{$sub} += 1;
                 } else {
@@ -88,7 +88,7 @@ sub find_dupes {
     print STDERR "="x80 . "\n";
     while (@subs) {
         my $sendme = shift @subs;
-        print STDERRf "%d\n", $sendme;
+        printf STDERR "%d\n", $sendme;
         print STDERR "\tWhich contains the shared files:\n";
         print STDERR "-"x80 . "\n\t";
         print STDERR join("\n\t", grep { not m/TMPID/ and $_ ~~ @shared_files } uniq @{$subs_to_files->{$sendme}});
