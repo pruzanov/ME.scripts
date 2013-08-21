@@ -31,6 +31,19 @@ intervening line-breaks due to word-wrap. We expect each line to match the patte
 
 	'GS[EM][0-9]+'
 
+Example email:
+
+	GSE49717       seq-JA00001_HTZ1_N2_L3   Aug 10, 2013   approved  TAR GFF3 GFF3
+	GSM1206280     seq-JA00001_HTZ1_N2_L3_Input_Rep1  Aug 10, 2013   approved  WIG      
+	GSM1206281     seq-JA00001_HTZ1_N2_L3_Input_Rep2  Aug 10, 2013   approved  WIG      
+	GSM1206282     seq-JA00001_HTZ1_N2_L3_ChIP_Rep1  Aug 10, 2013   approved  WIG      
+	GSM1206283     seq-JA00001_HTZ1_N2_L3_ChIP_Rep2  Aug 10, 2013   approved  WIG      
+	GSE49718       seq-AB2621_H3K79me3:361576_N2_L3  Aug 10, 2013   approved  TAR      
+	GSM1206284     seq-AB2621_H3K79me3:361576_N2_L3_Input_Rep1  Aug 10, 2013  
+	GSM1206285     seq-AB2621_H3K79me3:361576_N2_L3_Input_Rep2  Aug 10, 2013  
+	GSM1206286     seq-AB2621_H3K79me3:361576_N2_L3_ChIP_Rep1  Aug 10, 2013  
+	GSM1206287     seq-AB2621_H3K79me3:361576_N2_L3_ChIP_Rep2  Aug 10, 2013  
+
 CREDENTIALSFILE is a two-column tab-delimited text file. The first column should
 contain a modENCODE DCC username; the second should contain a password.
 
