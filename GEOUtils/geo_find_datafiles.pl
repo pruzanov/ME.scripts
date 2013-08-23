@@ -113,6 +113,7 @@ sub print_plain {
     my @files;
     foreach (@{$trimmed_sdrf}) {
         foreach my $file (@{$_}[1..$#{$_}]) {
+            next unless $file;
             push @files, $file unless grep { $_ eq $file } @files;
         }
     }

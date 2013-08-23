@@ -105,22 +105,23 @@ sub print_gff {
 # Returns false otherwise.
 sub find_overlaps {
     my $gffstruct = shift;
+    my $overlap = 0;
     foreach my $chrom (keys %{$gffstruct}) {
         my $prev_feat = shift @{$gffstruct->{$chrom}};
         foreach my $feature (@{$gffstruct->{$chrom}}) {
             if ($prev_feat->[0] < $feature->[1] and $prev_feat->[1] > $feature->[0]) {
                 next if $prev_feat->[0] == $feature->[0] and $prev_feat->[1] == $feature->[1];
                 print STDOUT "Found overlap on chromosome $chrom! [$prev_feat->[0], $prev_feat->[1]], [$feature->[0], $feature->[1]]\n";
-                return 1;
+                $overlap = 1;
             }
         }
     }
-    return 0;
+    return $overlap;
 }
 
 my $gffpath = shift;
 my $gffstruct = load_file($gffpath);
-find_overlaps($gffstruct);
+find_overlaps(sort_features($gffstruct));
 #print_gff(sort_features($gffstruct));
 #print Dumper($gffstruct);
 #print STDERR Dumper(sort_features($gffstruct));
