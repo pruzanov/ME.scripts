@@ -6,14 +6,21 @@ use warnings;
 # ps_geoemail.pl - Process Submission: GEO Email
 # TODO: Explain motivation, input file format.
 
+use Getopt::Long;
 use File::Slurp;    # Clean way of reading an entire file at once.
 use LWP::Simple;    # To grab data off of GEO web pages.
 use WWW::Mechanize; # To submit forms on the DCC and attach the GEO ID's.
 use Data::Dumper;
 
-my $ssh_key = "/home/pruzanov/cron/flyking-rsync-key";
+my $ssh_key = "/home/pruzanov/cron/flyking-rsync-key"; # You should change this to your own ssh key
+my($login,$password,$subs,$fin_geo_email);
+my $result = GetOptions ('geo_email=s'=> \$fin_geo_email,
+                         'subs=s'     => \$subs,
+                         'login=s'    => \$login,    # working (output) directory
+                         'password=s' => \$password); # directory with temporary GATK files
 
-use constant DEBUG=>0;
+
+use constant DEBUG=>1;
 
 # Takes in a string and returns a shaved (more than just trimmed!) version of
 # the string, stripping any spaces.
@@ -42,17 +49,16 @@ sub sleep_dots {
 
 # Explain syntax and die if not given an input text file and at least one
 # submission ID.
-if ($#ARGV < 1) {
-    print STDERR "This script expects at least two arguments, the first a\n";
-    print STDERR "file containing the text from a GEO email with GEO ID's\n";
-    print STDERR "or alternatively, just each ID on a separate line.\n";
-    print STDERR "The rest of the arguments should be individual\n";
-    print STDERR "submission ID's for the script to attach GEO ID's for.\n";
-    die "SYNTAX: $0 <geo_email.txt> <sub1> <sub2> ... <subn>";
+if (!$fin_geo_email || !$subs || !$login || !$password) {
+    print STDERR "This script expects the following parameters:\n";
+    print STDERR "--geo_email=[file containing the text from a GEO email with GEO ID's]\n";
+    print STDERR "--subs=[comma-delimited list of submissions that need GEO ids attached]\n";
+    print STDERR "--login=[DCC pipeline login]\n";
+    print STDERR "--password=[DCC pipeline password].\n";
+    die "Check your parameters and launch again";
 }
 
-my $fin_geo_email = shift;
-my @subs = @ARGV;
+my @subs = split(",",$subs);
 my %subs = map{$_=>1} @subs;
 
 my $geo_email = read_file($fin_geo_email);
@@ -228,8 +234,8 @@ foreach my $sub (@subs) {
 
     if ($mech->uri() =~ m/login/i) {
         print "[Main] Logging into modENCODE DCC...\n";
-        $mech->submit_form(form_number => 1, fields => { login => 'rdevilla',
-                password => 'nope' });
+        $mech->submit_form(form_number => 1, fields => { login => $login,
+                                                      password => $password });
     }
 
     if ($mech->content() =~ m/A set of GEO ids has already been successfully attached to this project/i) {
