@@ -1,5 +1,39 @@
 #!/usr/bin/perl -w
 
+=pod
+
+=head1 NAME
+
+geo_find_datafiles.pl - Generates a .txt list of raw and supplementary files associated with a modENCODE submission
+
+=head1 SYNOPSIS
+
+geo_find_datafiles.pl [-s] [SDRF]
+
+=head1 CAVEATS
+
+=over 8
+
+=item Some SDRF files on the pipeline contain GEO:TMPID entries which will appear
+in this script's output.
+
+
+=item If you plan to use this script for building GEO tarballs, please ensure
+that you remove extraneous entries from the generated datafiles.txt file -
+this script may pick up 'GEO:TMPID' entries, bam and sam files, or other
+files that are not accepted by GEO.
+
+=back
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-s>
+Prints a display relating sample names in the SDRF to files within that sample.
+
+=cut
+
 use strict;
 use warnings;
 
@@ -40,7 +74,8 @@ sub trim_sdrf {
     # This is the submatrix of SDRFMATRIX that only contains
     # those columns necessary for building a SOFT file out
     # of the entire SDRF.
-    my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ } @{$sdrftranspose};
+    #my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ } @{$sdrftranspose};
+    my @softmatrix = grep { $_->[0] =~ m/Result File \[.+\]/ or $_->[0] =~ m/Result Value \[fastq file\]/ } @{$sdrftranspose};
     splice(@softmatrix, 0, 0, $sdrftranspose->[0]);
 
     return transpose(\@softmatrix);
@@ -78,6 +113,7 @@ sub print_plain {
     my @files;
     foreach (@{$trimmed_sdrf}) {
         foreach my $file (@{$_}[1..$#{$_}]) {
+            next unless $file;
             push @files, $file unless grep { $_ eq $file } @files;
         }
     }
@@ -101,7 +137,12 @@ sub sample_view {
             push @{$samples{$_->[0]}}, $file unless grep { $_ eq $file } @{$samples{$_->[0]}};
         }
     }
-    print STDOUT Dumper(\%samples);
+
+    foreach my $sample (keys %samples) {
+        foreach my $file (@{$samples{$sample}}) {
+            print STDOUT "$sample\t$file\n";
+        }
+    }
 }
 
 getopts("s");

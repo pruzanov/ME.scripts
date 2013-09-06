@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use diagnostics;
 
 use Data::Dumper;
 use List::MoreUtils qw(lastidx firstidx);
@@ -14,7 +15,7 @@ add_subtracks.pl - Add new subtracks to a GBrowse VISTA stanza.
 
 =head1 SYNOPSIS
 
-add_subtracks.pl [STANZAFILE] [MAPFILE]
+add_subtracks.pl [STANZAFILE] [MAPFILE] [SUBIDs..]
 
 =head1 DESCRIPTION
 
@@ -35,10 +36,8 @@ Track.2	1002	36136	13563
 
 .	.	.	.
 
-NOTICE: This script does not really parse MAPFILE correctly. I will fix this
-later perhaps, but for now use the following workaround:
-
-add_subtracks.pl [STANZAFILE] <(grep "$SUBID" [MAPFILE])
+SUBIDs should be a space-separated list of modENCODE IDs that are to be added
+to the current stanza.
 
 =cut
 
@@ -91,7 +90,7 @@ sub update_stanza {
         push @vista_lines, sprintf "\t\tVISTA:%s\n", $_->{"SignalID"};
 
         # New IDs to be appended to "track source" line
-        if ($_->{"SignalID"} != $_->{"PeakID"}) {
+        if ($_->{"SignalID"} ne $_->{"PeakID"}) {
             $track_ids .= "$_->{SignalID} $_->{PeakID} ";
         } else {
             $track_ids .= "$_->{SignalID} ";
@@ -99,7 +98,7 @@ sub update_stanza {
         chomp $track_ids;
 
         # New IDs to be appended to "data source" line
-        if ($_->{"SignalID"} == $_->{"PeakID"}) {
+        if ($_->{"SignalID"} eq $_->{"PeakID"}) {
             $data_ids .= "$_->{SubID} "
         } else {
             $data_ids .= "$_->{SubID} $_->{SubID} "
@@ -121,8 +120,8 @@ sub update_stanza {
     ######################################################
 
     ## Add new VISTA:nnnnn lines.
-    my $lastidx = lastidx { /VISTA:[0-9]{1,5}/ } @{$stanza};
-    my $firstidx = firstidx { /VISTA:[0-9]{1,5}/ } @{$stanza};
+    my $lastidx = lastidx { /VISTA:(modENCODE_)?[0-9]{1,5}/ } @{$stanza};
+    my $firstidx = firstidx { /VISTA:(modENCODE_)?[0-9]{1,5}/ } @{$stanza};
 
     # If there is only one VISTA:nnnnn entry, splice AFTER that line, not
     # before.
@@ -160,11 +159,13 @@ sub update_stanza {
 }
 
 ################################################################################
-# parse_mapfile \@LINES
+# parse_mapfile \@LINES \@SUBS
 # Where:
 #
-# 	@LINES is a list of strings, each string a line from the user-supplied
+# 	\@LINES is a list of strings, each string a line from the user-supplied
 # 	mapfile. One line represents one NEW subtrack to be added to the stanza.
+#
+#   \@SUBS should be a list of submissions to add to the stanza.
 #
 ################################################################################
 # Returns an arrayref of hashrefs, each hash containing the submission details for
@@ -172,9 +173,11 @@ sub update_stanza {
 ################################################################################
 sub parse_mapfile {
     my $lines = shift;
+    my @subs = @_;
+    chomp @subs;
     my @new_subs;
     foreach (@{$lines}) {
-        my @fields = split('\t', $_);
+        my @fields = split("\t", $_);
         chomp @fields;
         my $sub = {
             "Name" => $fields[0],
@@ -182,13 +185,13 @@ sub parse_mapfile {
             "SignalID" => $fields[2],
             "PeakID" => $fields[3]
         };
-        push @new_subs, $sub;
+        push @new_subs, $sub if grep {$_ == $sub->{SubID}} @subs;
     }
     return \@new_subs;
 }
 
-open(my $stanzafh, "<", $ARGV[0]);
-open(my $mapfh, "<", $ARGV[1]);
+open(my $stanzafh, "<", shift);
+open(my $mapfh, "<", shift);
 
 my @stanza_lines;
 while (<$stanzafh>) {
@@ -200,4 +203,4 @@ while (<$mapfh>) {
     push @mapfile_lines, $_;
 }
 
-update_stanza(\@stanza_lines, parse_mapfile(\@mapfile_lines));
+update_stanza(\@stanza_lines, parse_mapfile(\@mapfile_lines, @ARGV));

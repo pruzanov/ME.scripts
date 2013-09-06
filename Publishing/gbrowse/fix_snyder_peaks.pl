@@ -1,5 +1,40 @@
 #!/usr/bin/perl -w
 
+=pod
+
+=head1 NAME
+
+fix_snyder_peaks.pl - Unite overlapping peaks within a single GFF3 file.
+
+=head1 SYNOPSIS
+
+fix_snyder_peaks.pl --trackid=ID [--verbose] B<GFF3File>
+
+=head1 DESCRIPTION
+
+This script was designed to unite overlapping peaks in a single GFF3
+replicate (see modENCODE_3846, modENCODE_3857). Once overlapping
+peaks have been eliminated from both replicates, they may be
+combined into a single track for display on GBrowse using
+bedtools intersect.
+
+=head1 OPTIONS
+
+=over
+
+=item B<--trackid>=I<ID>
+
+Some unique identifier (usually numeric, from modencode-www1:/modencode/raw/data/tracks)
+to be entered into Column 2 of the returned GFF3
+
+=item B<--verbose>
+
+Turn on verbose output.
+
+=back
+
+=cut
+
 use strict;
 use warnings;
 use diagnostics;

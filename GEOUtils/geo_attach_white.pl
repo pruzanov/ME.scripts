@@ -77,8 +77,9 @@ my %exts_to_ftypes = (
     "fq.gz" => "FASTQ",
     "fq" => "FASTQ",
     "txt.gz" => "TXT",
+    "cel" => "CEL",
 );
-my @raw_ftypes = ("FASTQ", "TXT");
+my @raw_ftypes = ("FASTQ", "TXT", "CEL");
 #                                                                              # 
 ################################################################################
 
@@ -359,8 +360,10 @@ sub create_samples {
     my ($orig_softmatrix, $subid) = @_;
 
     # Strip the first row - we don't need column headings.
-    my @softmatrix = (@{$orig_softmatrix}); # So we don't mess up the original
-    shift @softmatrix;
+    my @matrix = (@{$orig_softmatrix}); # So we don't mess up the original
+    shift @matrix;
+
+    my @softmatrix = map { [grep { ! m/^.*\.sam$/i } @{$_}] } @matrix;
 
     print STDERR "="x80 . "\n";
     print STDERR "SDRF Summary:\n";
