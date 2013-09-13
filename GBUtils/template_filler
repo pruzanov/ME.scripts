@@ -8,7 +8,7 @@ use strict;
 # Supply a file (tab-delimited) with the following columns:
 #    FIELD_name FIELD_key FIELD_ds FIELD_ts FIELD_cat FIELD_sel
 #
-# This script for filling template for bam tracks ONLY
+# This script for filling template for bam tracks and VISTA tracks with paired bw/GFF3 files ONLY
 # Possible development into more generic script in a future
 
 # Template file should be changed in order to work with some custom tracks
@@ -69,7 +69,9 @@ print "\n";
      $t =~ s/FIELD_ds/$data[$i]->{FIELD_ds}->[0]/ if $t =~ /FIELD_ds/;
      print $t;
      next;
-    }elsif($t=~/=>/ && $t=~/(.*\()/ && $t=~/subs/){
+    }elsif($t=~/=>/ && $t=~/subs/ && $t=~/(.*\()/){
+     # For some reason, $1 is not initialized here if the capturing regex is not the last condition!
+     # Switching the order of the conditions so the capturing regex is last seems to fix the problem
      $head = $1;
      $tail = ');';
      my $sep  = '=>';
@@ -89,6 +91,19 @@ print "\n";
   if ($tail) {
    map{print $spaces.$subs[$_]."\,\n"} (1..@subs-2);
    print $spaces.$subs[@subs-1].$tail."\n";
+  # Start of possible fix for VISTA tracks that should only print out every signal number while skipping peak numbers
+  }elsif($type eq "VISTA:" && scalar(@subs) > 2){
+   # $sub_length not strictly necessary, just makes lines below easier to read
+   my $sub_length = scalar(@subs);
+   if ($sub_length % 2) {
+    print STDERR "Warning: There are an odd number of files for the VISTA tracks.  It is likely that...\n";
+    print STDERR "Warning: ...a submission ID/track ID pair is missing from the fields file.\n";
+   }
+   map{print $spaces.$subs[(2 * $_)]."\n"} (1..(($sub_length % 2) ? ($sub_length / 2) : (($sub_length / 2) - 1)));
+   next;
+  }elsif($type eq "VISTA:" && scalar(@subs) == 2){
+   next;
+  # End of possible fix for VISTA tracks that should only print out every signal number while skipping peak numbers
   }else{
    map{print $spaces.$subs[$_]."\n"} (1..@subs-1);
   }
@@ -153,7 +168,7 @@ FIELD_name FIELD_key FIELD_ds FIELD_ts FIELD_cat FIELD_sel
 
 =head2 USAGE
 
-template_filler [template_file] [fileds_file]
+template_filler [template_file] [fields_file]
 
 template should look like a regular stanza snippet except it would
 use FIELD_* placeholders where required:
