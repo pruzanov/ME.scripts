@@ -40,7 +40,7 @@ my $dir = getcwd;
 opendir(DIR, $dir) or die $!;
 my @dir_files = readdir DIR;
 
-oreach (@dir_files) {
+foreach (@dir_files) {
     if (m/fastq/i) {
         my @file_name = split /\./;
         my $expt_number = $file_name[-3];
