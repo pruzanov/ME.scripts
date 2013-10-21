@@ -47,9 +47,10 @@ use constant DEBUG=>1;
 
 my $confdir;
 my $pipe_host 	  = "modencode-www1.oicr.on.ca";
-my $nih_dir   	  = "/modencode/raw/tools/reporter/output/output_nih*";
+my $nih_dir 	  = "/modencode/raw/tools/reporter/output/output_nih*";
 my $local_nih_dir = "./nih_spreadsheet";
-my $ssh_key   	  = "$HOME/.ssh/clinic_key"; # TODO update this after installation
+my $ssh_key 	  = "$HOME/.ssh/clinic_key"; # TODO update this after installation
+my $GB_conf 	  = "$HOME/public_html/conf/GBrowse.conf"; # Location of main conf file (GBrowse.conf or equivalent)
 my $result 	  = GetOptions ('confdir=s'    => \$confdir); # directory with .conf files
 
 $confdir ||=".";
@@ -69,6 +70,36 @@ if (@files == 0) {die "We have 0 .conf files in $confdir, check the directory an
 # Process config files
 # =====================================================
 
+# Attempt to recursively parse conf files in order to extract all database names
+# These database names will be used to check if the entry is present, if the database can be accessed
+# TODO: There should be a better way to do this, as bad database names will not be caught
+my %database_list;
+my $main_conf_dir = dirname($GB_conf);
+my $main_conf = eval { Bio::Graphics::FeatureFile->new(-file => $GB_conf); };
+if (!$main_conf || $@) {
+	warn("ERROR: main config file $GB_conf couldn't be loaded - syntax problems\n");
+	die;
+}
+
+my @conf_files = keys %{$main_conf->{'config'}};
+
+foreach my $file (@conf_files) {
+	next if (!exists($main_conf->{'config'}->{$file}->{'path'}));
+	my $cconf = eval { Bio::Graphics::FeatureFile->new(-file => join("/",($main_conf_dir,$main_conf->{'config'}->{$file}->{'path'}))); };
+	if (!$cconf || $@) {
+		warn("ERROR: config file $main_conf->{'config'}->{$file}->{'path'} couldn't be loaded - syntax problems\n");
+		die if ($@);
+		next;
+	}
+	foreach my $db_string (keys %{$cconf->{'config'}}) {
+		next unless $db_string =~ m/^(.*):database$/;
+		my $database = $1;
+		unless (exists($database_list{$database})) {
+			$database_list{$database} = 1;
+		}
+	}
+}
+
 # This hash will store modENCODE submission IDs as the keys and each ID's status as the values
 # Currently empty, but will be populated by &load_nih_spreadsheet()
 my %id_status;
@@ -85,15 +116,25 @@ foreach my $file(@files) {
 	print STDERR "\n\n----------\n";
 	print STDERR "Checking conf file $confdir/$file\n";
 
-	my $conf = Bio::Graphics::FeatureFile->new(-file => join("/",($confdir,$file)));
-	if (!$conf) {
+	my $conf = eval { Bio::Graphics::FeatureFile->new(-file => join("/",($confdir,$file))); };
+	if (!$conf || $@) {
 		# simple check #1
 		warn("ERROR: config file $confdir/$file couldn't be loaded - syntax problems\n");
+		# FIXME: It would be better if the script skipped to checking the next file instead of dying when...
+		# 	 ...Bio::Graphics::FeatureFile->new() throws an exception, but for some unknown reason...
+		# 	 ...Bio::Graphics::FeatureFile->new() refuses to read in any actual data in loop iterations...
+		# 	 ...after an exception is caught
+		warn("ERROR: Bio::Graphics::FeatureFile->new() threw an exception; exiting script\n") if ($@);
+		die if ($@);
 		next;
 	}
 
 	# Extract all stanza snippets
 	my @snippets = grep{!/\:/} @{$conf->{types}}; 
+	unless (@snippets) {
+		warn("ERROR: Could not parse config file $confdir/$file\n");
+		next;
+	}
 
 	# This hash will have previously encountered track IDs as keys and...
 	# ...a reference to an array of the names of the stanzas they occur in as values
@@ -107,6 +148,12 @@ foreach my $file(@files) {
 		print STDERR "----------\n";
 		print STDERR "TYPE: [$stanza]\n";
 		my $features = $conf->{config}->{$stanza};
+
+		# Skip placeholder stanzas (those with a name starting with '=')
+		if ($stanza =~ m/^=/) {
+			print STDERR "[$stanza] appears to be a placeholder; skipping all checks\n";
+			next;
+		}
 
 		# Check to make sure all required data is present
 		unless (exists($features->{feature}) && exists($features->{'data source'}) && exists($features->{'track source'})) {
@@ -123,7 +170,7 @@ foreach my $file(@files) {
 		# Perform a brief sanity check on each feature
 		foreach (@features) {
 			#if (!m/[a-zA-Z_]+:(?:modENCODE_|modencode_)?[0-9]+(?:r)?(?:_details)?/) {
-			if (!m/[a-zA-Z_]+:[0-9]+(?:r)?(?:_details)?/) {
+			if (!m/^\w+(?::\w+)?$/) {
 				warn("WARNING: Feature '$_' looks unusual\n");
 			}
 		}
@@ -151,14 +198,16 @@ foreach my $file(@files) {
 			# Note that not all stanza snippets have a select field
 			# Only compare select keys against database entries if there is a select field and a database field to begin with!
 			if ($return) {
-				warn("ERROR: Could not connect to database [$db], skipping remaining database-related checks\n");
+				warn("ERROR: Could not connect to database [$db]; skipping remaining database-related checks\n");
 			} elsif (exists($features->{'select'})) {
 				&select_matches($features);
 			}
+		} elsif (exists($features->{'database'}) && exists($database_list{$db})) {
+			warn("WARNING: This script is unable to connect to database [$db]; skipping database-related checks\n");
 		} elsif (exists($features->{'database'})) {
-			warn("ERROR: Database name [$db] is non-standard, skipping database-related checks\n");
+			warn("ERROR: Database name [$db] is not recognized; skipping database-related checks\n");
 		} else {
-			warn("ERROR: Database not specified for [$stanza], skipping database-related checks\n");
+			warn("ERROR: Database not specified for [$stanza]; skipping database-related checks\n");
 		}
 
 		# Not-so-simple check 3
