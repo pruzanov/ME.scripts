@@ -197,9 +197,16 @@ foreach my $file(@files) {
 			# Not-so-simple check 2
 			# Note that not all stanza snippets have a select field
 			# Only compare select keys against database entries if there is a select field and a database field to begin with!
+			# Note that the use of the "select" field is actually deprecated; "subtrack select", "subtrack table", and "subtrack labels"...
+			# ...fields should be used instead
 			if ($return) {
 				warn("ERROR: Could not connect to database [$db]; skipping remaining database-related checks\n");
+			} elsif (exists($features->{'subtrack select'}) && exists($features->{'subtrack table'}) && exists($features->{'subtrack select labels'})) {
+				&subtrack_matches($features);
+			} elsif (exists($features->{'subtrack select'}) || exists($features->{'subtrack table'}) || exists($features->{'subtrack select labels'})) {
+				warn("ERROR: Subtrack options are incorrectly configured; skipping subtrack checks\n");
 			} elsif (exists($features->{'select'})) {
+				warn("WARNING: The 'select' subtrack syntax is deprecated; instead use 'subtrack select', 'subtrack table', and 'subtrack select labels'\n");
 				&select_matches($features);
 			}
 		} elsif (exists($features->{'database'}) && exists($database_list{$db})) {
@@ -288,7 +295,103 @@ sub confirm_present {
 	return 0;
 }
 
+
+# Check that each the name of each subtrack matches the name stored in the database, as well as checking whether...
+# ...each subtrack has a unique entry in both 'subtrack table' and 'subtrack select fields'
+# Unlike &select_matches below, this is made to work on config entries using the newer subtrack syntax
+# See http://gmod.org/wiki/GBrowse_2.0_Configuration_HOWTO#Track_Table_Options for details on subtrack configuration
+# Takes in as input a reference to a hash containing the details of a single config entry
+sub subtrack_matches {
+	my $features = shift;
+	die "Bad input to &subtrack_matches; died" unless (ref($features) eq 'HASH');
+	my $db_name = $features->{'database'};
+	my @ts = split(" ",$features->{'track source'});
+	my @ds = split(" ",$features->{'data source'});
+	# Get the data for each subtrack in the 'subtrack table' field and store it the %subtrack_ids hash
+	# Each subtrack's internal name is used as a key and the corresponding data source ID as the value
+	# Warnings are printed for any entries with the same internal name
+	my %subtrack_ids;
+	my @subtrack_table_lines = split(/;/, $features->{'subtrack table'});
+	foreach (@subtrack_table_lines) {
+		if (m/([-\.\w]+)\s*=\s*(\d+)/) {
+			my $identifier = $1;
+			my $sub_id = $2;
+			if (exists($subtrack_ids{$identifier})) {
+				warn("ERROR: Duplicate entries for [$identifier] are present in the 'subtrack table' field\n");
+				next;
+			} else {
+				$subtrack_ids{$identifier} = $sub_id;
+			}
+		}
+	}
+	# Get the data for each subtrack in the 'subtrack select labels' field and store it the %subtrack_labels hash
+	# Each subtrack's internal name is used as a key and the corresponding human-readable dialog box name as the value
+	# Warnings are printed for any entries with the same internal name
+	my %subtrack_labels;
+	my @subtrack_label_lines = split(/;/, $features->{'subtrack select labels'});
+	foreach (@subtrack_label_lines) {
+		if (m/([-\.\w]+)\s*"(.+)"/) {
+			my $identifier = $1;
+			my $label = $2;
+			if (exists($subtrack_labels{$identifier})) {
+				warn("ERROR: Duplicate entries for [$identifier] are present in the 'subtrack select labels' field\n");
+				next;
+			} else {
+				$subtrack_labels{$identifier} = $label;
+			}
+		}
+	}
+	# Check whether each internal subtrack name has an entry in the 'subtrack table' and the 'subtrack select labels' field
+	# The %subtrack_counter hash has each subtrack's internal name as a key and a value of 1 if it is only in 'subtrack table',...
+	# ...a value of 2 if it is only in 'subtrack select labels', and a value of 3 if it is in both
+	# A value of 1 or 2 indicates an error
+	my %subtrack_counter;
+	foreach (keys %subtrack_ids) {
+		$subtrack_counter{$_}++;
+	}
+	foreach (keys %subtrack_labels) {
+		$subtrack_counter{$_} = $subtrack_counter{$_} + 2;
+	}
+	my $db = Bio::DB::SeqFeature::Store->new(-adaptor=>'DBI::mysql', -dsn=>$db_name, -user=>'viewer', -pass=>'viewer');
+	foreach my $name (keys %subtrack_counter) {
+		if ($subtrack_counter{$name} == 1) {
+			warn("ERROR: An entry for [$name] is present in 'subtrack table' but not in 'subtrack select labels'\n");
+			next;
+		} elsif ($subtrack_counter{$name} == 2) {
+			warn("ERROR: An entry for [$name] is present in 'subtrack select labels' but not in 'subtrack table'\n");
+			next;
+		}
+		# @track_ids will hold the track ID numbers associated with the current data source ID
+		my @track_ids;
+		# FIXME: This assumes that the data source and track source IDs in the same sequential position are associated
+		# 	 This may not necessarily be the case, but there's no easy way to reliably check
+		foreach (0..$#ds) {
+			if ($ds[$_] == $subtrack_ids{$name}) {
+				push(@track_ids, $ts[$_]);
+			}
+		}
+		if (scalar(@track_ids) == 0) {
+			warn("ERROR: Track ID $subtrack_ids{$name} from 'subtrack table' not found in track ID field\n");
+			next;
+		}
+		# Uses Bio::DB::SeqFeature::Store to get a list of "feature" objects stored in the database
+		# Each of those feature objects has a track ID corresponding to the submission ID in the current select line
+		# Check if the name of each "feature" object matches the name given in the select line
+		my @feature_list = $db->features(-source=>\@track_ids);
+		my %name_tracker;
+		foreach (@feature_list) {
+			if (${$_}{name} ne $name && !exists($name_tracker{${$_}{name}})) {
+				warn("ERROR: Submission $subtrack_ids{$name} is named [$name] in the conf file but is named [${$_}{name}] in database [$db_name]\n");
+				$name_tracker{${$_}{name}} = 1;
+			}
+		}
+
+	}
+}
+
 # Check that each the name of each entry in a select field matches the name stored in the database
+# Unlike &subtrack_matches above, this is made to work on config entries using the older (deprecated) subtrack syntax
+# See http://gmod.org/wiki/GBrowse_2.0_Configuration_HOWTO#Track_Table_Options for details on subtrack configuration
 # Takes in as input a reference to a hash containing the details of a single config entry
 sub select_matches {
 	my $features = shift;
