@@ -171,13 +171,17 @@ foreach my $file(@files) {
 		foreach (@features) {
 			#if (!m/[a-zA-Z_]+:(?:modENCODE_|modencode_)?[0-9]+(?:r)?(?:_details)?/) {
 			if (!m/^\w+(?::\w+)?$/) {
-				warn("WARNING: Feature '$_' looks unusual\n");
+				warn("WARNING: Feature [$_] looks unusual\n");
 			}
 		}
 		# print STDERR Dumper(@features);
 
 		my @ds = split(" ",$features->{'data source'});
 		print STDERR "[$stanza] has ".scalar(@ds)." data source(s)\n";
+		# Check if each data source ID is numeric
+		foreach (@ds) {
+			warn("ERROR: Data source ID [$_] is not numeric\n") if (m/\D/);
+		}
 		# Do something with submission ids
 
 		# Simple checks 2 and 3
@@ -185,6 +189,10 @@ foreach my $file(@files) {
 		# Do something with track ids
 		# Check for equal number of submission and track IDs
 		&check_sources($features, $stanza);
+		# Check if each track source ID is numeric
+		foreach (@ts) {
+			warn("ERROR: Track source ID [$_] is not numeric\n") if (m/\D/);
+		}
 		# Check for presence of each track ID in a hash of previously encountered track IDs
 		&check_uniqness($features, $stanza, \%tracks_seen);
 
@@ -210,7 +218,7 @@ foreach my $file(@files) {
 				&select_matches($features);
 			}
 		} elsif (exists($features->{'database'}) && exists($database_list{$db})) {
-			warn("WARNING: This script is unable to connect to database [$db]; skipping database-related checks\n");
+			print STDERR "NOTICE: This script is unable to connect to database [$db]; skipping database-related checks\n";
 		} elsif (exists($features->{'database'})) {
 			warn("ERROR: Database name [$db] is not recognized; skipping database-related checks\n");
 		} else {
@@ -227,7 +235,7 @@ foreach my $file(@files) {
 		my @stanzas = @{ $tracks_seen{$_} };
 		if (scalar(@stanzas) > 1) {
 			print STDERR "----------\n";
-			warn("ERROR: Track ID $_ is used by [" . join("], [", map {$_} @stanzas) . "]\n");
+			warn("ERROR: Track ID [$_] is used by [" . join("], [", map {$_} @stanzas) . "]\n");
 		}
 	}
 	#print STDERR Dumper($conf);
@@ -268,7 +276,7 @@ sub check_uniqness {
 	my @ts = split(" ",$features->{'track source'});
 	foreach (@ts) {
 		if (exists($tracks_ref->{$_})) {
-			warn("ERROR: Track ID $_ in [$stanza] is also used elsewhere in the same file\n");
+			warn("ERROR: Track source ID [$_] in [$stanza] is also used elsewhere in the same file\n");
 			push(@{ $tracks_ref->{$_} }, $stanza);
 		} else {
 			# Initialize the new hash element as a single-element array
@@ -290,7 +298,7 @@ sub confirm_present {
 		my $dbresult_ref = $db->get_data("SELECT * FROM typelist WHERE tag = '$_';");
 		return 1 unless (ref($dbresult_ref) eq 'ARRAY');
 		my @dbresult = @{ $dbresult_ref };
-		warn("ERROR: Feature '$_' is in $conf_filename but is absent from database [$db_name]\n") if (scalar(@dbresult) == 0);
+		warn("ERROR: Feature [$_] is in $conf_filename but is absent from database [$db_name]\n") if (scalar(@dbresult) == 0);
 	}
 	return 0;
 }
@@ -371,13 +379,14 @@ sub subtrack_matches {
 			}
 		}
 		if (scalar(@track_ids) == 0) {
-			warn("ERROR: Track ID $subtrack_ids{$name} from 'subtrack table' not found in track ID field\n");
+			warn("ERROR: Track source ID [$subtrack_ids{$name}] from 'subtrack table' not found in 'track source' field\n");
 			next;
 		}
 		# Uses Bio::DB::SeqFeature::Store to get a list of "feature" objects stored in the database
 		# Each of those feature objects has a track ID corresponding to the submission ID in the current select line
 		# Check if the name of each "feature" object matches the name given in the select line
 		my @feature_list = $db->features(-source=>\@track_ids);
+		warn("WARNING: No matches in database [$db_name]; submission $subtrack_ids{$name} with name [$name] may need manual checking\n") if (scalar(@feature_list) == 0);
 		my %name_tracker;
 		foreach (@feature_list) {
 			if (${$_}{name} ne $name && !exists($name_tracker{${$_}{name}})) {
@@ -416,13 +425,14 @@ sub select_matches {
 				}
 			}
 			if (scalar(@track_ids) == 0) {
-				warn("ERROR: Track ID $sub_id from select field not found in track ID field\n");
+				warn("ERROR: Track source ID [$sub_id] from 'select' field not found in 'track source' field\n");
 				next;
 			}
 			# Uses Bio::DB::SeqFeature::Store to get a list of "feature" objects stored in the database
 			# Each of those feature objects has a track ID corresponding to the submission ID in the current select line
 			# Check if the name of each "feature" object matches the name given in the select line
 			my @feature_list = $db->features(-source=>\@track_ids);
+			warn("WARNING: No matches in database [$db_name]; submission $sub_id with name [$description] may need manual checking\n") if (scalar(@feature_list) == 0);
 			my %name_tracker;
 			foreach (@feature_list) {
 				if (${$_}{name} ne $description && !exists($name_tracker{${$_}{name}})) {
