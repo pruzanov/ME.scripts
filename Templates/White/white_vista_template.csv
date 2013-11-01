@@ -58,7 +58,7 @@ link         = sub { my $feature = shift;
                       my $start = CGI::escape($feature->start);
                       my $end   = CGI::escape($feature->end);
                       my $id    = eval {CGI::escape($feature->primary_id)};
-                      return "../../gbrowse_details/worm?name=$name;class=$class;ref=$ref;start=$start;end=$end;feature_id=$id;db_id=snyder:database";
+                      return "../../gbrowse_details/worm?name=$name;class=$class;ref=$ref;start=$start;end=$end;feature_id=$id;db_id=white:database";
                     }
                     return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
 citation = 

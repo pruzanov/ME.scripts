@@ -3,15 +3,15 @@ glyph_subtype = density
 height        = 12
 
 [LIEB_FIELD_name_]
-feature      = VISTA:modENCODE_FIELD_ds
-track source = FIELD_ds
-data source  = modENCODE_FIELD_ds
+feature      = VISTA:FIELD_ts
+data source  = FIELD_ds
+track source = FIELD_ts
 glyph        = vista_plot
 glyph select = vista_plot
 autoscale     = local
 variance_band = 1
 graph type   = boxes
-database     = ryantesting
+database     = lieb
 min_peak     = 0
 box_subparts = 1
 neg_color    = blue
@@ -25,7 +25,7 @@ group_label  = 0
 end_color    = black
 glyph_subtype= signal
 bump density = 250
-category     = Chromatin Structure: Test
+category     = FIELD_cat
 sort_order   = name
 stranded     = 0
 height       = 30
@@ -49,6 +49,6 @@ label        = sub {  my $name = shift->name;
                       return $name =~/(.+?) (.+)$/ ? sprintf "%-10s %-7s",$1,$2 : sprintf "%-15s",$name;
                     }
 link         = sub { my $src = shift->source;
-                     my %subs =(
+                     my %subs = (FIELD_ts=>FIELD_ds);
                      return "http://intermine.modencode.org/query/portal.do?externalid=modENCODE_$subs{$src}&class=Submission"; }
 citation =
