@@ -321,7 +321,7 @@ sub subtrack_matches {
 	my %subtrack_ids;
 	my @subtrack_table_lines = split(/;/, $features->{'subtrack table'});
 	foreach (@subtrack_table_lines) {
-		if (m/([-\.\w]+)\s*=\s*(\d+)/) {
+		if (m/([-\.\w\(\)]+)\s*=\s*(\d+)/) {
 			my $identifier = $1;
 			my $sub_id = $2;
 			if (exists($subtrack_ids{$identifier})) {
@@ -338,7 +338,7 @@ sub subtrack_matches {
 	my %subtrack_labels;
 	my @subtrack_label_lines = split(/;/, $features->{'subtrack select labels'});
 	foreach (@subtrack_label_lines) {
-		if (m/([-\.\w]+)\s*"(.+)"/) {
+		if (m/([-\.\w\(\)]+)\s+"(.+)"/) {
 			my $identifier = $1;
 			my $label = $2;
 			if (exists($subtrack_labels{$identifier})) {
