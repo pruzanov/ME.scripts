@@ -57,16 +57,39 @@ foreach (@dir_files) {
 
 # Now we order the files. Input FASTQ files always come before ChIP FASTQ files
 # and within each group they are sorted by increasing experiment number.
+# Some FASTQ filenames don't have the experiment number, so sort those stringwise instead
 my @expt_order;
-foreach (sort {$a <=> $b} keys %fastq_files) {
-    if ($fastq_files{$_}{type} eq 'input') {
-        push @expt_order, $_;
-    }
+my $numeric_keys = 0;
+
+foreach (keys %fastq_files) {
+	if ($_ =~ /^\d+$/) {
+		$numeric_keys = 1;
+	}
 }
-foreach (sort {$a <=> $b} keys %fastq_files) {
-    if ($fastq_files{$_}{type} eq 'chip') {
-        push @expt_order, $_;
-    }
+
+if ($numeric_keys) {
+	foreach (sort {$a <=> $b} keys %fastq_files) {
+	    if ($fastq_files{$_}{type} eq 'input') {
+		push @expt_order, $_;
+	    }
+	}
+	foreach (sort {$a <=> $b} keys %fastq_files) {
+	    if ($fastq_files{$_}{type} eq 'chip') {
+		push @expt_order, $_;
+	    }
+	}
+} else {
+	foreach (sort {$a cmp $b} keys %fastq_files) {
+	    if ($fastq_files{$_}{type} eq 'input') {
+		push @expt_order, $_;
+	    }
+	}
+	foreach (sort {$a cmp $b} keys %fastq_files) {
+	    if ($fastq_files{$_}{type} eq 'chip') {
+		push @expt_order, $_;
+	    }
+	}
+
 }
 
 # Now we download and parse the submission's SDRF file and find what
