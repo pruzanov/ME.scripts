@@ -95,10 +95,10 @@ print "\n";
   }elsif($type eq "VISTA:" && scalar(@subs) > 2){
    # $sub_length not strictly necessary, just makes lines below easier to read
    my $sub_length = scalar(@subs);
-   if ($sub_length % 2) {
-    print STDERR "Warning: There are an odd number of files for the VISTA tracks.  It is likely that...\n";
-    print STDERR "Warning: ...a submission ID/track ID pair is missing from the fields file.\n";
-   }
+   #if ($sub_length % 2) {
+   #print STDERR "Warning: There are an odd number of files for the VISTA tracks.  It is likely that...\n";
+   #print STDERR "Warning: ...a submission ID/track ID pair is missing from the fields file.\n";
+   #}
    map{print $spaces.$subs[(2 * $_)]."\n"} (1..(($sub_length % 2) ? ($sub_length / 2) : (($sub_length / 2) - 1)));
    next;
   }elsif($type eq "VISTA:" && scalar(@subs) == 2){
