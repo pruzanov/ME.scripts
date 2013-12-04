@@ -25,7 +25,7 @@ if (@args) {
 foreach my $d (@dirs) {
  
  opendir(DIR,$d) or die "Cannot read from Directory [$d]";
- my @files = grep{!/mean\.wig/} grep{/\.wig$/} readdir(DIR);
+ my @files = grep{/cleaned\.wig/} grep{/\.wig$/} readdir(DIR);
  rewinddir(DIR);
  my @mfiles= grep{/mean\.wig/} readdir(DIR);
  closedir DIR;
