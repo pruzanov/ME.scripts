@@ -13,7 +13,7 @@ use File::Slurp;
 # This could be placed after the submission ID has been processed or inputted by the user...
 # ...but this makes it hard to find and awkwardly placed
 # An idea: Use a placeholder for the modENCODE submission ID then use a s/// regex...
-# ...to replace the placaholder once the submission ID has been determined
+# ...to replace the placeholder once the submission ID has been determined
 # Note to users: The [SUB_ID] in the filepath will be replaced with the modENCODE submission ID
 # There may or may not be a better way to go about generating the filepath
 # Commented out because SDRF files are not being used, as they may be inconsistent or unreliable
@@ -99,6 +99,7 @@ my $file_counter = 1;
 if ($exp_type eq "seq") {
 	foreach (@dir_files) {
 		push @raw_files, $_ if m/fastq/i;
+		push @raw_files, $_ if m/sequence\.txt\.gz/;
 	}
 } elsif ($exp_type eq "chip") {
 	foreach (@dir_files) {
@@ -120,7 +121,7 @@ foreach (@old_soft) {
 			next;
 		}
 		# Due to the way Perl hashes work, duplicate entries for repeated files are avoided
-		$supp_files{$supp_file} = undef;
+		$supp_files{$supp_file} = 1;
 	}
 }
 # The hash is only necessary in order to avoid duplicate entries
@@ -188,10 +189,10 @@ while (<FHIN>) {
 		my $old_soft_index = $old_soft_counter + 1;
 		while ($sample_lines_passed <= $series_sample_id_counter && $old_soft_index < $#old_soft) {
 			if ($sample_lines_passed == $series_sample_id_counter && $old_soft[$old_soft_index] =~ m/^!Sample_description/) {
-				if ($old_soft[$old_soft_index] =~ m/ChIP/i) {
+				if ($old_soft[$old_soft_index] =~ m/ChIP DNA/) {
 					$expt_type_suffix = "ChIP";
 					last;
-				} elsif ($old_soft[$old_soft_index] =~ m/input/i) {
+				} elsif ($old_soft[$old_soft_index] =~ m/input DNA/ or $old_soft[$old_soft_index] =~ m/negative control for ChIP/) {
 					$expt_type_suffix = "Input";
 					last;
 				}
