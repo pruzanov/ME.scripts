@@ -90,6 +90,8 @@ $short_name =~ s/^\s+//;
 chomp $short_name;
 
 # Determine what CEL/FASTQ/pair raw data files exist in this directory and store the filenames in an array
+# Note that some FASTQ files end in "sequence.txt.gz" instead of the usual FASTQ file endings
+# These misnamed FASTQ files should be renamed
 my @raw_files;
 my $dir = getcwd;
 opendir(DIR, $dir) or die $!;
@@ -99,7 +101,6 @@ my $file_counter = 1;
 if ($exp_type eq "seq") {
 	foreach (@dir_files) {
 		push @raw_files, $_ if m/fastq/i;
-		push @raw_files, $_ if m/sequence\.txt\.gz/;
 	}
 } elsif ($exp_type eq "chip") {
 	foreach (@dir_files) {
@@ -117,7 +118,8 @@ foreach (@old_soft) {
 		my $supp_file = $supp_line[1];
 		$supp_file =~ s/^\s+//;
 		chomp $supp_file;
-		if ($supp_file =~ m/\.bam$/i) {
+		# BAM, SAM, and BAM index files are not uploaded to GEO, so ignore them
+		if ($supp_file =~ m/\.sam$/i or $supp_file =~ m/\.bam$/i or $supp_file =~ m/\.bai$/i ) {
 			next;
 		}
 		# Due to the way Perl hashes work, duplicate entries for repeated files are avoided
@@ -363,7 +365,7 @@ while (<FHIN>) {
 			$new_sample = 0;
 			my $supp_line_counter = 1;
 			foreach (@{ $sample_filelist{$sample_sup_file_counter}{supp} }) {
-				# Print out !Sample_supplementary_file samlines
+				# Print out !Sample_supplementary_file lines
 				my $supp_type;
 				if (m/\.wig$/i) {
 					$supp_type = "WIG";
