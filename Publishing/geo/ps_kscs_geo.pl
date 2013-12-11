@@ -100,7 +100,8 @@ my @dir_files = readdir DIR;
 my $file_counter = 1;
 if ($exp_type eq "seq") {
 	foreach (@dir_files) {
-		push @raw_files, $_ if m/fastq/i;
+		push @raw_files, $_ if m/\.fastq/i;
+		push @raw_files, $_ if m/\.fq\.gz/i;
 	}
 } elsif ($exp_type eq "chip") {
 	foreach (@dir_files) {
@@ -387,7 +388,7 @@ while (<FHIN>) {
 				$raw_filename_escaped =~ s/\)/\\\)/g;
 				$raw_filename_escaped =~ s/ /\\ /g;
 
-				if (m/\.fastq/i && $exp_type eq "seq") {
+				if ((m/\.fastq/i || m/\.fq\.gz/i) && $exp_type eq "seq") {
 					my $fastq_checksum = `md5sum $raw_filename_escaped | cut -d ' ' -f1`;
 					$fastq_checksum =~ s/^\s+//;
 					chomp $fastq_checksum;
