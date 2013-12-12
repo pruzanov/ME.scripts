@@ -90,12 +90,13 @@ $short_name =~ s/^\s+//;
 chomp $short_name;
 
 # Determine what CEL/FASTQ/pair raw data files exist in this directory and store the filenames in an array
-# Note that some FASTQ files end in "sequence.txt.gz" instead of the usual FASTQ file endings
+# Note that some FASTQ files end in "txt.gz" instead of the usual FASTQ file endings
 # These misnamed FASTQ files should be renamed
 my @raw_files;
 my $dir = getcwd;
 opendir(DIR, $dir) or die $!;
 my @dir_files = readdir DIR;
+closedir(DIR);
 
 my $file_counter = 1;
 if ($exp_type eq "seq") {
@@ -110,9 +111,13 @@ if ($exp_type eq "seq") {
 	}
 }
 
-# Create an array containing the filenames of all the supplementary files in the original SOFT
+# Populate a hash containing filenames as keys of all files that could possibly be supplementary raw data files...
+# ...in the current directory as well as the supplementary files in the original SOFT
 my $sample_index = 1;
 my %supp_files;
+foreach (@dir_files) {
+	$supp_files{$_} = 1 if (m/\.wig$/i || m/\.GFF(?:3)?$/i);
+}
 foreach (@old_soft) {
 	if (/^!Sample_supplementary_file(?:_)?\d* =/) {
 		my @supp_line = split(/=/, $_);
