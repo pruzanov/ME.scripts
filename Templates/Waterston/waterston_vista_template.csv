@@ -1,0 +1,45 @@
+[RNAseq_BIGWIG_WIN:70001]
+glyph_subtype = density
+height       = 12
+
+
+[RNAseq_BIGWIG_WIN]
+feature      = VISTA:FIELD_ts
+glyph        = vista_plot
+glyph select = vista_plot
+label        = sub {my $name = shift->name;
+                    $name =~ s/ exp\.//;
+                    $name =~ s/ cntr//;
+                    return sprintf("%-36s",$name); }
+graph_type   = histogram
+glyph_subtype= signal
+bump density = 250
+category     = FIELD_cat
+data source  = FIELD_ds
+track source = FIELD_ts
+sort_order   = sub ($$) {shift->feature->name cmp shift->feature->name}
+stranded     = 0
+height       = 30
+
+connector    = solid
+autoscale    = z_score
+variance_band= 1
+database     = waterston
+pos_color    = blue
+neg_color    = orange
+fgcolor      = black
+bgcolor      = orange
+alpha        = 80
+group_label  = 0
+bicolor_pivot= min
+smoothing    = mean
+smoothing_window = 10
+label_position = left
+label density= 100
+key          = FIELD_key
+group_on     =
+select       = name FIELD_sel#FIELD_ds
+link         = sub {my $src = shift->source;
+                my %subs= (FIELD_ts=>FIELD_ds);
+                return "http://intermine.modencode.org/query/portal.do?externalid=$subs{$src}&class=Submission";}
+citation = 
