@@ -5,17 +5,48 @@
 # given a list of directories with wiggle files and bw files
 #
 use strict;
+use constant DEBUG => 0;
 
 #Things that change
+my $USAGE = "./dir2load_gff.pl [DIR IDS, space- or dash-separated] [ORGANISM, optional]\n"; 
+my $fasta = {fly =>"/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta",
+             dana=>"/browser_data/dana/fasta/dana-all-chromosome-r1.3.fasta",
+             dmoj=>"/browser_data/dmoj/fasta/dmoj-all-chromosome-r1.3.fasta",
+             dpse=>"/browser_data/dpse/fasta/dpse-all-chromosome-r2.4.fasta",
+             dsim=>"/browser_data/dsim/fasta/dsim-all-chromosome-r1.3.fasta",
+             dvir=>"/browser_data/dvir/fasta/dvir-all-chromosome-r1.2.fasta",
+             dyak=>"/browser_data/dyak/fasta/dyak-all-chromosome-r1.3.fasta",
+             worm=>"/browser_data/worm/fasta/c_elegans.WS220.genomic.fa",
+             cbrenneri=>"/browser_data/cbrenneri/fasta/c_brenneri.WS227.genomic.fa",
+             cbriggsae=>"/browser_data/cbriggsae/fasta/c_briggsae.WS225.genomic.fa",
+             cjaponica=>"/browser_data/cjaponica/fasta/c_japonica.WS227.genomic.fa",
+             cremanei=>"/browser_data/cremanei/fasta/c_remanei.WS225.genomic.fa"};
+           
 
-#my $fasta   = "/browser_data/dpse/fasta/dpse-all-chromosome-r2.6.fasta";
-my $fasta   = "/browser_data/fly/fasta/dmel-all-chromosome-r5.8.fasta";
-#my $fasta   = "/browser_data/worm/fasta/c_elegans.WS220.genomic.fa";
-my $wigpath = "/browser_data/fly/wiggle_binaries/celniker/";
+my $wigpath = "/browser_data/ORG/wiggle_binaries/PI/";
 my $method  = "binding_site";
-my $id_file = "celniker_sub2_sig_peak"; #macalpine_sub2sig";
-my $size_file = '/home/pruzanov/Data/FlyData/chrom.sizes';
-#'/home/pruzanov/Data/D.pseudoobscura/d.pseudoobscura_chroms.txt';#'/home/pruzanov/Data/FlyData/chrom.sizes';
+my $org;
+my $id_file;
+my $id_mask = "_sub2_sig_peak"; # THE PRESENCE OF THIS FILE IS MANDATORY, the rest should be configured automatically
+my $size_file = 'chrom.sizes'; # Must be present (linked to) in the current directory
+
+#===================AUTOMATIC CONFIGURATION============================//
+my @confchecks = `ls \*$id_mask`;
+my $pwd = `pwd`;
+chomp($pwd);
+@confchecks > 0 or die "A file with submission->track id mappings should be present in the [$pwd] and its name should look like *$id_mask"; 
+if ($confchecks[0]=~/(\w+)$id_mask/) {
+  my $pi = $1;
+  $id_file = $pi.$id_mask;
+  $wigpath =~ s/PI/$pi/;
+} else {
+  die "Could not find a proper file submission->track id mappings although a file [$confchecks[0]] is present";
+}
+
+if (! -e $size_file) {
+  die "Could not find chrom.sizes file, make sure it is present on the file system and is linked to from the current dir. Also make sure it is for the right organism!\nit may be created with this one liner:\ncat your_species.fa \| perl -ne \'{chomp;if(/^>(\\S+)/){\$current = \$1;next;}else{if(\$current && /^(\\S+)/){\$chroms{\$current}+=length(\$1);}}} END {map{print join(\"\\t\",(\$_,\$chroms{\$_})),\"\\n\"}(keys \%chroms)}\'\n";
+}
+
 
 
 #====================SCRIPT BEGINS=====================================//
@@ -28,8 +59,21 @@ foreach (@args) {
   map {push @dirs,$_} ($1..$2);
  } else {push @dirs,$_;}
 }
+if(@dirs == 0){die $USAGE;}
+print STDERR "Got ".scalar(@dirs)." directories\n" if DEBUG;
 
-# Load track/peak ids from the suppplied file
+#==================CHECK FOR ORGANISM==================================//
+if ($args[$#args] !~/\d/ && $fasta->{$args[$#args]}) {
+ $wigpath=~s/ORG/$args[$#args]/;
+ $org = $args[$#args];
+} else {
+  print STDERR "Error [$args[$#args]], we need a recognizable organism alias passed as the last argument to this script, The avaliable Organisms:\n";
+  map {print $_."\n"} (keys %$fasta);
+  exit;
+}
+
+# Load track/peak ids from the suppplied filea
+print STDERR "Reading from $id_file...\n" if DEBUG;
 open(INFO,"<$id_file") or die "Cannot read from [$id_file]";
 while (<INFO>) {
  chomp;
@@ -39,6 +83,12 @@ while (<INFO>) {
  $ids{$temp[0]} ||= {signal=>$temp[1],peak=>$temp[2]};
 
 }
+my %notfound = ();
+map {$notfound{$_} = 1 if !$ids{$_}} @dirs;
+if (scalar(keys %notfound) > 0) {
+ print STDERR "File [$id_file] does not have data for:\n";
+ print STDERR join("\n",(sort {$a<=>$b} keys %notfound)),"\n\n"; 
+}
 close INFO;
 
 # Read chrom sizes (in case we don't have wiggle files we'll just use chrom sizes for feature's coordinates
@@ -46,11 +96,11 @@ open(SIZE,"<$size_file") or die "Couldn't read from size file [$size_file]";
    while(<SIZE>) {
     chomp;
     my @temp = split("\t");
-    next if $temp[0] =~ /^dmel/;
+    next if $temp[0] =~ /^dmel/; # Bybass drosophila's mitochondrial annotation, we need 'M'
     $chroms{$temp[0]} = $temp[1];
    }
 close SIZE;
-print STDERR "Got ".scalar(keys %chroms)." chromosomes with sizes\n";
+print STDERR "Got ".scalar(keys %chroms)." chromosomes with sizes\n" if DEBUG;
 
 
 # Calculate coordinates for each feature and collect the list of bw files
@@ -84,7 +134,7 @@ foreach my $dir (@dirs) {
    print STDERR "Will use chromosomal sizes for coordinates\n";
    map{$dirs{$dir}->{coords}->{$_} = [1,$chroms{$_}]} (keys %chroms);
    }
-   #print STDERR "For $dir got $chr START: $start END: $end\n";
+   #print STDERR "For $dir got $chr START: $start END: $end\n" if DEBUG;
  }
  
  $dirs{$dir}->{bw} = [sort grep {/.*bw$/} readdir(DIR)]; 
@@ -104,6 +154,7 @@ foreach my $dir (@dirs) {
  if ($idf_file) {
   my $name = `grep \"Investigation Title\" $dir/$idf_file | awk -F \"\t\" '{print \$2}' | sed 's/\"//g' | sed 's/ //g'`;
   chomp($name);
+  print STDERR "Extracted name [$name] from $idf_file\n" if DEBUG;
   $dirs{$dir}->{name} = $name if $name =~ /\w+/;
  }
  closedir(DIR);
@@ -118,8 +169,8 @@ foreach my $d (sort {$a<=>$b} keys %dirs) {
  print STDERR "Got signal, getting peaks...\n";
  my $peak_id = $ids{$d}->{peak} ? $method.":".$ids{$d}->{peak}."_details" : "\"\"";
  if ($peak_id !~/\:(\d+_details)/){&fixgff($1,$d);}
- my $wigstring = scalar(@{$dirs{$d}->{bw}}) > 1 ?  "Name=$dirs{$d}->{name}\;peak_type=$peak_id;wigfileA=$wigpath$dirs{$d}->{bw}->[0];wigfileB=$wigpath$dirs{$d}->{bw}->[1];fasta=$fasta"
-                                                :  "Name=$dirs{$d}->{name}\;peak_type=$peak_id;wigfile=$wigpath$dirs{$d}->{bw}->[0];fasta=$fasta";
+ my $wigstring = scalar(@{$dirs{$d}->{bw}}) > 1 ?  "Name=$dirs{$d}->{name}\;peak_type=$peak_id;wigfileA=$wigpath$dirs{$d}->{bw}->[0];wigfileB=$wigpath$dirs{$d}->{bw}->[1];fasta=$fasta->{$org}"
+                                                :  "Name=$dirs{$d}->{name}\;peak_type=$peak_id;wigfile=$wigpath$dirs{$d}->{bw}->[0];fasta=$fasta->{$org}";
  print STDERR "Printing ".scalar(keys %{$dirs{$d}->{coords}})." lines for submission $d\n";
  if ($wigstring =~ /wigfileA/) {
   my $method = $wigstring=~/plus/ ? "WIG" : "rnaseq_wiggle";
@@ -175,13 +226,18 @@ sub fixgff {
 
 =head2 SYNOPSIS
 
-Simple script that makes loading gff file for a set of directories
+Simple script that makes loading (scaffold) gff file for a set of directories
 Tries to 'intelligently' guess the type of experiment from the content
-of a directory.
+of a directory. Depends on submission->track tab-delimited mapping file:
 
+SUB_id	SIGNAL_TRACK_id	PEAK_TRACK_id, i.e:
+
+566	6789	6790   (Not modENCODE real data)
+
+Useful for processing data configured for using with vista_plot
 
 =head2 USAGE
 
-dir2load_gff.pl dir1 dir2 dir3-dirX
+dir2load_gff.pl dir1 dir2 dir3-dirX organism
 
 =cut
