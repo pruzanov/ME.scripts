@@ -64,10 +64,7 @@ foreach my $te (@template) {
       if (scalar(keys %checkhash) == 1) {
         print STDERR "There is only one submission for [$data[$i]->{FIELD_key}] but you are trying to use a template for subtracks, skipping [select] parameter\n";
         next TE;
-      } else {
-        print STDERR "There are ".scalar(keys %checkhash)." keys in checkhash, here they are: \n";
-        map{print STDERR $_."\n"} (keys %checkhash);
-      }
+      } 
      $head = $1;
      $type = $2;
      my $sep = '#';
@@ -88,8 +85,13 @@ foreach my $te (@template) {
      my $sep  = '=>';
      my %tracks = (ts=>$data[$i]->{FIELD_ts},
                    ds=>$data[$i]->{FIELD_ds});
-     @subs = map{join($sep,($tracks{ts}->[$_],$tracks{ds}->[$_]))} (0..@{$tracks{ds}}-1);
-     print "$head$subs[0]\,\n"
+     my %seen = ();
+     for (0..@{$tracks{ds}}-1) {
+       $seen{$tracks{ds}->[$_]} ? next : push (@subs,join($sep,($tracks{ts}->[$_],$tracks{ds}->[$_])));
+       $seen{$tracks{ds}->[$_]}++;
+     }
+     
+     print $head$subs[0].',';
     }else{
      $t =~ s/($1)/@{$data[$i]->{$1}}/ while $t =~ /(FIELD_(ds|ts))/gc;
      $t =~ s/($1)/$data[$i]->{$1}/ while $t =~ /(FIELD_(name|key|cat))/gc;
