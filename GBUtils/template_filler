@@ -2,7 +2,8 @@
 
 use IO::File;
 use strict;
-
+use constant DEBUG=>0;
+use Data::Dumper;
 #
 # Simple script for filling the stanza using templates
 # Supply a file (tab-delimited) with the following columns:
@@ -31,22 +32,23 @@ while (<$fh>) {
              FIELD_ts   => [split(" ",$temp[3])],
              FIELD_cat  => $temp[4],
 	     #FIELD_sel  => $temp[5]=~/ / ? [split(" ",$temp[5])] : $temp[5]}
-             FIELD_sel  => [split(" ",$temp[5])]};
+             FIELD_sel  => $temp[5] ? [split(" ",$temp[5])] : []};
 }
 
 
 $fh->close;
 $fh->open("<$template") or die "Cannot read from template [$template]\n";
+
 my @template;
-map {push @template,$_} (<$fh>);
+map {push @template,$_ if !/^citation/} (<$fh>);
 $fh->close;
 
 for (my $i = 0; $i < @data; $i++) {
 #my $multi = ref($data[$i]->{FIELD_ts}) ? 1 : 0;
 
 print "\n";
-
- foreach my $te (@template) {
+TE:
+foreach my $te (@template) {
   my $t = $te;
   my(@subs,$head,$type,$tail);
 
@@ -56,20 +58,29 @@ print "\n";
      my $f = $3;
      @subs = map{$type.&cook_string($f,$i,$_)} (0..@{$data[$i]->{FIELD_ts}}-1);
      print "$head$subs[0]\n";
-    }elsif($t =~/^select/ && $t =~/^(select\s*=\s*)(\S+)/){
+    } elsif($t =~/^select/ && $t =~/^(select\s*=\s*)(\S+)/) {
+      # Check if we have only one sub id 
+      my %checkhash = map{$_=>1} (@{$data[$i]->{FIELD_ds}});
+      if (scalar(keys %checkhash) == 1) {
+        print STDERR "There is only one submission for [$data[$i]->{FIELD_key}] but you are trying to use a template for subtracks, skipping [select] parameter\n";
+        next TE;
+      } else {
+        print STDERR "There are ".scalar(keys %checkhash)." keys in checkhash, here they are: \n";
+        map{print STDERR $_."\n"} (keys %checkhash);
+      }
      $head = $1;
      $type = $2;
      my $sep = '#';
      my %names = (names=>$data[$i]->{FIELD_sel},
                   subs =>$data[$i]->{FIELD_ds});
-     if (@{$names{names}} != @{$names{subs}}){ die "Missing data for $data[$i]->{FIELD_key}";}
+     if (@{$names{names}} != @{$names{subs}}) { die "Missing data for $data[$i]->{FIELD_key}";}
      @subs = map{join($sep,($names{names}->[$_],$names{subs}->[$_]))} (0..@{$names{subs}}-1);
      print "$head $type $subs[0]\n";
-    }elsif($t =~/^link/){
+    } elsif($t =~/^link/){
      $t =~ s/FIELD_ds/$data[$i]->{FIELD_ds}->[0]/ if $t =~ /FIELD_ds/;
      print $t;
      next;
-    }elsif($t=~/=>/ && $t=~/subs/ && $t=~/(.*\()/){
+    } elsif($t=~/=>/ && $t=~/subs/ && $t=~/(.*\()/) {
      # For some reason, $1 is not initialized here if the capturing regex is not the last condition!
      # Switching the order of the conditions so the capturing regex is last seems to fix the problem
      $head = $1;

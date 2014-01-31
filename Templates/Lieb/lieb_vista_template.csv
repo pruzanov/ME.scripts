@@ -42,8 +42,6 @@ balloon hover = sub {my $f = shift;
 group_label  = 0
 label_position= left
 label        = sub {  my $name = shift->name;
-                      #$name =~s/^.+?_//;
-                      #$name =~s/(.+)_N2(.*)/$1$2/;
                       $name =~s/_/ /;
                       $name =~s/_/./g;
                       return $name =~/(.+?) (.+)$/ ? sprintf "%-10s %-7s",$1,$2 : sprintf "%-15s",$name;
