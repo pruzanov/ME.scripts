@@ -528,7 +528,7 @@ INIT{
 	# There doesn't seem to actually be a table in the database on modencode@oicr.on.ca named "data_clinic"
 	# Not sure why this is here considering that the table to be accessed...
 	# ...may be different for each new instance of DbConnect
-	our $database  = "data_clinic";
+	# our $database  = "data_clinic";
 	our $host      = "localhost";
 	our $user      = "viewer";
 	our $password  = "viewer";
