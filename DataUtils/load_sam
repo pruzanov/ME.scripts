@@ -35,7 +35,7 @@ foreach (@args) {
 foreach my $d (@dirs) {
  if (! -d $d) { `mkdir $d`; }
  `scp -Cr -i $key pruzanov\@$remote[0]$d/tracks/*gff $d/`;
- #`scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*BEADS_linear_*.wig.cleaned.wig $d/`;
+ `scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*txt $d/`;
  # `scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*wig $d`;
  #`scp -Cr -i $key pruzanov\@$remote[0]$d/extracted/*/*sam $d/`;
  #`scp -Cr -i $key pruzanov\@$remote[0]$d/tracks/* $d/`;
